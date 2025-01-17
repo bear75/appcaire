@@ -1,10 +1,10 @@
 {
   "Index": {
-    "meta_title": "SaaS Template - The perfect SaaS template to build and scale your business with ease.",
+    "meta_title": "SaaS-mall - Den perfekta SaaS-mallen för att enkelt bygga och skala ditt företag.",
     "meta_description": "A free and open-source landing page template for your SaaS business, built with React, TypeScript, Shadcn UI, and Tailwind CSS."
   },
   "Navbar": {
-    "sign_in": "Sign In",
+    "sign_in": "Logga in",
     "sign_up": "Registrera dig",
     "product": "Produkt",
     "docs": "Dokument",
@@ -13,7 +13,7 @@
     "company": "Företag"
   },
   "Hero": {
-    "follow_twitter": "Follow @Ixartz on Twitter",
+    "follow_twitter": "Följ @Ixartz på Twitter",
     "title": "The perfect <important>SaaS template</important> to build and scale your business with ease.",
     "description": "A free and open-source landing page template for your SaaS business, built with React, TypeScript, Shadcn UI, and Tailwind CSS.",
     "primary_button": "Kom igång",
@@ -68,7 +68,7 @@
   "Footer": {
     "product": "Produkt",
     "docs": "Dokument",
-    "blog": "Blog",
+    "blog": "Blogg",
     "community": "Community",
     "company": "Company",
     "terms_of_service": "Terms Of Service",
@@ -99,7 +99,7 @@
   },
   "DashboardIndex": {
     "title_bar": "Översikt",
-    "title_bar_description": "Welcome to your dashboard",
+    "title_bar_description": "Välkommen till översikten",
     "message_state_title": "Kom igång",
     "message_state_description": "You can customize this page by editing the file at <code>dashboard/page.tsx</code>",
     "message_state_button": "Star on GitHub",
@@ -110,7 +110,7 @@
     "title_bar_description": "Visa och hantera din användarprofil"
   },
   "OrganizationProfile": {
-    "title_bar": "Hantera organisation",
+    "title_bar": "Organisation",
     "title_bar_description": "Hantera din organisation"
   },
   "Billing": {
@@ -147,13 +147,13 @@
     "created_at_header": "Skapad den"
   },
   "AddTodo": {
-    "title_bar": "Lägg till Todo",
+    "title_bar": "Lägg till ",
     "add_todo_section_title": "Skapa ett nytt att göra",
     "add_todo_section_description": "Fyll i formuläret nedan för att skapa ett nytt att göra"
   },
   "EditTodo": {
-    "title_bar": "Redigera todo",
-    "edit_todo_section_title": "Modifiera todo",
+    "title_bar": "Redigera ",
+    "edit_todo_section_title": "Modifiera ",
     "edit_todo_section_description": "Fyll i formuläret nedan för att skapa ett nytt att göra"
   },
   "TodoForm": {
