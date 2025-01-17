@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale } from 'next-intl';
+import { GlobeIcon } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -13,43 +13,41 @@ import {
 import { usePathname, useRouter } from '@/libs/i18nNavigation';
 import { AppConfig } from '@/utils/AppConfig';
 
-export const LocaleSwitcher = () => {
+export function LocaleSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
-  const locale = useLocale();
+  const currentLocale = AppConfig.locales.find(
+    locale => locale.id === AppConfig.locale,
+  );
 
-  const handleChange = (value: string) => {
-    router.push(pathname, { locale: value });
-    router.refresh();
-  };
+  function onValueChange(value: string) {
+    router.push(pathname, { locale: value as 'sv' | 'en' });
+  }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="p-2 focus-visible:ring-offset-0" variant="ghost" size="icon" aria-label="lang-switcher">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="size-6 stroke-current stroke-2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            viewBox="0 0 24 24"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0M3.6 9h16.8M3.6 15h16.8" />
-            <path d="M11.5 3a17 17 0 0 0 0 18M12.5 3a17 17 0 0 1 0 18" />
-          </svg>
+        <Button
+          variant="outline"
+          size="icon"
+          className="size-9"
+          aria-label="Switch language"
+        >
+          <GlobeIcon className="size-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuRadioGroup value={locale} onValueChange={handleChange}>
-          {AppConfig.locales.map(elt => (
-            <DropdownMenuRadioItem key={elt.id} value={elt.id}>
-              {elt.name}
+      <DropdownMenuContent align="end">
+        <DropdownMenuRadioGroup
+          value={currentLocale?.id}
+          onValueChange={onValueChange}
+        >
+          {AppConfig.locales.map(locale => (
+            <DropdownMenuRadioItem key={locale.id} value={locale.id}>
+              {locale.name}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};
+}

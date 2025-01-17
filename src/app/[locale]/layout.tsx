@@ -1,66 +1,39 @@
-import '@/styles/global.css';
-
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
-import { unstable_setRequestLocale } from 'next-intl/server';
 
-import { DemoBadge } from '@/components/DemoBadge';
-import { AllLocales } from '@/utils/AppConfig';
+import { AppConfig } from '@/utils/AppConfig';
+import { cn } from '@/utils/Helpers';
 
-export const metadata: Metadata = {
-  icons: [
-    {
-      rel: 'apple-touch-icon',
-      url: '/apple-touch-icon.png',
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '32x32',
-      url: '/favicon-32x32.png',
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '16x16',
-      url: '/favicon-16x16.png',
-    },
-    {
-      rel: 'icon',
-      url: '/favicon.ico',
-    },
-  ],
-};
+const inter = Inter({ subsets: ['latin'] });
 
-export function generateStaticParams() {
-  return AllLocales.map(locale => ({ locale }));
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: {
+      default: AppConfig.title,
+      template: `%s | ${AppConfig.title}`,
+    },
+    description: AppConfig.description,
+  };
 }
 
-export default function RootLayout(props: {
+export function generateStaticParams() {
+  return AppConfig.locales.map(locale => ({ locale: locale.id }));
+}
+
+type RootLayoutProps = {
   children: React.ReactNode;
   params: { locale: string };
-}) {
-  unstable_setRequestLocale(props.params.locale);
+};
 
-  // Using internationalization in Client Components
+export default function RootLayout({ children, params }: RootLayoutProps) {
   const messages = useMessages();
 
-  // The `suppressHydrationWarning` in <html> is used to prevent hydration errors caused by `next-themes`.
-  // Solution provided by the package itself: https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
-
-  // The `suppressHydrationWarning` attribute in <body> is used to prevent hydration errors caused by Sentry Overlay,
-  // which dynamically adds a `style` attribute to the body tag.
   return (
-    <html lang={props.params.locale} suppressHydrationWarning>
-      <body className="bg-background text-foreground antialiased" suppressHydrationWarning>
-        {/* PRO: Dark mode support for Shadcn UI */}
-        <NextIntlClientProvider
-          locale={props.params.locale}
-          messages={messages}
-        >
-          {props.children}
-
-          <DemoBadge />
+    <html lang={params.locale} suppressHydrationWarning>
+      <body className={cn('min-h-screen bg-background antialiased', inter.className)}>
+        <NextIntlClientProvider messages={messages} locale={params.locale}>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

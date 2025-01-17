@@ -1,8 +1,9 @@
 import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 
-import { AllLocales, AppConfig } from '@/utils/AppConfig';
+import { AppConfig } from '@/utils/AppConfig';
 
-export const { usePathname, useRouter } = createSharedPathnamesNavigation({
-  locales: AllLocales,
-  localePrefix: AppConfig.localePrefix,
-});
+export const { Link, redirect, usePathname, useRouter }
+  = createSharedPathnamesNavigation({
+    locales: AppConfig.locales.map(l => l.id),
+    localePrefix: 'as-needed',
+  });

@@ -8,11 +8,11 @@ const sendDefaults = {
 };
 
 // FIXME: Add your production URL
-const productionURL = 'https://react-saas.com';
+const productionURL = 'https://app.caire.se';
 
 const emailChannel = new EmailAlertChannel('email-channel-1', {
   // FIXME: add your own email address, Checkly will send you an email notification if a check fails
-  address: 'contact@creativedesignsguru.com',
+  address: 'info@caire.se',
   ...sendDefaults,
 });
 
@@ -20,7 +20,7 @@ export const config = defineConfig({
   // FIXME: Add your own project name, logical ID, and repository URL
   projectName: 'SaaS Boilerplate',
   logicalId: 'saas-boilerplate',
-  repoUrl: 'https://github.com/ixartz/Next-js-Boilerplate',
+  repoUrl: 'https://github.com/bear75/SaaS-Boilerplate',
   checks: {
     locations: ['us-east-1', 'eu-west-1'],
     tags: ['website'],

@@ -1,17 +1,13 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import {
-  type NextFetchEvent,
-  type NextRequest,
-  NextResponse,
-} from 'next/server';
-import createMiddleware from 'next-intl/middleware';
+import { type NextFetchEvent, type NextRequest, NextResponse } from 'next/server';
+import createIntlMiddleware from 'next-intl/middleware';
 
-import { AllLocales, AppConfig } from './utils/AppConfig';
+import { locales, pathnames } from './config';
 
-const intlMiddleware = createMiddleware({
-  locales: AllLocales,
-  localePrefix: AppConfig.localePrefix,
-  defaultLocale: AppConfig.defaultLocale,
+const intlMiddleware = createIntlMiddleware({
+  defaultLocale: 'sv',
+  locales,
+  pathnames,
 });
 
 const isProtectedRoute = createRouteMatcher([
@@ -23,10 +19,7 @@ const isProtectedRoute = createRouteMatcher([
   '/:locale/api(.*)',
 ]);
 
-export default function middleware(
-  request: NextRequest,
-  event: NextFetchEvent,
-) {
+export default function middleware(request: NextRequest, event: NextFetchEvent) {
   if (
     request.nextUrl.pathname.includes('/sign-in')
     || request.nextUrl.pathname.includes('/sign-up')
@@ -36,13 +29,10 @@ export default function middleware(
       const authObj = auth();
 
       if (isProtectedRoute(req)) {
-        const locale
-          = req.nextUrl.pathname.match(/(\/.*)\/dashboard/)?.at(1) ?? '';
-
+        const locale = req.nextUrl.pathname.match(/(\/.*)\/dashboard/)?.at(1) ?? '';
         const signInUrl = new URL(`${locale}/sign-in`, req.url);
 
         authObj.protect({
-          // `unauthenticatedUrl` is needed to avoid error: "Unable to find `next-intl` locale because the middleware didn't run on this request"
           unauthenticatedUrl: signInUrl.toString(),
         });
       }
@@ -53,11 +43,7 @@ export default function middleware(
         && req.nextUrl.pathname.includes('/dashboard')
         && !req.nextUrl.pathname.endsWith('/organization-selection')
       ) {
-        const orgSelection = new URL(
-          '/onboarding/organization-selection',
-          req.url,
-        );
-
+        const orgSelection = new URL('/onboarding/organization-selection', req.url);
         return NextResponse.redirect(orgSelection);
       }
 
@@ -69,5 +55,13 @@ export default function middleware(
 }
 
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next|monitoring).*)', '/', '/(api|trpc)(.*)'], // Also exclude tunnelRoute used in Sentry from the matcher
+  matcher: [
+    // Enable a redirect to a matching locale at the root
+    '/',
+    // Set a cookie to remember the previous locale for
+    // all requests that have a locale prefix
+    '/(sv|en)/:path*',
+    // Enable redirects that add missing locales
+    '/((?!_next|_vercel|.*\\..*).*)',
+  ],
 };

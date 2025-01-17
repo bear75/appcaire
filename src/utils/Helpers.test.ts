@@ -12,7 +12,7 @@ describe('Helpers', () => {
 
     it('should prepend the locale to the path for non-default language', () => {
       const url = '/random-url';
-      const locale = 'fr';
+      const locale = 'sv';
 
       expect(getI18nPath(url, locale)).toMatch(/^\/fr/);
     });

@@ -1,22 +1,22 @@
-import type { LocalePrefix } from 'node_modules/next-intl/dist/types/src/routing/types';
-
 import { BILLING_INTERVAL, type PricingPlan } from '@/types/Subscription';
-
-const localePrefix: LocalePrefix = 'as-needed';
 
 // FIXME: Update this configuration file based on your project information
 export const AppConfig = {
-  name: 'SaaS Template',
+  name: 'Caire',
+  site_name: 'Caire',
+  title: 'Caire - AI-Driven Home Care Scheduling',
+  description:
+    'Optimize your home care scheduling with AI-driven solutions. Manage staff, clients, and schedules efficiently.',
   locales: [
-    {
-      id: 'en',
-      name: 'English',
-    },
-    { id: 'fr', name: 'Français' },
-  ],
-  defaultLocale: 'en',
-  localePrefix,
-};
+    { id: 'sv', name: 'Svenska' },
+    { id: 'en', name: 'English' },
+  ] as const,
+  defaultLocale: 'sv',
+  locale: 'sv',
+  /** the second parameter is the default value if the environment variable is not found */
+  apiUrl: process.env.NEXT_PUBLIC_API_URL || '',
+  gtmId: process.env.NEXT_PUBLIC_GTM_ID || '',
+} as const;
 
 export const AllLocales = AppConfig.locales.map(locale => locale.id);
 
@@ -45,8 +45,7 @@ export const PricingPlanList: Record<string, PricingPlan> = {
     id: PLAN_ID.PREMIUM,
     price: 79,
     interval: BILLING_INTERVAL.MONTH,
-    testPriceId: 'price_premium_test', // Use for testing
-    // FIXME: Update the price ID, you can create it after running `npm run stripe:setup-price`
+    testPriceId: 'price_premium_test',
     devPriceId: 'price_1PNksvKOp3DEwzQlGOXO7YBK',
     prodPriceId: '',
     features: {
@@ -60,10 +59,9 @@ export const PricingPlanList: Record<string, PricingPlan> = {
     id: PLAN_ID.ENTERPRISE,
     price: 199,
     interval: BILLING_INTERVAL.MONTH,
-    testPriceId: 'price_enterprise_test', // Use for testing
-    // FIXME: Update the price ID, you can create it after running `npm run stripe:setup-price`
+    testPriceId: 'price_enterprise_test',
     devPriceId: 'price_1PNksvKOp3DEwzQli9IvXzgb',
-    prodPriceId: 'price_123',
+    prodPriceId: '',
     features: {
       teamMember: 100,
       website: 100,
@@ -71,4 +69,17 @@ export const PricingPlanList: Record<string, PricingPlan> = {
       transfer: 100,
     },
   },
+};
+
+export type PricingType = {
+  id: string;
+  name: string;
+  href: string;
+  price: string;
+  description: string;
+  features: string[];
+  featured?: boolean;
+  cta: string;
+  interval: keyof typeof BILLING_INTERVAL;
+  plan: PricingPlan;
 };

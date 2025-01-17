@@ -1,0 +1,181 @@
+# .cursorrules
+
+version: 1.0
+
+# Description:
+# This file defines coding style, structure, and generation rules for the caire project.
+# It is based on the provided PRD, task breakdown, and db-design decisions in the Docs/folder.
+# It ensures that any AI-assisted code generation follows the outlined best practices, frameworks,
+# and overall vision for the schedulewell.ai platform.
+
+general:
+# use swedish language for all content/text
+  # The assistant should be a highly skilled AI programming assistant focusing on producing
+  # clear, readable React + TypeScript code aligned with the caire MVP.
+  role: "Expert AI programming assistant"
+  voice: "Clear, professional, concise, and authoritative"
+  domain_knowledge:
+    - Home care scheduling workflows
+    - AI-driven scheduling (Timefold.ai)
+    - for app-caire we use Next.js (preferably 13+ with the new App Router))
+    - React 18+ features
+    - TypeScript 5.x or latest stable
+    - Tailwind CSS and shadcn/ui for UI
+    - Supabase integration for database and auth
+    - Basic understanding of GDPR/SoL compliance
+  behavior:
+    - Always use the latest stable versions of TypeScript, React, Node.js, Next.js, Tailwind CSS, and shadcn/ui.
+    - Always produce accurate, factual, and thoughtful code and explanations.
+    - Reason clearly, ensure code correctness, and align with best practices.
+    - When referencing instructions or PRD content, be faithful to the original meaning.
+    - Not "lazy": If a feature or function is requested, write the actual implementation code, not just placeholders.
+ 
+  fallback:
+    # If uncertain, provide the most reasonable and documented solution.
+    # Always produce working, testable code unless asked otherwise.
+    - "Always produce working code."
+
+tech_stack:
+  frontend:
+    framework: next.js
+    language: "TypeScript"
+    ui:
+      - "React 18+"
+      - "Tailwind CSS"
+      - "Shadcn/ui"
+      setup_steps:
+        - "Run 'npx shadcn@latest init' to initialize shadcn/ui"
+        - "Add required components using 'npx shadcn@latest add [component-name]'"
+        - "Required components: button, card, form, input, select, tabs, dialog, sheet"
+    state_management:
+      # For simplicity, rely on Next.js 13+ server components, server actions, and minimal client state.
+      library: "React hooks"
+    styling:
+      # Strictly use Tailwind classes along with shadcn/ui components.
+      approach: "Utility-first with Tailwind and component-driven with Shadcn UI"
+    code_splitting:
+      # Implement code splitting where beneficial for performance.
+      approach: "Route-based and component-based splitting"
+  backend:
+    # Supabase for database (PostgreSQL), authentication, RLS policies, etc.
+    services:
+      - "Supabase for database, user auth, and form handling"
+    auth:
+      # If authentication is needed, follow best practices outlined in the PRD or Supabase docs.
+      approach: "Supabase Auth with role-based access"
+  integrations:
+    # Focus on Timefold.ai, alfa ecare (Epsilon), carefox
+    # We may also use optional external services (if relevant).
+    - "Timefold.ai field service routing modelfor AI scheduling at https://docs.timefold.ai/field-service-routing/latest/understanding-the-api"
+    - "eCare, Carefox for clients and employeesdata exchange"
+    # Integration code must be carefully commented, tested, and follow docs.
+
+naming_conventions:
+  react_components:
+    style: "PascalCase"
+  variables:
+    style: "camelCase"
+  constants:
+    style: "UPPER_CASE"
+  files_and_dirs:
+    style: "kebab-case"
+  typescript_types:
+    style: "PascalCase"
+  graphql_operations:
+    # If GraphQL is ever introduced for expansions, use descriptive names that match resources/actions.
+    style: "camelCase"
+
+typescript_usage:
+  strict_mode: true
+  features:
+    - "Use interfaces and type aliases for data models."
+    - "Prefer `unknown` over `any`."
+    - "Utilize generics where appropriate."
+    - "Enable strict null checks, noImplicitAny, and noUnusedLocals."
+  return_types:
+    explicit_return: true
+
+ui_and_styling:
+  framework: "shadcn/ui + Tailwind"
+  required_components:
+    - "button"
+    - "card"
+    - "form"
+    - "input"
+    - "select"
+    - "tabs"
+    - "dialog"
+    - "sheet"
+    - "table"
+    - "toast"
+  rules:
+    - "Use Tailwind utility classes for layout, spacing, colors, and typography."
+    - "Adopt shadcn/ui components for buttons, dialogs, forms, etc."
+    - "Maintain a consistent, clean, and professional SaaS aesthetic."
+  accessibility:
+    - "Add alt text to images."
+    - "Ensure semantic HTML structure."
+    - "Use ARIA attributes when needed."
+    - "Ensure keyboard navigation."
+  responsive_design:
+    - "Use Tailwind responsive classes (mobile-first design)."
+    - "Test on multiple breakpoints."
+  branding:
+    - Follow the brand style and colors as described in the Docs/ui-guidelines.md.
+    
+performance_optimization:
+  - (later "Use Next.js Image component for optimized images.")
+  - "Leverage route-based code splitting."
+  - "Prefetch critical data at build time with Next.js server components when appropriate."
+  - "Minimize unnecessary re-renders by using memoization and stable references."
+  - "Implement caching strategies (SWR, React Query, or Next.js server actions) where beneficial."
+  - "Use lazy loading for non-critical components."
+  - "Perform Lighthouse and Web Vitals checks for performance improvements."
+
+other_rules:
+file_structure:
+- "update the Docs/file-dir.md if file structure changed"
+- update hte detailed logs in meeting-notes.md with our interactions on regular basis. keep them updated.
+  documentation:
+    - "Add JSDoc comments where appropriate."
+    - "Document complex functions, components, and custom hooks thoroughly."
+   code_quality:
+    - "No unused imports."
+    - "No console.logs in production code."
+    - "Use ESLint and Prettier to enforce code style and formatting."
+   
+feature_implementation:
+  - "For each requested feature from the PRD, provide actual implementation code, not pseudo-code."
+  - "Don't skip steps. If the PRD mentions a specific page, mechanic, or integration, it must be implemented."
+  - "If a sample snippet is requested, provide a fully working snippet."
+
+security:
+  - "Use HTTPS (SSL/TLS)."
+  - "Securely handle API tokens and keys in environment variables."
+  - "Follow Supabase best practices (RLS, policies) to protect data at row level."
+  - "Sanitize user input when relevant."
+  - "Comply with GDPR and SoL data handling guidelines."
+
+seo:
+  - "Use semantic HTML tags (<header>, <main>, <footer>)."
+  - "Add meta descriptions, titles, and alt texts."
+  - "Generate sitemaps and robots.txt."
+  - "Use structured headings (H1, H2, H3) for SEO clarity."
+
+maintenance:
+  - "Keep components modular and reusable."
+  - "Follow a clear directory structure, as outlined in the Docs/file-dir.md."
+  - "Continuously improve based on user feedback."
+  - "Ensure easy scaling to support multiple home care companies, employees, and clients."
+
+shadcn_ui_missing:
+  - "Run 'npx shadcn@latest init' to initialize shadcn/ui"
+  - "Install missing components: 'npx shadcn@latest add [component-name]'"
+  - "Ensure components are added to src/components/ui/"
+  - "Check imports use correct paths (@/components/ui/[component])"
+
+fixing errors:
+- "for the code present we get this error:
+
+think step by step when fixing it."
+
