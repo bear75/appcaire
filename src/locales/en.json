@@ -4,7 +4,7 @@
     "meta_description": "Optimize your home care scheduling with AI-driven solutions. Manage staff, clients, and schedules efficiently."
   },
   "Navbar": {
-    "sign_in": "Sign In",
+    "sign_in": "",
     "sign_up": "Sign Up"
   },
   "Footer": {
@@ -44,7 +44,7 @@
     "view_schedule": "Visa Schema",
     "manage_employees": "Hantera Personal",
     "manage_clients": "Hantera Klienter",
-    "settings": "Inställningar"
+    "settings": "Settings"
   },
   "RecentActivity": {
     "recent_activity": "Senaste Aktivitet",
