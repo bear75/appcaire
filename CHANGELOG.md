@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/bear75/appcaire/compare/v1.1.0...v1.2.0) (2025-01-18)
+
+
+### Features
+
+* add pricing plan configuration and fix locale types ([ef615a5](https://github.com/bear75/appcaire/commit/ef615a58697332d9eaae28c28da0836008cba414))
+
 # [1.1.0](https://github.com/bear75/SaaS-Boilerplate/compare/v1.0.0...v1.1.0) (2025-01-18)
 
 
