@@ -16,7 +16,21 @@ export async function generateMetadata(props: { params: { locale: string } }) {
 }
 
 const SignInPage = (props: { params: { locale: string } }) => (
-  <SignIn path={getI18nPath('/sign-in', props.params.locale)} />
+  <div className="w-full max-w-[400px] px-4">
+    <SignIn
+      path={getI18nPath('/sign-in', props.params.locale)}
+      routing="path"
+      signUpUrl={getI18nPath('/sign-up', props.params.locale)}
+      redirectUrl={getI18nPath('/dashboard', props.params.locale)}
+      appearance={{
+        elements: {
+          rootBox: 'w-full',
+          card: 'w-full shadow-none border border-border',
+          formButtonPrimary: 'bg-primary hover:bg-primary/90',
+        },
+      }}
+    />
+  </div>
 );
 
 export default SignInPage;

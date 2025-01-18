@@ -30,26 +30,24 @@ export const KPICard = ({
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between">
-          <div>
-            <div className="flex items-baseline">
-              <div className="text-2xl font-bold">{value}</div>
-              <div className="ml-2 flex items-center text-sm">
-                <span
-                  className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
-                    isPositive
-                      ? 'bg-green-50 text-green-700 ring-green-600/20'
-                      : 'bg-red-50 text-red-700 ring-red-600/20'
-                  }`}
-                >
-                  <TrendIcon className="mr-1 size-3" />
-                  {trend}
-                </span>
-                {description && (
-                  <CardDescription className="mt-1 text-xs">
-                    {description}
-                  </CardDescription>
-                )}
-              </div>
+          <div className="space-y-1">
+            <p className="text-2xl font-bold">{value}</p>
+            <div className="flex items-center gap-2">
+              <span
+                className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
+                  isPositive
+                    ? 'bg-green-50 text-green-700 ring-green-600/20'
+                    : 'bg-red-50 text-red-700 ring-red-600/20'
+                }`}
+              >
+                <TrendIcon className="mr-1 size-3" />
+                {trend}
+              </span>
+              {description && (
+                <CardDescription className="text-xs">
+                  {description}
+                </CardDescription>
+              )}
             </div>
           </div>
         </div>

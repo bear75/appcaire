@@ -5,7 +5,7 @@ import createIntlMiddleware from 'next-intl/middleware';
 import { locales, pathnames } from './config';
 
 const intlMiddleware = createIntlMiddleware({
-  defaultLocale: 'sv',
+  defaultLocale: 'en',
   locales,
   pathnames,
 });

@@ -2,25 +2,40 @@ import { expect, test } from '@playwright/test';
 
 test.describe('I18n', () => {
   test.describe('Language Switching', () => {
-    test('should switch language from English to French using dropdown and verify text on the homepage', async ({ page }) => {
+    test('should switch language from English to Swedish using dropdown and verify text on the homepage', async ({ page }) => {
       await page.goto('/');
 
-      await expect(page.getByText('The perfect SaaS template to build')).toBeVisible();
+      // Wait for the page to be loaded
+      await page.waitForSelector('body', { state: 'visible' });
 
+      // Switch to Swedish
       await page.getByRole('button', { name: 'lang-switcher' }).click();
-      await page.getByText('Français').click();
+      await page.getByText('Svenska').click();
 
-      await expect(page.getByText('Le parfait SaaS template pour construire')).toBeVisible();
+      // Wait for navigation and content update
+      await page.waitForURL('**/sv');
+      await page.waitForSelector('body', { state: 'visible' });
+
+      // Verify Swedish text
+      await expect(
+        page.getByText('Caire - Framtidens Hemtjänstplanering'),
+      ).toBeVisible();
     });
 
-    test('should switch language from English to French using URL and verify text on the sign-in page', async ({ page }) => {
+    test('should switch language from English to Swedish using URL and verify text on the sign-in page', async ({ page }) => {
+      // Visit English sign-in
       await page.goto('/sign-in');
+      await page.waitForSelector('body', { state: 'visible' });
 
-      await expect(page.getByText('Email address')).toBeVisible();
+      // Verify English text
+      await expect(page.getByRole('heading', { name: 'Sign In' })).toBeVisible();
 
-      await page.goto('/fr/sign-in');
+      // Visit Swedish sign-in
+      await page.goto('/sv/sign-in');
+      await page.waitForSelector('body', { state: 'visible' });
 
-      await expect(page.getByText('Adresse e-mail')).toBeVisible();
+      // Verify Swedish text
+      await expect(page.getByRole('heading', { name: 'Logga in' })).toBeVisible();
     });
   });
 });

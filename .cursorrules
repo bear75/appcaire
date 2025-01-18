@@ -48,27 +48,50 @@ tech_stack:
         - "Add required components using 'npx shadcn@latest add [component-name]'"
         - "Required components: button, card, form, input, select, tabs, dialog, sheet"
     state_management:
-      # For simplicity, rely on Next.js 13+ server components, server actions, and minimal client state.
       library: "React hooks"
     styling:
-      # Strictly use Tailwind classes along with shadcn/ui components.
       approach: "Utility-first with Tailwind and component-driven with Shadcn UI"
     code_splitting:
-      # Implement code splitting where beneficial for performance.
       approach: "Route-based and component-based splitting"
+    i18n:
+      - "NextIntl for internationalization"
+      - "Crowdin for translation management"
   backend:
-    # Supabase for database (PostgreSQL), authentication, RLS policies, etc.
     services:
-      - "Supabase for database, user auth, and form handling"
+      - "PostgreSQL via Supabase"
+      - "Drizzle ORM for type-safe database operations"
     auth:
-      # If authentication is needed, follow best practices outlined in the PRD or Supabase docs.
-      approach: "Supabase Auth with role-based access"
+      approach: "Clerk for user and organization-level authentication"
+  testing:
+    frameworks:
+      - "Vitest for unit testing"
+      - "Playwright for end-to-end testing"
+      - "Codecov for coverage reporting"
+  monitoring:
+    - "Sentry for error tracking"
+    - "Better Stack for logs"
+    - "Checkly for uptime monitoring"
   integrations:
-    # Focus on Timefold.ai, alfa ecare (Epsilon), carefox
-    # We may also use optional external services (if relevant).
-    - "Timefold.ai field service routing modelfor AI scheduling at https://docs.timefold.ai/field-service-routing/latest/understanding-the-api"
-    - "eCare, Carefox for clients and employeesdata exchange"
-    # Integration code must be carefully commented, tested, and follow docs.
+    - "Timefold.ai field service routing model for AI scheduling"
+    - "Alfa eCare Business Intelligence API for data exchange"
+    - "Future integration with Carefox"
+
+  deployment:
+    platform: "Vercel"
+    features:
+      - "Automatic preview deployments for pull requests"
+      - "Production deployments on main branch merges"
+      - "Environment variable management"
+      - "Edge functions support"
+
+  ci_cd:
+    platform: "GitHub Actions"
+    workflows:
+      - "Automated testing with Vitest and Playwright"
+      - "Code coverage reporting via Codecov"
+      - "Database migration checks"
+      - "Type checking and linting"
+      - "Bundle size monitoring"
 
 naming_conventions:
   react_components:

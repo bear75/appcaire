@@ -1,42 +1,87 @@
 'use client';
 
-import { enUS, frFR } from '@clerk/localizations';
+import { svSE } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
+import { useParams } from 'next/navigation';
 
-import { AppConfig } from '@/utils/AppConfig';
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  // We still need useParams for Next.js routing but don't need the locale
+  useParams();
 
-export default function AuthLayout(props: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
-  let clerkLocale = enUS;
-  let signInUrl = '/sign-in';
-  let signUpUrl = '/sign-up';
-  let dashboardUrl = '/dashboard';
-  let afterSignOutUrl = '/';
+  // Custom Swedish translations to enhance/override Clerk's built-in ones
+  const customSwedishTranslations = {
+    signIn: {
+      start: {
+        title: 'Logga in på ditt konto',
+        subtitle: 'för att fortsätta till {{applicationName}}',
+        actionText: 'Har du inget konto?',
+        actionLink: 'Registrera dig',
+      },
+      emailCode: {
+        title: 'Verifiera din e-post',
+        subtitle: 'för att fortsätta till {{applicationName}}',
+        formTitle: 'Verifieringskod',
+        formSubtitle: 'Ange verifieringskoden som skickats till din e-postadress',
+        resendButton: 'Fick du ingen kod? Skicka igen',
+      },
+      password: {
+        title: 'Välkommen tillbaka',
+        subtitle: 'för att fortsätta till {{applicationName}}',
+        formTitle: 'Ange ditt lösenord',
+        actionText: 'Glömt lösenord?',
+        forgotPasswordTitle: 'Återställ ditt lösenord',
+      },
+    },
+    signUp: {
+      start: {
+        title: 'Skapa ditt konto',
+        subtitle: 'för att fortsätta till {{applicationName}}',
+        actionText: 'Har du redan ett konto?',
+        actionLink: 'Logga in',
+      },
+      emailCode: {
+        title: 'Verifiera din e-post',
+        subtitle: 'för att fortsätta till {{applicationName}}',
+        formTitle: 'Verifieringskod',
+        formSubtitle: 'Ange verifieringskoden som skickats till din e-postadress',
+        resendButton: 'Fick du ingen kod? Skicka igen',
+      },
+    },
+    userButton: {
+      action__signOut: 'Logga ut',
+      action__manageAccount: 'Hantera konto',
+      action__signOutAll: 'Logga ut från alla enheter',
+      action__addAccount: 'Lägg till konto',
+    },
+    formButtonPrimary: 'Fortsätt',
+    formFieldLabel__emailAddress: 'E-postadress',
+    formFieldLabel__password: 'Lösenord',
+    formFieldAction__forgotPassword: 'Glömt lösenord?',
+    formFieldInputPlaceholder__emailAddress: 'namn@exempel.se',
+    formFieldInputPlaceholder__password: 'Ange ditt lösenord',
+    footerActionLink__useAnotherMethod: 'Använd en annan metod',
+    dividerText: 'eller',
+    socialButtonsBlockButton: 'Fortsätt med {{provider}}',
+  };
 
-  if (props.params.locale === 'fr') {
-    clerkLocale = frFR;
-  }
+  // Always use Swedish locale with custom translations
+  const clerkLocale = { ...svSE, ...customSwedishTranslations };
 
-  if (props.params.locale !== AppConfig.defaultLocale) {
-    signInUrl = `/${props.params.locale}${signInUrl}`;
-    signUpUrl = `/${props.params.locale}${signUpUrl}`;
-    dashboardUrl = `/${props.params.locale}${dashboardUrl}`;
-    afterSignOutUrl = `/${props.params.locale}${afterSignOutUrl}`;
-  }
+  // Base URLs - always use English routes
+  const signInUrl = '/en/sign-in';
+  const signUpUrl = '/en/sign-up';
+  const dashboardUrl = '/en/dashboard';
+  const afterSignOutUrl = '/en';
 
   return (
     <ClerkProvider
-      // PRO: Dark mode support for Clerk
       localization={clerkLocale}
       signInUrl={signInUrl}
       signUpUrl={signUpUrl}
-      signInFallbackRedirectUrl={dashboardUrl}
-      signUpFallbackRedirectUrl={dashboardUrl}
+      redirectUrl={dashboardUrl}
       afterSignOutUrl={afterSignOutUrl}
     >
-      {props.children}
+      {children}
     </ClerkProvider>
   );
 }

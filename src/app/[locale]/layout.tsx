@@ -1,7 +1,11 @@
+import '@/styles/globals.css';
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { NextIntlClientProvider, useMessages } from 'next-intl';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, unstable_setRequestLocale } from 'next-intl/server';
 
+import type { AllLocales } from '@/utils/AppConfig';
 import { AppConfig } from '@/utils/AppConfig';
 import { cn } from '@/utils/Helpers';
 
@@ -23,16 +27,17 @@ export function generateStaticParams() {
 
 type RootLayoutProps = {
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: (typeof AllLocales)[number] };
 };
 
-export default function RootLayout({ children, params }: RootLayoutProps) {
-  const messages = useMessages();
+export default async function RootLayout({ children, params: { locale } }: RootLayoutProps) {
+  unstable_setRequestLocale(locale);
+  const messages = await getMessages({ locale });
 
   return (
-    <html lang={params.locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background antialiased', inter.className)}>
-        <NextIntlClientProvider messages={messages} locale={params.locale}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
           {children}
         </NextIntlClientProvider>
       </body>

@@ -511,3 +511,43 @@ Made with ♥ by [CreativeDesignsGuru](https://creativedesignsguru.com) [![Twitt
 Looking for a custom boilerplate to kick off your project? I'd be glad to discuss how I can help you build one. Feel free to reach out anytime at contact@creativedesignsguru.com!
 
 [![Sponsor Next JS Boilerplate](https://cdn.buymeacoffee.com/buttons/default-red.png)](https://github.com/sponsors/ixartz)
+
+## Deployment
+
+### Vercel Deployment
+
+This project is configured for automatic deployment to Vercel. Here's how it works:
+
+1. **Production Deployments**:
+   - Every push to the `main` branch triggers a production deployment
+   - The deployment is handled by GitHub Actions using Vercel CLI
+   - Production URL: [https://caire-platform.vercel.app](https://caire-platform.vercel.app)
+
+2. **Preview Deployments**:
+   - Every pull request gets a preview deployment
+   - Preview URLs are automatically added as a comment to the PR
+   - Great for testing changes before merging to main
+
+3. **Required Secrets**:
+   Add these secrets to your GitHub repository:
+   - `VERCEL_TOKEN`: Your Vercel API token
+   - `VERCEL_ORG_ID`: Your Vercel organization ID
+   - `VERCEL_PROJECT_ID`: Your Vercel project ID
+
+4. **Environment Variables**:
+   Configure these in your Vercel project settings:
+   - `NEXT_PUBLIC_API_URL`: Your API URL
+   - `NEXT_PUBLIC_GTM_ID`: Google Tag Manager ID
+   - Any other environment variables needed by the app
+
+5. **Manual Deployment**:
+   ```bash
+   # Install Vercel CLI
+   npm i -g vercel
+
+   # Login to Vercel
+   vercel login
+
+   # Deploy to production
+   vercel --prod
+   ```

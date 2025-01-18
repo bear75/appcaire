@@ -17,7 +17,17 @@ test.describe('Sanity', () => {
     test('should display the homepage', async ({ page, baseURL }) => {
       await page.goto(`${baseURL}/`);
 
-      await expect(page.getByText('The perfect SaaS template to build')).toBeVisible();
+      // Wait for the main content to be loaded
+      await page.waitForSelector('main', { state: 'visible' });
+
+      // Check for Swedish text (default locale)
+      await expect(
+        page.getByText('The perfect SaaS template to build and scale your business with ease.'),
+      ).toBeVisible();
+
+      // Verify navigation elements
+      await expect(page.getByText('Get Started')).toBeVisible();
+      await expect(page.getByText('Sign In')).toBeVisible();
     });
   });
 });

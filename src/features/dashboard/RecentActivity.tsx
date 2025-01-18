@@ -27,28 +27,28 @@ export const RecentActivity = () => {
       id: '1',
       type: 'schedule',
       message: t('schedule_optimized'),
-      timestamp: '2024-01-17T14:30:00Z',
+      timestamp: '2024-01-17T15:30:00Z',
       user: 'Anna Andersson',
     },
     {
       id: '2',
       type: 'employee',
       message: t('employee_added'),
-      timestamp: '2024-01-17T13:15:00Z',
+      timestamp: '2024-01-17T14:15:00Z',
       user: 'Erik Eriksson',
     },
     {
       id: '3',
       type: 'client',
       message: t('client_updated'),
-      timestamp: '2024-01-17T12:45:00Z',
+      timestamp: '2024-01-17T13:45:00Z',
       user: 'Maria Nilsson',
     },
     {
       id: '4',
       type: 'constraint',
       message: t('constraint_modified'),
-      timestamp: '2024-01-17T11:30:00Z',
+      timestamp: '2024-01-17T12:45:00Z',
       user: 'Johan Johansson',
     },
   ];
@@ -61,34 +61,39 @@ export const RecentActivity = () => {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{t('title')}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[300px] pr-4">
-          <div className="space-y-4">
-            {activities.map(activity => (
-              <div
-                key={activity.id}
-                className="flex items-center justify-between border-b pb-4 last:border-0"
-              >
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    {activity.message}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {activity.user}
-                  </p>
+    <div className="space-y-4">
+      <h2 className="text-lg font-semibold">{t('recent_activity')}</h2>
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base font-medium">
+            {t('latest_updates')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ScrollArea className="h-[300px] pr-4">
+            <div className="space-y-4">
+              {activities.map(activity => (
+                <div
+                  key={activity.id}
+                  className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
+                >
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium leading-none">
+                      {activity.message}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {activity.user}
+                    </p>
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {formatTimestamp(activity.timestamp)}
+                  </div>
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  {formatTimestamp(activity.timestamp)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </ScrollArea>
-      </CardContent>
-    </Card>
+              ))}
+            </div>
+          </ScrollArea>
+        </CardContent>
+      </Card>
+    </div>
   );
 };

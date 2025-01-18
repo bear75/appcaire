@@ -1,5 +1,3 @@
-import { BILLING_INTERVAL, type PricingPlan } from '@/types/Subscription';
-
 // FIXME: Update this configuration file based on your project information
 export const AppConfig = {
   name: 'Caire',
@@ -22,64 +20,42 @@ export const AllLocales = AppConfig.locales.map(locale => locale.id);
 
 export const PLAN_ID = {
   FREE: 'free',
-  PREMIUM: 'premium',
-  ENTERPRISE: 'enterprise',
+  STARTER: 'starter',
+  PRO: 'pro',
 } as const;
 
-export const PricingPlanList: Record<string, PricingPlan> = {
-  [PLAN_ID.FREE]: {
+export const PricingPlanList = [
+  {
     id: PLAN_ID.FREE,
     price: 0,
-    interval: BILLING_INTERVAL.MONTH,
-    testPriceId: '',
-    devPriceId: '',
-    prodPriceId: '',
+    interval: 'month',
     features: {
-      teamMember: 2,
-      website: 2,
-      storage: 2,
-      transfer: 2,
+      teamMember: 1,
+      website: 1,
+      storage: 1,
+      transfer: 1,
     },
   },
-  [PLAN_ID.PREMIUM]: {
-    id: PLAN_ID.PREMIUM,
-    price: 79,
-    interval: BILLING_INTERVAL.MONTH,
-    testPriceId: 'price_premium_test',
-    devPriceId: 'price_1PNksvKOp3DEwzQlGOXO7YBK',
-    prodPriceId: '',
+  {
+    id: PLAN_ID.STARTER,
+    price: 99,
+    interval: 'month',
     features: {
       teamMember: 5,
       website: 5,
-      storage: 5,
-      transfer: 5,
+      storage: 10,
+      transfer: 10,
     },
   },
-  [PLAN_ID.ENTERPRISE]: {
-    id: PLAN_ID.ENTERPRISE,
+  {
+    id: PLAN_ID.PRO,
     price: 199,
-    interval: BILLING_INTERVAL.MONTH,
-    testPriceId: 'price_enterprise_test',
-    devPriceId: 'price_1PNksvKOp3DEwzQli9IvXzgb',
-    prodPriceId: '',
+    interval: 'month',
     features: {
-      teamMember: 100,
-      website: 100,
-      storage: 100,
-      transfer: 100,
+      teamMember: 10,
+      website: 10,
+      storage: 25,
+      transfer: 25,
     },
   },
-};
-
-export type PricingType = {
-  id: string;
-  name: string;
-  href: string;
-  price: string;
-  description: string;
-  features: string[];
-  featured?: boolean;
-  cta: string;
-  interval: keyof typeof BILLING_INTERVAL;
-  plan: PricingPlan;
-};
+] as const;
