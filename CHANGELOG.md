@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/bear75/SaaS-Boilerplate/compare/v1.0.0...v1.1.0) (2025-01-18)
+
+
+### Features
+
+* add pricing plan configuration and fix locale types ([40fc116](https://github.com/bear75/SaaS-Boilerplate/commit/40fc11674b895c77797e90f331ff025aa2127053))
+
 # 1.0.0 (2025-01-17)
 
 
