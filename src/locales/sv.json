@@ -1,18 +1,20 @@
 {
   "Index": {
     "meta_title": "Caire - Framtidens Hemtjänstplanering",
-    "meta_description": "Optimera din hemtjänstverksamhet med AI-driven schemaläggning och ruttplanering",
-    "hero_title": "Caire - Framtidens Hemtjänstplanering",
-    "hero_description": "Optimera din hemtjänstverksamhet med AI-driven schemaläggning och ruttplanering",
-    "get_started": "Kom igång",
+    "meta_description": "Optimera din hemtjänstverksamhet med AI-driven schemaläggning och ruttplanering"
+  },
+  "Navbar": {
     "sign_in": "Logga in",
-    "benefits_title": "Fördelar med Caire",
-    "feature_1_title": "AI-Driven Planering",
-    "feature_1_description": "Optimera scheman automatiskt med vår avancerade AI-algoritm",
-    "feature_2_title": "Effektiv Ruttplanering",
-    "feature_2_description": "Minimera restid och maximera tid hos brukare",
-    "feature_3_title": "Realtidsövervakning",
-    "feature_3_description": "Följ upp och anpassa scheman i realtid"
+    "sign_up": "Registrera dig"
+  },
+  "Footer": {
+    "company": "Företag",
+    "terms_of_service": "Användarvillkor",
+    "privacy_policy": "Integritetspolicy",
+    "designed_by": "Designed by <author></author>."
+  },
+  "ProtectFallback": {
+    "not_enough_permission": "Du har inte behörighet att utföra denna åtgärd"
   },
   "SignIn": {
     "meta_title": "Logga in | Caire",
@@ -21,17 +23,6 @@
   "SignUp": {
     "meta_title": "Skapa konto | Caire",
     "meta_description": "Skapa ett nytt Caire-konto"
-  },
-  "Footer": {
-    "company": "Företag",
-    "contact": "Kontakt",
-    "about": "Om oss",
-    "privacy_policy": "Integritetspolicy",
-    "terms_of_service": "Användarvillkor"
-  },
-  "Navbar": {
-    "sign_in": "Logga in",
-    "sign_up": "Registrera dig"
   },
   "DashboardLayout": {
     "home": "Hem",
