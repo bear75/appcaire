@@ -70,8 +70,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   // Base URLs - always use English routes
   const signInUrl = '/en/sign-in';
   const signUpUrl = '/en/sign-up';
-  const dashboardUrl = '/en/dashboard';
-  const afterSignOutUrl = '/en';
+  const dashboardUrl = '/sv/dashboard';
+  const afterSignOutUrl = '/sv';
 
   return (
     <ClerkProvider
