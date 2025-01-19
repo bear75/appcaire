@@ -281,3 +281,18 @@ src/
 .env.production         # Production environment variables
 .env.local             # Local overrides (not tracked in git)
 ```
+
+### Database Configuration
+
+```
+# Development Database
+- Connection pooling (port 6543)
+- Transaction mode
+- SSL enabled
+
+# Production Database
+- Connection pooling (port 6543)
+- Transaction mode
+- SSL enabled
+- Enhanced security
+```

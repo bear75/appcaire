@@ -70,6 +70,20 @@
 - Connection pooling enabled (port 6543)
 - Transaction pool mode
 - SSL required for all connections
+- Separate development and production environments
+
+### Development Environment
+
+- Project URL: ryimasacidqeuufdbcrv.supabase.co
+- Connection pooling with transaction mode
+- SSL-enabled secure connections
+
+### Production Environment
+
+- Project URL: qcailgzrkecklsmtkodp.supabase.co
+- Connection pooling with transaction mode
+- SSL-enabled secure connections
+- Strict security policies
 
 ### ORM and Migrations
 

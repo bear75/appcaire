@@ -284,9 +284,29 @@ CREATE TABLE ScheduleMetrics (
   npm run db:migrate:prod:execute # Execute with confirmation
   ```
 
-### Connection Pooling
+### 6.4 Environment Configuration
+
+#### Development Database
+
+- Supabase Project: ryimasacidqeuufdbcrv.supabase.co
+- Connection pooling enabled (port 6543)
+- Transaction pool mode
+- SSL required for all connections
+
+#### Production Database
+
+- Supabase Project: qcailgzrkecklsmtkodp.supabase.co
+- Connection pooling enabled (port 6543)
+- Transaction pool mode
+- SSL required for all connections
+- Enhanced security measures
+- Regular backups and monitoring
+
+### 6.5 Connection Pooling
 
 - Using Supabase connection pooler (port 6543)
 - Transaction pool mode enabled
 - SSL required for all connections
 - Prefetch disabled for pooler compatibility
+- Connection timeout configuration
+- Pool size optimization per environment
