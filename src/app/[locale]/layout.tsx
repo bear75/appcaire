@@ -18,6 +18,11 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${AppConfig.title}`,
     },
     description: AppConfig.description,
+    icons: {
+      icon: '/favicon.ico',
+      shortcut: '/favicon-16x16.png',
+      apple: '/apple-touch-icon.png',
+    },
   };
 }
 
@@ -30,13 +35,21 @@ type RootLayoutProps = {
   params: { locale: (typeof AllLocales)[number] };
 };
 
-export default async function RootLayout({ children, params: { locale } }: RootLayoutProps) {
+export default async function RootLayout({
+  children,
+  params: { locale },
+}: RootLayoutProps) {
   unstable_setRequestLocale(locale);
   const messages = await getMessages({ locale });
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={cn('min-h-screen bg-background antialiased', inter.className)}>
+      <body
+        className={cn(
+          'min-h-screen bg-background antialiased',
+          inter.className,
+        )}
+      >
         <NextIntlClientProvider messages={messages} locale={locale}>
           {children}
         </NextIntlClientProvider>

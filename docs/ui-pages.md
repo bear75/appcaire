@@ -1,233 +1,107 @@
 # UI Pages Documentation
 
-## Overview
-This document outlines the structure and components of each page in the Caire Platform.
+## Phase 1: Basic UI Implementation
 
-## Pages
+### Common Elements
 
-### 1. Dashboard (`/dashboard`)
-Main overview page showing key metrics and quick actions.
+- Sidebar navigation with:
+  - Logo (heart-shaped, green #22c55e)
+  - Navigation links with Lucide icons
+  - Active state indicators
 
-#### Components
-- `DashboardHeader`: Title and user/organization info
-- `DashboardOverview`: KPI cards showing:
+### Dashboard Pages
+
+#### Analytics Dashboard
+
+- Date range selector
+- Metrics cards displaying:
+  - Total tasks
+  - Completed tasks
+  - Pending tasks
   - Active employees
-  - Active clients
-  - Weekly schedule completion rate
-  - Average travel time
-- `QuickActions`: Quick access buttons for common tasks
-- `RecentActivity`: Timeline of recent changes and events
+  - Total travel time
+  - Completion rate
+- Mock data for development
 
-### 2. Schedule Management (`/dashboard/schedule`)
-Schedule visualization and optimization interface.
+#### Employees Page
 
-#### Components
-- Schedule view with timeline
-- Employee/client assignment grid
-- Optimization controls
-- Constraint satisfaction indicators
-- Route visualization
-- Schedule metrics
+- List of employees in card format
+- Each card shows:
+  - Employee name
+  - Role
+  - Status
+  - Tasks today
+  - Completed tasks
+- "Add Employee" button
+- Mock data for development
 
-### 3. Employee Management (`/dashboard/employees`)
-Employee information and scheduling preferences.
+#### Schedule Page
 
-#### Components
-- Employee list with filters
-- Employee details view
-- Skill matrix
-- Availability calendar
-- Constraint management
-- Integration with eCare system
+- List of scheduled tasks
+- Each task card shows:
+  - Time
+  - Client
+  - Employee
+  - Status
+  - Task type
+- "View Calendar" and "Add Task" buttons
+- Mock data for development
 
-### 4. Client Management (`/dashboard/clients`)
-Client information and visit requirements.
+#### Clients Page
 
-#### Components
-- Client list with filters
-- Client details view
-- Visit requirements
-- Special needs/preferences
-- Service history
-- Integration with eCare system
+- List of clients in card format
+- Each card shows:
+  - Client name
+  - Address
+  - Contact info
+  - Active tasks
+  - Last visit
+- "Add Client" button
+- Mock data for development
 
-### 5. Settings (`/dashboard/settings`)
-Organization and system settings.
+#### Settings Page
 
-#### Components
-- Organization details
-- Constraint management
-- Integration settings
-- User management
-- Role permissions
-- System preferences
+- Organization settings section:
+  - Company name
+  - Email
+  - Phone
+  - Address
+- User preferences section:
+  - Language
+  - Timezone
+  - Notification preferences
+- Mock data for development
 
-### 6. Analytics (`/dashboard/analytics`)
-Performance metrics and reporting.
+## Implementation Details
 
-#### Components
-- KPI dashboard
-- Efficiency metrics
-- Travel optimization stats
-- Staff utilization charts
-- Client satisfaction metrics
-- Custom report builder
+### Components
 
-### 7. Organization Profile (`/dashboard/organization-profile`)
-Organization management interface.
+- All pages use shadcn/ui components
+- Tailwind CSS for styling
+- Responsive design (mobile-first)
+- Loading states
+- Error handling
 
-#### Components
-- Organization details form
-- Billing information
-- Subscription management
-- API keys and integration tokens
-- Team member management
+### Navigation
 
-### 8. User Profile (`/dashboard/user-profile`)
-Individual user settings and preferences.
+- Locale-based routing (/[locale]/...)
+- Protected routes under (auth) group
+- Dynamic navigation based on user role
 
-#### Components
-- Personal information
-- Notification preferences
-- Language settings
-- Theme preferences
-- Security settings
+### Data Handling
 
-## Common Elements
+- Mock data for Phase 1
+- Structured for easy replacement with real data in Phase 2
 
-### Headers
-```tsx
-<header className="mb-6">
-  <h1 className="text-2xl font-bold">{t('title_bar')}</h1>
-  <p className="text-muted-foreground">{t('title_bar_description')}</p>
-</header>;
-```
+### Accessibility
 
-### Data Tables
-```tsx
-<DataTable
-  columns={columns}
-  data={data}
-  searchable
-  sortable
-  pagination
-/>;
-```
-
-### Forms
-```tsx
-<Form {...form}>
-  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-    <FormFields />
-    <Button type="submit">
-      {t('submit_button')}
-    </Button>
-  </form>
-</Form>;
-```
-
-### Filters
-```tsx
-<div className="mb-6 flex gap-4">
-  <Input
-    placeholder={t('search_placeholder')}
-    onChange={e => setSearch(e.target.value)}
-  />
-  <Select
-    options={filterOptions}
-    onChange={setFilter}
-    placeholder={t('filter_placeholder')}
-  />
-</div>;
-```
-
-## Responsive Behavior
-
-### Mobile View
-- Single column layout
-- Collapsible navigation
-- Simplified tables
-- Full-width forms
-- Touch-friendly controls
-
-### Tablet View
-- Two column layout where appropriate
-- Sidebar navigation
-- Responsive tables
-- Optimized forms
-
-### Desktop View
-- Multi-column layout
-- Persistent navigation
-- Full feature set
-- Advanced visualizations
-
-## State Management
-
-### Loading States
-```tsx
-{ isLoading
-  ? (
-      <LoadingSkeleton />
-    )
-  : (
-      <PageContent data={data} />
-    ); }
-```
-
-### Error States
-```tsx
-{ error
-  ? (
-      <ErrorMessage message={error.message} />
-    )
-  : (
-      <PageContent data={data} />
-    ); }
-```
-
-### Empty States
-```tsx
-{ items.length === 0
-  ? (
-      <EmptyState
-        icon={<Icon />}
-        title={t('empty_state_title')}
-        description={t('empty_state_description')}
-      />
-    )
-  : (
-      <ItemsList items={items} />
-    ); }
-```
-
-## Internationalization
-All pages use the `useTranslations` hook from `next-intl` for Swedish language support:
-
-```tsx
-// Example component using translations
-function PageTitle() {
-  const t = useTranslations('PageNamespace');
-
-  return (
-    <h1>{t('title')}</h1>
-  );
-}
-```
-
-## Performance Considerations
-- Implement virtualization for long lists
-- Use pagination for large datasets
-- Lazy load images and heavy components
-- Cache API responses
-- Optimize bundle size with code splitting
-
-## Accessibility
-- Semantic HTML structure
-- ARIA labels and roles
+- ARIA labels
 - Keyboard navigation
-- Focus management
 - Screen reader support
-- High contrast mode support
+- Color contrast compliance
 
-These pages form the core interface of the Caire Platform, providing a comprehensive solution for home care scheduling and management.
+### Future Phases
+
+- Phase 2: Database integration
+- Phase 3: Business logic
+- Phase 4: Advanced features

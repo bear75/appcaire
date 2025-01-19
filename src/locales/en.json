@@ -1,7 +1,18 @@
 {
   "Index": {
-    "meta_title": "Caire - AI-Driven Home Care Scheduling",
-    "meta_description": "Optimize your home care scheduling with AI-driven solutions. Manage staff, clients, and schedules efficiently."
+    "meta_title": "Caire - AI Powered Home Care Scheduling",
+    "meta_description": "Optimize your home care scheduling with AI-driven solutions. Manage staff, clients, and schedules efficiently.",
+    "hero_title": "Caire - AI Powered Home Care Scheduling",
+    "hero_description": "Optimize your home care operations with AI-driven scheduling and route planning",
+    "get_started": "Get Started",
+    "sign_in": "Sign In",
+    "benefits_title": "Benefits of Caire",
+    "feature_1_title": "AI Powered Planning",
+    "feature_1_description": "Automatically optimize schedules with our advanced AI algorithm",
+    "feature_2_title": "Efficient Route Planning",
+    "feature_2_description": "Minimize travel time and maximize client care time",
+    "feature_3_title": "Real-time Monitoring",
+    "feature_3_description": "Track and adjust schedules in real-time"
   },
   "Navbar": {
     "sign_in": "Sign In",
@@ -11,7 +22,8 @@
     "company": "Company",
     "terms_of_service": "Terms Of Service",
     "privacy_policy": "Privacy Policy",
-    "designed_by": "Designed by <author></author>."
+    "designed_by": "Designed by <author></author>.",
+    "all_rights_reserved": "All rights reserved"
   },
   "ProtectFallback": {
     "not_enough_permission": "You do not have the permissions to perform this action"
@@ -24,34 +36,369 @@
     "meta_title": "Sign up",
     "meta_description": "Effortlessly create an account through our intuitive sign-up process."
   },
+  "UserProfile": {
+    "title_bar": "User Profile",
+    "title_bar_description": "View and manage your user profile"
+  },
+  "OrganizationProfile": {
+    "title_bar": "Organization Management",
+    "title_bar_description": "Manage your organization"
+  },
   "DashboardLayout": {
     "home": "Home",
     "members": "Members",
     "settings": "Settings"
   },
+  "Dashboard": {
+    "meta_title": "Caire Dashboard",
+    "meta_description": "Caire Dashboard for managing home care operations"
+  },
+  "DashboardIndex": {
+    "title_bar": "Caire Dashboard",
+    "title_bar_description": "Welcome to your dashboard",
+    "message_state_title": "Let's get started",
+    "message_state_description": "description"
+  },
   "DashboardOverview": {
-    "welcome": "Välkommen till din kontrollpanel",
-    "active_employees": "Aktiva Anställda",
-    "active_clients": "Aktiva Klienter",
-    "schedule_completion": "Schemaläggning",
-    "travel_time": "Restid",
-    "since_last_month": "sedan förra månaden",
-    "completion_rate": "slutföringsgrad",
-    "average_per_visit": "genomsnitt per besök"
+    "welcome": "Welcome to your dashboard",
+    "active_employees": "Active Employees",
+    "active_clients": "Active Clients",
+    "schedule_completion": "Schedule Completion",
+    "travel_time": "Travel Time",
+    "since_last_month": "since last month",
+    "completion_rate": "completion rate",
+    "average_per_visit": "average per visit"
   },
   "QuickActions": {
-    "quick_actions": "Snabbåtgärder",
-    "view_schedule": "Visa Schema",
-    "manage_employees": "Hantera Personal",
-    "manage_clients": "Hantera Klienter",
-    "settings": "Inställningar"
+    "quick_actions": "Quick Actions",
+    "view_schedule": "View Schedule",
+    "manage_employees": "Manage Employees",
+    "manage_clients": "Manage Clients",
+    "settings": "Settings"
   },
   "RecentActivity": {
-    "recent_activity": "Senaste Aktivitet",
-    "latest_updates": "Senaste uppdateringar",
-    "schedule_optimized": "Schema optimerat",
-    "employee_added": "Personal tillagd",
-    "client_updated": "Klient uppdaterad",
-    "constraint_modified": "Begränsning ändrad"
+    "recent_activity": "Recent Activity",
+    "latest_updates": "Latest Updates",
+    "schedule_optimized": "Schedule optimized",
+    "employee_added": "Employee added",
+    "client_updated": "Client updated",
+    "constraint_modified": "Constraint modified"
+  },
+  "Navigation": {
+    "dashboard": "Dashboard",
+    "schedule": "Schedule",
+    "employees": "Employees",
+    "clients": "Clients",
+    "analytics": "Analytics",
+    "settings": "Settings"
+  },
+  "Schedule": {
+    "title": "Schedule",
+    "description": "Manage and optimize scheduling",
+    "optimize_schedule": "Optimize Schedule",
+    "employee": "Employee",
+    "views": {
+      "timeline": "Timeline",
+      "grid": "Grid",
+      "map": "Map"
+    },
+    "grid": {
+      "employee": "Employee",
+      "client": "Client",
+      "time": "Time",
+      "type": "Type",
+      "status": "Status",
+      "location": "Location",
+      "constraints": "Constraints"
+    },
+    "metrics": {
+      "total_hours": "Total Hours",
+      "active_employees": "Active Employees",
+      "travel_time": "Travel Time",
+      "completion_rate": "Completion Rate"
+    },
+    "map": {
+      "routes": "Routes",
+      "total_time": "Total Time",
+      "integration_placeholder": "Map integration coming soon"
+    },
+    "timeline": {
+      "employee": "Employee",
+      "client": "Client",
+      "time": "Time",
+      "type": "Type",
+      "status": "Status"
+    },
+    "page_title": "Schedule | Caire",
+    "page_description": "Manage and optimize your home care schedule"
+  },
+  "Auth": {
+    "sign_in": {
+      "title": "Sign in to your account",
+      "description": "Enter your credentials to access your account",
+      "email_label": "Email address",
+      "email_placeholder": "Enter your email",
+      "password_label": "Password",
+      "password_placeholder": "Enter your password",
+      "remember_me": "Remember me",
+      "forgot_password": "Forgot password?",
+      "submit": "Sign in",
+      "no_account": "Don't have an account?",
+      "create_account": "Create an account"
+    },
+    "sign_up": {
+      "title": "Create an account",
+      "description": "Enter your details to create your account",
+      "name_label": "Full name",
+      "name_placeholder": "Enter your full name",
+      "email_label": "Email address",
+      "email_placeholder": "Enter your email",
+      "password_label": "Password",
+      "password_placeholder": "Create a password",
+      "confirm_password_label": "Confirm password",
+      "confirm_password_placeholder": "Confirm your password",
+      "terms": "I agree to the terms and conditions",
+      "submit": "Create account",
+      "has_account": "Already have an account?",
+      "sign_in": "Sign in"
+    },
+    "forgot_password": {
+      "title": "Reset your password",
+      "description": "Enter your email address and we'll send you a reset link",
+      "email_label": "Email address",
+      "email_placeholder": "Enter your email",
+      "submit": "Send reset link",
+      "back_to_sign_in": "Back to sign in"
+    },
+    "verify_email": {
+      "title": "Check your email",
+      "description": "We've sent you a verification link",
+      "resend": "Resend email",
+      "back_to_sign_in": "Back to sign in"
+    }
+  },
+  "Errors": {
+    "required": "This field is required",
+    "invalid_email": "Please enter a valid email address",
+    "password_mismatch": "Passwords do not match",
+    "min_password_length": "Password must be at least 8 characters",
+    "invalid_credentials": "Invalid email or password",
+    "email_taken": "This email is already registered",
+    "server_error": "Something went wrong. Please try again."
+  },
+  "Employees": {
+    "page_title": "Employees | Caire",
+    "page_description": "Manage your employees and their schedules",
+    "title": "Employees",
+    "description": "Manage your employees and their schedules",
+    "add_employee": "Add Employee",
+    "name": "Name",
+    "contact": "Contact",
+    "role": "Role",
+    "status": "Status",
+    "open_menu": "Open menu",
+    "edit": "Edit",
+    "view_schedule": "View Schedule",
+    "delete": "Delete",
+    "search": "Search employees...",
+    "filter": "Filter",
+    "sort": "Sort",
+    "export": "Export"
+  },
+  "Clients": {
+    "page_title": "Clients | Caire",
+    "page_description": "Manage your clients and their visit requirements",
+    "title": "Clients",
+    "description": "Manage your clients and their visit requirements",
+    "add_client": "Add Client",
+    "name": "Name",
+    "address": "Address",
+    "visit_details": "Visit Details",
+    "status": "Status",
+    "open_menu": "Open menu",
+    "edit": "Edit",
+    "view_visits": "View Visits",
+    "delete": "Delete",
+    "search": "Search clients...",
+    "filter": "Filter",
+    "sort": "Sort",
+    "export": "Export"
+  },
+  "Analytics": {
+    "page_title": "Analytics | Caire",
+    "page_description": "Get insights about your operations and optimize scheduling",
+    "title": "Analytics",
+    "description": "Get insights about your operations and optimize scheduling",
+    "export_report": "Export Report",
+    "metrics": {
+      "total_hours": "Total Hours",
+      "active_employees": "Active Employees",
+      "travel_time": "Travel Time",
+      "completion_rate": "Completion Rate"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "employees": "Employees",
+      "clients": "Clients",
+      "routes": "Routes"
+    },
+    "charts": {
+      "hours_trend": "Hours per Week",
+      "completion_rate": "Completion Rate",
+      "coming_soon": "Chart coming soon"
+    }
+  },
+  "Settings": {
+    "page_title": "Settings | Caire",
+    "page_description": "Manage your settings and preferences",
+    "title": "Settings",
+    "description": "Manage your settings and preferences",
+
+    "tabs": {
+      "organization": "Organization",
+      "users": "Users",
+      "notifications": "Notifications",
+      "security": "Security",
+      "localization": "Localization"
+    },
+
+    "organization": {
+      "title": "Organization Settings",
+      "description": "Manage your organization information and settings",
+      "fields": {
+        "name": "Organization Name",
+        "org_number": "Organization Number",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address"
+      },
+      "placeholders": {
+        "name": "Enter organization name",
+        "org_number": "Enter organization number",
+        "email": "Enter email address",
+        "phone": "Enter phone number",
+        "address": "Enter address"
+      },
+      "save": "Save Changes"
+    },
+
+    "users": {
+      "title": "User Management",
+      "description": "Manage users and permissions",
+      "search_placeholder": "Search users...",
+      "invite": "Invite User",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "actions": {
+        "edit": "Edit"
+      }
+    },
+
+    "notifications": {
+      "title": "Notification Settings",
+      "description": "Manage how and when you receive notifications",
+      "email": {
+        "title": "Email Notifications",
+        "schedule_changes": "Schedule Changes",
+        "schedule_changes_description": "Get notified when schedules are changed",
+        "new_assignments": "New Assignments",
+        "new_assignments_description": "Get notified about new assignments",
+        "reports": "Reports",
+        "reports_description": "Receive weekly and monthly reports via email"
+      },
+      "sms": {
+        "title": "SMS Notifications",
+        "urgent_changes": "Urgent Changes",
+        "urgent_changes_description": "Receive SMS for urgent schedule changes"
+      },
+      "frequency": {
+        "title": "Notification Frequency",
+        "label": "Frequency",
+        "placeholder": "Select frequency",
+        "realtime": "Real-time",
+        "daily": "Daily",
+        "weekly": "Weekly"
+      },
+      "save": "Save Changes"
+    },
+
+    "security": {
+      "title": "Security Settings",
+      "description": "Manage security and authentication",
+      "authentication": {
+        "title": "Authentication",
+        "description": "Manage login and security",
+        "two_factor": "Two-Factor Authentication",
+        "two_factor_description": "Add an extra layer of security when signing in",
+        "session_timeout": "Session Timeout",
+        "session_timeout_description": "Log out users after inactivity"
+      },
+      "data_protection": {
+        "title": "Data Protection",
+        "description": "Manage data protection and privacy",
+        "encryption": "Data Encryption",
+        "encryption_description": "All sensitive data is automatically encrypted",
+        "audit_log": "Audit Log",
+        "audit_log_description": "Track important system events"
+      },
+      "password_policy": {
+        "title": "Password Policy",
+        "description": "Manage password requirements",
+        "strong_password": "Strong Passwords",
+        "strong_password_description": "Require complex passwords",
+        "password_expiry": "Password Expiry",
+        "password_expiry_description": "Passwords must be changed every 90 days"
+      },
+      "save": "Save Changes"
+    },
+
+    "localization": {
+      "title": "Localization Settings",
+      "description": "Manage language, timezone and formats",
+      "language": {
+        "title": "Language",
+        "description": "Choose your preferred language",
+        "select_label": "Select Language",
+        "placeholder": "Select language",
+        "options": {
+          "swedish": "Swedish",
+          "english": "English",
+          "norwegian": "Norwegian",
+          "danish": "Danish"
+        }
+      },
+      "timezone": {
+        "title": "Timezone",
+        "description": "Choose your timezone",
+        "select_label": "Select Timezone",
+        "placeholder": "Select timezone",
+        "options": {
+          "stockholm": "Stockholm (UTC+1)",
+          "oslo": "Oslo (UTC+1)",
+          "copenhagen": "Copenhagen (UTC+1)",
+          "helsinki": "Helsinki (UTC+2)"
+        }
+      },
+      "date_format": {
+        "title": "Date & Time",
+        "description": "Choose how dates and times are displayed",
+        "select_label": "Date Format",
+        "placeholder": "Select date format"
+      },
+      "time_format": {
+        "select_label": "Time Format",
+        "placeholder": "Select time format",
+        "options": {
+          "24h": "24-hour (13:00)",
+          "12h": "12-hour (1:00 PM)"
+        }
+      },
+      "save": "Save Changes"
+    }
   }
 }

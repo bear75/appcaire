@@ -18,8 +18,8 @@ const emailChannel = new EmailAlertChannel('email-channel-1', {
 
 export const config = defineConfig({
   // FIXME: Add your own project name, logical ID, and repository URL
-  projectName: 'SaaS Boilerplate',
-  logicalId: 'saas-boilerplate',
+  projectName: 'Caire',
+  logicalId: 'caire',
   repoUrl: 'https://github.com/bear75/SaaS-Boilerplate',
   checks: {
     locations: ['us-east-1', 'eu-west-1'],

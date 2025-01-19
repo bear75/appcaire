@@ -38,7 +38,7 @@ export const Footer = () => {
       >
         <div className="text-center text-sm text-muted-foreground">
           {new Date().getFullYear()}
-          {' Caire. '}
+          {' caire. '}
           {t('all_rights_reserved')}
         </div>
       </CenteredFooter>

@@ -14,6 +14,20 @@
     "feature_3_title": "Realtidsövervakning",
     "feature_3_description": "Följ upp och anpassa scheman i realtid"
   },
+  "Navbar": {
+    "sign_in": "Logga in",
+    "sign_up": "Registrera dig"
+  },
+  "Footer": {
+    "company": "Företag",
+    "terms_of_service": "Användarvillkor",
+    "privacy_policy": "Integritetspolicy",
+    "designed_by": "Designad av <author></author>.",
+    "all_rights_reserved": "Alla rättigheter reserverade"
+  },
+  "ProtectFallback": {
+    "not_enough_permission": "Du har inte behörighet att utföra denna åtgärd"
+  },
   "SignIn": {
     "meta_title": "Logga in | Caire",
     "meta_description": "Logga in på ditt Caire-konto"
@@ -22,25 +36,32 @@
     "meta_title": "Skapa konto | Caire",
     "meta_description": "Skapa ett nytt Caire-konto"
   },
-  "Footer": {
-    "company": "Företag",
-    "contact": "Kontakt",
-    "about": "Om oss",
-    "privacy_policy": "Integritetspolicy",
-    "terms_of_service": "Användarvillkor"
+  "UserProfile": {
+    "title_bar": "Användarprofil",
+    "title_bar_description": "Visa och hantera din användarprofil"
   },
-  "Navbar": {
-    "sign_in": "Logga in",
-    "sign_up": "Registrera dig"
+  "OrganizationProfile": {
+    "title_bar": "Organisationshantering",
+    "title_bar_description": "Hantera din organisation"
   },
   "DashboardLayout": {
     "home": "Hem",
     "members": "Medlemmar",
     "settings": "Inställningar"
   },
+  "Dashboard": {
+    "meta_title": "Caire Kontrollpanel",
+    "meta_description": "Caire Kontrollpanel för hantering av hemtjänstverksamhet"
+  },
+  "DashboardIndex": {
+    "title_bar": "Caire Kontrollpanel",
+    "title_bar_description": "Välkommen till din kontrollpanel",
+    "message_state_title": "Kom igång",
+    "message_state_description": "beskrivning"
+  },
   "DashboardOverview": {
     "welcome": "Välkommen till din kontrollpanel",
-    "active_employees": "Aktiva Anställda",
+    "active_employees": "Aktiv Personal",
     "active_clients": "Aktiva Klienter",
     "schedule_completion": "Schemaläggning",
     "travel_time": "Restid",
@@ -62,5 +83,322 @@
     "employee_added": "Personal tillagd",
     "client_updated": "Klient uppdaterad",
     "constraint_modified": "Begränsning ändrad"
+  },
+  "Navigation": {
+    "dashboard": "Översikt",
+    "schedule": "Schema",
+    "employees": "Personal",
+    "clients": "Klienter",
+    "analytics": "Analys",
+    "settings": "Inställningar"
+  },
+  "Schedule": {
+    "title": "Schema",
+    "description": "Hantera och optimera schemaläggning",
+    "optimize_schedule": "Optimera Schema",
+    "employee": "Personal",
+    "views": {
+      "timeline": "Tidslinje",
+      "grid": "Lista",
+      "map": "Karta"
+    },
+    "grid": {
+      "employee": "Personal",
+      "client": "Klient",
+      "time": "Tid",
+      "type": "Typ",
+      "status": "Status",
+      "location": "Plats",
+      "constraints": "Begränsningar"
+    },
+    "metrics": {
+      "total_hours": "Totala Timmar",
+      "active_employees": "Aktiv Personal",
+      "travel_time": "Restid",
+      "completion_rate": "Slutföringsgrad"
+    },
+    "map": {
+      "routes": "Rutter",
+      "total_time": "Total Tid",
+      "integration_placeholder": "Kartintegration kommer snart"
+    },
+    "timeline": {
+      "employee": "Personal",
+      "client": "Klient",
+      "time": "Tid",
+      "type": "Typ",
+      "status": "Status"
+    },
+    "page_title": "Schema | Caire",
+    "page_description": "Hantera och optimera ditt hemtjänstschema"
+  },
+  "Auth": {
+    "sign_in": {
+      "title": "Logga in på ditt konto",
+      "description": "Ange dina inloggningsuppgifter för att komma åt ditt konto",
+      "email_label": "E-postadress",
+      "email_placeholder": "Ange din e-postadress",
+      "password_label": "Lösenord",
+      "password_placeholder": "Ange ditt lösenord",
+      "remember_me": "Kom ihåg mig",
+      "forgot_password": "Glömt lösenord?",
+      "submit": "Logga in",
+      "no_account": "Har du inget konto?",
+      "create_account": "Skapa ett konto"
+    },
+    "sign_up": {
+      "title": "Skapa ett konto",
+      "description": "Ange dina uppgifter för att skapa ditt konto",
+      "name_label": "Fullständigt namn",
+      "name_placeholder": "Ange ditt fullständiga namn",
+      "email_label": "E-postadress",
+      "email_placeholder": "Ange din e-postadress",
+      "password_label": "Lösenord",
+      "password_placeholder": "Skapa ett lösenord",
+      "confirm_password_label": "Bekräfta lösenord",
+      "confirm_password_placeholder": "Bekräfta ditt lösenord",
+      "terms": "Jag godkänner villkoren",
+      "submit": "Skapa konto",
+      "has_account": "Har du redan ett konto?",
+      "sign_in": "Logga in"
+    },
+    "forgot_password": {
+      "title": "Återställ ditt lösenord",
+      "description": "Ange din e-postadress så skickar vi en återställningslänk",
+      "email_label": "E-postadress",
+      "email_placeholder": "Ange din e-postadress",
+      "submit": "Skicka återställningslänk",
+      "back_to_sign_in": "Tillbaka till inloggning"
+    },
+    "verify_email": {
+      "title": "Kontrollera din e-post",
+      "description": "Vi har skickat dig en verifieringslänk",
+      "resend": "Skicka om e-post",
+      "back_to_sign_in": "Tillbaka till inloggning"
+    }
+  },
+  "Errors": {
+    "required": "Detta fält är obligatoriskt",
+    "invalid_email": "Ange en giltig e-postadress",
+    "password_mismatch": "Lösenorden matchar inte",
+    "min_password_length": "Lösenordet måste vara minst 8 tecken",
+    "invalid_credentials": "Ogiltig e-postadress eller lösenord",
+    "email_taken": "Denna e-postadress är redan registrerad",
+    "server_error": "Något gick fel. Försök igen."
+  },
+  "Employees": {
+    "page_title": "Personal | Caire",
+    "page_description": "Hantera din personal och deras scheman",
+    "title": "Personal",
+    "description": "Hantera din personal och deras scheman",
+    "add_employee": "Lägg till personal",
+    "name": "Namn",
+    "contact": "Kontakt",
+    "role": "Roll",
+    "status": "Status",
+    "open_menu": "Öppna meny",
+    "edit": "Redigera",
+    "view_schedule": "Visa schema",
+    "delete": "Ta bort",
+    "search": "Sök personal...",
+    "filter": "Filtrera",
+    "sort": "Sortera",
+    "export": "Exportera"
+  },
+  "Clients": {
+    "page_title": "Klienter | Caire",
+    "page_description": "Hantera dina klienter och deras besökskrav",
+    "title": "Klienter",
+    "description": "Hantera dina klienter och deras besökskrav",
+    "add_client": "Lägg till klient",
+    "name": "Namn",
+    "address": "Adress",
+    "visit_details": "Besöksdetaljer",
+    "status": "Status",
+    "open_menu": "Öppna meny",
+    "edit": "Redigera",
+    "view_visits": "Visa besök",
+    "delete": "Ta bort",
+    "search": "Sök klienter...",
+    "filter": "Filtrera",
+    "sort": "Sortera",
+    "export": "Exportera"
+  },
+  "Analytics": {
+    "page_title": "Analys | Caire",
+    "page_description": "Få insikter om din verksamhet och optimera schemaläggningen",
+    "title": "Analys",
+    "description": "Få insikter om din verksamhet och optimera schemaläggningen",
+    "export_report": "Exportera rapport",
+    "metrics": {
+      "total_hours": "Totala timmar",
+      "active_employees": "Aktiv personal",
+      "travel_time": "Restid",
+      "completion_rate": "Slutförande"
+    },
+    "tabs": {
+      "overview": "Översikt",
+      "employees": "Personal",
+      "clients": "Klienter",
+      "routes": "Rutter"
+    },
+    "charts": {
+      "hours_trend": "Timmar per vecka",
+      "completion_rate": "Slutförandegrad",
+      "coming_soon": "Diagram kommer snart"
+    }
+  },
+  "Settings": {
+    "page_title": "Inställningar | Caire",
+    "page_description": "Hantera dina inställningar och preferenser",
+    "title": "Inställningar",
+    "description": "Hantera dina inställningar och preferenser",
+
+    "tabs": {
+      "organization": "Organisation",
+      "users": "Användare",
+      "notifications": "Notifieringar",
+      "security": "Säkerhet",
+      "localization": "Lokalisering"
+    },
+
+    "organization": {
+      "title": "Organisationsinställningar",
+      "description": "Hantera din organisations information och inställningar",
+      "fields": {
+        "name": "Organisationsnamn",
+        "org_number": "Organisationsnummer",
+        "email": "E-post",
+        "phone": "Telefon",
+        "address": "Adress"
+      },
+      "placeholders": {
+        "name": "Ange organisationsnamn",
+        "org_number": "Ange organisationsnummer",
+        "email": "Ange e-postadress",
+        "phone": "Ange telefonnummer",
+        "address": "Ange adress"
+      },
+      "save": "Spara ändringar"
+    },
+
+    "users": {
+      "title": "Användarhantering",
+      "description": "Hantera användare och behörigheter",
+      "search_placeholder": "Sök användare...",
+      "invite": "Bjud in användare",
+      "fields": {
+        "name": "Namn",
+        "email": "E-post",
+        "role": "Roll",
+        "status": "Status",
+        "actions": "Åtgärder"
+      },
+      "actions": {
+        "edit": "Redigera"
+      }
+    },
+
+    "notifications": {
+      "title": "Notifieringsinställningar",
+      "description": "Hantera hur och när du får notifieringar",
+      "email": {
+        "title": "E-postnotifieringar",
+        "schedule_changes": "Schemaändringar",
+        "schedule_changes_description": "Få notifieringar när scheman ändras",
+        "new_assignments": "Nya uppdrag",
+        "new_assignments_description": "Få notifieringar om nya uppdrag",
+        "reports": "Rapporter",
+        "reports_description": "Få vecko- och månadsrapporter via e-post"
+      },
+      "sms": {
+        "title": "SMS-notifieringar",
+        "urgent_changes": "Akuta ändringar",
+        "urgent_changes_description": "Få SMS vid akuta schemaändringar"
+      },
+      "frequency": {
+        "title": "Notifieringsfrekvens",
+        "label": "Frekvens",
+        "placeholder": "Välj frekvens",
+        "realtime": "Realtid",
+        "daily": "Dagligen",
+        "weekly": "Veckovis"
+      },
+      "save": "Spara ändringar"
+    },
+
+    "security": {
+      "title": "Säkerhetsinställningar",
+      "description": "Hantera säkerhet och autentisering",
+      "authentication": {
+        "title": "Autentisering",
+        "description": "Hantera inloggning och säkerhet",
+        "two_factor": "Tvåfaktorsautentisering",
+        "two_factor_description": "Lägg till ett extra säkerhetslager vid inloggning",
+        "session_timeout": "Sessionstimeout",
+        "session_timeout_description": "Logga ut användare efter inaktivitet"
+      },
+      "data_protection": {
+        "title": "Dataskydd",
+        "description": "Hantera dataskydd och integritet",
+        "encryption": "Datakryptering",
+        "encryption_description": "All känslig data krypteras automatiskt",
+        "audit_log": "Granskningslogg",
+        "audit_log_description": "Spåra viktiga systemhändelser"
+      },
+      "password_policy": {
+        "title": "Lösenordspolicy",
+        "description": "Hantera lösenordskrav",
+        "strong_password": "Starka lösenord",
+        "strong_password_description": "Kräv komplexa lösenord",
+        "password_expiry": "Lösenordsutgång",
+        "password_expiry_description": "Lösenord måste bytas var 90:e dag"
+      },
+      "save": "Spara ändringar"
+    },
+
+    "localization": {
+      "title": "Lokaliseringsinställningar",
+      "description": "Hantera språk, tidszon och format",
+      "language": {
+        "title": "Språk",
+        "description": "Välj ditt föredragna språk",
+        "select_label": "Välj språk",
+        "placeholder": "Välj språk",
+        "options": {
+          "swedish": "Svenska",
+          "english": "Engelska",
+          "norwegian": "Norska",
+          "danish": "Danska"
+        }
+      },
+      "timezone": {
+        "title": "Tidszon",
+        "description": "Välj din tidszon",
+        "select_label": "Välj tidszon",
+        "placeholder": "Välj tidszon",
+        "options": {
+          "stockholm": "Stockholm (UTC+1)",
+          "oslo": "Oslo (UTC+1)",
+          "copenhagen": "Köpenhamn (UTC+1)",
+          "helsinki": "Helsingfors (UTC+2)"
+        }
+      },
+      "date_format": {
+        "title": "Datum & tid",
+        "description": "Välj hur datum och tid ska visas",
+        "select_label": "Datumformat",
+        "placeholder": "Välj datumformat"
+      },
+      "time_format": {
+        "select_label": "Tidsformat",
+        "placeholder": "Välj tidsformat",
+        "options": {
+          "24h": "24-timmars (13:00)",
+          "12h": "12-timmars (1:00 PM)"
+        }
+      },
+      "save": "Spara ändringar"
+    }
   }
 }

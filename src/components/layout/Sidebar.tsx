@@ -11,6 +11,7 @@ import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/libs/i18nNavigation';
+import { Logo } from '@/templates/Logo';
 import { cn } from '@/utils/Helpers';
 
 const navigation = [
@@ -55,9 +56,8 @@ export function Sidebar() {
       <div className="flex h-full flex-col">
         {/* Logo */}
         <div className="flex h-16 items-center border-b px-6">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            {/* Add your logo here */}
-            <span className="text-lg font-semibold">Caire</span>
+          <Link href="/dashboard">
+            <Logo />
           </Link>
         </div>
 

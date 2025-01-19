@@ -14,7 +14,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
-import { Logo } from '@/templates/Logo';
 import { getI18nPath } from '@/utils/Helpers';
 
 export const DashboardHeader = (props: {
@@ -28,22 +27,6 @@ export const DashboardHeader = (props: {
   return (
     <>
       <div className="flex items-center">
-        <Link href="/dashboard" className="max-sm:hidden">
-          <Logo />
-        </Link>
-
-        <svg
-          className="size-8 stroke-muted-foreground max-sm:hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" />
-          <path d="M17 5 7 19" />
-        </svg>
-
         <OrganizationSwitcher
           organizationProfileMode="navigation"
           organizationProfileUrl={getI18nPath(
@@ -89,8 +72,6 @@ export const DashboardHeader = (props: {
               </DropdownMenu>
             </div>
           </li>
-
-          {/* PRO: Dark mode toggle button */}
 
           <li data-fade>
             <LocaleSwitcher />
