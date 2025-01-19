@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/bear75/appcaire/compare/v1.6.0...v1.7.0) (2025-01-19)
+
+
+### Features
+
+* **i18n:** add user types and role translations ([a628cb8](https://github.com/bear75/appcaire/commit/a628cb858bb389b38370f143c6ffb4ae016c8f58))
+
 # [1.6.0](https://github.com/bear75/appcaire/compare/v1.5.0...v1.6.0) (2025-01-19)
 
 
