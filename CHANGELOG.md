@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/bear75/appcaire/compare/v1.3.0...v1.4.0) (2025-01-19)
+
+
+### Features
+
+* update project assets and configuration ([beb246a](https://github.com/bear75/appcaire/commit/beb246a9398aeb2ec5ed227c90dd41157cbadfde))
+
 # [1.3.0](https://github.com/bear75/appcaire/compare/v1.2.0...v1.3.0) (2025-01-19)
 
 
