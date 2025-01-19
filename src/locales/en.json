@@ -248,6 +248,32 @@
       "coming_soon": "Chart coming soon"
     }
   },
+  "UserTypes": {
+    "system_users": {
+      "title": "System Users",
+      "super_admin": "Super Administrator",
+      "support_staff": "Support Staff"
+    },
+    "organization_users": {
+      "title": "Organization Users",
+      "org_admin": "Organization Administrator",
+      "scheduler": "Schedule Coordinator",
+      "unit_manager": "Unit Manager",
+      "ops_manager": "Operations Manager"
+    },
+    "domain_users": {
+      "title": "Domain Users",
+      "care_employee": "Care Employee",
+      "client": "Client",
+      "family_member": "Family Member"
+    }
+  },
+  "OrganizationSwitch": {
+    "title": "Switch Organization",
+    "all_organizations": "All Organizations",
+    "search_placeholder": "Search organizations...",
+    "no_results": "No organizations found"
+  },
   "Settings": {
     "page_title": "Settings | Caire",
     "page_description": "Manage your settings and preferences",
@@ -399,6 +425,29 @@
         }
       },
       "save": "Save Changes"
+    },
+
+    "roles": {
+      "title": "Role Management",
+      "description": "Manage user roles and permissions",
+      "system_roles": {
+        "title": "System Roles",
+        "super_admin": "Super Administrator",
+        "super_admin_description": "Full system access and organization management",
+        "support": "Support Staff",
+        "support_description": "Limited system access for support purposes"
+      },
+      "organization_roles": {
+        "title": "Organization Roles",
+        "admin": "Organization Administrator",
+        "admin_description": "Full organization management access",
+        "scheduler": "Schedule Coordinator",
+        "scheduler_description": "Schedule and resource management",
+        "unit_manager": "Unit Manager",
+        "unit_manager_description": "Unit-level management and oversight",
+        "ops_manager": "Operations Manager",
+        "ops_manager_description": "Operational management and planning"
+      }
     }
   }
 }

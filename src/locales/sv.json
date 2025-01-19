@@ -248,6 +248,32 @@
       "coming_soon": "Diagram kommer snart"
     }
   },
+  "UserTypes": {
+    "system_users": {
+      "title": "Systemanvändare",
+      "super_admin": "Superadministratör",
+      "support_staff": "Supportpersonal"
+    },
+    "organization_users": {
+      "title": "Organisationsanvändare",
+      "org_admin": "Organisationsadministratör",
+      "scheduler": "Schemaläggare",
+      "unit_manager": "Enhetschef",
+      "ops_manager": "Verksamhetschef"
+    },
+    "domain_users": {
+      "title": "Domänanvändare",
+      "care_employee": "Vårdpersonal",
+      "client": "Klient",
+      "family_member": "Familjemedlem"
+    }
+  },
+  "OrganizationSwitch": {
+    "title": "Byt Organisation",
+    "all_organizations": "Alla Organisationer",
+    "search_placeholder": "Sök organisationer...",
+    "no_results": "Inga organisationer hittades"
+  },
   "Settings": {
     "page_title": "Inställningar | Caire",
     "page_description": "Hantera dina inställningar och preferenser",
@@ -399,6 +425,29 @@
         }
       },
       "save": "Spara ändringar"
+    },
+
+    "roles": {
+      "title": "Rollhantering",
+      "description": "Hantera användarroller och behörigheter",
+      "system_roles": {
+        "title": "Systemroller",
+        "super_admin": "Superadministratör",
+        "super_admin_description": "Full systemåtkomst och organisationshantering",
+        "support": "Supportpersonal",
+        "support_description": "Begränsad systemåtkomst för supportändamål"
+      },
+      "organization_roles": {
+        "title": "Organisationsroller",
+        "admin": "Organisationsadministratör",
+        "admin_description": "Full åtkomst till organisationshantering",
+        "scheduler": "Schemaläggare",
+        "scheduler_description": "Schema- och resurshantering",
+        "unit_manager": "Enhetschef",
+        "unit_manager_description": "Enhetshantering och översikt",
+        "ops_manager": "Verksamhetschef",
+        "ops_manager_description": "Verksamhetsstyrning och planering"
+      }
     }
   }
 }
