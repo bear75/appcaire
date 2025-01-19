@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/bear75/appcaire/compare/v1.5.0...v1.6.0) (2025-01-19)
+
+
+### Features
+
+* **db:** setup production database ([32fdfdb](https://github.com/bear75/appcaire/commit/32fdfdb27d384831413e367d67d9a19d5da572df))
+
 # [1.5.0](https://github.com/bear75/appcaire/compare/v1.4.0...v1.5.0) (2025-01-19)
 
 
