@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/bear75/appcaire/compare/v1.2.0...v1.3.0) (2025-01-19)
+
+
+### Features
+
+* add phase 1 ui components and pages ([92c9d72](https://github.com/bear75/appcaire/commit/92c9d72bd04e2e402bcd43563117e8a17f66bc7a))
+
 # [1.2.0](https://github.com/bear75/appcaire/compare/v1.1.0...v1.2.0) (2025-01-18)
 
 
