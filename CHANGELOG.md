@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/bear75/appcaire/compare/v1.4.0...v1.5.0) (2025-01-19)
+
+
+### Features
+
+* **db:** setup database connection and migrations ([1851d84](https://github.com/bear75/appcaire/commit/1851d847869934ebd552087dd4db71ab8dfbe0be))
+
 # [1.4.0](https://github.com/bear75/appcaire/compare/v1.3.0...v1.4.0) (2025-01-19)
 
 
