@@ -239,7 +239,7 @@ Each feature directory follows a similar structure:
 
 - Tailwind utility classes
 - Component-specific styles
-- Global styles in `globals.css`
+- Global styles in `global.css`
 
 ## Testing Structure
 
