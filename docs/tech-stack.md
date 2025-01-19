@@ -28,6 +28,7 @@
 
 - next-intl
 - Locale-based routing
+- Direct JSON file management for translations
 
 ### Assets
 
@@ -63,9 +64,40 @@
 
 ## Database
 
-- PostgreSQL (via Supabase)
-- Drizzle ORM
-- Row Level Security
+### Supabase Setup
+
+- PostgreSQL via Supabase
+- Connection pooling enabled (port 6543)
+- Transaction pool mode
+- SSL required for all connections
+
+### ORM and Migrations
+
+- Drizzle ORM for type-safe queries
+- Raw SQL migrations for complex schema changes
+- Separate dev/prod migration workflows
+- Schema validation and type generation
+
+### Environment Configuration
+
+```env
+# Development
+DATABASE_URL=postgresql://postgres.[PROJECT-REF]:[PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require
+
+# Production
+DATABASE_URL=postgresql://postgres.[PROD-PROJECT-REF]:[PROD-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require
+```
+
+### Migration Scripts
+
+```bash
+# Development
+npm run db:migrate
+
+# Production
+npm run db:migrate:prod        # Dry run
+npm run db:migrate:prod:execute # Execute
+```
 
 ## Analytics & Charts
 
@@ -185,8 +217,8 @@ import {
 
 ```typescript
 // React Hook Form with Zod
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 ```
 
@@ -194,7 +226,7 @@ import * as z from "zod";
 
 ```typescript
 // React Query
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 ```
 
 ### Internationalization
@@ -210,8 +242,9 @@ import { useTranslations } from "next-intl";
 
 ```typescript
 // Drizzle ORM
-import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
+
+import { db } from "@/lib/db";
 ```
 
 ### Authentication

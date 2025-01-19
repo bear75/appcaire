@@ -259,3 +259,25 @@ docs/
 ├── tech-stack.md        # Technology stack
 └── prd.md              # Product requirements
 ```
+
+### Database Structure
+
+```
+src/
+├── db/
+│   ├── index.ts           # Database connection setup
+│   └── schema.ts         # Drizzle schema definitions
+├── migrations/
+│   ├── 0000_initial.sql  # Initial schema migration
+│   └── 0001_add_trial_expiration.sql  # Trial expiration field
+└── scripts/
+    └── migrate-prod.ts   # Production migration script
+```
+
+### Environment Files
+
+```
+.env.development         # Development environment variables
+.env.production         # Production environment variables
+.env.local             # Local overrides (not tracked in git)
+```

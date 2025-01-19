@@ -1,9 +1,11 @@
 # Database Design Document for **Caire Platform MVP**
 
 ## 1. Introduction
+
 The Caire platform requires a scalable, secure, and modular database schema to support its MVP and future phases. The database will handle data for multi-tenancy (multiple organizations), user roles, scheduling, analytics, and integrations with external systems like **Timefold.ai** and **Alfa eCare**.
 
 ### Key Design Goals
+
 - **Multi-Tenancy**: Support multiple home care organizations with isolated data scopes.
 - **Flexibility**: Easily accommodate trial users, integrations, and real-time updates.
 - **Security**: Ensure compliance with GDPR by pseudonymizing sensitive data and encrypting patient addresses.
@@ -17,7 +19,9 @@ The Caire platform requires a scalable, secure, and modular database schema to s
 ### 2.1 **Core Tables**
 
 #### **Organizations**
+
 Stores details of home care companies.
+
 ```sql
 CREATE TABLE Organizations (
     id UUID PRIMARY KEY,
@@ -30,7 +34,9 @@ CREATE TABLE Organizations (
 ```
 
 #### **Users**
+
 Stores platform users with role-based access control (RBAC).
+
 ```sql
 CREATE TABLE Users (
     id UUID PRIMARY KEY,
@@ -48,7 +54,9 @@ CREATE TABLE Users (
 ### 2.2 **Constraint Management**
 
 #### **Constraint Definitions**
+
 Defines the types and weights of constraints for scheduling.
+
 ```sql
 CREATE TABLE ConstraintDefinitions (
     id UUID PRIMARY KEY,
@@ -65,7 +73,9 @@ CREATE TABLE ConstraintDefinitions (
 ```
 
 #### **Constraint Values**
+
 Stores the actual constraint values for different entities.
+
 ```sql
 CREATE TABLE ConstraintValues (
     id UUID PRIMARY KEY,
@@ -82,7 +92,9 @@ CREATE TABLE ConstraintValues (
 ### 2.3 **Resource Management**
 
 #### **Vehicles**
+
 Manages organization's vehicle fleet.
+
 ```sql
 CREATE TABLE Vehicles (
     id UUID PRIMARY KEY,
@@ -98,7 +110,9 @@ CREATE TABLE Vehicles (
 ```
 
 #### **Shift Templates**
+
 Defines standard shift patterns.
+
 ```sql
 CREATE TABLE ShiftTemplates (
     id UUID PRIMARY KEY,
@@ -113,7 +127,9 @@ CREATE TABLE ShiftTemplates (
 ```
 
 #### **Employee Shifts**
+
 Tracks actual employee shift assignments.
+
 ```sql
 CREATE TABLE EmployeeShifts (
     id UUID PRIMARY KEY,
@@ -132,7 +148,9 @@ CREATE TABLE EmployeeShifts (
 ### 2.4 **Service Management**
 
 #### **Visit Requirements**
+
 Defines client service requirements and preferences.
+
 ```sql
 CREATE TABLE VisitRequirements (
     id UUID PRIMARY KEY,
@@ -150,7 +168,9 @@ CREATE TABLE VisitRequirements (
 ### 2.5 **Scheduling and Analytics**
 
 #### **Schedule Solutions**
+
 Stores scheduling optimization results.
+
 ```sql
 CREATE TABLE ScheduleSolutions (
     id UUID PRIMARY KEY,
@@ -166,7 +186,9 @@ CREATE TABLE ScheduleSolutions (
 ```
 
 #### **Schedule Metrics**
+
 Tracks KPIs and performance metrics.
+
 ```sql
 CREATE TABLE ScheduleMetrics (
     id UUID PRIMARY KEY,
@@ -185,16 +207,19 @@ CREATE TABLE ScheduleMetrics (
 ## 3. Key Relationships
 
 ### 3.1 Constraint Management
+
 - Organizations define their constraints
 - Constraints can be overridden at employee/client level
 - System constraints cannot be modified
 
 ### 3.2 Resource Planning
+
 - Employees are assigned to shifts
 - Shifts can have vehicle assignments
 - Vehicle assignments consider employee qualifications
 
 ### 3.3 Service Delivery
+
 - Client visits are planned based on requirements
 - Visit requirements consider constraints
 - Actual service delivery is tracked for analytics
@@ -204,12 +229,14 @@ CREATE TABLE ScheduleMetrics (
 ## 4. Data Types and Formats
 
 ### 4.1 JSON Structures
+
 - **Constraints**: `{ type, value, priority }`
 - **Break Windows**: `[{ start, end, required }]`
 - **Time Windows**: `[{ day, start, end, preference }]`
 - **Schedule Solutions**: Complete solution including routes and assignments
 
 ### 4.2 Enums and Constants
+
 - Constraint Types: HARD, MEDIUM, SOFT
 - Entity Types: ORGANIZATION, EMPLOYEE, CLIENT
 - Status Types: Various per entity
@@ -219,11 +246,13 @@ CREATE TABLE ScheduleMetrics (
 ## 5. Security & Compliance
 
 ### 5.1 Data Protection
+
 - Encrypt sensitive client data
 - Use row-level security for multi-tenancy
 - Audit logging for critical operations
 
 ### 5.2 Access Control
+
 - Role-based access control
 - Organization-level data isolation
 - API key management for integrations
@@ -233,18 +262,31 @@ CREATE TABLE ScheduleMetrics (
 ## 6. Performance Considerations
 
 ### 6.1 Indexing Strategy
+
 - Index foreign keys
 - Index frequently queried fields
 - Consider partial indexes for large tables
 
 ### 6.2 Partitioning
+
 - Consider partitioning by organization
 - Time-based partitioning for historical data
 - Archive old schedule solutions
 
 ### 6.3 Migration Management
+
 - Migrations stored in `/migrations` directory
-- Each migration file follows the format: `XXXX_name.sql`
-- Migration metadata stored in `/migrations/meta`
-- Drizzle ORM used for schema management and migrations
-- Schema defined in `src/models/Schema.ts`
+- Each migration follows format: `XXXX_description.sql`
+- Development migrations run via `npm run db:migrate`
+- Production migrations require confirmation:
+  ```bash
+  npm run db:migrate:prod        # Dry run
+  npm run db:migrate:prod:execute # Execute with confirmation
+  ```
+
+### Connection Pooling
+
+- Using Supabase connection pooler (port 6543)
+- Transaction pool mode enabled
+- SSL required for all connections
+- Prefetch disabled for pooler compatibility

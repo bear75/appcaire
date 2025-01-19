@@ -1,6 +1,6 @@
 # .cursorrules
 
-version: 1.0
+version: 2.1
 
 # Description:
 # This file defines coding style, structure, and generation rules for the caire project.
@@ -20,8 +20,10 @@ general:
     - for app-caire we use Next.js (preferably 13+ with the new App Router))
     - React 18+ features
     - TypeScript 5.x or latest stable
-    - Tailwind CSS and shadcn/ui for UI
-    - Supabase integration for database and auth
+    - Tailwind CSS and shadcn/ for UI
+    - i18n with NextIntl for multi-language support
+    - Clerk for authentication and multi-tenant management
+    - Supabase integration for database with drizzle ORM
     - Basic understanding of GDPR/SoL compliance
   behavior:
     - Always use the latest stable versions of TypeScript, React, Node.js, Next.js, Tailwind CSS, and shadcn/ui.
@@ -42,9 +44,9 @@ tech_stack:
     ui:
       - "React 18+"
       - "Tailwind CSS"
-      - "Shadcn/ui"
+      - "Shadcn"
       setup_steps:
-        - "Run 'npx shadcn@latest init' to initialize shadcn/ui"
+        - "Run 'npx shadcn@latest init' to initialize shadcn"
         - "Add required components using 'npx shadcn@latest add [component-name]'"
         - "Required components: button, card, form, input, select, tabs, dialog, sheet"
     state_management:
@@ -55,11 +57,26 @@ tech_stack:
       approach: "Route-based and component-based splitting"
     i18n:
       - "NextIntl for internationalization"
-      - "Crowdin for translation management"
   backend:
     services:
       - "PostgreSQL via Supabase"
       - "Drizzle ORM for type-safe database operations"
+      - "Connection pooling with Transaction mode"
+      - "SSL-enabled database connections"
+    database:
+      development:
+        pooler: "aws-0-eu-central-1.pooler.supabase.com:6543"
+        ssl: "require"
+        mode: "transaction"
+      production:
+        pooler: "aws-0-eu-central-1.pooler.supabase.com:6543"
+        ssl: "require"
+        mode: "transaction"
+    migrations:
+      - "SQL-based migrations in /migrations"
+      - "Separate dev/prod migration workflows"
+      - "Migration confirmation for production"
+      - "Schema validation before deployment"
     auth:
       approach: "Clerk for user and organization-level authentication"
   testing:
@@ -119,7 +136,7 @@ typescript_usage:
     explicit_return: true
 
 ui_and_styling:
-  framework: "shadcn/ui + Tailwind"
+  framework: "shadcn + Tailwind"
   required_components:
     - "button"
     - "card"
@@ -133,7 +150,7 @@ ui_and_styling:
     - "toast"
   rules:
     - "Use Tailwind utility classes for layout, spacing, colors, and typography."
-    - "Adopt shadcn/ui components for buttons, dialogs, forms, etc."
+    - "Adopt shadcn components for buttons, dialogs, forms, etc."
     - "Maintain a consistent, clean, and professional SaaS aesthetic."
   accessibility:
     - "Add alt text to images."
@@ -147,7 +164,7 @@ ui_and_styling:
     - Follow the brand style and colors as described in the Docs/ui-guidelines.md.
     
 performance_optimization:
-  - (later "Use Next.js Image component for optimized images.")
+  - "Use Next.js Image component for optimized images."
   - "Leverage route-based code splitting."
   - "Prefetch critical data at build time with Next.js server components when appropriate."
   - "Minimize unnecessary re-renders by using memoization and stable references."
@@ -156,13 +173,13 @@ performance_optimization:
   - "Perform Lighthouse and Web Vitals checks for performance improvements."
 
 other_rules:
-file_structure:
+file-dir:
 - "update the Docs/file-dir.md if file structure changed"
-- update hte detailed logs in meeting-notes.md with our interactions on regular basis. keep them updated.
-  documentation:
+
+documentation:
     - "Add JSDoc comments where appropriate."
     - "Document complex functions, components, and custom hooks thoroughly."
-   code_quality:
+code_quality:
     - "No unused imports."
     - "No console.logs in production code."
     - "Use ESLint and Prettier to enforce code style and formatting."
@@ -191,7 +208,7 @@ maintenance:
   - "Continuously improve based on user feedback."
   - "Ensure easy scaling to support multiple home care companies, employees, and clients."
 
-shadcn_ui_missing:
+shadcn_missing:
   - "Run 'npx shadcn@latest init' to initialize shadcn/ui"
   - "Install missing components: 'npx shadcn@latest add [component-name]'"
   - "Ensure components are added to src/components/ui/"
