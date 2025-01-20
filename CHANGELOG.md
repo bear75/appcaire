@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/bear75/appcaire/compare/v1.7.0...v1.7.1) (2025-01-20)
+
+
+### Bug Fixes
+
+* **charts:** update donut chart to show name and value labels ([035b5e9](https://github.com/bear75/appcaire/commit/035b5e9739cc22ea5851cfe5502400c815714ea5))
+
 # [1.7.0](https://github.com/bear75/appcaire/compare/v1.6.0...v1.7.0) (2025-01-19)
 
 
