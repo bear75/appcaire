@@ -4,327 +4,259 @@
 
 ### Core
 
-- Next.js 14 (App Router)
-- React 18
+- Next.js 13+ (App Router)
+- React 18+
 - TypeScript 5.x
+
+### UI & Styling
+
 - Tailwind CSS
-
-### UI Components
-
-- shadcn/ui
-- Radix UI primitives
-- Custom components:
-  - Logo (SVG-based)
-  - Sidebar navigation
-  - Dashboard layout
+- shadcn/ui components
+- Lucide icons
+- CSS Modules for component-specific styles
 
 ### State Management
 
-- React Context
-- React Hooks
-- Clerk for auth state
-
-### Internationalization
-
-- next-intl
-- Locale-based routing
-- Direct JSON file management for translations
-
-### Assets
-
-- SVG for logo and icons
-- PNG for favicons (16x16, 32x32, 180x180, 192x192)
-- Sharp for image processing
-
-### Development Tools
-
-- ESLint
-- Prettier
-- Vitest for testing
-- Husky for git hooks
-- lint-staged for pre-commit checks
-
-## UI Components
-
-- Lucide Icons
-- React Hook Form
-- Zod validation
-
-## State Management
-
-- React Query
-- Zustand (for complex state)
-
-## Authentication
-
-- Clerk
-  - User authentication
-  - Organization management
-  - Role-based access control
-
-## Database
-
-### Supabase Setup
-
-- PostgreSQL via Supabase
-- Connection pooling enabled (port 6543)
-- Transaction pool mode
-- SSL required for all connections
-- Separate development and production environments
-
-### Development Environment
-
-- Project URL: ryimasacidqeuufdbcrv.supabase.co
-- Connection pooling with transaction mode
-- SSL-enabled secure connections
-
-### Production Environment
-
-- Project URL: qcailgzrkecklsmtkodp.supabase.co
-- Connection pooling with transaction mode
-- SSL-enabled secure connections
-- Strict security policies
-
-### ORM and Migrations
-
-- Drizzle ORM for type-safe queries
-- Raw SQL migrations for complex schema changes
-- Separate dev/prod migration workflows
-- Schema validation and type generation
-
-### Environment Configuration
-
-```env
-# Development
-DATABASE_URL=postgresql://postgres.[PROJECT-REF]:[PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require
-
-# Production
-DATABASE_URL=postgresql://postgres.[PROD-PROJECT-REF]:[PROD-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require
-```
-
-### Migration Scripts
-
-```bash
-# Development
-npm run db:migrate
-
-# Production
-npm run db:migrate:prod        # Dry run
-npm run db:migrate:prod:execute # Execute
-```
-
-## Analytics & Charts
-
-- Recharts
-- D3.js (for complex visualizations)
-- CSV export functionality
-
-## Testing
-
-- Playwright (E2E testing)
-- MSW (API mocking)
-
-## CI/CD
-
-- GitHub Actions
-- Vercel deployment
-
-## Key Features
+- React Context for global state
+- React Query for server state
+- React Hook Form for form state
 
 ### Authentication & Authorization
 
-- Email/password login
-- Organization management
-- Role-based access
-- Session management
+- Clerk for authentication
+  - Organization management
+  - Role-based access control
+  - User profiles
+  - Session management
+  - Secure token handling
 
-### Dashboard
+### Data Visualization
 
-- Key metrics display
-- Quick actions
-- Recent activity
-- Schedule overview
+- Recharts for charts
+- react-table for data grids
 
-### Schedule Management
+### Performance
 
-- Interactive calendar
-- Drag-and-drop interface
-- Multiple views (timeline, grid, map)
-- AI-driven optimization
+- Next.js Image optimization
+- Dynamic imports
+- Route-based code splitting
+- Suspense boundaries
+- React.memo for expensive components
 
-### Employee Management
-
-- Employee profiles
-- Availability tracking
-- Skills management
-- Performance metrics
-
-### Client Management
-
-- Client profiles
-- Visit requirements
-- Service history
-- Special needs tracking
-
-### Analytics Dashboard
-
-- Key performance indicators
-  - Total hours worked
-  - Active employees
-  - Travel time
-  - Completion rate
-- Interactive charts
-  - Hours trend
-  - Completion rate
-  - Employee performance
-  - Client satisfaction
-- Data export functionality
-- Multiple view tabs
-  - Overview
-  - Employee analysis
-  - Client insights
-  - Route optimization
-
-### Settings Management
-
-- Organization settings
-  - Company information
-  - Contact details
-  - Business settings
-- User management
-  - User list
-  - Role management
-  - Access control
-- Notification preferences
-  - Email notifications
-  - SMS alerts
-  - Frequency settings
-- Security settings
-  - Authentication
-  - Data protection
-  - Password policies
-- Localization
-  - Language selection
-  - Timezone settings
-  - Date/time formats
-
-## Component Libraries
-
-### UI Components
-
-```typescript
-// Shadcn UI components
-import {
-  Button,
-  Card,
-  Dialog,
-  Form,
-  Input,
-  Select,
-  Switch,
-  Tabs,
-  Toast,
-} from "@/components/ui";
-```
-
-### Form Handling
-
-```typescript
-// React Hook Form with Zod
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-```
-
-### Data Fetching
-
-```typescript
-// React Query
-import { useMutation, useQuery } from "@tanstack/react-query";
-```
-
-### Internationalization
-
-```typescript
-// next-intl
-import { useTranslations } from "next-intl";
-```
-
-## API Integration
+## Backend
 
 ### Database
 
-```typescript
-// Drizzle ORM
-import { eq } from "drizzle-orm";
+- PostgreSQL via Supabase
+- Connection pooling enabled
+- Row-level security
+- Real-time subscriptions
 
-import { db } from "@/lib/db";
-```
+### ORM
+
+- Drizzle ORM
+- Type-safe queries
+- Migration management
+- Schema validation
+
+### API Layer
+
+- Next.js API routes
+- Server components
+- Server actions
+- Edge functions where applicable
+
+### Caching
+
+- Redis for session store
+- Vercel's edge caching
+- SWR for client-side caching
+
+## Infrastructure
+
+### Hosting
+
+- Vercel for frontend and API
+- Supabase for database
+- AWS S3 for file storage
+
+### CI/CD
+
+- GitHub Actions
+- Automated testing
+- Code quality checks
+- Preview deployments
+
+### Monitoring
+
+- Sentry for error tracking
+- Better Stack for logs
+- Checkly for uptime
+- Performance monitoring
+
+## Development Tools
+
+### Code Quality
+
+- ESLint
+- Prettier
+- TypeScript strict mode
+- Husky pre-commit hooks
+
+### Testing
+
+- Vitest for unit tests
+- Playwright for E2E tests
+- Testing Library
+- MSW for API mocking
+
+### Documentation
+
+- TypeDoc for API docs
+- Storybook for components
+- Markdown for guides
+- Swagger for API specs
+
+## External Services
+
+### Scheduling
+
+- Timefold.ai for optimization
+- Custom constraints engine
+- Real-time updates
+
+### Integration
+
+- Alfa eCare Business Intelligence API
+- Future Carefox integration
+- Webhook support
+
+## Security
 
 ### Authentication
 
-```typescript
-// Clerk
-import { auth, clerkClient } from "@clerk/nextjs";
-```
+- Clerk security features
+- JWT token management
+- RBAC implementation
+- Session management
 
-## Development Setup
+### Data Protection
 
-### Environment Variables
-
-```env
-# Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-
-# Database
-DATABASE_URL=
-
-# API Keys
-TIMEFOLD_API_KEY=
-```
-
-### Scripts
-
-```json
-{
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "vitest",
-    "e2e": "playwright test"
-  }
-}
-```
-
-## Performance Optimization
-
-- Server components
-- Edge runtime
-- Image optimization
-- Route prefetching
-- Bundle optimization
-
-## Security Measures
-
-- HTTPS only
-- CSP headers
-- API rate limiting
-- Input sanitization
+- GDPR compliance
 - Data encryption
+- Secure headers
+- CORS policies
 
-## Monitoring
+### Monitoring
 
-- Error tracking (Sentry)
-- Performance monitoring
-- Usage analytics
-- Audit logging
+- Security logs
+- Audit trails
+- Rate limiting
+- DDoS protection
+
+## Development Workflow
+
+### Version Control
+
+- Git
+- Feature branches
+- Pull request reviews
+- Semantic versioning
+
+### Environment Management
+
+- Development
+- Staging
+- Production
+- Feature flags
+
+### Quality Assurance
+
+- Automated tests
+- Manual testing
+- Performance testing
+- Security scanning
 
 ## Deployment
 
-- Vercel platform
-- Edge functions
-- Automatic previews
+### Strategy
+
+- Blue-green deployments
+- Automatic rollbacks
+- Database migrations
 - Zero-downtime updates
+
+### Environments
+
+- Development: dev.caire.se
+- Staging: staging.caire.se
+- Production: caire.se
+
+### Monitoring
+
+- Uptime tracking
+- Error reporting
+- Performance metrics
+- User analytics
+
+## Best Practices
+
+### Code
+
+- TypeScript strict mode
+- ESLint rules
+- Code formatting
+- Documentation
+
+### Security
+
+- Regular updates
+- Dependency scanning
+- Security headers
+- Access controls
+
+### Performance
+
+- Lighthouse scores
+- Core Web Vitals
+- Bundle analysis
+- Load testing
+
+### Testing
+
+- Unit test coverage
+- Integration tests
+- E2E scenarios
+- Performance tests
+
+## Frontend Components
+
+### Charts
+
+We use Recharts for data visualization with the following custom components:
+
+- `DoughnutChart`: For distribution data with labeled segments showing both name and value
+- `BarChart`: For comparative data with clear axis labels and tooltips
+- `LineChart`: For trend visualization with smooth curves and data points
+
+Data structure for all charts follows a consistent format:
+
+```typescript
+type ChartData = {
+  data: Array<{ name: string; value: number }>;
+  datasets: Array<{
+    dataKey: string;
+    label?: string;
+    backgroundColor?: string | string[];
+    borderColor?: string;
+  }>;
+};
+```
+
+Key features:
+
+- Server-side rendering compatible
+- Responsive containers
+- Consistent styling and tooltips
+- Swedish language labels
+- Proper data formatting

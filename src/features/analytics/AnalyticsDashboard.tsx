@@ -1,142 +1,153 @@
-import {
-  Car,
-  CheckCircle,
-  Clock,
-  TrendingDown,
-  TrendingUp,
-  Users,
-} from 'lucide-react';
+import { CheckCircle, Clock, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
-type MetricCardProps = {
-  title: string;
-  value: string;
-  trend?: string;
-  icon: React.ReactNode;
-  trendUp?: boolean;
-};
-
-function MetricCard({ title, value, trend, icon, trendUp }: MetricCardProps) {
-  return (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <p className="text-sm font-medium text-muted-foreground">{title}</p>
-            <div className="flex items-center gap-2">
-              <p className="text-2xl font-bold">{value}</p>
-              {trend && (
-                <div
-                  className={`flex items-center text-sm ${trendUp ? 'text-green-600' : 'text-red-600'}`}
-                >
-                  {trendUp
-                    ? (
-                        <TrendingUp className="size-4" />
-                      )
-                    : (
-                        <TrendingDown className="size-4" />
-                      )}
-                  <span>{trend}</span>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="bg-primary/10 rounded-full p-2">{icon}</div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
+import { BarChart, DoughnutChart, LineChart } from '@/components/ui/charts';
 
 export function AnalyticsDashboard() {
   const t = useTranslations('Analytics');
 
+  // Mock data - replace with real data from your API
+  const kpiData = {
+    staffUtilization: 75,
+    travelTime: 45,
+    completionRate: 92,
+  };
+
+  const costSavingsData = {
+    data: [
+      { name: 'Jan', value: 12000 },
+      { name: 'Feb', value: 19000 },
+      { name: 'Mar', value: 15000 },
+      { name: 'Apr', value: 25000 },
+      { name: 'Maj', value: 22000 },
+      { name: 'Jun', value: 30000 },
+    ],
+    datasets: [
+      {
+        dataKey: 'value',
+        label: t('charts.costSavings'),
+        backgroundColor: '#7C3AED',
+      },
+    ],
+  };
+
+  const efficiencyTrendData = {
+    data: [
+      { name: 'Jan', value: 65 },
+      { name: 'Feb', value: 68 },
+      { name: 'Mar', value: 70 },
+      { name: 'Apr', value: 72 },
+      { name: 'Maj', value: 75 },
+      { name: 'Jun', value: 78 },
+    ],
+    datasets: [
+      {
+        dataKey: 'value',
+        label: t('charts.efficiency'),
+        borderColor: '#22C55E',
+      },
+    ],
+  };
+
+  const taskCategoriesData = {
+    data: [
+      { name: 'Medicinsk', value: 30 },
+      { name: 'Hygien', value: 25 },
+      { name: 'Socialt', value: 25 },
+      { name: 'Övrigt', value: 20 },
+    ],
+    datasets: [
+      {
+        dataKey: 'value',
+        backgroundColor: ['#7C3AED', '#3B82F6', '#22C55E', '#EAB308'],
+      },
+    ],
+  };
+
   return (
     <div className="space-y-6">
-      {/* Key Metrics */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <MetricCard
-          title={t('metrics.total_hours')}
-          value="156h"
-          trend="+2.5%"
-          trendUp
-          icon={<Clock className="size-4 text-primary" />}
-        />
-        <MetricCard
-          title={t('metrics.active_employees')}
-          value="24"
-          trend="+2"
-          trendUp
-          icon={<Users className="size-4 text-primary" />}
-        />
-        <MetricCard
-          title={t('metrics.travel_time')}
-          value="12.3h"
-          trend="-5.2%"
-          trendUp={false}
-          icon={<Car className="size-4 text-primary" />}
-        />
-        <MetricCard
-          title={t('metrics.completion_rate')}
-          value="98%"
-          trend="+1.2%"
-          trendUp
-          icon={<CheckCircle className="size-4 text-primary" />}
-        />
+      {/* KPI Cards */}
+      <div className="grid gap-4 md:grid-cols-3">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              {t('kpi.staffUtilization')}
+            </CardTitle>
+            <Users className="size-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {kpiData.staffUtilization}
+              %
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              {t('kpi.travelTime')}
+            </CardTitle>
+            <Clock className="size-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {kpiData.travelTime}
+              {' '}
+              min
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              {t('kpi.completionRate')}
+            </CardTitle>
+            <CheckCircle className="size-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {kpiData.completionRate}
+              %
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Charts */}
-      <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="overview">{t('tabs.overview')}</TabsTrigger>
-          <TabsTrigger value="employees">{t('tabs.employees')}</TabsTrigger>
-          <TabsTrigger value="clients">{t('tabs.clients')}</TabsTrigger>
-          <TabsTrigger value="routes">{t('tabs.routes')}</TabsTrigger>
-        </TabsList>
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>{t('charts.costSavingsTitle')}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <BarChart data={costSavingsData} height={300} />
+          </CardContent>
+        </Card>
 
-        <TabsContent value="overview" className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <Card className="col-span-4">
-              <CardHeader>
-                <CardTitle>{t('charts.hours_trend')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {/* Add chart component here */}
-                <div className="flex h-[350px] items-center justify-center rounded border">
-                  {t('charts.coming_soon')}
-                </div>
-              </CardContent>
-            </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>{t('charts.efficiencyTitle')}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <LineChart data={efficiencyTrendData} height={300} />
+          </CardContent>
+        </Card>
+      </div>
 
-            <Card className="col-span-3">
-              <CardHeader>
-                <CardTitle>{t('charts.completion_rate')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {/* Add chart component here */}
-                <div className="flex h-[350px] items-center justify-center rounded border">
-                  {t('charts.coming_soon')}
-                </div>
-              </CardContent>
-            </Card>
+      {/* Task Categories */}
+      <Card className="col-span-2">
+        <CardHeader>
+          <CardTitle>{t('charts.taskCategoriesTitle')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="h-[300px] w-full">
+            <DoughnutChart data={taskCategoriesData} height={300} />
           </div>
-        </TabsContent>
-
-        <TabsContent value="employees">
-          {/* Employee-specific analytics */}
-        </TabsContent>
-
-        <TabsContent value="clients">
-          {/* Client-specific analytics */}
-        </TabsContent>
-
-        <TabsContent value="routes">
-          {/* Route optimization analytics */}
-        </TabsContent>
-      </Tabs>
+        </CardContent>
+      </Card>
     </div>
   );
 }
