@@ -1,9 +1,9 @@
 'use client';
 
 import { Users } from 'lucide-react';
+import { useQuery } from 'react-query';
 
 import { Progress } from '@/components/ui/progress';
-import { useTranslations } from '@/utils/translations';
 
 type RegionData = {
   name: string;
@@ -19,8 +19,17 @@ const regions: RegionData[] = [
   { name: 'Uppsala', value: 453, total: 800, change: 5.4 },
 ];
 
+const mockActivities = [
+  // Add your mock activities here
+];
+
 export function RecentActivity() {
-  const t = useTranslations('Dashboard');
+  const { data: activities } = useQuery({
+    queryKey: ['recent-activities'],
+    queryFn: async () => {
+      return mockActivities;
+    },
+  });
 
   return (
     <div className="space-y-8">

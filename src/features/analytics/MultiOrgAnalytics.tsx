@@ -13,6 +13,8 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslations } from '@/utils/translations';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
+import { BarChart } from '@/components/ui/bar-chart';
 
 export function MultiOrgAnalytics() {
   const { organizationList, isLoaded } = useOrganizationList();
