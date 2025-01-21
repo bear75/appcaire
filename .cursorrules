@@ -9,7 +9,7 @@ version: 2.1
 # and overall vision for the schedulewell.ai platform.
 
 general:
-# use swedish language for all content/text
+# use swedish language for all content/text - No multi-language support
   # The assistant should be a highly skilled AI programming assistant focusing on producing
   # clear, readable React + TypeScript code aligned with the caire MVP.
   role: "Expert AI programming assistant"
@@ -21,7 +21,6 @@ general:
     - React 18+ features
     - TypeScript 5.x or latest stable
     - Tailwind CSS and shadcn/ for UI
-    - i18n with NextIntl for multi-language support
     - Clerk for authentication and multi-tenant management
     - Supabase integration for database with drizzle ORM
     - Basic understanding of GDPR/SoL compliance
@@ -45,6 +44,10 @@ tech_stack:
       - "React 18+"
       - "Tailwind CSS"
       - "Shadcn"
+      navigation:
+        - "Use src/templates/Navbar.tsx as the single source for navigation"
+        - "Do not create separate TopNav components"
+        - "Keep navigation consistent across all pages"
       setup_steps:
         - "Run 'npx shadcn@latest init' to initialize shadcn"
         - "Add required components using 'npx shadcn@latest add [component-name]'"
@@ -53,10 +56,13 @@ tech_stack:
       library: "React hooks"
     styling:
       approach: "Utility-first with Tailwind and component-driven with Shadcn UI"
+      css_structure:
+        - "Use src/styles/global.css for all global styles"
+        - "Follow Tailwind's layer system (@layer base, components, utilities)"
+        - "Define theme variables in :root and .dark selectors"
+        - "Keep component-specific styles within their respective components using Tailwind classes"
     code_splitting:
       approach: "Route-based and component-based splitting"
-    i18n:
-      - "NextIntl for internationalization"
   backend:
     services:
       - "PostgreSQL via Supabase"
@@ -148,10 +154,21 @@ ui_and_styling:
     - "sheet"
     - "table"
     - "toast"
+    - "progress"
   rules:
     - "Use Tailwind utility classes for layout, spacing, colors, and typography."
     - "Adopt shadcn components for buttons, dialogs, forms, etc."
     - "Maintain a consistent, clean, and professional SaaS aesthetic."
+    - "Use purple accent color for active states (bg-purple-50 text-purple-600)"
+    - "Consistent hover states with slate colors (bg-slate-50 text-slate-900)"
+    - "Consistent padding and rounded corners across components"
+  tabs_styling:
+    - "Use grid layout for tab lists"
+    - "Apply purple active state (bg-purple-50 text-purple-600)"
+    - "Consistent hover states (bg-slate-50 text-slate-900)"
+    - "Rounded corners and consistent padding (px-3 py-2)"
+    - "Gap between tabs (gap-4)"
+    - "Light background and padding for tab lists (bg-background p-1)"
   accessibility:
     - "Add alt text to images."
     - "Ensure semantic HTML structure."
@@ -160,6 +177,7 @@ ui_and_styling:
   responsive_design:
     - "Use Tailwind responsive classes (mobile-first design)."
     - "Test on multiple breakpoints."
+    - "Grid layouts adapt from 2 columns on mobile to 5 columns on desktop"
   branding:
     - Follow the brand style and colors as described in the Docs/ui-guidelines.md.
     
@@ -210,12 +228,30 @@ maintenance:
 
 shadcn_missing:
   - "Run 'npx shadcn@latest init' to initialize shadcn/ui"
-  - "Install missing components: 'npx shadcn@latest add [component-name]'"
+  - "Install missing components using:"
+    - "npx shadcn@latest add button"
+    - "npx shadcn@latest add card"
+    - "npx shadcn@latest add form"
+    - "npx shadcn@latest add input"
+    - "npx shadcn@latest add select"
+    - "npx shadcn@latest add tabs"
+    - "npx shadcn@latest add dialog"
+    - "npx shadcn@latest add sheet"
+    - "npx shadcn@latest add table"
+    - "npx shadcn@latest add toast"
+    - "npx shadcn@latest add progress"
   - "Ensure components are added to src/components/ui/"
   - "Check imports use correct paths (@/components/ui/[component])"
+  - "Required dependencies:"
+    - "@radix-ui/react-progress"
+    - "other shadcn dependencies will be installed automatically"
 
 fixing errors:
 - "for the code present we get this error:
-
+  1. Check if the error is about missing dependencies
+  2. Install required dependencies using npm/pnpm
+  3. Verify shadcn components are properly initialized
+  4. Check import paths are correct
+  5. Run the development server to verify fixes
 think step by step when fixing it."
 

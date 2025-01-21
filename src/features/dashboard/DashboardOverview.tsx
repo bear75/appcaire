@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/utils/translations';
 
 import { KPICard } from '@/components/KPICard';
 

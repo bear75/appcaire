@@ -7,10 +7,9 @@ import {
   HomeIcon,
   PersonIcon,
 } from '@radix-ui/react-icons';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 
-import { Link } from '@/libs/i18nNavigation';
 import { Logo } from '@/templates/Logo';
 import { cn } from '@/utils/Helpers';
 
@@ -18,37 +17,36 @@ const navigation = [
   {
     icon: HomeIcon,
     href: '/dashboard',
-    translationKey: 'dashboard',
+    label: 'Översikt',
   },
   {
     icon: CalendarIcon,
     href: '/dashboard/schedule',
-    translationKey: 'schedule',
+    label: 'Schema',
   },
   {
     icon: PersonIcon,
     href: '/dashboard/employees',
-    translationKey: 'employees',
+    label: 'Personal',
   },
   {
     icon: HomeIcon,
     href: '/dashboard/clients',
-    translationKey: 'clients',
+    label: 'Klienter',
   },
   {
     icon: BarChartIcon,
     href: '/dashboard/analytics',
-    translationKey: 'analytics',
+    label: 'Analys',
   },
   {
     icon: GearIcon,
     href: '/dashboard/settings',
-    translationKey: 'settings',
+    label: 'Inställningar',
   },
 ];
 
 export function Sidebar() {
-  const t = useTranslations('Navigation');
   const pathname = usePathname();
 
   return (
@@ -80,7 +78,7 @@ export function Sidebar() {
                   className={cn('size-4', isActive && 'text-inherit')}
                   aria-hidden="true"
                 />
-                {t(item.translationKey)}
+                {item.label}
               </Link>
             );
           })}

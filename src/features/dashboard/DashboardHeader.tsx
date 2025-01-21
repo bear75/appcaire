@@ -1,11 +1,8 @@
 'use client';
 
-import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
-import { useLocale } from 'next-intl';
 
 import { ActiveLink } from '@/components/ActiveLink';
-import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import { ToggleMenuButton } from '@/components/ToggleMenuButton';
 import {
   DropdownMenu,
@@ -14,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
-import { getI18nPath } from '@/utils/Helpers';
+import { UserButton } from '@clerk/nextjs';
 
 export const DashboardHeader = (props: {
   menu: {
@@ -22,26 +19,9 @@ export const DashboardHeader = (props: {
     label: string;
   }[];
 }) => {
-  const locale = useLocale();
-
   return (
     <>
       <div className="flex items-center">
-        <OrganizationSwitcher
-          organizationProfileMode="navigation"
-          organizationProfileUrl={getI18nPath(
-            '/dashboard/organization-profile',
-            locale,
-          )}
-          afterCreateOrganizationUrl="/dashboard"
-          hidePersonal
-          skipInvitationScreen
-          appearance={{
-            elements: {
-              organizationSwitcherTrigger: 'max-w-28 sm:max-w-52',
-            },
-          }}
-        />
 
         <nav className="ml-3 max-lg:hidden">
           <ul className="flex flex-row items-center gap-x-3 text-lg font-medium [&_a:hover]:opacity-100 [&_a]:opacity-75">
@@ -71,10 +51,6 @@ export const DashboardHeader = (props: {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-          </li>
-
-          <li data-fade>
-            <LocaleSwitcher />
           </li>
 
           <li>

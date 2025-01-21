@@ -1,44 +1,51 @@
 'use client';
 
+import { useAuth } from '@clerk/nextjs';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-import { LocaleSwitcher } from '@/components/LocaleSwitcher';
-import { buttonVariants } from '@/components/ui/buttonVariants';
-import { CenteredMenu } from '@/features/landing/CenteredMenu';
-import { Section } from '@/features/landing/Section';
-import { getI18nPath } from '@/utils/Helpers';
+import { buttonVariants } from '@/components/ui/button';
 
 import { Logo } from './Logo';
 
-export const Navbar = () => {
-  const t = useTranslations('Navbar');
-  const params = useParams();
-  const locale = params.locale as string;
+export function Navbar() {
+  const { isLoaded, userId } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoaded && userId) {
+      router.push('/dashboard');
+    }
+  }, [isLoaded, userId, router]);
+
+  if (!isLoaded || userId) {
+    return null;
+  }
 
   return (
-    <Section className="px-3 py-6">
-      <CenteredMenu
-        logo={<Logo />}
-        rightMenu={(
-          <>
-            <li data-fade>
-              <LocaleSwitcher />
-            </li>
-            <li className="ml-1 mr-2.5" data-fade>
-              <Link href={getI18nPath('/sign-in', locale)}>{t('sign_in')}</Link>
-            </li>
-            <li>
-              <Link className={buttonVariants()} href={getI18nPath('/sign-up', locale)}>
-                {t('sign_up')}
-              </Link>
-            </li>
-          </>
-        )}
-      >
-        <></>
-      </CenteredMenu>
-    </Section>
+    <header className="sticky top-0 z-40 w-full border-b bg-background">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <Link href="/" className="flex items-center space-x-2">
+          <Logo className="size-8" />
+          <span className="text-xl font-medium">Caire</span>
+        </Link>
+
+        <div className="flex items-center gap-4">
+          <Link
+            href="/sign-in"
+            className={buttonVariants({ variant: 'outline', size: 'sm' })}
+          >
+            Logga in
+          </Link>
+          <Link
+            href="/sign-up"
+            className={buttonVariants({ variant: 'default', size: 'sm' })}
+          >
+            Skapa konto
+          </Link>
+        </div>
+      </div>
+    </header>
   );
-};
+}

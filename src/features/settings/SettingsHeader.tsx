@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/utils/translations';
 
 export function SettingsHeader() {
   const t = useTranslations('Settings');

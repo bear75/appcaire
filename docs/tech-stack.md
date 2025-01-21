@@ -13,7 +13,14 @@
 - Tailwind CSS
 - shadcn/ui components
 - Lucide icons
-- CSS Modules for component-specific styles
+- Single global.css for all styles
+- No CSS Modules
+
+### Navigation
+
+- Single Navbar component in src/templates/Navbar.tsx
+- No separate TopNav components
+- Consistent navigation across all pages
 
 ### State Management
 
@@ -24,11 +31,24 @@
 ### Authentication & Authorization
 
 - Clerk for authentication
-  - Organization management
+  - ClerkProvider wrapping the application in root layout
+  - Organization management via OrganizationSwitcher
+  - User profile management via UserButton
   - Role-based access control
   - User profiles
   - Session management
   - Secure token handling
+
+### Language Support
+
+- Swedish only
+- Internal translation system:
+  - Translation keys stored in `src/locales/sv.json`
+  - Custom `useTranslations` hook in `src/utils/translations.ts`
+  - Type-safe translation keys
+  - Component-based translation organization
+- No external translation libraries
+- All UI text managed through internal translation utility
 
 ### Data Visualization
 

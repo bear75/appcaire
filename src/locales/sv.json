@@ -50,8 +50,83 @@
     "settings": "Inställningar"
   },
   "Dashboard": {
+    "title": "Översikt",
     "meta_title": "Caire Kontrollpanel",
-    "meta_description": "Caire Kontrollpanel för hantering av hemtjänstverksamhet"
+    "meta_description": "Caire Kontrollpanel för hantering av hemtjänstverksamhet",
+
+    "stats": {
+      "total_clients": {
+        "title": "Totalt antal klienter",
+        "description": "Aktiva klienter i systemet"
+      },
+      "total_employees": {
+        "title": "Total personal",
+        "description": "Aktiv personal i systemet"
+      },
+      "vehicles": {
+        "title": "Fordon",
+        "description": "Tillgängliga fordon"
+      },
+      "scheduled_visits": {
+        "title": "Planerade besök",
+        "description": "Dagens planerade besök"
+      },
+      "travel_time": {
+        "title": "Restid",
+        "description": "Genomsnittlig restid"
+      },
+      "critical_alerts": {
+        "title": "Kritiska varningar",
+        "description": "Aktiva varningar"
+      },
+      "optimization": {
+        "title": "Optimering",
+        "description": "Schemaoptimering"
+      }
+    },
+
+    "today_schedule": {
+      "title": "Dagens Schema",
+      "description": "Översikt över dagens planerade aktiviteter",
+      "time": "Tid",
+      "visits": "Besök",
+      "staff": "Personal",
+      "clients": "Klienter",
+      "vehicles": "Fordon",
+      "distance": "Avstånd",
+      "efficiency": "Effektivitet"
+    },
+
+    "recommendations": {
+      "title": "Rekommendationer",
+      "description": "AI-baserade förslag för verksamhetsförbättring",
+      "staffing": {
+        "title": "Bemanning",
+        "need_more_hourly": "Behov av fler timanställda"
+      },
+      "training": {
+        "title": "Utbildning",
+        "dementia_care_needed": "Behov av demensutbildning"
+      },
+      "vehicles": {
+        "title": "Fordon",
+        "optimal_allocation": "Optimal fordonsfördelning"
+      },
+      "clients": {
+        "title": "Klienter",
+        "needs_review": "Behöver genomgång"
+      }
+    },
+
+    "financial_overview": {
+      "title": "Ekonomisk översikt",
+      "description": "Intäkter och måluppföljning"
+    },
+
+    "recent_activity": {
+      "title": "Senaste aktivitet",
+      "description": "Översikt över regionala aktiviteter"
+    }
   },
   "DashboardIndex": {
     "title_bar": "Caire Kontrollpanel",
@@ -228,24 +303,83 @@
     "page_title": "Analys | Caire",
     "page_description": "Få insikter om din verksamhet och optimera schemaläggningen",
     "title": "Analys",
-    "description": "Få insikter om din verksamhet och optimera schemaläggningen",
+    "description": "Översikt över verksamhetens nyckeltal",
     "export_report": "Exportera rapport",
+    "multi_org": {
+      "title": "Organisationsöversikt",
+      "select_orgs": "Välj organisationer",
+      "no_selection": "Välj organisationer för att se deras statistik",
+      "compare": "Jämför organisationer"
+    },
     "metrics": {
-      "total_hours": "Totala timmar",
-      "active_employees": "Aktiv personal",
+      "total_clients": "Totalt antal klienter",
+      "active_employees": "Aktiva anställda",
+      "schedule_efficiency": "Schemaeffektivitet",
       "travel_time": "Restid",
-      "completion_rate": "Slutförande"
+      "utilization": "Utnyttjandegrad",
+      "satisfaction": "Kundnöjdhet"
     },
     "tabs": {
       "overview": "Översikt",
-      "employees": "Personal",
-      "clients": "Klienter",
-      "routes": "Rutter"
+      "staff": "Personal",
+      "schedule": "Schema",
+      "continuity": "Kontinuitet",
+      "clients": "Klienter"
+    },
+    "staff": {
+      "performanceTitle": "Personalens prestanda",
+      "skillsTitle": "Kompetenser",
+      "certificationsTitle": "Certifieringar",
+      "employee": "Personal",
+      "tasksPerDay": "Uppgifter per dag",
+      "travelTime": "Restid",
+      "personalHygiene": "Personlig hygien",
+      "safeLifting": "Säker lyftning"
+    },
+    "certifications": {
+      "medical": "Medicinsk vård",
+      "firstAid": "Första hjälpen",
+      "dementia": "Demensvård"
+    },
+    "status": {
+      "valid": "Giltig",
+      "expiring": "Går snart ut"
+    },
+    "table": {
+      "employee": "Personal",
+      "certification": "Certifiering",
+      "expiry": "Utgångsdatum",
+      "status": "Status"
+    },
+    "continuity": {
+      "trendTitle": "Kontinuitetstrend",
+      "warningTitle": "Kontinuitetsvarningar",
+      "topPerformanceTitle": "Bästa kontinuitet",
+      "averageCaregiversPerClient": "Genomsnittligt antal vårdgivare per klient",
+      "warningDesc": "{client} har haft {caregivers} olika vårdgivare under {period}"
+    },
+    "time": {
+      "period": {
+        "30days": "senaste 30 dagarna"
+      }
+    },
+    "kpi": {
+      "staffUtilization": "Personalutnyttjande",
+      "travelTime": "Genomsnittlig restid",
+      "completionRate": "Slutförandegrad"
     },
     "charts": {
-      "hours_trend": "Timmar per vecka",
-      "completion_rate": "Slutförandegrad",
-      "coming_soon": "Diagram kommer snart"
+      "costSavings": "Kostnadsbesparingar",
+      "costSavingsTitle": "Kostnadsbesparingar över tid",
+      "efficiency": "Effektivitet",
+      "efficiencyTitle": "Effektivitetstrend",
+      "taskCategoriesTitle": "Uppgiftskategorier"
+    },
+    "tasks": {
+      "medical": "Medicinsk",
+      "hygiene": "Hygien",
+      "social": "Socialt",
+      "other": "Övrigt"
     }
   },
   "UserTypes": {

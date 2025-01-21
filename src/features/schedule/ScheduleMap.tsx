@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/utils/translations';
 
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';

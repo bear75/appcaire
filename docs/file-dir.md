@@ -217,13 +217,16 @@ features/schedule/
 ## Import Conventions
 
 ```typescript
-// External imports
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-
-// Internal imports
+// Common imports
+import { useTranslations } from "@/utils/translations";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { AnalyticsHeader } from "@/features/analytics/AnalyticsHeader";
+
+// Example usage
+const Component = () => {
+  const t = useTranslations("namespace");
+  return <Button>{t("key")}</Button>;
+};
 ```
 
 ## Component Organization

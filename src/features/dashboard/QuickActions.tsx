@@ -2,7 +2,7 @@
 
 import { CalendarIcon, GearIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/utils/translations';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

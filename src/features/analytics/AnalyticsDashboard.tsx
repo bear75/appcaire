@@ -1,8 +1,8 @@
 import { CheckCircle, Clock, Users } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, DoughnutChart, LineChart } from '@/components/ui/charts';
+import { useTranslations } from '@/utils/translations';
 
 export function AnalyticsDashboard() {
   const t = useTranslations('Analytics');
@@ -52,10 +52,10 @@ export function AnalyticsDashboard() {
 
   const taskCategoriesData = {
     data: [
-      { name: 'Medicinsk', value: 30 },
-      { name: 'Hygien', value: 25 },
-      { name: 'Socialt', value: 25 },
-      { name: 'Övrigt', value: 20 },
+      { name: t('tasks.medical'), value: 30 },
+      { name: t('tasks.hygiene'), value: 25 },
+      { name: t('tasks.social'), value: 25 },
+      { name: t('tasks.other'), value: 20 },
     ],
     datasets: [
       {

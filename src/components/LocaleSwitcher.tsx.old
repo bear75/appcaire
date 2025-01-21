@@ -1,0 +1,46 @@
+'use client';
+
+import { usePathname, useRouter } from 'next/navigation';
+
+import { AppConfig } from '@/utils/AppConfig';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+export function LocaleSwitcher() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const currentLocale = AppConfig.locales.find(
+    locale => locale.id === AppConfig.defaultLocale,
+  );
+
+  function onValueChange(value: string) {
+    const nextLocale = AppConfig.locales.find(locale => locale.id === value);
+    if (!nextLocale) return;
+
+    const segments = pathname.split('/');
+    segments[1] = nextLocale.id;
+    router.push(segments.join('/'));
+  }
+
+  if (!currentLocale) return null;
+
+  return (
+    <Select defaultValue={currentLocale.id} onValueChange={onValueChange}>
+      <SelectTrigger className="w-[120px]">
+        <SelectValue placeholder={currentLocale.name} />
+      </SelectTrigger>
+      <SelectContent>
+        {AppConfig.locales.map(locale => (
+          <SelectItem key={locale.id} value={locale.id}>
+            {locale.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}

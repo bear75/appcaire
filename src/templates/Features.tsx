@@ -1,38 +1,35 @@
 import { CalendarIcon, ClockIcon, PersonIcon } from '@radix-ui/react-icons';
-import { useTranslations } from 'next-intl';
 
 import { Background } from '@/components/Background';
 import { FeatureCard } from '@/features/landing/FeatureCard';
 import { Section } from '@/features/landing/Section';
 
 export const Features = () => {
-  const t = useTranslations('Index');
-
   return (
     <Background>
       <Section
-        title={t('benefits_title')}
+        title="Fördelar med Caire"
       >
         <div className="grid grid-cols-1 gap-x-3 gap-y-8 md:grid-cols-3">
           <FeatureCard
             icon={<CalendarIcon className="size-6 stroke-primary-foreground stroke-2" />}
-            title={t('feature_1_title')}
+            title="Smart Schemaläggning"
           >
-            {t('feature_1_description')}
+            AI-driven schemaläggning som optimerar personalens tid och minskar administrativa kostnader.
           </FeatureCard>
 
           <FeatureCard
             icon={<ClockIcon className="size-6 stroke-primary-foreground stroke-2" />}
-            title={t('feature_2_title')}
+            title="Effektiv Ruttplanering"
           >
-            {t('feature_2_description')}
+            Minimera restid och maximera tiden hos klienterna med intelligent ruttoptimering.
           </FeatureCard>
 
           <FeatureCard
             icon={<PersonIcon className="size-6 stroke-primary-foreground stroke-2" />}
-            title={t('feature_3_title')}
+            title="Personlig Anpassning"
           >
-            {t('feature_3_description')}
+            Hänsyn till personalens kompetenser och klienternas önskemål för bästa möjliga matchning.
           </FeatureCard>
         </div>
       </Section>

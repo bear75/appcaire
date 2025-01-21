@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/utils/translations';
 
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,21 +20,21 @@ export function StaffAnalysis() {
   // Mock data - replace with real data from your API
   const performanceData = {
     data: [
-      { name: 'Anna L.', uppgifter: 8, restid: 45 },
-      { name: 'Erik S.', uppgifter: 7, restid: 35 },
-      { name: 'Maria H.', uppgifter: 9, restid: 50 },
-      { name: 'Johan B.', uppgifter: 6, restid: 30 },
-      { name: 'Lisa P.', uppgifter: 8, restid: 40 },
+      { name: 'Anna L.', tasks: 8, travel: 45 },
+      { name: 'Erik S.', tasks: 7, travel: 35 },
+      { name: 'Maria H.', tasks: 9, travel: 50 },
+      { name: 'Johan B.', tasks: 6, travel: 30 },
+      { name: 'Lisa P.', tasks: 8, travel: 40 },
     ],
     datasets: [
       {
-        dataKey: 'uppgifter',
-        label: 'Uppgifter per dag',
+        dataKey: 'tasks',
+        label: t('staff.tasksPerDay'),
         backgroundColor: '#7C3AED',
       },
       {
-        dataKey: 'restid',
-        label: 'Restid',
+        dataKey: 'travel',
+        label: t('staff.travelTime'),
         backgroundColor: '#3B82F6',
       },
     ],
@@ -42,11 +42,11 @@ export function StaffAnalysis() {
 
   const skillsData = {
     data: [
-      { name: 'Medicinsk vård', value: 30 },
-      { name: 'Personlig hygien', value: 25 },
-      { name: 'Demensvård', value: 15 },
-      { name: 'Första hjälpen', value: 20 },
-      { name: 'Säker lyftning', value: 10 },
+      { name: t('certifications.medical'), value: 30 },
+      { name: t('staff.personalHygiene'), value: 25 },
+      { name: t('certifications.dementia'), value: 15 },
+      { name: t('certifications.firstAid'), value: 20 },
+      { name: t('staff.safeLifting'), value: 10 },
     ],
     datasets: [
       {
@@ -64,19 +64,19 @@ export function StaffAnalysis() {
 
   const certifications = [
     {
-      employee: t('staff.employee', { name: 'Anna Larsson' }),
+      employee: 'Anna Larsson',
       certification: t('certifications.medical'),
       expiry: '2025-06-15',
       status: 'valid',
     },
     {
-      employee: t('staff.employee', { name: 'Erik Svensson' }),
+      employee: 'Erik Svensson',
       certification: t('certifications.firstAid'),
       expiry: '2024-12-01',
       status: 'expiring',
     },
     {
-      employee: t('staff.employee', { name: 'Maria Holm' }),
+      employee: 'Maria Holm',
       certification: t('certifications.dementia'),
       expiry: '2025-03-20',
       status: 'valid',

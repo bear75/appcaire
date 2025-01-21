@@ -30,13 +30,47 @@
 
 ### Navigation
 
-- Sidebar:
-  - Minimal icons in collapsed state
-  - Full text in expanded state
-  - Purple highlight for active items
-  - Subtle hover states
-  - Grouped navigation items
-  - Nested items with indentation
+### Navbar
+
+- Single navigation component (`src/templates/Navbar.tsx`)
+- Consistent across all pages
+- Contains:
+  - Organization logo and name
+  - Main navigation links
+  - User profile menu
+  - Notifications
+  - Search (optional)
+- Styling:
+  - Background: White (#FFFFFF)
+  - Border bottom: 1px solid Slate-200
+  - Height: 64px
+  - Responsive on all screen sizes
+
+### Main Navigation Items
+
+- Dashboard (Översikt)
+- Schedule (Schema)
+- Employees (Personal)
+- Clients (Klienter)
+- Analytics (Analys)
+- Settings (Inställningar)
+
+## Styling
+
+### Global CSS
+
+- Single `global.css` file in `src/styles/`
+- Contains:
+  - Tailwind base, components, and utilities
+  - Root variables for theming
+  - Dark mode selectors
+  - Global resets and defaults
+
+### Component Styling
+
+- Use Tailwind utility classes exclusively
+- No component-specific CSS files
+- shadcn/ui components for common UI elements
 
 ### Components
 
@@ -46,7 +80,7 @@
   - Subtle border
   - Rounded corners (lg)
   - Optional header with actions
-  - Consistent padding
+  - Consistent padding (p-6)
   - Shadow on hover for interactive cards
 
 - Stats Cards:
@@ -78,6 +112,24 @@
   - Status indicators with badges
   - Action buttons
   - Hover states
+
+- Tabs:
+  - Layout:
+    - Grid layout for tab lists
+    - 2 columns on mobile, 5 columns on desktop
+    - Gap of 16px (gap-4) between tabs
+    - Light background with padding
+  - Styling:
+    - Active state: Purple-50 background (#F5F3FF) with Purple-600 text (#7C3AED)
+    - Hover state: Slate-50 background with Slate-900 text
+    - Rounded corners (rounded-md)
+    - Consistent padding (px-3 py-2)
+    - Font: Text-sm with medium weight
+    - Icons: Consistent size-4 (16px)
+  - Variants:
+    - Settings tabs: Include icons with labels
+    - Analytics tabs: Text only with full width
+    - All tabs use consistent purple active state
 
 ## Typography
 
@@ -132,6 +184,18 @@
   - Default: Purple-600
   - Hover: Purple-700
   - Visited: Purple-800
+
+- Tabs:
+  - Default:
+    - Text: Slate-600
+    - Background: Transparent
+  - Hover:
+    - Text: Slate-900
+    - Background: Slate-50
+  - Active:
+    - Text: Purple-600
+    - Background: Purple-50
+  - Transition: All properties with smooth animation
 
 ## Data Visualization
 

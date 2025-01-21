@@ -1,5 +1,5 @@
 import { Calendar, Settings, Users } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/utils/translations';
 
 import { Button } from '@/components/ui/button';
 

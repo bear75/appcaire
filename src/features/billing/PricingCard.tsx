@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/utils/translations';
 import React from 'react';
 
 import type { BillingInterval } from '@/types/Subscription';

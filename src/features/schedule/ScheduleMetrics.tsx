@@ -1,68 +1,62 @@
-import { Car, CheckCircle, Clock, Users } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 
-import { Card } from '@/components/ui/card';
-
-type MetricCardProps = {
-  title: string;
-  value: string;
-  trend?: string;
-  icon: React.ReactNode;
-  trendUp?: boolean;
-};
-
-function MetricCard({ title, value, trend, icon, trendUp }: MetricCardProps) {
-  return (
-    <Card className="p-4">
-      <div className="flex items-start justify-between">
-        <div className="space-y-1">
-          <p className="text-sm font-medium text-muted-foreground">{title}</p>
-          <p className="text-2xl font-bold">{value}</p>
-          {trend && (
-            <p
-              className={`text-sm ${trendUp ? 'text-green-600' : 'text-red-600'}`}
-            >
-              {trend}
-            </p>
-          )}
-        </div>
-        <div className="bg-primary/10 rounded-full p-2">{icon}</div>
-      </div>
-    </Card>
-  );
-}
+const metrics = [
+  {
+    title: 'Schemalagda besök',
+    value: '42',
+    description: 'Idag',
+    progress: 80,
+  },
+  {
+    title: 'Personal i tjänst',
+    value: '12',
+    description: 'Av 15 totalt',
+    progress: 75,
+  },
+  {
+    title: 'Restid',
+    value: '45 min',
+    description: 'Genomsnitt per besök',
+    progress: 65,
+  },
+  {
+    title: 'Effektivitet',
+    value: '72%',
+    description: 'Besökstid vs. total tid',
+    progress: 72,
+  },
+];
 
 export default function ScheduleMetrics() {
-  const t = useTranslations('Schedule.metrics');
-
   return (
     <>
-      <MetricCard
-        title={t('total_hours')}
-        value="156h"
-        trend="+2.5%"
-        trendUp
-        icon={<Clock className="size-4 text-primary" />}
-      />
-      <MetricCard
-        title={t('active_employees')}
-        value="24"
-        icon={<Users className="size-4 text-primary" />}
-      />
-      <MetricCard
-        title={t('travel_time')}
-        value="12.3h"
-        trend="-5.2%"
-        trendUp={false}
-        icon={<Car className="size-4 text-primary" />}
-      />
-      <MetricCard
-        title={t('completion_rate')}
-        value="98%"
-        trend="+1.2%"
-        trendUp
-        icon={<CheckCircle className="size-4 text-primary" />}
-      />
+      {metrics.map((metric) => (
+        <Card key={metric.title}>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              {metric.title}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{metric.value}</div>
+            <p className="text-xs text-muted-foreground">
+              {metric.description}
+            </p>
+            <Progress
+              value={metric.progress}
+              className="mt-2"
+              indicatorClassName={
+                metric.progress >= 70
+                  ? 'bg-green-500'
+                  : metric.progress >= 50
+                  ? 'bg-yellow-500'
+                  : 'bg-red-500'
+              }
+            />
+          </CardContent>
+        </Card>
+      ))}
     </>
   );
 }
