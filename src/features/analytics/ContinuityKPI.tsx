@@ -12,10 +12,10 @@ export function ContinuityKPI() {
   // Mock data - replace with real data from your API
   const continuityTrendData = {
     data: [
-      { name: 'Vecka 1', value: 3.5 },
-      { name: 'Vecka 2', value: 4.2 },
-      { name: 'Vecka 3', value: 3.8 },
-      { name: 'Vecka 4', value: 4.5 },
+      { name: t('time.weeks.week1'), value: 3.5 },
+      { name: t('time.weeks.week2'), value: 4.2 },
+      { name: t('time.weeks.week3'), value: 3.8 },
+      { name: t('time.weeks.week4'), value: 4.5 },
     ],
     datasets: [{
       dataKey: 'value',
@@ -62,7 +62,7 @@ export function ContinuityKPI() {
       {/* Trend Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('continuity.trendTitle')}</CardTitle>
+          <CardTitle>{t('kpi.continuity.trends')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="h-[300px] w-full">
@@ -74,7 +74,7 @@ export function ContinuityKPI() {
       {/* Warnings */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('continuity.warningTitle')}</CardTitle>
+          <CardTitle>{t('kpi.continuity.warnings')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -84,11 +84,7 @@ export function ContinuityKPI() {
                 variant={warning.priority === 'high' ? 'destructive' : 'default'}
               >
                 <AlertTitle>
-                  {t('continuity.warningDesc', {
-                    client: warning.client,
-                    caregivers: warning.caregivers,
-                    period: warning.period,
-                  })}
+                  {`${warning.client} har haft ${warning.caregivers} olika vårdgivare under ${warning.period}`}
                 </AlertTitle>
               </Alert>
             ))}
@@ -99,7 +95,7 @@ export function ContinuityKPI() {
       {/* Top Performance */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('continuity.topPerformanceTitle')}</CardTitle>
+          <CardTitle>{t('kpi.continuity.top_performance')}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>

@@ -1,10 +1,9 @@
 'use client';
 
-import { useTranslations } from '@/utils/translations';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, LineChart } from '@/components/ui/charts';
 import { Progress } from '@/components/ui/progress';
+import { useTranslations } from '@/utils/translations';
 
 export function ScheduleOptimization() {
   const t = useTranslations('Analytics');
@@ -93,8 +92,8 @@ export function ScheduleOptimization() {
             <CardTitle>{t('schedule.constraintsTitle')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            {constraints.map((constraint, index) => (
-              <div key={index} className="space-y-2">
+            {constraints.map(constraint => (
+              <div key={`constraint-${constraint.type}`} className="space-y-2">
                 <div className="flex justify-between">
                   <span className="font-medium">{constraint.type}</span>
                   <span className="text-sm text-muted-foreground">

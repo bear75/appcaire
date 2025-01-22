@@ -1,7 +1,5 @@
 'use client';
 
-import { useTranslations } from '@/utils/translations';
-
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, DoughnutChart } from '@/components/ui/charts';
@@ -13,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useTranslations } from '@/utils/translations';
 
 export function StaffAnalysis() {
   const t = useTranslations('Analytics');
@@ -20,11 +19,11 @@ export function StaffAnalysis() {
   // Mock data - replace with real data from your API
   const performanceData = {
     data: [
-      { name: 'Anna L.', tasks: 8, travel: 45 },
-      { name: 'Erik S.', tasks: 7, travel: 35 },
-      { name: 'Maria H.', tasks: 9, travel: 50 },
-      { name: 'Johan B.', tasks: 6, travel: 30 },
-      { name: 'Lisa P.', tasks: 8, travel: 40 },
+      { name: t('staff.employees.anna_l'), tasks: 8, travel: 45 },
+      { name: t('staff.employees.erik_s'), tasks: 7, travel: 35 },
+      { name: t('staff.employees.maria_h'), tasks: 9, travel: 50 },
+      { name: t('staff.employees.johan_b'), tasks: 6, travel: 30 },
+      { name: t('staff.employees.lisa_p'), tasks: 8, travel: 40 },
     ],
     datasets: [
       {
@@ -64,19 +63,19 @@ export function StaffAnalysis() {
 
   const certifications = [
     {
-      employee: 'Anna Larsson',
+      employee: t('staff.employees.anna_larsson'),
       certification: t('certifications.medical'),
       expiry: '2025-06-15',
       status: 'valid',
     },
     {
-      employee: 'Erik Svensson',
+      employee: t('staff.employees.erik_svensson'),
       certification: t('certifications.firstAid'),
       expiry: '2024-12-01',
       status: 'expiring',
     },
     {
-      employee: 'Maria Holm',
+      employee: t('staff.employees.maria_holm'),
       certification: t('certifications.dementia'),
       expiry: '2025-03-20',
       status: 'valid',

@@ -1,11 +1,11 @@
 import '@/styles/global.css';
 
+import { svSE } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import { cn } from '@/lib/utils';
-import { Navbar } from '@/templates/Navbar';
 
 import { Providers } from './providers';
 
@@ -27,7 +27,12 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      localization={{
+        locale: 'sv-SE',
+        ...svSE,
+      }}
+    >
       <html lang="sv" suppressHydrationWarning>
         <body
           className={cn(
@@ -35,7 +40,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             inter.className,
           )}
         >
-          {!children?.toString().includes('(auth)') && <Navbar />}
           <Providers>{children}</Providers>
         </body>
       </html>

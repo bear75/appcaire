@@ -1,7 +1,5 @@
 'use client';
 
-import { useTranslations } from '@/utils/translations';
-
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, LineChart } from '@/components/ui/charts';
@@ -13,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useTranslations } from '@/utils/translations';
 
 export function ClientInsights() {
   const t = useTranslations('Analytics');
@@ -20,16 +19,16 @@ export function ClientInsights() {
   // Mock data - replace with real data from your API
   const completionRateData = {
     data: [
-      { name: 'Måndag', value: 95 },
-      { name: 'Tisdag', value: 98 },
-      { name: 'Onsdag', value: 92 },
-      { name: 'Torsdag', value: 96 },
-      { name: 'Fredag', value: 94 },
+      { name: t('time.weekdays.monday'), value: 95 },
+      { name: t('time.weekdays.tuesday'), value: 98 },
+      { name: t('time.weekdays.wednesday'), value: 92 },
+      { name: t('time.weekdays.thursday'), value: 96 },
+      { name: t('time.weekdays.friday'), value: 94 },
     ],
     datasets: [
       {
         dataKey: 'value',
-        label: t('clients.completionRate'),
+        label: t('kpi.client.completion_rate'),
         backgroundColor: '#7C3AED',
       },
     ],
@@ -37,15 +36,15 @@ export function ClientInsights() {
 
   const timeWindowData = {
     data: [
-      { name: 'Vecka 1', value: 88 },
-      { name: 'Vecka 2', value: 92 },
-      { name: 'Vecka 3', value: 90 },
-      { name: 'Vecka 4', value: 94 },
+      { name: t('time.weeks.week1'), value: 88 },
+      { name: t('time.weeks.week2'), value: 92 },
+      { name: t('time.weeks.week3'), value: 90 },
+      { name: t('time.weeks.week4'), value: 94 },
     ],
     datasets: [
       {
         dataKey: 'value',
-        label: t('clients.timeWindowAdherence'),
+        label: t('kpi.client.time_adherence'),
         borderColor: '#22C55E',
       },
     ],
@@ -71,13 +70,13 @@ export function ClientInsights() {
 
   const missedVisits = [
     {
-      client: t('staff.employee', { name: 'Karl Svensson' }),
+      client: 'Karl Svensson',
       date: '2024-01-18',
       time: '09:00',
       reason: t('clients.reasons.staffIllness'),
     },
     {
-      client: t('staff.employee', { name: 'Eva Berg' }),
+      client: 'Eva Berg',
       date: '2024-01-17',
       time: '14:30',
       reason: t('clients.reasons.clientUnavailable'),
@@ -90,7 +89,7 @@ export function ClientInsights() {
         {/* Visit Completion Rates */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('clients.completionTitle')}</CardTitle>
+            <CardTitle>{t('kpi.client.completion_rate')}</CardTitle>
           </CardHeader>
           <CardContent>
             <BarChart data={completionRateData} height={300} />
@@ -100,7 +99,7 @@ export function ClientInsights() {
         {/* Time Window Adherence */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('clients.timeWindowTitle')}</CardTitle>
+            <CardTitle>{t('kpi.client.time_adherence')}</CardTitle>
           </CardHeader>
           <CardContent>
             <LineChart data={timeWindowData} height={300} />
@@ -111,7 +110,7 @@ export function ClientInsights() {
       {/* Special Needs Fulfillment */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('clients.specialNeedsTitle')}</CardTitle>
+          <CardTitle>{t('kpi.client.special_needs')}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
@@ -151,7 +150,7 @@ export function ClientInsights() {
       {/* Missed Visits */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('clients.missedVisitsTitle')}</CardTitle>
+          <CardTitle>{t('kpi.client.missed_visits')}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>

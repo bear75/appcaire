@@ -13,15 +13,24 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslations } from '@/utils/translations';
-import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import { BarChart } from '@/components/ui/bar-chart';
+
+interface Organization {
+  id: string;
+  name: string;
+}
+
+interface OrganizationMembership {
+  organization: Organization;
+}
 
 export function MultiOrgAnalytics() {
-  const { organizationList, isLoaded } = useOrganizationList();
+  const { userMemberships, isLoaded } = useOrganizationList();
   const [selectedOrgs, setSelectedOrgs] = useState<string[]>([]);
   const t = useTranslations('Analytics');
 
   if (!isLoaded) return null;
+
+  const organizationList = userMemberships.data || [];
 
   const toggleOrg = (orgId: string) => {
     setSelectedOrgs(prev =>
@@ -45,21 +54,21 @@ export function MultiOrgAnalytics() {
             </DialogHeader>
             <ScrollArea className="h-[400px] pr-4">
               <div className="space-y-4">
-                {organizationList.map(org => (
+                {organizationList.map((membership: OrganizationMembership) => (
                   <div
-                    key={org.organization.id}
+                    key={membership.organization.id}
                     className="flex items-center space-x-2"
                   >
                     <Checkbox
-                      id={org.organization.id}
-                      checked={selectedOrgs.includes(org.organization.id)}
-                      onCheckedChange={() => toggleOrg(org.organization.id)}
+                      id={membership.organization.id}
+                      checked={selectedOrgs.includes(membership.organization.id)}
+                      onCheckedChange={() => toggleOrg(membership.organization.id)}
                     />
                     <label
-                      htmlFor={org.organization.id}
+                      htmlFor={membership.organization.id}
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      {org.organization.name}
+                      {membership.organization.name}
                     </label>
                   </div>
                 ))}
@@ -69,12 +78,15 @@ export function MultiOrgAnalytics() {
         </Dialog>
       </div>
 
-      {selectedOrgs.length > 0 ? (
+      {selectedOrgs.length === 0 ? (
+        <p>{t('multi_org.no_selection')}</p>
+      ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {selectedOrgs.map(orgId => {
-            const org = organizationList.find(
-              o => o.organization.id === orgId,
-            )?.organization;
+            const membership = organizationList.find(
+              (m: OrganizationMembership) => m.organization.id === orgId,
+            );
+            const org = membership?.organization;
             if (!org) return null;
 
             return (
@@ -99,12 +111,6 @@ export function MultiOrgAnalytics() {
               </Card>
             );
           })}
-        </div>
-      ) : (
-        <div className="rounded-lg border border-dashed p-8 text-center">
-          <p className="text-muted-foreground">
-            {t('multi_org.no_selection')}
-          </p>
         </div>
       )}
     </div>

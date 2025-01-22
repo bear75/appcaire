@@ -1,7 +1,7 @@
 import { Download } from 'lucide-react';
-import { useTranslations } from '@/utils/translations';
 
 import { Button } from '@/components/ui/button';
+import { useTranslations } from '@/utils/translations';
 
 export function AnalyticsHeader() {
   const t = useTranslations('Analytics');

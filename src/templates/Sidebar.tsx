@@ -73,6 +73,9 @@ export function Sidebar() {
               organizationSwitcherTrigger: 'max-w-28 sm:max-w-52',
             },
           }}
+          afterCreateOrganizationUrl="/dashboard"
+          afterLeaveOrganizationUrl="/dashboard"
+          afterSelectOrganizationUrl="/dashboard"
         />
         <UserButton
           appearance={{

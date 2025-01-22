@@ -144,6 +144,192 @@
     "completion_rate": "slutföringsgrad",
     "average_per_visit": "genomsnitt per besök"
   },
+  "Analytics": {
+    "title": "Analys",
+    "overview": "Översikt",
+    "staff": "Personal",
+    "schedule": {
+      "comparisonTitle": "AI vs Manuell Schemaläggning",
+      "travelTimeTitle": "Restidsreduktion",
+      "constraintsTitle": "Begränsningsuppfyllnad",
+      "aiSchedule": "AI Schema",
+      "manualSchedule": "Manuellt Schema",
+      "travelTime": "Restid"
+    },
+    "continuity": "Kontinuitet",
+    "clients": {
+      "completionTitle": "Besöksgenomförande",
+      "timeWindowTitle": "Tidsfönster Följsamhet",
+      "specialNeedsTitle": "Särskilda Behov",
+      "missedVisitsTitle": "Missade Besök",
+      "completionRate": "Genomförandegrad",
+      "timeWindowAdherence": "Tidsfönster Följsamhet",
+      "needs": {
+        "medical": "Medicinska behov",
+        "language": "Språkbehov",
+        "mobility": "Rörlighetsbehov"
+      },
+      "reasons": {
+        "staffIllness": "Personal sjuk",
+        "clientUnavailable": "Klient ej tillgänglig"
+      }
+    },
+    "kpi": {
+      "continuity": {
+        "title": "Kontinuitet KPI",
+        "trends": "Kontinuitetstrender",
+        "warnings": "Klientvarningar",
+        "top_performance": "Bästa kontinuitet"
+      },
+      "client": {
+        "title": "Klientinsikter",
+        "completion_rate": "Slutföringsgrad",
+        "time_adherence": "Tidsfönster följsamhet",
+        "special_needs": "Särskilda behov",
+        "missed_visits": "Missade besök"
+      }
+    },
+    "staff": {
+      "performanceTitle": "Personalens prestanda",
+      "skillsTitle": "Kompetensfördelning",
+      "certificationsTitle": "Certifieringar",
+      "tasksPerDay": "Uppgifter per dag",
+      "travelTime": "Restid",
+      "personalHygiene": "Personlig hygien",
+      "safeLifting": "Säker lyftning",
+      "employees": {
+        "anna_l": "Anna L.",
+        "erik_s": "Erik S.",
+        "maria_h": "Maria H.",
+        "johan_b": "Johan B.",
+        "lisa_p": "Lisa P.",
+        "anna_larsson": "Anna Larsson",
+        "erik_svensson": "Erik Svensson",
+        "maria_holm": "Maria Holm"
+      }
+    },
+    "certifications": {
+      "medical": "Medicinsk vård",
+      "firstAid": "Första hjälpen",
+      "dementia": "Demensvård"
+    },
+    "status": {
+      "valid": "Giltig",
+      "expiring": "Går snart ut"
+    },
+    "table": {
+      "employee": "Personal",
+      "certification": "Certifiering",
+      "expiry": "Utgångsdatum",
+      "status": "Status",
+      "need": "Behov",
+      "fulfillment": "Uppfyllnad",
+      "client": "Klient",
+      "date": "Datum",
+      "time": "Tid",
+      "reason": "Anledning",
+      "primaryCaregiver": "Primär vårdgivare",
+      "consistency": "Kontinuitet"
+    },
+    "continuity": {
+      "trendTitle": "Kontinuitetstrend",
+      "warningTitle": "Kontinuitetsvarningar",
+      "topPerformanceTitle": "Bästa kontinuitet",
+      "averageCaregiversPerClient": "Genomsnittligt antal vårdgivare per klient",
+      "warningDesc": "{client} har haft {caregivers} olika vårdgivare under {period}"
+    },
+    "time": {
+      "period": {
+        "30days": "senaste 30 dagarna"
+      },
+      "weekdays": {
+        "monday": "Måndag",
+        "tuesday": "Tisdag",
+        "wednesday": "Onsdag",
+        "thursday": "Torsdag",
+        "friday": "Fredag",
+        "saturday": "Lördag",
+        "sunday": "Söndag"
+      },
+      "weeks": {
+        "week1": "Vecka 1",
+        "week2": "Vecka 2",
+        "week3": "Vecka 3",
+        "week4": "Vecka 4"
+      }
+    },
+    "kpi": {
+      "staffUtilization": "Personalutnyttjande",
+      "travelTime": "Genomsnittlig restid",
+      "completionRate": "Slutförandegrad",
+      "continuity": {
+        "title": "Kontinuitet KPI",
+        "trends": "Kontinuitetstrender",
+        "warnings": "Klientvarningar",
+        "top_performance": "Bästa kontinuitet"
+      },
+      "client": {
+        "title": "Klientinsikter",
+        "completion_rate": "Slutföringsgrad",
+        "time_adherence": "Tidsfönster följsamhet",
+        "special_needs": "Särskilda behov",
+        "missed_visits": "Missade besök"
+      }
+    },
+    "charts": {
+      "costSavings": "Kostnadsbesparingar",
+      "costSavingsTitle": "Kostnadsbesparingar över tid",
+      "efficiency": "Effektivitet",
+      "efficiencyTitle": "Effektivitetstrend",
+      "taskCategoriesTitle": "Uppgiftskategorier"
+    },
+    "tasks": {
+      "medical": "Medicinsk",
+      "hygiene": "Hygien",
+      "social": "Socialt",
+      "other": "Övrigt"
+    },
+    "organization": {
+      "title": "Organisationsöversikt",
+      "description": "Översikt över verksamhetens nyckeltal"
+    },
+    "comparison": {
+      "from_previous": "från föregående period",
+      "minutes": "min",
+      "increase_2_1": "+2.1% från föregående period",
+      "decrease_5": "-5 min från föregående period",
+      "increase_0_5": "+0.5% från föregående period"
+    },
+    "months": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "Maj",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug",
+      "sep": "Sep",
+      "oct": "Okt",
+      "nov": "Nov",
+      "dec": "Dec"
+    },
+    "tabs": {
+      "overview": "Översikt",
+      "staff": "Personal",
+      "schedule": "Schema",
+      "continuity": "Kontinuitet",
+      "clients": "Klienter"
+    },
+    "constraints": {
+      "hard": "Hårda begränsningar",
+      "medium": "Medelhårda begränsningar",
+      "soft": "Mjuka begränsningar",
+      "hardDesc": "Kritiska krav som måste uppfyllas",
+      "mediumDesc": "Viktiga krav med viss flexibilitet",
+      "softDesc": "Önskvärda krav när möjligt"
+    }
+  },
   "QuickActions": {
     "quick_actions": "Snabbåtgärder",
     "view_schedule": "Visa Schema",
@@ -346,10 +532,15 @@
       "expiring": "Går snart ut"
     },
     "table": {
-      "employee": "Personal",
-      "certification": "Certifiering",
-      "expiry": "Utgångsdatum",
-      "status": "Status"
+      "need": "Behov",
+      "fulfillment": "Uppfyllnad",
+      "status": "Status",
+      "client": "Klient",
+      "date": "Datum",
+      "time": "Tid",
+      "reason": "Anledning",
+      "primaryCaregiver": "Primär vårdgivare",
+      "consistency": "Kontinuitet"
     },
     "continuity": {
       "trendTitle": "Kontinuitetstrend",
@@ -361,12 +552,40 @@
     "time": {
       "period": {
         "30days": "senaste 30 dagarna"
+      },
+      "weekdays": {
+        "monday": "Måndag",
+        "tuesday": "Tisdag",
+        "wednesday": "Onsdag",
+        "thursday": "Torsdag",
+        "friday": "Fredag",
+        "saturday": "Lördag",
+        "sunday": "Söndag"
+      },
+      "weeks": {
+        "week1": "Vecka 1",
+        "week2": "Vecka 2",
+        "week3": "Vecka 3",
+        "week4": "Vecka 4"
       }
     },
     "kpi": {
       "staffUtilization": "Personalutnyttjande",
       "travelTime": "Genomsnittlig restid",
-      "completionRate": "Slutförandegrad"
+      "completionRate": "Slutförandegrad",
+      "continuity": {
+        "title": "Kontinuitet KPI",
+        "trends": "Kontinuitetstrender",
+        "warnings": "Klientvarningar",
+        "top_performance": "Bästa kontinuitet"
+      },
+      "client": {
+        "title": "Klientinsikter",
+        "completion_rate": "Slutföringsgrad",
+        "time_adherence": "Tidsfönster följsamhet",
+        "special_needs": "Särskilda behov",
+        "missed_visits": "Missade besök"
+      }
     },
     "charts": {
       "costSavings": "Kostnadsbesparingar",

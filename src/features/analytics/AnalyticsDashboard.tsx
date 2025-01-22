@@ -16,12 +16,12 @@ export function AnalyticsDashboard() {
 
   const costSavingsData = {
     data: [
-      { name: 'Jan', value: 12000 },
-      { name: 'Feb', value: 19000 },
-      { name: 'Mar', value: 15000 },
-      { name: 'Apr', value: 25000 },
-      { name: 'Maj', value: 22000 },
-      { name: 'Jun', value: 30000 },
+      { name: t('months.jan'), value: 12000 },
+      { name: t('months.feb'), value: 19000 },
+      { name: t('months.mar'), value: 15000 },
+      { name: t('months.apr'), value: 25000 },
+      { name: t('months.may'), value: 22000 },
+      { name: t('months.jun'), value: 30000 },
     ],
     datasets: [
       {
@@ -34,18 +34,19 @@ export function AnalyticsDashboard() {
 
   const efficiencyTrendData = {
     data: [
-      { name: 'Jan', value: 65 },
-      { name: 'Feb', value: 68 },
-      { name: 'Mar', value: 70 },
-      { name: 'Apr', value: 72 },
-      { name: 'Maj', value: 75 },
-      { name: 'Jun', value: 78 },
+      { name: t('months.jan'), value: 65 },
+      { name: t('months.feb'), value: 68 },
+      { name: t('months.mar'), value: 70 },
+      { name: t('months.apr'), value: 72 },
+      { name: t('months.may'), value: 75 },
+      { name: t('months.jun'), value: 78 },
     ],
     datasets: [
       {
         dataKey: 'value',
         label: t('charts.efficiency'),
         borderColor: '#22C55E',
+        backgroundColor: 'rgba(34, 197, 94, 0.1)',
       },
     ],
   };
@@ -67,6 +68,14 @@ export function AnalyticsDashboard() {
 
   return (
     <div className="space-y-6">
+      {/* Organization Overview */}
+      <Card className="border-none bg-purple-50">
+        <CardHeader>
+          <CardTitle>{t('organization.title')}</CardTitle>
+          <p className="text-sm text-muted-foreground">{t('organization.description')}</p>
+        </CardHeader>
+      </Card>
+
       {/* KPI Cards */}
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
@@ -81,6 +90,9 @@ export function AnalyticsDashboard() {
               {kpiData.staffUtilization}
               %
             </div>
+            <p className="text-xs text-muted-foreground">
+              {t('comparison.increase_2_1')}
+            </p>
           </CardContent>
         </Card>
 
@@ -95,8 +107,11 @@ export function AnalyticsDashboard() {
             <div className="text-2xl font-bold">
               {kpiData.travelTime}
               {' '}
-              min
+              {t('comparison.minutes')}
             </div>
+            <p className="text-xs text-muted-foreground">
+              {t('comparison.decrease_5')}
+            </p>
           </CardContent>
         </Card>
 
@@ -112,6 +127,9 @@ export function AnalyticsDashboard() {
               {kpiData.completionRate}
               %
             </div>
+            <p className="text-xs text-muted-foreground">
+              {t('comparison.increase_0_5')}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -120,7 +138,9 @@ export function AnalyticsDashboard() {
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>{t('charts.costSavingsTitle')}</CardTitle>
+            <CardTitle className="text-lg font-semibold">
+              {t('charts.costSavingsTitle')}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <BarChart data={costSavingsData} height={300} />
@@ -129,7 +149,9 @@ export function AnalyticsDashboard() {
 
         <Card>
           <CardHeader>
-            <CardTitle>{t('charts.efficiencyTitle')}</CardTitle>
+            <CardTitle className="text-lg font-semibold">
+              {t('charts.efficiencyTitle')}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <LineChart data={efficiencyTrendData} height={300} />
@@ -137,13 +159,14 @@ export function AnalyticsDashboard() {
         </Card>
       </div>
 
-      {/* Task Categories */}
-      <Card className="col-span-2">
+      <Card>
         <CardHeader>
-          <CardTitle>{t('charts.taskCategoriesTitle')}</CardTitle>
+          <CardTitle className="text-lg font-semibold">
+            {t('charts.taskCategoriesTitle')}
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-[300px] w-full">
+          <div className="flex justify-center">
             <DoughnutChart data={taskCategoriesData} height={300} />
           </div>
         </CardContent>
