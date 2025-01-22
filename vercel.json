@@ -1,5 +1,6 @@
 {
   "version": 2,
+  // Build settings for automatic deployment
   "buildCommand": "pnpm run build",
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install",
@@ -17,5 +18,6 @@
     "enabled": true,
     "silent": false,
     "autoAlias": true
-  }
+  },
+  "public": true
 }
