@@ -1,7 +1,7 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import { Users } from 'lucide-react';
-import { useQuery } from 'react-query';
 
 import { Progress } from '@/components/ui/progress';
 
@@ -19,15 +19,12 @@ const regions: RegionData[] = [
   { name: 'Uppsala', value: 453, total: 800, change: 5.4 },
 ];
 
-const mockActivities = [
-  // Add your mock activities here
-];
-
 export function RecentActivity() {
-  const { data: activities } = useQuery({
+  // We'll implement the activities query later
+  useQuery({
     queryKey: ['recent-activities'],
     queryFn: async () => {
-      return mockActivities;
+      return [];
     },
   });
 
