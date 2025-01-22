@@ -15,6 +15,13 @@
       "NEXT_PUBLIC_GTM_ID": "@gtm_id"
     }
   },
+  "git": {
+    "deploymentEnabled": {
+      "main": false,
+      "development": true,
+      "preview": true
+    }
+  },
   "github": {
     "enabled": true,
     "silent": true,
