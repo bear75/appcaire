@@ -7,6 +7,8 @@ import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { Navbar } from '@/templates/Navbar';
 
+import { Providers } from './providers';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -23,9 +25,7 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function RootLayout({
-  children,
-}: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <ClerkProvider>
       <html lang="sv" suppressHydrationWarning>
@@ -36,7 +36,7 @@ export default function RootLayout({
           )}
         >
           {!children?.toString().includes('(auth)') && <Navbar />}
-          {children}
+          <Providers>{children}</Providers>
         </body>
       </html>
     </ClerkProvider>
