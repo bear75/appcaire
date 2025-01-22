@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "pnpm install --no-frozen-lockfile && NODE_ENV=development pnpm run build",
+  "buildCommand": "NODE_ENV=production pnpm install && pnpm run build",
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install",
   "outputDirectory": ".next",
@@ -17,6 +17,10 @@
     "enabled": true,
     "silent": false,
     "autoAlias": true
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "NEXT_TELEMETRY_DISABLED": "1"
   },
   "public": true
 }
