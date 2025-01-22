@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "pnpm install && npx shadcn@latest init --yes && pnpm run build",
+  "buildCommand": "pnpm install && pnpm run build",
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install",
   "outputDirectory": ".next",
