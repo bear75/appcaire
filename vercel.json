@@ -1,26 +1,23 @@
 {
   "version": 2,
-  "buildCommand": "NODE_ENV=production pnpm install && pnpm run build",
-  "devCommand": "pnpm run dev",
-  "installCommand": "pnpm install",
-  "outputDirectory": ".next",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["fra1"],
-  "git": {
-    "deploymentEnabled": {
-      "main": false,
-      "development": true,
-      "preview": true
+  "env": {
+    "NEXT_PUBLIC_API_URL": "production-api-url",
+    "NEXT_PUBLIC_GTM_ID": "@gtm_id"
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_API_URL": "production-api-url",
+      "NEXT_PUBLIC_GTM_ID": "@gtm_id"
     }
   },
   "github": {
     "enabled": true,
-    "silent": false,
+    "silent": true,
     "autoAlias": true
-  },
-  "env": {
-    "NODE_ENV": "production",
-    "NEXT_TELEMETRY_DISABLED": "1"
-  },
-  "public": true
+  }
 }
