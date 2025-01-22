@@ -72,6 +72,63 @@
 - No component-specific CSS files
 - shadcn/ui components for common UI elements
 
+#### Cards
+- Base styling:
+  - Background: White
+  - Border: 1px solid rgb(226, 232, 240)
+  - Border Radius: 0.75rem (rounded-xl)
+  - Padding: p-6
+  - Shadow: shadow-sm
+- Hover effects:
+  - Transform: scale(1.01)
+  - Shadow: shadow-lg
+  - Transition: all 0.2s ease-in-out
+- 3D effects:
+  - Transform: translateY(-2px)
+  - Box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)
+  - Transition: transform 0.2s, box-shadow 0.2s
+
+#### Stats Cards
+- Layout:
+  - Grid: 2 columns on mobile, 3-4 on desktop
+  - Gap: 1rem (gap-4)
+- Content:
+  - Large number (text-3xl font-bold)
+  - Label (text-sm text-slate-600)
+  - Optional icon (top right)
+- Hover:
+  - Scale effect: scale(1.02)
+  - Elevated shadow
+  - Smooth transition
+
+#### Charts
+- Container:
+  - Background: White
+  - Padding: p-6
+  - Border radius: rounded-xl
+  - Shadow: shadow-sm
+- Colors:
+  - Bar charts: Purple (#7C3AED)
+  - Line charts: Green (#22C55E) for trends
+  - Area charts: Purple with opacity
+- Hover effects:
+  - Tooltip with detailed data
+  - Highlight active data point
+
+#### Tabs
+- Layout:
+  - Grid layout for tab lists
+  - Gap: 1rem between items
+  - Padding: px-3 py-2
+- States:
+  - Default: text-slate-600
+  - Hover: bg-slate-50 text-slate-900
+  - Active: bg-purple-50 text-purple-600
+  - Border bottom for active state
+- Transitions:
+  - Smooth color transitions
+  - 0.2s duration
+
 ### Components
 
 - Cards:
@@ -135,12 +192,13 @@
 
 - Font: Inter
 - Headings:
-  - H1: 24px, Bold
-  - H2: 20px, Semibold
-  - H3: 16px, Semibold
+  - H1: text-2xl font-semibold
+  - H2: text-xl font-semibold
+  - H3: text-lg font-medium
 - Body:
-  - Regular: 14px
-  - Small: 12px
+  - Regular: text-base
+  - Small: text-sm
+  - Muted: text-slate-600
 - Weights:
   - Regular: 400
   - Medium: 500
@@ -330,13 +388,13 @@
 ```typescript
 const chartData = {
   data: [
-    { name: "Category 1", value: 30 },
-    { name: "Category 2", value: 25 },
+    { name: 'Category 1', value: 30 },
+    { name: 'Category 2', value: 25 },
   ],
   datasets: [
     {
-      dataKey: "value",
-      backgroundColor: ["#7C3AED", "#3B82F6"],
+      dataKey: 'value',
+      backgroundColor: ['#7C3AED', '#3B82F6'],
     },
   ],
 };
@@ -352,14 +410,14 @@ const chartData = {
 ```typescript
 const chartData = {
   data: [
-    { name: "Jan", value: 12000 },
-    { name: "Feb", value: 19000 },
+    { name: 'Jan', value: 12000 },
+    { name: 'Feb', value: 19000 },
   ],
   datasets: [
     {
-      dataKey: "value",
-      label: "Chart Label",
-      backgroundColor: "#7C3AED",
+      dataKey: 'value',
+      label: 'Chart Label',
+      backgroundColor: '#7C3AED',
     },
   ],
 };

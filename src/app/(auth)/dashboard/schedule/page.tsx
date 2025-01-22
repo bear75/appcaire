@@ -1,23 +1,32 @@
-import type { Metadata } from 'next';
-
+import { Metadata } from 'next';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ScheduleHeader from '@/features/schedule/ScheduleHeader';
-import ScheduleView from '@/features/schedule/ScheduleView';
-import { getTranslations } from '@/utils/translations';
+import ScheduleTimeline from '@/features/schedule/ScheduleTimeline';
+import ScheduleMetrics from '@/features/schedule/ScheduleMetrics';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('Schedule');
+export const metadata: Metadata = {
+  title: 'Schema | Caire',
+  description: 'Hantera och optimera ditt hemtjänstschema',
+};
 
-  return {
-    title: t('page_title'),
-    description: t('page_description'),
-  };
-}
-
-export default async function SchedulePage() {
+export default function SchedulePage() {
   return (
-    <main className="container mx-auto space-y-6 p-6">
+    <div className="flex-1 space-y-6 p-6">
       <ScheduleHeader />
-      <ScheduleView />
-    </main>
+      <ScheduleMetrics />
+      
+      <Tabs defaultValue="timeline" className="space-y-4">
+        <TabsList>
+          <TabsTrigger value="timeline">Tidslinje</TabsTrigger>
+          <TabsTrigger value="schema">Schema</TabsTrigger>
+          <TabsTrigger value="karta">Karta</TabsTrigger>
+        </TabsList>
+        <TabsContent value="timeline" className="space-y-4">
+          <ScheduleTimeline />
+        </TabsContent>
+        <TabsContent value="schema">Schema vy kommer snart</TabsContent>
+        <TabsContent value="karta">Karta vy kommer snart</TabsContent>
+      </Tabs>
+    </div>
   );
 }

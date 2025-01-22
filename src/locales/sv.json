@@ -355,13 +355,49 @@
   },
   "Schedule": {
     "title": "Schema",
-    "description": "Hantera och optimera schemaläggning",
-    "optimize_schedule": "Optimera Schema",
-    "employee": "Personal",
-    "views": {
-      "timeline": "Tidslinje",
-      "grid": "Lista",
-      "map": "Karta"
+    "description": "Hantera och optimera dagliga besök",
+    "optimize_schedule": "Optimera schema",
+    "timeline": {
+      "staff": "Personal",
+      "time": "Tid",
+      "no_visits": "Inga besök schemalagda"
+    },
+    "taskDetails": {
+      "subtitle": "Besöksdetaljer och begränsningar",
+      "employee": "Personal",
+      "time": "Tid",
+      "location": "Plats",
+      "type": "Typ",
+      "constraints": "Begränsningar",
+      "conflicts": "Konflikter",
+      "client": "Klient",
+      "status": "Status"
+    },
+    "constraints": {
+      "title": "Hantera begränsningar",
+      "description": "Konfigurera och övervaka schemaläggningsbegränsningar",
+      "categories": {
+        "organization": "Organisation",
+        "employee": "Personal",
+        "client": "Klienter"
+      },
+      "types": {
+        "hard": "Hård",
+        "medium": "Medium",
+        "soft": "Mjuk"
+      },
+      "select_type": "Välj typ",
+      "description_placeholder": "Beskriv begränsningen",
+      "add_constraint": "Lägg till ny begränsning",
+      "satisfaction": "Uppfyllnad",
+      "category_labels": {
+        "WORKING_HOURS": "Arbetstid",
+        "STAFF_RATIO": "Personaltäthet",
+        "AVAILABILITY": "Tillgänglighet",
+        "PREFERENCES": "Preferenser",
+        "TIME_WINDOW": "Tidsintervall",
+        "CONTINUITY": "Kontinuitet"
+      }
     },
     "grid": {
       "employee": "Personal",
@@ -372,23 +408,16 @@
       "location": "Plats",
       "constraints": "Begränsningar"
     },
+    "map": {
+      "routes": "Rutter",
+      "total_time": "Total tid",
+      "integration_placeholder": "Kartintegration kommer snart"
+    },
     "metrics": {
       "total_hours": "Totala Timmar",
       "active_employees": "Aktiv Personal",
       "travel_time": "Restid",
       "completion_rate": "Slutföringsgrad"
-    },
-    "map": {
-      "routes": "Rutter",
-      "total_time": "Total Tid",
-      "integration_placeholder": "Kartintegration kommer snart"
-    },
-    "timeline": {
-      "employee": "Personal",
-      "client": "Klient",
-      "time": "Tid",
-      "type": "Typ",
-      "status": "Status"
     },
     "page_title": "Schema | Caire",
     "page_description": "Hantera och optimera ditt hemtjänstschema"

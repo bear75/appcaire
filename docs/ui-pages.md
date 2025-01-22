@@ -175,29 +175,97 @@ Each **Dashboard Card** is **clickable**, allowing users to drill down into the 
 
 ### 3.1 Overview Tab
 
-- KPI Cards showing key metrics
-- Cost savings bar chart with monthly data
-- Efficiency trend line chart
-- Task categories donut chart showing distribution with labeled segments (name : value)
+- **Page Header**
+  - Title: "Analys"
+  - Subtitle: "Översikt över verksamhetens nyckeltal"
+  - RealId/AI-Driven toggle badges
 
-### 3.2 Staff Tab
+- **Organization Overview Card**
+  - White background with 3D hover effect
+  - Rounded corners (rounded-xl)
+  - Shadow on hover
+  - Title: "Organisationsöversikt"
+
+- **KPI Grid Layout**
+  - 3-column grid on desktop, 2 columns on tablet, 1 column on mobile
+  - Gap: 1rem (gap-4)
+  - Each KPI card:
+    - 3D hover effect (translateY(-2px))
+    - Shadow transition
+    - Scale effect on hover (1.01)
+    - Icon placement top right
+    - Large value display
+    - Label below value
+
+- **KPI Cards**
+  1. **Personalutnyttjande**
+     - Value: Percentage (e.g., "75%")
+     - Icon: User icon
+     - 3D hover effect
+
+  2. **Genomsnittlig restid**
+     - Value: Time format (e.g., "45 min")
+     - Icon: Clock icon
+     - 3D hover effect
+
+  3. **Slutförandegrad**
+     - Value: Percentage (e.g., "92%")
+     - Icon: Check icon
+     - 3D hover effect
+
+- **Chart Section**
+  - Two-column grid layout
+  - Gap between charts: 1.5rem
+
+  1. **Kostnadsbesparingar över tid**
+     - Bar chart
+     - Purple bars (#7C3AED)
+     - Monthly data (Jan-Jun)
+     - Y-axis: Currency values
+     - 3D card effect on container
+     - Hover effects on bars
+
+  2. **Effektivitetstrend**
+     - Line chart
+     - Green line (#22C55E)
+     - Monthly data points
+     - Y-axis: Percentage
+     - 3D card effect on container
+     - Hover tooltip with details
+
+- **Categories Section**
+  - Title: "Uppgiftskategorier"
+  - Donut chart
+  - Legend with values
+  - 3D card effect
+  - Interactive segments
+
+### 3.2 Navigation
+
+- **Tab Navigation**
+  - Grid layout
+  - Equal width tabs
+  - Purple active state (bg-purple-50 text-purple-600)
+  - Hover state (bg-slate-50)
+  - Tabs:
+    - Översikt
+    - Personal
+    - Schema
+    - Kontinuitet
+    - Klienter
+
+### 3.3 Staff Tab
 
 - Performance metrics bar chart showing tasks and travel time
 - Skills distribution donut chart with labeled segments (name : value)
 - Certification tracking table
 
-### 3.3 Client Tab
+### 3.4 Client Tab
 
 - Visit completion rates bar chart
 - Time window adherence line chart
 - Special needs fulfillment table
 - Missed visits tracking
-
-### 3.4 Schedule Tab
-
-- Schedule comparison metrics
-- Travel time optimization data
-- Constraint satisfaction rates
 
 ### 3.5 Continuity Tab
 
