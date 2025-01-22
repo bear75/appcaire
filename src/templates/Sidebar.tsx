@@ -1,9 +1,6 @@
 'use client';
 
 import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
-import { useOrganization } from '@clerk/nextjs';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import {
   BarChart3,
   Calendar,
@@ -12,17 +9,17 @@ import {
   Users,
   UserSquare2,
 } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { useTranslations } from '@/utils/translations';
-import { ORG_ROLE } from '@/types/Auth';
+
 import { Logo } from './Logo';
 
 export function Sidebar() {
   const t = useTranslations('Navigation');
   const pathname = usePathname();
-  const { membership } = useOrganization();
-  const isCaireAdmin = membership?.role === ORG_ROLE.SUPER_ADMIN;
 
   const navigation = [
     { name: t('dashboard'), href: '/dashboard', icon: Home },
@@ -38,7 +35,7 @@ export function Sidebar() {
       {/* Logo and Name */}
       <div className="flex h-12 items-center justify-start border-b px-4">
         <Link href="/dashboard" className="flex items-center gap-2">
-          <Logo className="h-6 w-6" />
+          <Logo className="size-6" />
           <span className="text-lg font-medium">Caire</span>
         </Link>
       </div>
@@ -59,7 +56,7 @@ export function Sidebar() {
                   : 'text-gray-700 hover:bg-gray-50',
               )}
             >
-              <Icon className="h-5 w-5" />
+              <Icon className="size-5" />
               {item.name}
             </Link>
           );
@@ -67,30 +64,25 @@ export function Sidebar() {
       </nav>
 
       {/* Clerk Components at Bottom */}
-      <div className="border-t p-4">
-        {isCaireAdmin && (
-          <div className="mb-4">
-            <OrganizationSwitcher
-              hidePersonal
-              afterCreateOrganizationUrl="/dashboard"
-              organizationProfileUrl="/dashboard/organization-profile"
-              createOrganizationUrl="/dashboard/create-organization"
-              skipInvitationScreen={false}
-              appearance={{
-                elements: {
-                  rootBox: 'flex items-center',
-                  organizationSwitcherTrigger: 'flex w-full items-center gap-2 rounded-md px-2 py-2 hover:bg-accent text-sm',
-                },
-              }}
-            />
-          </div>
-        )}
+      <div className="space-y-2 border-t p-4">
+        <OrganizationSwitcher
+          organizationProfileMode="modal"
+          hidePersonal
+          appearance={{
+            elements: {
+              organizationSwitcherTrigger: 'max-w-28 sm:max-w-52',
+            },
+          }}
+        />
         <UserButton
           appearance={{
             elements: {
               rootBox: 'flex items-center',
-              userButtonTrigger: 'flex w-full items-center gap-2 rounded-md p-2 hover:bg-accent',
+              userButtonTrigger:
+                'flex w-full items-center gap-2 rounded-md p-2 hover:bg-accent',
               userButtonBox: 'flex w-full',
+              userPreviewMainIdentifier: 'font-medium',
+              userPreviewSecondaryIdentifier: 'text-xs text-muted-foreground',
             },
           }}
           afterSignOutUrl="/"
@@ -98,4 +90,4 @@ export function Sidebar() {
       </div>
     </div>
   );
-} 
+}
