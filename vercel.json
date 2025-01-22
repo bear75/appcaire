@@ -1,7 +1,6 @@
 {
   "version": 2,
-  // Build settings for automatic deployment
-  "buildCommand": "pnpm run build",
+  "buildCommand": "pnpm install && pnpm run build",
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install",
   "outputDirectory": ".next",
