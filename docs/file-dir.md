@@ -21,281 +21,149 @@ appcaire/
 │   │   └── [locale]/        # Internationalized routes
 │   │       └── (auth)/      # Authenticated routes group
 │   │           └── dashboard/# Dashboard pages
-│   │               ├── analytics/    # Analytics page
-│   │               ├── clients/      # Clients page
-│   │               ├── employees/    # Employees page
-│   │               ├── schedule/     # Schedule page
-│   │               └── settings/     # Settings page
+│   │               ├── analytics/    # Analytics pages
+│   │               │   ├── page.tsx  # Main analytics page
+│   │               │   └── layout.tsx# Analytics layout
+│   │               ├── clients/      # Clients pages
+│   │               ├── employees/    # Employees pages
+│   │               ├── schedule/     # Schedule pages
+│   │               └── settings/     # Settings pages
 │   ├── components/          # Shared components
 │   │   ├── layout/         # Layout components
-│   │   │   └── Sidebar.tsx # Main navigation sidebar
+│   │   │   ├── Sidebar.tsx # Main navigation sidebar
+│   │   │   └── Navigation.tsx # Navigation components
 │   │   └── ui/            # UI components from shadcn/ui
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       ├── charts/    # Chart components
+│   │       │   ├── BarChart.tsx
+│   │       │   ├── DoughnutChart.tsx
+│   │       │   └── LineChart.tsx
+│   │       └── table.tsx
 │   ├── features/          # Feature-specific components
 │   │   ├── analytics/     # Analytics features
+│   │   │   ├── AnalyticsDashboard.tsx
+│   │   │   ├── ClientInsights.tsx
+│   │   │   ├── ContinuityKPI.tsx
+│   │   │   ├── MultiOrgAnalytics.tsx
+│   │   │   ├── ScheduleOptimization.tsx
+│   │   │   └── StaffAnalysis.tsx
 │   │   ├── dashboard/     # Dashboard features
+│   │   │   ├── DashboardHeader.tsx
+│   │   │   ├── DashboardMetrics.tsx
+│   │   │   └── traffic-light.tsx
 │   │   └── settings/      # Settings features
 │   ├── libs/             # Library integrations
 │   ├── locales/          # Translation files
+│   │   └── sv.json      # Swedish translations
 │   ├── styles/           # Global styles
+│   │   └── global.css  # Global CSS including Tailwind
 │   ├── templates/        # Page templates
-│   │   └── Logo.tsx     # Logo component
+│   │   └── Navbar.tsx   # Main navigation template
 │   └── utils/           # Utility functions
+│       ├── translations.ts # Translation utility
+│       └── helpers.ts    # Helper functions
 ├── package.json         # Project dependencies
 └── README.md           # Project overview
-```
 
-## Key Directories
+## Translation Structure
 
-- `docs/`: Contains all project documentation
-- `public/`: Static assets including logos and favicons
-- `src/app/`: Next.js application pages using the App Router
-- `src/components/`: Reusable UI components
-- `src/features/`: Feature-specific components and logic
-- `src/templates/`: Page templates and layouts
-- `src/utils/`: Utility functions and helpers
-
-## Notable Files
-
-- `heart-logo.svg`: Main logo file used throughout the application
-- `Logo.tsx`: Logo component implementation
-- `Sidebar.tsx`: Main navigation component
-- `generate-favicons.js`: Script to generate favicon files from SVG
-
-## Root Structure
-
-```
-src/
-├── app/
-│   └── [locale]/
-│       ├── (auth)/
-│       │   └── dashboard/
-│       │       ├── analytics/
-│       │       │   └── page.tsx
-│       │       ├── clients/
-│       │       │   └── page.tsx
-│       │       ├── employees/
-│       │       │   └── page.tsx
-│       │       ├── schedule/
-│       │       │   └── page.tsx
-│       │       └── settings/
-│       │           └── page.tsx
-│       ├── (marketing)/
-│       └── layout.tsx
-├── components/
-│   ├── layout/
-│   │   ├── ClerkHeader.tsx
-│   │   └── Navigation.tsx
-│   └── ui/
-├── features/
-│   ├── analytics/
-│   │   ├── AnalyticsDashboard.tsx
-│   │   └── AnalyticsHeader.tsx
-│   ├── clients/
-│   │   ├── ClientHeader.tsx
-│   │   └── ClientList.tsx
-│   ├── employees/
-│   │   ├── EmployeeHeader.tsx
-│   │   └── EmployeeList.tsx
-│   ├── schedule/
-│   │   ├── ScheduleHeader.tsx
-│   │   └── ScheduleView.tsx
-│   └── settings/
-│       ├── SettingsHeader.tsx
-│       ├── SettingsTabs.tsx
-│       └── sections/
-│           ├── OrganizationSettings.tsx
-│           ├── UserSettings.tsx
-│           ├── NotificationSettings.tsx
-│           ├── SecuritySettings.tsx
-│           └── LocalizationSettings.tsx
-├── lib/
-├── locales/
-│   ├── en.json
-│   └── sv.json
-└── styles/
-    └── globals.css
-```
-
-## Key Directories
-
-### `/app`
-
-Next.js 13+ app directory using the new App Router.
-
-- `[locale]`: Dynamic route for language support
-- `(auth)`: Route group for authenticated pages
-- `(marketing)`: Route group for public pages
-
-### `/components`
-
-Reusable UI components.
-
-- `layout`: Layout-specific components
-- `ui`: Shadcn UI components
-
-### `/features`
-
-Feature-specific components and logic.
-
-- `analytics`: Analytics dashboard components
-- `clients`: Client management components
-- `employees`: Employee management components
-- `schedule`: Schedule management components
-- `settings`: Settings management components
-
-### `/lib`
-
-Utility functions and configurations.
-
-### `/locales`
-
-Internationalization files.
-
-- `en.json`: English translations
-- `sv.json`: Swedish translations
-
-### `/styles`
-
-Global styles and Tailwind configuration.
-
-## Component Structure
-
-### Analytics
-
-```
-features/analytics/
-├── AnalyticsDashboard.tsx  # Main analytics dashboard
-└── AnalyticsHeader.tsx     # Analytics page header
-```
-
-### Settings
-
-```
-features/settings/
-├── SettingsHeader.tsx      # Settings page header
-├── SettingsTabs.tsx       # Settings navigation tabs
-└── sections/              # Settings section components
-    ├── OrganizationSettings.tsx
-    ├── UserSettings.tsx
-    ├── NotificationSettings.tsx
-    ├── SecuritySettings.tsx
-    └── LocalizationSettings.tsx
-```
-
-### Clients
-
-```
-features/clients/
-├── ClientHeader.tsx        # Client page header
-└── ClientList.tsx         # Client management interface
-```
-
-### Employees
-
-```
-features/employees/
-├── EmployeeHeader.tsx     # Employee page header
-└── EmployeeList.tsx      # Employee management interface
-```
-
-### Schedule
-
-```
-features/schedule/
-├── ScheduleHeader.tsx     # Schedule page header
-└── ScheduleView.tsx      # Schedule management interface
-```
-
-## File Naming Conventions
-
-- React components: PascalCase (e.g., `AnalyticsDashboard.tsx`)
-- Utilities: camelCase (e.g., `formatDate.ts`)
-- Constants: UPPER_CASE (e.g., `API_ENDPOINTS.ts`)
-- Pages: lowercase (e.g., `page.tsx`)
-- Styles: kebab-case (e.g., `globals.css`)
-
-## Import Conventions
-
-```typescript
-// Common imports
-import { useTranslations } from "@/utils/translations";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-
-// Example usage
-const Component = () => {
-  const t = useTranslations("namespace");
-  return <Button>{t("key")}</Button>;
-};
+src/locales/sv.json:
+```json
+{
+  "Analytics": {
+    "title": "Analys",
+    "overview": "Översikt",
+    "staff": {
+      "performanceTitle": "Personalutnyttjande",
+      "skillsTitle": "Kompetenser"
+    },
+    "clients": {
+      "completionRate": "Slutförandegrad",
+      "timeWindowTitle": "Tidsfönster följsamhet"
+    },
+    "table": {
+      "client": "Klient",
+      "date": "Datum",
+      "status": "Status"
+    },
+    "status": {
+      "success": "Godkänd",
+      "warning": "Varning"
+    }
+  }
+}
 ```
 
 ## Component Organization
 
-Each feature directory follows a similar structure:
+### Analytics Components
 
-- Main components
-- Supporting components
-- Feature-specific utilities
-- Types and interfaces
+```
+features/analytics/
+├── AnalyticsDashboard.tsx  # Main analytics dashboard
+├── ClientInsights.tsx      # Client analytics
+├── ContinuityKPI.tsx      # Continuity metrics
+├── MultiOrgAnalytics.tsx  # Multi-organization view
+├── ScheduleOptimization.tsx# Schedule metrics
+└── StaffAnalysis.tsx      # Staff performance
+```
+
+### Dashboard Components
+
+```
+features/dashboard/
+├── DashboardHeader.tsx    # Dashboard header
+├── DashboardMetrics.tsx   # KPI metrics
+└── traffic-light.tsx      # Traffic light recommendations
+```
+
+### UI Components
+
+```
+components/ui/
+├── button.tsx            # Button component
+├── card.tsx             # Card component
+├── charts/              # Chart components
+│   ├── BarChart.tsx     # Bar chart
+│   ├── DoughnutChart.tsx# Doughnut chart
+│   └── LineChart.tsx    # Line chart
+└── table.tsx           # Table component
+```
+
+## Key Files
+
+### Translation Files
+
+- `src/locales/sv.json`: Swedish translations
+- `src/utils/translations.ts`: Translation utility functions
+
+### Navigation
+
+- `src/templates/Navbar.tsx`: Main navigation component
+- `src/components/layout/Navigation.tsx`: Navigation utilities
+
+### Analytics
+
+- `features/analytics/*.tsx`: Analytics components
+- `app/dashboard/analytics/page.tsx`: Analytics page
+- `app/dashboard/analytics/layout.tsx`: Analytics layout
+
+## Import Conventions
+
+```typescript
+// Translation imports
+// Component imports
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { BarChart } from '@/components/ui/charts/BarChart';
+// Feature imports
+import { AnalyticsDashboard } from '@/features/analytics/AnalyticsDashboard';
+import { t } from '@/utils/translations';
+```
 
 ## Style Organization
 
-- Tailwind utility classes
-- Component-specific styles
-- Global styles in `global.css`
-
-## Testing Structure
-
-```
-__tests__/
-├── components/
-├── features/
-└── utils/
-```
-
-## Documentation
-
-```
-docs/
-├── file-dir.md           # This file
-├── ui-guidelines.md      # UI/UX guidelines
-├── tech-stack.md        # Technology stack
-└── prd.md              # Product requirements
-```
-
-### Database Structure
-
-```
-src/
-├── db/
-│   ├── index.ts           # Database connection setup
-│   └── schema.ts         # Drizzle schema definitions
-├── migrations/
-│   ├── 0000_initial.sql  # Initial schema migration
-│   └── 0001_add_trial_expiration.sql  # Trial expiration field
-└── scripts/
-    └── migrate-prod.ts   # Production migration script
-```
-
-### Environment Files
-
-```
-.env.development         # Development environment variables
-.env.production         # Production environment variables
-.env.local             # Local overrides (not tracked in git)
-```
-
-### Database Configuration
-
-```
-# Development Database
-- Connection pooling (port 6543)
-- Transaction mode
-- SSL enabled
-
-# Production Database
-- Connection pooling (port 6543)
-- Transaction mode
-- SSL enabled
-- Enhanced security
-```
+- `styles/global.css`: Global styles and Tailwind
+- Component-specific styles using Tailwind classes
+- No CSS modules or separate stylesheets

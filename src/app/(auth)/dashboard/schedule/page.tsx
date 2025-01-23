@@ -1,8 +1,9 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ScheduleHeader from '@/features/schedule/ScheduleHeader';
-import ScheduleTimeline from '@/features/schedule/ScheduleTimeline';
 import ScheduleMetrics from '@/features/schedule/ScheduleMetrics';
+import ScheduleTimeline from '@/features/schedule/ScheduleTimeline';
 
 export const metadata: Metadata = {
   title: 'Schema | Caire',
@@ -14,14 +15,30 @@ export default function SchedulePage() {
     <div className="flex-1 space-y-6 p-6">
       <ScheduleHeader />
       <ScheduleMetrics />
-      
-      <Tabs defaultValue="timeline" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="timeline">Tidslinje</TabsTrigger>
-          <TabsTrigger value="schema">Schema</TabsTrigger>
-          <TabsTrigger value="karta">Karta</TabsTrigger>
+
+      <Tabs defaultValue="tidslinje" className="space-y-4">
+        <TabsList className="grid w-full grid-cols-3 gap-4 bg-background p-1">
+          <TabsTrigger
+            value="tidslinje"
+            className="space-x-2 rounded-md px-3 py-2 text-sm font-medium ring-offset-background transition-all hover:bg-slate-50 hover:text-slate-900 data-[state=active]:bg-purple-50 data-[state=active]:text-purple-600"
+          >
+            Tidslinje
+          </TabsTrigger>
+          <TabsTrigger
+            value="schema"
+            className="space-x-2 rounded-md px-3 py-2 text-sm font-medium ring-offset-background transition-all hover:bg-slate-50 hover:text-slate-900 data-[state=active]:bg-purple-50 data-[state=active]:text-purple-600"
+          >
+            Schema
+          </TabsTrigger>
+          <TabsTrigger
+            value="karta"
+            className="space-x-2 rounded-md px-3 py-2 text-sm font-medium ring-offset-background transition-all hover:bg-slate-50 hover:text-slate-900 data-[state=active]:bg-purple-50 data-[state=active]:text-purple-600"
+          >
+            Karta
+          </TabsTrigger>
         </TabsList>
-        <TabsContent value="timeline" className="space-y-4">
+
+        <TabsContent value="tidslinje" className="space-y-4">
           <ScheduleTimeline />
         </TabsContent>
         <TabsContent value="schema">Schema vy kommer snart</TabsContent>

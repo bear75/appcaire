@@ -44,11 +44,32 @@
 - Swedish only
 - Internal translation system:
   - Translation keys stored in `src/locales/sv.json`
-  - Custom `useTranslations` hook in `src/utils/translations.ts`
-  - Type-safe translation keys
-  - Component-based translation organization
+  - Custom `t` function in `src/utils/translations.ts`
+  - Type-safe translation keys using TypeScript
+  - Namespace-based organization
+  - Support for variable interpolation
+  - Component-specific translation organization
+  - Error handling for missing keys
 - No external translation libraries
 - All UI text managed through internal translation utility
+
+### Translation Implementation
+
+```typescript
+// Translation utility
+type TranslationKey = NestedKeyOf<typeof translations>;
+
+interface InterpolationValues {
+  [key: string]: string | number;
+}
+
+// Translation function with interpolation support
+function t(key: TranslationKey, values?: InterpolationValues): string;
+
+// Example usage
+const title = t('Analytics.title');
+const warning = t('Analytics.warning', { client: 'Anna', count: 5 });
+```
 
 ### Data Visualization
 

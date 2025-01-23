@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Avatar } from '@/components/ui/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import TaskDetailsModal from './TaskDetailsModal';
 import { useTranslations } from '@/utils/translations';
+import Image from 'next/image';
 
 // Generate time slots from 07:00 to 22:00
 const timeSlots = Array.from(
@@ -69,6 +70,30 @@ const mockSchedule = [
   // Add more employees here
 ];
 
+// Helper functions
+function parseTime(time: string): Date {
+  const [hours, minutes] = time.split(':').map(Number);
+  const date = new Date();
+  date.setHours(hours, minutes, 0, 0);
+  return date;
+}
+
+function addHours(date: Date, hours: number): string {
+  const newDate = new Date(date);
+  newDate.setHours(date.getHours() + hours);
+  return `${newDate.getHours().toString().padStart(2, '0')}:00`;
+}
+
+function formatTime(time: string): string {
+  return time;
+}
+
+function calculateVisitWidth(visit: any): number {
+  const startHour = parseInt(visit.start);
+  const endHour = parseInt(visit.end);
+  return (endHour - startHour) * 100;
+}
+
 export default function ScheduleTimeline() {
   const t = useTranslations('Schedule.timeline');
   const [selectedVisit, setSelectedVisit] = useState<any>(null);
@@ -84,8 +109,15 @@ export default function ScheduleTimeline() {
             </div>
             <div className="flex flex-1">
               {timeSlots.map((time) => (
-                <div key={time} className="w-[100px] border-r p-4 text-center bg-white">
-                  <span className="text-sm font-medium text-purple-600">{time}</span>
+                <div
+                  key={time}
+                  className="flex-1 min-w-[100px] h-full border-l border-gray-100 relative"
+                  role="gridcell"
+                  tabIndex={0}
+                >
+                  <span className="text-xs font-medium text-gray-500 p-2 block">
+                    {time}
+                  </span>
                 </div>
               ))}
             </div>
@@ -94,11 +126,21 @@ export default function ScheduleTimeline() {
           {/* Schedule rows */}
           {mockSchedule.map((employee) => (
             <div key={employee.id} className="flex border-t hover:bg-slate-50/50">
-              <div className="flex w-48 items-center gap-2 border-r p-4 bg-white">
-                <Avatar className="border-2 border-purple-200">
-                  <img src={employee.avatar} alt={employee.employeeName} />
-                </Avatar>
-                <span className="font-medium text-purple-900">{employee.employeeName}</span>
+              <div className="flex items-center gap-2 sticky left-0 bg-white z-10 pr-4 min-w-[200px]">
+                <div className="relative w-8 h-8">
+                  <Image
+                    src={employee.avatar || '/placeholder-avatar.png'}
+                    alt={employee.employeeName}
+                    width={32}
+                    height={32}
+                    className="rounded-full"
+                  />
+                </div>
+                <div>
+                  <p className="font-medium text-sm text-gray-900 truncate">
+                    {employee.employeeName}
+                  </p>
+                </div>
               </div>
               <div className="relative flex flex-1 py-2 min-h-[80px]">
                 {employee.visits.map((visit) => (
@@ -106,8 +148,8 @@ export default function ScheduleTimeline() {
                     key={visit.id}
                     className="absolute flex cursor-pointer items-center gap-2 rounded-md bg-white p-3 shadow-sm transition-all hover:bg-purple-50 hover:shadow-lg hover:-translate-y-1 border border-purple-100"
                     style={{
-                      left: `${((parseInt(visit.start) - 7) * 100) / 15}%`,
-                      width: `${((parseInt(visit.end) - parseInt(visit.start)) * 100) / 15}%`,
+                      left: `${((parseInt(visit.start) - 7) * 100)}px`,
+                      width: `${((parseInt(visit.end) - parseInt(visit.start)) * 100)}px`,
                       minWidth: '150px',
                     }}
                     onClick={() => setSelectedVisit(visit)}
@@ -121,7 +163,10 @@ export default function ScheduleTimeline() {
                           {visit.start}-{visit.end}
                         </span>
                       </div>
-                      <Badge variant="secondary" className="mt-1 w-fit bg-purple-50 text-purple-600 hover:bg-purple-100">
+                      <Badge
+                        variant="secondary"
+                        className="mt-1 w-fit bg-purple-50 text-purple-600 hover:bg-purple-100"
+                      >
                         {visit.type}
                       </Badge>
                     </div>
@@ -133,11 +178,23 @@ export default function ScheduleTimeline() {
         </div>
       </ScrollArea>
 
-      <TaskDetailsModal
-        isOpen={!!selectedVisit}
-        onClose={() => setSelectedVisit(null)}
-        task={selectedVisit}
-      />
+      {selectedVisit && (
+        <TaskDetailsModal
+          isOpen={!!selectedVisit}
+          onClose={() => setSelectedVisit(null)}
+          task={{
+            id: selectedVisit.id,
+            employeeName: mockSchedule.find(e => e.visits.some(v => v.id === selectedVisit.id))?.employeeName || '',
+            clientName: selectedVisit.clientName,
+            startTime: selectedVisit.start,
+            endTime: selectedVisit.end,
+            location: selectedVisit.location,
+            type: selectedVisit.type,
+            constraints: selectedVisit.constraints || [],
+            conflicts: selectedVisit.conflicts || []
+          }}
+        />
+      )}
     </Card>
   );
 }

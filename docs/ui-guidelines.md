@@ -429,3 +429,62 @@ const chartData = {
 - Include data points and smooth curves
 - Show grid lines for better readability
 - Data structure matches bar chart format
+
+```
+
+## Translation System
+
+### Key Structure
+
+- Namespace-based organization (e.g., 'Analytics', 'Schedule')
+- Dot notation for nested keys
+- Type-safe implementation using TypeScript
+
+### Translation Usage
+
+```typescript
+// Direct translation
+const title = t('Analytics.title');
+
+// With interpolation
+const warning = t('Analytics.warnings.message', {
+  client: 'Anna Nilsson',
+  caregivers: 8,
+  period: 'senaste 30 dagarna'
+});
+
+// Component-specific translations
+const tableHeaders = {
+  client: t('Analytics.table.client'),
+  date: t('Analytics.table.date'),
+  status: t('Analytics.table.status')
+};
+```
+
+### Status Messages
+
+- Success messages: t('Analytics.status.success')
+- Warning messages: t('Analytics.status.warning')
+- Error messages: t('Analytics.status.error')
+- Dynamic values using interpolation
+
+### Component Labels
+
+- Button text: t('Analytics.buttons.[action]')
+- Table headers: t('Analytics.table.[column]')
+- Form labels: t('Analytics.form.[field]')
+- Chart labels: t('Analytics.charts.[type]')
+
+### Charts
+
+- Labels and titles use translation keys
+- Tooltips with formatted values
+- Status indicators with translated states
+- Proper aria-labels for accessibility
+
+### Tables
+
+- Headers use translation keys
+- Status badges with translated states
+- Pagination text translated
+- Empty state messages localized

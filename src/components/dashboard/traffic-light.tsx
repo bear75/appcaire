@@ -80,7 +80,7 @@ export function TrafficLightRecommendations() {
         >
           <rec.icon className={cn('h-5 w-5', getIconColor(rec.status))} />
           <div className="flex-1">
-            <div className="font-medium">{t(`${rec.type}.title`)}</div>
+            <div className="font-medium">{t(`recommendations.${rec.type}.title`)}</div>
             <div className="mt-1 text-sm">{rec.message}</div>
           </div>
         </button>

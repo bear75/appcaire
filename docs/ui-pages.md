@@ -176,15 +176,15 @@ Each **Dashboard Card** is **clickable**, allowing users to drill down into the 
 ### 3.1 Overview Tab
 
 - **Page Header**
-  - Title: "Analys"
-  - Subtitle: "Översikt över verksamhetens nyckeltal"
+  - Title: "Analys" (t('Analytics.title'))
+  - Subtitle: "Översikt över verksamhetens nyckeltal" (t('Analytics.overview'))
   - RealId/AI-Driven toggle badges
 
 - **Organization Overview Card**
   - White background with 3D hover effect
   - Rounded corners (rounded-xl)
   - Shadow on hover
-  - Title: "Organisationsöversikt"
+  - Title: "Organisationsöversikt" (t('Analytics.organization.title'))
 
 - **KPI Grid Layout**
   - 3-column grid on desktop, 2 columns on tablet, 1 column on mobile
@@ -198,20 +198,23 @@ Each **Dashboard Card** is **clickable**, allowing users to drill down into the 
     - Label below value
 
 - **KPI Cards**
-  1. **Personalutnyttjande**
+  1. **Personalutnyttjande** (t('Analytics.staff.performanceTitle'))
      - Value: Percentage (e.g., "75%")
      - Icon: User icon
      - 3D hover effect
+     - Status badge with interpolated values
 
-  2. **Genomsnittlig restid**
+  2. **Genomsnittlig restid** (t('Analytics.schedule.travelTime'))
      - Value: Time format (e.g., "45 min")
      - Icon: Clock icon
      - 3D hover effect
+     - Trend indicator with interpolated percentage
 
-  3. **Slutförandegrad**
+  3. **Slutförandegrad** (t('Analytics.clients.completionRate'))
      - Value: Percentage (e.g., "92%")
      - Icon: Check icon
      - 3D hover effect
+     - Status badge with dynamic status
 
 - **Chart Section**
   - Two-column grid layout
@@ -263,9 +266,19 @@ Each **Dashboard Card** is **clickable**, allowing users to drill down into the 
 ### 3.4 Client Tab
 
 - Visit completion rates bar chart
-- Time window adherence line chart
+  - Weekday labels using t('Analytics.time.weekdays.[day]')
+  - Values with percentage formatting
+  - Tooltips with translated labels
+
 - Special needs fulfillment table
+  - Headers using t('Analytics.table.[key]')
+  - Status badges with translated states
+  - Dynamic status colors
+
 - Missed visits tracking
+  - Client names and dates
+  - Translated reason codes t('Analytics.clients.reasons.[reason]')
+  - Status indicators with proper translations
 
 ### 3.5 Continuity Tab
 
@@ -378,18 +391,6 @@ All charts follow consistent data structure and styling:
 - **Service Delivery**: Min/Max visit duration, travel allowances
 - **Qualifications**: Required certs, min experience
 - **Resource Management**: Vehicles, usage recommendations
-
-### 7.3 Admin Settings (Role-Based)
-
-- **Access Control**: Fine-tune permissions
-- **System Preferences**: UI theme, language, time zone
-- **Audit Logs**: Changes to scheduling, employee data
-
-### 7.4 Super Admin Settings
-
-- **Organization Management**: Activate/suspend, usage stats
-- **System-Wide Config**: Global constraints, branding
-- **Trial Conversions & Metrics**: Track usage, upsell prompts
 
 ---
 

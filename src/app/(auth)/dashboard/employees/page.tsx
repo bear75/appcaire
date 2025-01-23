@@ -1,23 +1,18 @@
-import type { Metadata } from 'next';
-import { getTranslations } from '@/utils/translations';
+import { Metadata } from 'next';
 
+import { EmployeeDirectory } from '@/features/employees/EmployeeDirectory';
 import { EmployeeHeader } from '@/features/employees/EmployeeHeader';
-import { EmployeeList } from '@/features/employees/EmployeeList';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('Employees');
+export const metadata: Metadata = {
+  title: 'Personal | Caire',
+  description: 'Hantera personal och kompetenser',
+};
 
-  return {
-    title: t('page_title'),
-    description: t('page_description'),
-  };
-}
-
-export default async function EmployeesPage() {
+export default function EmployeesPage() {
   return (
-    <main className="container mx-auto space-y-6 p-6">
+    <main className="flex min-h-screen flex-col gap-8 bg-slate-50 p-8">
       <EmployeeHeader />
-      <EmployeeList />
+      <EmployeeDirectory />
     </main>
   );
 }

@@ -53,7 +53,6 @@
     "title": "Översikt",
     "meta_title": "Caire Kontrollpanel",
     "meta_description": "Caire Kontrollpanel för hantering av hemtjänstverksamhet",
-
     "stats": {
       "total_clients": {
         "title": "Totalt antal klienter",
@@ -84,7 +83,6 @@
         "description": "Schemaoptimering"
       }
     },
-
     "today_schedule": {
       "title": "Dagens Schema",
       "description": "Översikt över dagens planerade aktiviteter",
@@ -96,7 +94,6 @@
       "distance": "Avstånd",
       "efficiency": "Effektivitet"
     },
-
     "recommendations": {
       "title": "Rekommendationer",
       "description": "AI-baserade förslag för verksamhetsförbättring",
@@ -117,12 +114,10 @@
         "needs_review": "Behöver genomgång"
       }
     },
-
     "financial_overview": {
       "title": "Ekonomisk översikt",
       "description": "Intäkter och måluppföljning"
     },
-
     "recent_activity": {
       "title": "Senaste aktivitet",
       "description": "Översikt över regionala aktiviteter"
@@ -145,68 +140,41 @@
     "average_per_visit": "genomsnitt per besök"
   },
   "Analytics": {
+    "page_title": "Analys | Caire",
+    "page_description": "Få insikter om din verksamhet och optimera schemaläggningen",
     "title": "Analys",
-    "overview": "Översikt",
-    "staff": "Personal",
-    "schedule": {
-      "comparisonTitle": "AI vs Manuell Schemaläggning",
-      "travelTimeTitle": "Restidsreduktion",
-      "constraintsTitle": "Begränsningsuppfyllnad",
-      "aiSchedule": "AI Schema",
-      "manualSchedule": "Manuellt Schema",
-      "travelTime": "Restid"
+    "description": "Översikt över verksamhetens nyckeltal",
+    "export_report": "Exportera rapport",
+    "multi_org": {
+      "title": "Organisationsöversikt",
+      "select_orgs": "Välj organisationer",
+      "no_selection": "Välj organisationer för att se deras statistik",
+      "compare": "Jämför organisationer"
     },
-    "continuity": "Kontinuitet",
-    "clients": {
-      "completionTitle": "Besöksgenomförande",
-      "timeWindowTitle": "Tidsfönster Följsamhet",
-      "specialNeedsTitle": "Särskilda Behov",
-      "missedVisitsTitle": "Missade Besök",
-      "completionRate": "Genomförandegrad",
-      "timeWindowAdherence": "Tidsfönster Följsamhet",
-      "needs": {
-        "medical": "Medicinska behov",
-        "language": "Språkbehov",
-        "mobility": "Rörlighetsbehov"
-      },
-      "reasons": {
-        "staffIllness": "Personal sjuk",
-        "clientUnavailable": "Klient ej tillgänglig"
-      }
+    "metrics": {
+      "total_clients": "Totalt antal klienter",
+      "active_employees": "Aktiva anställda",
+      "schedule_efficiency": "Schemaeffektivitet",
+      "travel_time": "Restid",
+      "utilization": "Utnyttjandegrad",
+      "satisfaction": "Kundnöjdhet"
     },
-    "kpi": {
-      "continuity": {
-        "title": "Kontinuitet KPI",
-        "trends": "Kontinuitetstrender",
-        "warnings": "Klientvarningar",
-        "top_performance": "Bästa kontinuitet"
-      },
-      "client": {
-        "title": "Klientinsikter",
-        "completion_rate": "Slutföringsgrad",
-        "time_adherence": "Tidsfönster följsamhet",
-        "special_needs": "Särskilda behov",
-        "missed_visits": "Missade besök"
-      }
+    "tabs": {
+      "overview": "Översikt",
+      "staff": "Personal",
+      "schedule": "Schema",
+      "continuity": "Kontinuitet",
+      "clients": "Klienter"
     },
     "staff": {
       "performanceTitle": "Personalens prestanda",
-      "skillsTitle": "Kompetensfördelning",
+      "skillsTitle": "Kompetenser",
       "certificationsTitle": "Certifieringar",
+      "employee": "Personal",
       "tasksPerDay": "Uppgifter per dag",
       "travelTime": "Restid",
       "personalHygiene": "Personlig hygien",
-      "safeLifting": "Säker lyftning",
-      "employees": {
-        "anna_l": "Anna L.",
-        "erik_s": "Erik S.",
-        "maria_h": "Maria H.",
-        "johan_b": "Johan B.",
-        "lisa_p": "Lisa P.",
-        "anna_larsson": "Anna Larsson",
-        "erik_svensson": "Erik Svensson",
-        "maria_holm": "Maria Holm"
-      }
+      "safeLifting": "Säker lyftning"
     },
     "certifications": {
       "medical": "Medicinsk vård",
@@ -214,16 +182,15 @@
       "dementia": "Demensvård"
     },
     "status": {
+      "success": "Godkänd",
+      "warning": "Varning",
       "valid": "Giltig",
       "expiring": "Går snart ut"
     },
     "table": {
-      "employee": "Personal",
-      "certification": "Certifiering",
-      "expiry": "Utgångsdatum",
-      "status": "Status",
       "need": "Behov",
       "fulfillment": "Uppfyllnad",
+      "status": "Status",
       "client": "Klient",
       "date": "Datum",
       "time": "Tid",
@@ -234,9 +201,9 @@
     "continuity": {
       "trendTitle": "Kontinuitetstrend",
       "warningTitle": "Kontinuitetsvarningar",
+      "warningDesc": "{client} har haft {caregivers} olika vårdgivare under {period}",
       "topPerformanceTitle": "Bästa kontinuitet",
-      "averageCaregiversPerClient": "Genomsnittligt antal vårdgivare per klient",
-      "warningDesc": "{client} har haft {caregivers} olika vårdgivare under {period}"
+      "averageCaregiversPerClient": "Genomsnittligt antal vårdgivare per klient"
     },
     "time": {
       "period": {
@@ -289,45 +256,37 @@
       "social": "Socialt",
       "other": "Övrigt"
     },
-    "organization": {
-      "title": "Organisationsöversikt",
-      "description": "Översikt över verksamhetens nyckeltal"
+    "clients": {
+      "completionRate": "Slutförandegrad",
+      "timeWindowTitle": "Tidsfönster följsamhet",
+      "specialNeedsTitle": "Särskilda behov",
+      "missedVisitsTitle": "Missade besök",
+      "reasons": {
+        "staffIllness": "Personal sjukfrånvaro",
+        "clientUnavailable": "Klient ej tillgänglig",
+        "weatherConditions": "Väderförhållanden",
+        "transportation": "Transportproblem"
+      }
+    },
+    "schedule": {
+      "comparisonTitle": "AI vs Manuell Schemaläggning",
+      "travelTimeTitle": "Restidsreduktion",
+      "constraintsTitle": "Begränsningsuppfyllnad",
+      "travelTime": "Restid"
     },
     "comparison": {
-      "from_previous": "från föregående period",
-      "minutes": "min",
       "increase_2_1": "+2.1% från föregående period",
-      "decrease_5": "-5 min från föregående period",
+      "decrease_5": "-5% från föregående period",
       "increase_0_5": "+0.5% från föregående period"
     },
-    "months": {
-      "jan": "Jan",
-      "feb": "Feb",
-      "mar": "Mar",
-      "apr": "Apr",
-      "may": "Maj",
-      "jun": "Jun",
-      "jul": "Jul",
-      "aug": "Aug",
-      "sep": "Sep",
-      "oct": "Okt",
-      "nov": "Nov",
-      "dec": "Dec"
-    },
-    "tabs": {
-      "overview": "Översikt",
-      "staff": "Personal",
-      "schedule": "Schema",
-      "continuity": "Kontinuitet",
-      "clients": "Klienter"
-    },
+    "overview": "Översikt över verksamhetens nyckeltal",
     "constraints": {
       "hard": "Hårda begränsningar",
       "medium": "Medelhårda begränsningar",
       "soft": "Mjuka begränsningar",
-      "hardDesc": "Kritiska krav som måste uppfyllas",
-      "mediumDesc": "Viktiga krav med viss flexibilitet",
-      "softDesc": "Önskvärda krav när möjligt"
+      "hardDesc": "Måste uppfyllas",
+      "mediumDesc": "Bör uppfyllas",
+      "softDesc": "Kan uppfyllas"
     }
   },
   "QuickActions": {
@@ -356,6 +315,7 @@
   "Schedule": {
     "title": "Schema",
     "description": "Hantera och optimera dagliga besök",
+    "optimize": "Optimera schema",
     "optimize_schedule": "Optimera schema",
     "timeline": {
       "staff": "Personal",
@@ -417,7 +377,8 @@
       "total_hours": "Totala Timmar",
       "active_employees": "Aktiv Personal",
       "travel_time": "Restid",
-      "completion_rate": "Slutföringsgrad"
+      "completion_rate": "Slutföringsgrad",
+      "staff_utilization": "Personalutnyttjande"
     },
     "page_title": "Schema | Caire",
     "page_description": "Hantera och optimera ditt hemtjänstschema"
@@ -480,155 +441,95 @@
     "page_title": "Personal | Caire",
     "page_description": "Hantera din personal och deras scheman",
     "title": "Personal",
-    "description": "Hantera din personal och deras scheman",
+    "description": "Hantera personal och kompetenser",
     "add_employee": "Lägg till personal",
-    "name": "Namn",
-    "contact": "Kontakt",
-    "role": "Roll",
-    "status": "Status",
+    "search_placeholder": "Sök personal...",
+    "select_role": "Välj roll",
+    "select_status": "Välj status",
+    "all_roles": "Alla roller",
+    "all_statuses": "Alla statusar",
+    "nurse": "Sjuksköterska",
+    "care_assistant": "Vårdbiträde",
+    "active": "Aktiv",
+    "on_leave": "Ledig",
     "open_menu": "Öppna meny",
     "edit": "Redigera",
     "view_schedule": "Visa schema",
     "delete": "Ta bort",
-    "search": "Sök personal...",
-    "filter": "Filtrera",
-    "sort": "Sortera",
-    "export": "Exportera"
+    "name": "Namn",
+    "contact": "Kontakt",
+    "role": "Roll",
+    "status": "Status",
+    "edit_profile": "Redigera profil",
+    "started": "Började",
+    "overview": "Översikt",
+    "skills": "Kompetenser",
+    "schedule": "Schema",
+    "performance": "Prestanda",
+    "performance_metrics": "Prestationsmått",
+    "task_completion": "Genomförda uppgifter",
+    "client_satisfaction": "Kundnöjdhet",
+    "availability": "Tillgänglighet",
+    "preferred_hours": "Önskade arbetstider",
+    "max_hours_week": "Max timmar/vecka",
+    "vacation_days": "Semesterdagar",
+    "days": "dagar",
+    "skills_certifications": "Kompetenser & certifieringar",
+    "certifications": "Certifieringar",
+    "issued": "Utfärdad",
+    "expires": "Utgår",
+    "schedule_coming_soon": "Schemavy kommer snart",
+    "detailed_performance": "Detaljerad prestanda",
+    "key_metrics": "Nyckeltal",
+    "punctuality": "Punktlighet",
+    "continuity_score": "Kontinuitetspoäng",
+    "client_feedback": "Kundfeedback",
+    "average_rating": "genomsnittligt betyg",
+    "select_skill": "Välj kompetens",
+    "all_skills": "Alla kompetenser",
+    "view_profile": "Visa profil"
   },
   "Clients": {
     "page_title": "Klienter | Caire",
     "page_description": "Hantera dina klienter och deras besökskrav",
     "title": "Klienter",
-    "description": "Hantera dina klienter och deras besökskrav",
+    "description": "Hantera klienter och deras vårdplaner",
     "add_client": "Lägg till klient",
+    "search_placeholder": "Sök klienter...",
+    "select_visit_type": "Välj besökstyp",
+    "select_status": "Välj status",
+    "all_visit_types": "Alla besökstyper",
+    "all_statuses": "Alla statusar",
+    "medical": "Medicinsk",
+    "hygiene": "Hygien",
+    "social": "Social",
+    "active": "Aktiv",
+    "on_hold": "Pausad",
+    "completed": "Avslutad",
     "name": "Namn",
-    "address": "Adress",
-    "visit_details": "Besöksdetaljer",
+    "contact": "Kontakt",
     "status": "Status",
-    "open_menu": "Öppna meny",
+    "visit_type": "Besökstyp",
+    "care_needs": "Vårdbehov",
     "edit": "Redigera",
-    "view_visits": "Visa besök",
+    "view_schedule": "Visa schema",
     "delete": "Ta bort",
-    "search": "Sök klienter...",
-    "filter": "Filtrera",
-    "sort": "Sortera",
-    "export": "Exportera"
-  },
-  "Analytics": {
-    "page_title": "Analys | Caire",
-    "page_description": "Få insikter om din verksamhet och optimera schemaläggningen",
-    "title": "Analys",
-    "description": "Översikt över verksamhetens nyckeltal",
-    "export_report": "Exportera rapport",
-    "multi_org": {
-      "title": "Organisationsöversikt",
-      "select_orgs": "Välj organisationer",
-      "no_selection": "Välj organisationer för att se deras statistik",
-      "compare": "Jämför organisationer"
-    },
-    "metrics": {
-      "total_clients": "Totalt antal klienter",
-      "active_employees": "Aktiva anställda",
-      "schedule_efficiency": "Schemaeffektivitet",
-      "travel_time": "Restid",
-      "utilization": "Utnyttjandegrad",
-      "satisfaction": "Kundnöjdhet"
-    },
-    "tabs": {
-      "overview": "Översikt",
-      "staff": "Personal",
-      "schedule": "Schema",
-      "continuity": "Kontinuitet",
-      "clients": "Klienter"
-    },
-    "staff": {
-      "performanceTitle": "Personalens prestanda",
-      "skillsTitle": "Kompetenser",
-      "certificationsTitle": "Certifieringar",
-      "employee": "Personal",
-      "tasksPerDay": "Uppgifter per dag",
-      "travelTime": "Restid",
-      "personalHygiene": "Personlig hygien",
-      "safeLifting": "Säker lyftning"
-    },
-    "certifications": {
-      "medical": "Medicinsk vård",
-      "firstAid": "Första hjälpen",
-      "dementia": "Demensvård"
-    },
-    "status": {
-      "valid": "Giltig",
-      "expiring": "Går snart ut"
-    },
-    "table": {
-      "need": "Behov",
-      "fulfillment": "Uppfyllnad",
-      "status": "Status",
-      "client": "Klient",
-      "date": "Datum",
-      "time": "Tid",
-      "reason": "Anledning",
-      "primaryCaregiver": "Primär vårdgivare",
-      "consistency": "Kontinuitet"
-    },
-    "continuity": {
-      "trendTitle": "Kontinuitetstrend",
-      "warningTitle": "Kontinuitetsvarningar",
-      "topPerformanceTitle": "Bästa kontinuitet",
-      "averageCaregiversPerClient": "Genomsnittligt antal vårdgivare per klient",
-      "warningDesc": "{client} har haft {caregivers} olika vårdgivare under {period}"
-    },
-    "time": {
-      "period": {
-        "30days": "senaste 30 dagarna"
-      },
-      "weekdays": {
-        "monday": "Måndag",
-        "tuesday": "Tisdag",
-        "wednesday": "Onsdag",
-        "thursday": "Torsdag",
-        "friday": "Fredag",
-        "saturday": "Lördag",
-        "sunday": "Söndag"
-      },
-      "weeks": {
-        "week1": "Vecka 1",
-        "week2": "Vecka 2",
-        "week3": "Vecka 3",
-        "week4": "Vecka 4"
-      }
-    },
-    "kpi": {
-      "staffUtilization": "Personalutnyttjande",
-      "travelTime": "Genomsnittlig restid",
-      "completionRate": "Slutförandegrad",
-      "continuity": {
-        "title": "Kontinuitet KPI",
-        "trends": "Kontinuitetstrender",
-        "warnings": "Klientvarningar",
-        "top_performance": "Bästa kontinuitet"
-      },
-      "client": {
-        "title": "Klientinsikter",
-        "completion_rate": "Slutföringsgrad",
-        "time_adherence": "Tidsfönster följsamhet",
-        "special_needs": "Särskilda behov",
-        "missed_visits": "Missade besök"
-      }
-    },
-    "charts": {
-      "costSavings": "Kostnadsbesparingar",
-      "costSavingsTitle": "Kostnadsbesparingar över tid",
-      "efficiency": "Effektivitet",
-      "efficiencyTitle": "Effektivitetstrend",
-      "taskCategoriesTitle": "Uppgiftskategorier"
-    },
-    "tasks": {
-      "medical": "Medicinsk",
-      "hygiene": "Hygien",
-      "social": "Socialt",
-      "other": "Övrigt"
-    }
+    "open_menu": "Öppna meny",
+    "edit_profile": "Redigera profil",
+    "next_visit": "Nästa besök",
+    "overview": "Översikt",
+    "requirements": "Krav",
+    "constraints": "Begränsningar",
+    "visit_history": "Besökshistorik",
+    "risk_factors": "Riskfaktorer",
+    "time_windows": "Tidsfönster",
+    "morning_window": "Morgon",
+    "evening_window": "Kväll",
+    "preferences": "Preferenser",
+    "medical_constraints": "Medicinska begränsningar",
+    "personal_constraints": "Personliga begränsningar",
+    "minutes": "minuter",
+    "view_profile": "Visa profil"
   },
   "UserTypes": {
     "system_users": {
@@ -661,15 +562,14 @@
     "page_description": "Hantera dina inställningar och preferenser",
     "title": "Inställningar",
     "description": "Hantera dina inställningar och preferenser",
-
     "tabs": {
       "organization": "Organisation",
-      "users": "Användare",
+      "users": "Personal",
+      "scheduling": "Schemaläggning",
       "notifications": "Notifieringar",
       "security": "Säkerhet",
       "localization": "Lokalisering"
     },
-
     "organization": {
       "title": "Organisationsinställningar",
       "description": "Hantera din organisations information och inställningar",
@@ -689,7 +589,6 @@
       },
       "save": "Spara ändringar"
     },
-
     "users": {
       "title": "Användarhantering",
       "description": "Hantera användare och behörigheter",
@@ -706,7 +605,6 @@
         "edit": "Redigera"
       }
     },
-
     "notifications": {
       "title": "Notifieringsinställningar",
       "description": "Hantera hur och när du får notifieringar",
@@ -734,7 +632,6 @@
       },
       "save": "Spara ändringar"
     },
-
     "security": {
       "title": "Säkerhetsinställningar",
       "description": "Hantera säkerhet och autentisering",
@@ -764,7 +661,6 @@
       },
       "save": "Spara ändringar"
     },
-
     "localization": {
       "title": "Lokaliseringsinställningar",
       "description": "Hantera språk, tidszon och format",
@@ -808,7 +704,6 @@
       },
       "save": "Spara ändringar"
     },
-
     "roles": {
       "title": "Rollhantering",
       "description": "Hantera användarroller och behörigheter",
@@ -830,6 +725,38 @@
         "ops_manager": "Verksamhetschef",
         "ops_manager_description": "Verksamhetsstyrning och planering"
       }
+    },
+    "scheduling": {
+      "title": "Schemaläggning",
+      "description": "Hantera inställningar för schemaläggning och resursplanering",
+      "working_hours": {
+        "title": "Arbetstider",
+        "description": "Ställ in standardarbetstider och tillgänglighet",
+        "default_start": "Standard starttid",
+        "default_end": "Standard sluttid",
+        "allow_weekends": "Tillåt schemaläggning på helger"
+      },
+      "service_delivery": {
+        "title": "Tjänsteleverans",
+        "description": "Konfigurera tidsramar för besök och resor",
+        "min_duration": "Minsta besökstid (minuter)",
+        "max_duration": "Längsta besökstid (minuter)",
+        "travel_buffer": "Restidsbuffert (minuter)"
+      },
+      "qualifications": {
+        "title": "Kvalifikationer",
+        "description": "Hantera matchning av personal och kompetenskrav",
+        "strict_matching": "Strikt matchning av kompetenser",
+        "certification_warnings": "Visa varningar för utgående certifieringar"
+      },
+      "resources": {
+        "title": "Resurshantering",
+        "description": "Hantera fordon och transportbegränsningar",
+        "max_daily_distance": "Max daglig körsträcka (km)",
+        "max_continuous_driving": "Max kontinuerlig körtid (minuter)",
+        "optimize_routes": "Optimera rutter automatiskt"
+      },
+      "save": "Spara ändringar"
     }
   }
 }

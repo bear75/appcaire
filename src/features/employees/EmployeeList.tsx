@@ -1,5 +1,8 @@
+'use client';
+
 import { Mail, MoreHorizontal, Phone } from 'lucide-react';
 import { useTranslations } from '@/utils/translations';
+import Link from 'next/link';
 
 import { Avatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -45,49 +48,71 @@ export function EmployeeList() {
   const t = useTranslations('Employees');
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-xl border bg-white shadow-sm">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>{t('name')}</TableHead>
-            <TableHead>{t('contact')}</TableHead>
+          <TableRow className="hover:bg-transparent">
+            <TableHead className="w-[300px]">{t('name')}</TableHead>
+            <TableHead className="w-[300px]">{t('contact')}</TableHead>
             <TableHead>{t('role')}</TableHead>
             <TableHead>{t('status')}</TableHead>
             <TableHead className="w-[70px]"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {mockEmployees.map(employee => (
-            <TableRow key={employee.id}>
+          {mockEmployees.map((employee) => (
+            <TableRow
+              key={employee.id}
+              className="group transition-colors hover:bg-purple-50"
+            >
               <TableCell>
                 <div className="flex items-center gap-3">
-                  <Avatar>
+                  <Avatar className="border-2 border-purple-100">
                     <img src={employee.avatar} alt={employee.name} />
                   </Avatar>
                   <div>
-                    <div className="font-medium">{employee.name}</div>
+                    <div className="font-medium group-hover:text-purple-700">
+                      <Link
+                        href={`/dashboard/employees/${employee.id}`}
+                        className="hover:text-purple-600"
+                      >
+                        {employee.name}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </TableCell>
               <TableCell>
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2">
-                    <Mail className="size-4 text-muted-foreground" />
-                    <span className="text-sm">{employee.email}</span>
+                    <Mail className="size-4 text-purple-600" />
+                    <span className="text-sm text-muted-foreground">
+                      {employee.email}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Phone className="size-4 text-muted-foreground" />
-                    <span className="text-sm">{employee.phone}</span>
+                    <Phone className="size-4 text-purple-600" />
+                    <span className="text-sm text-muted-foreground">
+                      {employee.phone}
+                    </span>
                   </div>
                 </div>
               </TableCell>
               <TableCell>
-                <Badge variant="outline">{employee.role}</Badge>
+                <Badge
+                  variant="outline"
+                  className="border-purple-200 bg-purple-50 text-purple-700"
+                >
+                  {employee.role}
+                </Badge>
               </TableCell>
               <TableCell>
                 <Badge
-                  variant={
-                    employee.status === 'Active' ? 'default' : 'secondary'
+                  variant={employee.status === 'Active' ? 'default' : 'secondary'}
+                  className={
+                    employee.status === 'Active'
+                      ? 'bg-green-100 text-green-700 hover:bg-green-100'
+                      : 'bg-yellow-100 text-yellow-700 hover:bg-yellow-100'
                   }
                 >
                   {employee.status}
@@ -96,15 +121,25 @@ export function EmployeeList() {
               <TableCell>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="opacity-0 transition-opacity group-hover:opacity-100"
+                    >
                       <MoreHorizontal className="size-4" />
                       <span className="sr-only">{t('open_menu')}</span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>{t('edit')}</DropdownMenuItem>
-                    <DropdownMenuItem>{t('view_schedule')}</DropdownMenuItem>
-                    <DropdownMenuItem>{t('delete')}</DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer">
+                      {t('edit')}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer">
+                      {t('view_schedule')}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer text-red-600">
+                      {t('delete')}
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>

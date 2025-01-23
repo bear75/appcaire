@@ -11,29 +11,26 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useTranslations } from '@/utils/translations';
+import { t } from '@/utils/translations';
 
 export function StaffAnalysis() {
-  const t = useTranslations('Analytics');
-
-  // Mock data - replace with real data from your API
   const performanceData = {
     data: [
-      { name: t('staff.employees.anna_l'), tasks: 8, travel: 45 },
-      { name: t('staff.employees.erik_s'), tasks: 7, travel: 35 },
-      { name: t('staff.employees.maria_h'), tasks: 9, travel: 50 },
-      { name: t('staff.employees.johan_b'), tasks: 6, travel: 30 },
-      { name: t('staff.employees.lisa_p'), tasks: 8, travel: 40 },
+      { name: 'Anna Larsson', tasks: 8, travel: 45 },
+      { name: 'Erik Svensson', tasks: 7, travel: 35 },
+      { name: 'Maria Holm', tasks: 9, travel: 50 },
+      { name: 'Johan Berg', tasks: 6, travel: 30 },
+      { name: 'Lisa Pettersson', tasks: 8, travel: 40 },
     ],
     datasets: [
       {
         dataKey: 'tasks',
-        label: t('staff.tasksPerDay'),
+        label: t('Analytics.staff.tasksPerDay'),
         backgroundColor: '#7C3AED',
       },
       {
         dataKey: 'travel',
-        label: t('staff.travelTime'),
+        label: t('Analytics.staff.travelTime'),
         backgroundColor: '#3B82F6',
       },
     ],
@@ -41,53 +38,43 @@ export function StaffAnalysis() {
 
   const skillsData = {
     data: [
-      { name: t('certifications.medical'), value: 30 },
-      { name: t('staff.personalHygiene'), value: 25 },
-      { name: t('certifications.dementia'), value: 15 },
-      { name: t('certifications.firstAid'), value: 20 },
-      { name: t('staff.safeLifting'), value: 10 },
+      { name: t('Analytics.staff.personalHygiene'), value: 25 },
+      { name: t('Analytics.certifications.medical'), value: 30 },
+      { name: t('Analytics.certifications.dementia'), value: 15 },
+      { name: t('Analytics.staff.safeLifting'), value: 10 },
+      { name: t('Analytics.certifications.firstAid'), value: 20 },
     ],
     datasets: [
       {
         dataKey: 'value',
-        backgroundColor: [
-          '#7C3AED',
-          '#3B82F6',
-          '#22C55E',
-          '#EAB308',
-          '#94A3B8',
-        ],
+        backgroundColor: ['#7C3AED', '#3B82F6', '#22C55E', '#94A3B8', '#EAB308'],
       },
     ],
   };
 
   const certifications = [
     {
-      employee: t('staff.employees.anna_larsson'),
-      certification: t('certifications.medical'),
-      expiry: '2025-06-15',
+      employee: 'Anna Larsson',
+      certification: t('Analytics.certifications.medical'),
       status: 'valid',
     },
     {
-      employee: t('staff.employees.erik_svensson'),
-      certification: t('certifications.firstAid'),
-      expiry: '2024-12-01',
+      employee: 'Erik Svensson',
+      certification: t('Analytics.certifications.firstAid'),
       status: 'expiring',
     },
     {
-      employee: t('staff.employees.maria_holm'),
-      certification: t('certifications.dementia'),
-      expiry: '2025-03-20',
+      employee: 'Maria Holm',
+      certification: t('Analytics.certifications.dementia'),
       status: 'valid',
     },
   ];
 
   return (
     <div className="space-y-6">
-      {/* Employee Performance */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('staff.performanceTitle')}</CardTitle>
+          <CardTitle>{t('Analytics.staff.performanceTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
           <BarChart data={performanceData} height={300} />
@@ -95,51 +82,45 @@ export function StaffAnalysis() {
       </Card>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Skills Distribution */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('staff.skillsTitle')}</CardTitle>
+            <CardTitle>{t('Analytics.staff.skillsTitle')}</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[300px]">
+            <div className="flex justify-center">
               <DoughnutChart data={skillsData} height={300} />
             </div>
           </CardContent>
         </Card>
 
-        {/* Certification Tracking */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('staff.certificationsTitle')}</CardTitle>
+            <CardTitle>{t('Analytics.staff.certificationsTitle')}</CardTitle>
           </CardHeader>
           <CardContent>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>{t('table.employee')}</TableHead>
-                  <TableHead>{t('table.certification')}</TableHead>
-                  <TableHead>{t('table.expiry')}</TableHead>
-                  <TableHead>{t('table.status')}</TableHead>
+                  <TableHead>Personal</TableHead>
+                  <TableHead>Certifiering</TableHead>
+                  <TableHead>Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {certifications.map(cert => (
-                  <TableRow key={`cert-${cert.employee}-${cert.certification}`}>
+                  <TableRow key={`${cert.employee}-${cert.certification}`}>
                     <TableCell>{cert.employee}</TableCell>
                     <TableCell>{cert.certification}</TableCell>
-                    <TableCell>{cert.expiry}</TableCell>
                     <TableCell>
                       <Badge
-                        variant={
-                          cert.status === 'valid' ? 'default' : 'secondary'
-                        }
+                        variant={cert.status === 'valid' ? 'default' : 'secondary'}
                         className={
                           cert.status === 'valid'
                             ? 'bg-green-100 text-green-700'
                             : 'bg-yellow-100 text-yellow-700'
                         }
                       >
-                        {t(`status.${cert.status}`)}
+                        {cert.status === 'valid' ? 'Giltig' : 'Går snart ut'}
                       </Badge>
                     </TableCell>
                   </TableRow>

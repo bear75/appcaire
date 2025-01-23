@@ -11,22 +11,33 @@
      - Set up Tailwind CSS
      - Integrate shadcn/ui
      - Ensure responsive design
+     - Implement internal translation system with type-safe keys
+     - Set up Swedish language support with sv.json
 
-2. **RBAC & Authentication (Clerk + Supabase)**
+2. **Translation System & UI Components**
+   - **Tasks**:
+     - Implement type-safe translation utility
+     - Create interpolation support for dynamic values
+     - Set up translation key structure
+     - Define component-specific translation namespaces
+     - Ensure proper error handling for missing keys
+     - Document translation usage patterns
+
+3. **RBAC & Authentication (Clerk + Supabase)**
    - **Ref. PRD Sections**: 6.2 Authentication & Authorization
    - **Tasks**:
      - Integrate Clerk.dev for Super Admin, Admin, Member, Trial User
      - Set up Supabase for employees, clients, family members
      - Implement row-level security for org data
 
-3. **Database Schema (Drizzle ORM + Supabase)**
+4. **Database Schema (Drizzle ORM + Supabase)**
    - **Ref. PRD Sections**: 6.3 Database, 6.3.1 Schema Considerations
    - **Tasks**:
      - Define migrations for Organizations, Users, Employees, Clients, Schedules, etc.
      - Include trial status, GDPR compliance fields
      - Possibly add vehicles/shift templates if required
 
-4. **Core RBAC (Super Admin, Admin, Member)**
+5. **Core RBAC (Super Admin, Admin, Member)**
    - **Ref. PRD Sections**: 4.2 Caire Super Admin, 5.5 Navigation
    - **Tasks**:
      - Ensure Super Admin can switch orgs
@@ -42,12 +53,16 @@
      - Main links: Overview, Schedule, Employees, Clients, Analytics, Settings
      - Bottom section: Clerk org switching (Super Admin), member management
      - No top nav bar
+     - Implement translated navigation labels
+     - Add proper aria-labels for accessibility
 
 2. **Initial Pages (Placeholders)**
    - **Ref. PRD**: 5.5
    - **Tasks**:
-     - Create `<OverviewPage />`, `<SchedulePage />`, `<EmployeesPage />`, `<ClientsPage />`, `<AnalyticsPage />`, `<SettingsPage />`
-     - Simple placeholders for now
+     - Create base components with translation support
+     - Implement proper type-safe translation keys
+     - Set up component-specific translation namespaces
+     - Add loading states and error boundaries
 
 3. **Trial Environment Setup**
    - **Ref. PRD**: 5.7 Trial Environment
@@ -101,13 +116,18 @@
    - **Tasks**:
      - Implement `analyticsSchema`, `scheduleMetricSchema`
      - Store staff utilization, travel time, completion rates
+     - Add translation support for metrics and KPIs
+     - Implement interpolation for dynamic values
 
 2. **Dashboard UI**
    - **Ref. PRD**: 5.2.1 (Dashboards)
    - **Tasks**:
      - Main Overview page w/ KPI cards (utilization, travel time, efficiency)
      - Drill-down graphs (bar/line)
-     - Possibly a side-by-side comparison for manual vs. AI
+     - Side-by-side comparison for manual vs. AI
+     - Implement translated metrics and descriptions
+     - Add proper aria-labels for accessibility
+     - Support dynamic value interpolation in status messages
 
 3. **Reporting & Exports**
    - **Ref. PRD**: 5.2.2
@@ -172,7 +192,7 @@
 - **Ref. PRD**: 10.2 Advanced Analytics
 - **Tasks**:
   - Predictive scheduling, cost forecasts
-  - Scenario testing w/ “what-if” modeling
+  - Scenario testing w/ "what-if" modeling
   - Long-term data retention (6–12+ months)
   - Custom dashboards for large orgs
 

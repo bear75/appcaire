@@ -4,42 +4,40 @@ import { Alert, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart } from '@/components/ui/charts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useTranslations } from '@/utils/translations';
+import { t } from '@/utils/translations';
 
 export function ContinuityKPI() {
-  const t = useTranslations('Analytics');
-
-  // Mock data - replace with real data from your API
-  const continuityTrendData = {
+  const trendData = {
     data: [
-      { name: t('time.weeks.week1'), value: 3.5 },
-      { name: t('time.weeks.week2'), value: 4.2 },
-      { name: t('time.weeks.week3'), value: 3.8 },
-      { name: t('time.weeks.week4'), value: 4.5 },
+      { name: t('Analytics.time.weeks.week1'), value: 3.5 },
+      { name: t('Analytics.time.weeks.week2'), value: 4.1 },
+      { name: t('Analytics.time.weeks.week3'), value: 3.8 },
+      { name: t('Analytics.time.weeks.week4'), value: 4.2 },
     ],
-    datasets: [{
-      dataKey: 'value',
-      label: t('continuity.averageCaregiversPerClient'),
-      borderColor: '#7C3AED',
-    }],
+    datasets: [
+      {
+        dataKey: 'value',
+        label: t('Analytics.continuity.averageCaregiversPerClient'),
+        borderColor: '#7C3AED',
+        backgroundColor: 'rgba(124, 58, 237, 0.1)',
+      },
+    ],
   };
 
-  const clientWarnings = [
+  const warnings = [
     {
-      client: 'Maria Andersson',
-      caregivers: 12,
-      period: t('time.period.30days'),
-      priority: 'high',
+      client: 'Anna Nilsson',
+      caregivers: 8,
+      period: t('Analytics.time.period.30days'),
     },
     {
-      client: 'Erik Johansson',
-      caregivers: 8,
-      period: t('time.period.30days'),
-      priority: 'medium',
+      client: 'Karl Lindgren',
+      caregivers: 7,
+      period: t('Analytics.time.period.30days'),
     },
   ];
 
-  const topContinuity = [
+  const topPerformers = [
     {
       client: 'Anna Nilsson',
       primaryCaregiver: 'Lisa Holm',
@@ -59,59 +57,53 @@ export function ContinuityKPI() {
 
   return (
     <div className="space-y-6">
-      {/* Trend Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('kpi.continuity.trends')}</CardTitle>
+          <CardTitle>{t('Analytics.continuity.trendTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-[300px] w-full">
-            <LineChart data={continuityTrendData} />
-          </div>
+          <LineChart data={trendData} height={300} />
         </CardContent>
       </Card>
 
-      {/* Warnings */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('kpi.continuity.warnings')}</CardTitle>
+          <CardTitle>{t('Analytics.continuity.warningTitle')}</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {clientWarnings.map(warning => (
-              <Alert
-                key={warning.client}
-                variant={warning.priority === 'high' ? 'destructive' : 'default'}
-              >
-                <AlertTitle>
-                  {`${warning.client} har haft ${warning.caregivers} olika vårdgivare under ${warning.period}`}
-                </AlertTitle>
-              </Alert>
-            ))}
-          </div>
+        <CardContent className="space-y-4">
+          {warnings.map((warning, index) => (
+            <Alert key={index} variant="warning" className="bg-yellow-50 text-yellow-900">
+              <AlertTitle>
+                {t('Analytics.continuity.warningDesc', {
+                  client: warning.client,
+                  caregivers: warning.caregivers,
+                  period: warning.period,
+                })}
+              </AlertTitle>
+            </Alert>
+          ))}
         </CardContent>
       </Card>
 
-      {/* Top Performance */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('kpi.continuity.top_performance')}</CardTitle>
+          <CardTitle>{t('Analytics.continuity.topPerformanceTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>{t('table.client')}</TableHead>
-                <TableHead>{t('table.primaryCaregiver')}</TableHead>
-                <TableHead>{t('table.consistency')}</TableHead>
+                <TableHead>{t('Analytics.table.client')}</TableHead>
+                <TableHead>{t('Analytics.table.primaryCaregiver')}</TableHead>
+                <TableHead>{t('Analytics.table.consistency')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {topContinuity.map(item => (
-                <TableRow key={item.client}>
-                  <TableCell>{item.client}</TableCell>
-                  <TableCell>{item.primaryCaregiver}</TableCell>
-                  <TableCell>{item.consistency}</TableCell>
+              {topPerformers.map((performer, index) => (
+                <TableRow key={index}>
+                  <TableCell>{performer.client}</TableCell>
+                  <TableCell>{performer.primaryCaregiver}</TableCell>
+                  <TableCell>{performer.consistency}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

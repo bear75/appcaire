@@ -11,59 +11,40 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useTranslations } from '@/utils/translations';
+import { t } from '@/utils/translations';
 
 export function ClientInsights() {
-  const t = useTranslations('Analytics');
-
-  // Mock data - replace with real data from your API
-  const completionRateData = {
+  const completionData = {
     data: [
-      { name: t('time.weekdays.monday'), value: 95 },
-      { name: t('time.weekdays.tuesday'), value: 98 },
-      { name: t('time.weekdays.wednesday'), value: 92 },
-      { name: t('time.weekdays.thursday'), value: 96 },
-      { name: t('time.weekdays.friday'), value: 94 },
+      { name: t('Analytics.time.weekdays.monday'), value: 95 },
+      { name: t('Analytics.time.weekdays.tuesday'), value: 98 },
+      { name: t('Analytics.time.weekdays.wednesday'), value: 92 },
+      { name: t('Analytics.time.weekdays.thursday'), value: 95 },
+      { name: t('Analytics.time.weekdays.friday'), value: 90 },
     ],
     datasets: [
       {
         dataKey: 'value',
-        label: t('kpi.client.completion_rate'),
+        label: t('Analytics.clients.completionRate'),
         backgroundColor: '#7C3AED',
-      },
-    ],
-  };
-
-  const timeWindowData = {
-    data: [
-      { name: t('time.weeks.week1'), value: 88 },
-      { name: t('time.weeks.week2'), value: 92 },
-      { name: t('time.weeks.week3'), value: 90 },
-      { name: t('time.weeks.week4'), value: 94 },
-    ],
-    datasets: [
-      {
-        dataKey: 'value',
-        label: t('kpi.client.time_adherence'),
-        borderColor: '#22C55E',
       },
     ],
   };
 
   const specialNeeds = [
     {
-      need: t('clients.needs.medical'),
-      fulfillment: '95%',
+      need: 'Särskilda behov',
+      fulfilled: '95%',
       status: 'success',
     },
     {
-      need: t('clients.needs.language'),
-      fulfillment: '85%',
+      need: 'Tidsfönster följsamhet',
+      fulfilled: '85%',
       status: 'warning',
     },
     {
-      need: t('clients.needs.mobility'),
-      fulfillment: '98%',
+      need: 'Missade besök',
+      fulfilled: '98%',
       status: 'success',
     },
   ];
@@ -73,71 +54,49 @@ export function ClientInsights() {
       client: 'Karl Svensson',
       date: '2024-01-18',
       time: '09:00',
-      reason: t('clients.reasons.staffIllness'),
-    },
-    {
-      client: 'Eva Berg',
-      date: '2024-01-17',
-      time: '14:30',
-      reason: t('clients.reasons.clientUnavailable'),
+      reason: t('Analytics.clients.reasons.staffIllness'),
     },
   ];
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Visit Completion Rates */}
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('kpi.client.completion_rate')}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <BarChart data={completionRateData} height={300} />
-          </CardContent>
-        </Card>
-
-        {/* Time Window Adherence */}
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('kpi.client.time_adherence')}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <LineChart data={timeWindowData} height={300} />
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Special Needs Fulfillment */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('kpi.client.special_needs')}</CardTitle>
+          <CardTitle>{t('Analytics.clients.completionRate')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <BarChart data={completionData} height={300} />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>{t('Analytics.clients.specialNeedsTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>{t('table.need')}</TableHead>
-                <TableHead>{t('table.fulfillment')}</TableHead>
-                <TableHead>{t('table.status')}</TableHead>
+                <TableHead>{t('Analytics.table.need')}</TableHead>
+                <TableHead>{t('Analytics.table.fulfillment')}</TableHead>
+                <TableHead>{t('Analytics.table.status')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {specialNeeds.map(need => (
-                <TableRow key={`need-${need.need}`}>
+              {specialNeeds.map((need, index) => (
+                <TableRow key={index}>
                   <TableCell>{need.need}</TableCell>
-                  <TableCell>{need.fulfillment}</TableCell>
+                  <TableCell>{need.fulfilled}</TableCell>
                   <TableCell>
                     <Badge
-                      variant={
-                        need.status === 'success' ? 'default' : 'secondary'
-                      }
+                      variant={need.status === 'success' ? 'default' : 'secondary'}
                       className={
                         need.status === 'success'
                           ? 'bg-green-100 text-green-700'
                           : 'bg-yellow-100 text-yellow-700'
                       }
                     >
-                      {t(`status.${need.status}`)}
+                      {t(`Analytics.status.${need.status}`)}
                     </Badge>
                   </TableCell>
                 </TableRow>
@@ -147,32 +106,27 @@ export function ClientInsights() {
         </CardContent>
       </Card>
 
-      {/* Missed Visits */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('kpi.client.missed_visits')}</CardTitle>
+          <CardTitle>{t('Analytics.clients.missedVisitsTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>{t('table.client')}</TableHead>
-                <TableHead>{t('table.date')}</TableHead>
-                <TableHead>{t('table.time')}</TableHead>
-                <TableHead>{t('table.reason')}</TableHead>
+                <TableHead>{t('Analytics.table.client')}</TableHead>
+                <TableHead>{t('Analytics.table.date')}</TableHead>
+                <TableHead>{t('Analytics.table.time')}</TableHead>
+                <TableHead>{t('Analytics.table.reason')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {missedVisits.map(visit => (
-                <TableRow
-                  key={`visit-${visit.client}-${visit.date}-${visit.time}`}
-                >
+              {missedVisits.map((visit, index) => (
+                <TableRow key={index}>
                   <TableCell>{visit.client}</TableCell>
                   <TableCell>{visit.date}</TableCell>
                   <TableCell>{visit.time}</TableCell>
-                  <TableCell>
-                    <span className="text-red-600">{visit.reason}</span>
-                  </TableCell>
+                  <TableCell>{visit.reason}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
