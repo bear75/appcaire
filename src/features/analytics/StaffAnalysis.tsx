@@ -1,7 +1,8 @@
 'use client';
 
+import { Award, BarChart2, PieChart } from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, DoughnutChart } from '@/components/ui/charts';
 import {
   Table,
@@ -11,7 +12,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { cn } from '@/lib/utils';
 import { t } from '@/utils/translations';
+
+const CARD_STYLES = {
+  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
+  large: 'hover:scale-[1.01]',
+};
 
 export function StaffAnalysis() {
   const performanceData = {
@@ -72,32 +79,41 @@ export function StaffAnalysis() {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('Analytics.staff.performanceTitle')}</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+        <div className="p-6">
+          <div className="flex items-center gap-2">
+            <BarChart2 className="size-5 text-purple-500" />
+            <h3 className="text-lg font-semibold">{t('Analytics.staff.performanceTitle')}</h3>
+          </div>
+        </div>
+        <div className="p-6 pt-2">
           <BarChart data={performanceData} height={300} />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('Analytics.staff.skillsTitle')}</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+          <div className="p-6">
+            <div className="flex items-center gap-2">
+              <PieChart className="size-5 text-blue-500" />
+              <h3 className="text-lg font-semibold">{t('Analytics.staff.skillsTitle')}</h3>
+            </div>
+          </div>
+          <div className="p-6 pt-2">
             <div className="flex justify-center">
               <DoughnutChart data={skillsData} height={300} />
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('Analytics.staff.certificationsTitle')}</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+          <div className="p-6">
+            <div className="flex items-center gap-2">
+              <Award className="size-5 text-green-500" />
+              <h3 className="text-lg font-semibold">{t('Analytics.staff.certificationsTitle')}</h3>
+            </div>
+          </div>
+          <div className="p-6 pt-2">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -127,8 +143,8 @@ export function StaffAnalysis() {
                 ))}
               </TableBody>
             </Table>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

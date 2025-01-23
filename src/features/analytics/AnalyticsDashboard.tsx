@@ -2,9 +2,15 @@
 
 import { CheckCircle, Clock, Users } from 'lucide-react';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, DoughnutChart } from '@/components/ui/charts';
+import { cn } from '@/lib/utils';
 import { t } from '@/utils/translations';
+
+const CARD_STYLES = {
+  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
+  small: 'hover:scale-[1.02]',
+  large: 'hover:scale-[1.01]',
+};
 
 export function AnalyticsDashboard() {
   const kpiData = [
@@ -85,55 +91,55 @@ export function AnalyticsDashboard() {
     <div className="space-y-8">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {kpiData.map((kpi, index) => (
-          <Card key={index}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+          <div key={index} className={cn(CARD_STYLES.base, CARD_STYLES.small)}>
+            <div className="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
+              <h3 className="text-sm font-medium">
                 {kpi.title}
-              </CardTitle>
+              </h3>
               {kpi.icon === 'users' && <Users className="size-4 text-muted-foreground" />}
               {kpi.icon === 'clock' && <Clock className="size-4 text-muted-foreground" />}
               {kpi.icon === 'check-circle' && <CheckCircle className="size-4 text-muted-foreground" />}
-            </CardHeader>
-            <CardContent>
+            </div>
+            <div className="p-6 pt-2">
               <div className="text-2xl font-bold">{kpi.value}</div>
               <p className="text-xs text-muted-foreground">
                 {kpi.description}
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('Analytics.schedule.comparisonTitle')}</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+          <div className="p-6">
+            <h3 className="text-lg font-semibold">{t('Analytics.schedule.comparisonTitle')}</h3>
+          </div>
+          <div className="p-6 pt-2">
             <BarChart data={comparisonData} height={300} />
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('Analytics.schedule.travelTimeTitle')}</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+          <div className="p-6">
+            <h3 className="text-lg font-semibold">{t('Analytics.schedule.travelTimeTitle')}</h3>
+          </div>
+          <div className="p-6 pt-2">
             <BarChart data={travelTimeData} height={300} />
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('Analytics.staff.skillsTitle')}</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+        <div className="p-6">
+          <h3 className="text-lg font-semibold">{t('Analytics.staff.skillsTitle')}</h3>
+        </div>
+        <div className="p-6 pt-2">
           <div className="flex justify-center">
             <DoughnutChart data={skillsData} height={300} />
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

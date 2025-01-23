@@ -2,6 +2,12 @@ import { ArrowDownIcon, ArrowUpIcon } from '@radix-ui/react-icons';
 import * as React from 'react';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+
+const CARD_STYLES = {
+  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
+  large: 'hover:scale-[1.01]',
+};
 
 type KPICardProps = {
   title: string;
@@ -22,16 +28,16 @@ export const KPICard = ({
   const TrendIcon = isPositive ? ArrowUpIcon : ArrowDownIcon;
 
   return (
-    <Card className={className}>
+    <Card className={cn(CARD_STYLES.base, CARD_STYLES.large, 'bg-gradient-to-br from-purple-50 to-purple-100', className)}>
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <CardTitle className="text-sm font-medium text-purple-900">
           {title}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <p className="text-2xl font-bold">{value}</p>
+            <p className="text-2xl font-bold text-purple-900">{value}</p>
             <div className="flex items-center gap-2">
               <span
                 className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
@@ -44,7 +50,7 @@ export const KPICard = ({
                 {trend}
               </span>
               {description && (
-                <CardDescription className="text-xs">
+                <CardDescription className="text-xs text-purple-600">
                   {description}
                 </CardDescription>
               )}

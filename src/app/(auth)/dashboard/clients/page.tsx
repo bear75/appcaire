@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from '@/utils/translations';
 
+import { PageContainer } from '@/components/shared';
 import { ClientHeader } from '@/features/clients/ClientHeader';
 import { ClientDirectory } from '@/features/clients/ClientDirectory';
 
@@ -15,9 +16,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function ClientsPage() {
   return (
-    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+    <PageContainer>
       <ClientHeader />
       <ClientDirectory />
-    </div>
+    </PageContainer>
   );
 }

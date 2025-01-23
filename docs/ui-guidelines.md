@@ -28,10 +28,50 @@
 
 ## Layout
 
+### Shared Components
+
+#### Page Layout Components
+
+To maintain consistency across all pages, use these shared layout components:
+
+##### PageContainer
+```tsx
+import { PageContainer } from '@/components/shared';
+
+// Provides consistent padding and background
+<PageContainer>
+  {/* Page content */}
+</PageContainer>
+```
+
+Properties:
+- Base padding: `p-8 pt-6`
+- Background: `bg-slate-50`
+- Spacing between sections: `space-y-8`
+- Flex layout: `flex-1`
+
+##### PageHeader
+```tsx
+import { PageHeader } from '@/components/shared';
+
+<PageHeader
+  title="Page Title"
+  description="Optional page description"
+>
+  {/* Optional right-side content */}
+</PageHeader>
+```
+
+Properties:
+- Title: `text-2xl font-semibold text-slate-900`
+- Description: `text-sm text-slate-600`
+- Layout: Flexbox with space between title and optional content
+
 ### Navigation
 
 ### Navbar
 
+- only visible for users not logged in
 - Single navigation component (`src/templates/Navbar.tsx`)
 - Consistent across all pages
 - Contains:
@@ -48,6 +88,9 @@
 
 ### Main Navigation Items
 
+### Sidebar Navigation
+
+- only visible for users logged in
 - Dashboard (Översikt)
 - Schedule (Schema)
 - Employees (Personal)
@@ -65,6 +108,75 @@
   - Root variables for theming
   - Dark mode selectors
   - Global resets and defaults
+
+### Component Styling
+
+#### Shared Component Constants
+
+Use these predefined styles for consistent component styling:
+
+```tsx
+const CARD_STYLES = {
+  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
+  large: 'hover:scale-[1.01]',
+};
+
+const ICON_STYLES = 'size-4 text-purple-600';
+```
+
+#### Form Elements
+
+##### Inputs
+```tsx
+<Input className="bg-white border-slate-200" />
+```
+
+##### Select
+```tsx
+<SelectTrigger className="bg-white border-slate-200">
+  <SelectValue />
+</SelectTrigger>
+```
+
+##### Switch
+```tsx
+<Switch className="data-[state=checked]:bg-purple-600" />
+```
+
+#### Buttons
+
+Primary:
+```tsx
+<Button className="bg-purple-600 hover:bg-purple-700 text-white shadow-sm hover:shadow-md">
+  Button Text
+</Button>
+```
+
+Ghost:
+```tsx
+<Button 
+  variant="ghost"
+  className="text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+>
+  Button Text
+</Button>
+```
+
+#### Badges
+
+Default:
+```tsx
+<Badge className="bg-slate-100 text-slate-700 hover:bg-slate-200">
+  Badge Text
+</Badge>
+```
+
+Status:
+```tsx
+<Badge className="bg-green-50 text-green-700 hover:bg-green-100 border-green-200/50">
+  Status
+</Badge>
+```
 
 ### Component Styling
 
@@ -488,3 +600,371 @@ const tableHeaders = {
 - Status badges with translated states
 - Pagination text translated
 - Empty state messages localized
+
+## Page Structure & Layout
+
+### Standard Page Layout
+```typescript
+// src/components/layout/PageLayout.tsx
+type PageLayoutProps = {
+  title: string; // Page title
+  description?: string; // Optional description
+  actions?: ReactNode; // Optional action buttons
+  children: ReactNode; // Page content
+};
+```
+
+Every page should follow this structure:
+1. PageHeader (consistent spacing and styling)
+2. Content sections (standardized gaps)
+3. Optional footer
+
+### Spacing System
+- Page padding: p-6 (desktop), p-4 (mobile)
+- Section gaps: space-y-6
+- Card gaps: gap-4
+- Internal padding: p-4 (cards), p-6 (sections)
+
+### Header Pattern
+```tsx
+<div className="mb-8">
+  <h1 className="text-2xl font-semibold text-slate-900">{title}</h1>
+  {description && (
+    <p className="mt-2 text-sm text-slate-600">{description}</p>
+  )}
+  {actions && (
+    <div className="mt-4 flex items-center gap-3">{actions}</div>
+  )}
+</div>;
+```
+
+## Component Styling
+
+### Cards
+- Base styling:
+  ```tsx
+  <Card className="overflow-hidden bg-white hover:shadow-lg transition-all duration-200 hover:scale-[1.02] hover:-translate-y-1">
+  ```
+- Header:
+  ```tsx
+  <CardHeader className="bg-slate-50 border-b border-slate-100">
+  ```
+- Content:
+  ```tsx
+  <CardContent className="p-6">
+  ```
+
+### Status Badges
+```tsx
+const STATUS_STYLES = {
+  success: 'bg-green-50 text-green-700 border-green-100',
+  warning: 'bg-yellow-50 text-yellow-700 border-yellow-100',
+  error: 'bg-red-50 text-red-700 border-red-100',
+  info: 'bg-blue-50 text-blue-700 border-blue-100'
+};
+```
+
+### Interactive Elements
+
+#### Buttons
+- Primary:
+  ```tsx
+  <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+  ```
+- Secondary:
+  ```tsx
+  <Button variant="outline" className="border-slate-200 hover:bg-slate-50">
+  ```
+- Ghost:
+  ```tsx
+  <Button variant="ghost" className="text-slate-600 hover:text-slate-900">
+  ```
+
+#### Links
+```tsx
+<Link className="text-purple-600 hover:text-purple-700 underline-offset-4 hover:underline">
+```
+
+### Data Display
+
+#### Tables
+```tsx
+<Table>
+  <TableHeader className="bg-slate-50">
+    <TableRow className="hover:bg-slate-100">
+      <TableHead className="font-medium text-slate-600">
+  // ... content
+```
+
+#### Charts
+- Container styling:
+  ```tsx
+  <div className="rounded-xl border border-slate-200 bg-white p-6 hover:shadow-lg transition-all duration-200">
+  ```
+- Chart colors:
+  ```typescript
+  const CHART_COLORS = {
+    primary: '#7C3AED', // Purple
+    secondary: '#3B82F6', // Blue
+    success: '#22C55E', // Green
+    warning: '#EAB308', // Yellow
+    error: '#EF4444' // Red
+  };
+  ```
+
+## Section Patterns
+
+### Metric Cards Grid
+```tsx
+<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+  {metrics.map(metric => (
+    <Card className="transition-all duration-200 hover:shadow-lg">
+      <CardHeader className="flex items-center justify-between">
+        <CardTitle>{metric.title}</CardTitle>
+        {metric.icon}
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">{metric.value}</div>
+        <p className="text-sm text-slate-600">{metric.description}</p>
+      </CardContent>
+    </Card>
+  ))}
+</div>;
+```
+
+### Data Section
+```tsx
+<section className="space-y-6">
+  <div className="flex items-center justify-between">
+    <h2 className="text-xl font-semibold text-slate-900">
+      {sectionTitle}
+    </h2>
+    <div className="flex items-center gap-3">
+      {actions}
+    </div>
+  </div>
+  <div className="rounded-xl border border-slate-200 bg-white">
+    {children}
+  </div>
+</section>;
+```
+
+## Theme Configuration
+
+### Colors
+```typescript
+const colors = {
+  primary: {
+    50: '#F5F3FF', // Light purple
+    100: '#EDE9FE',
+    500: '#8B5CF6',
+    600: '#7C3AED', // Main purple
+    700: '#6D28D9', // Dark purple
+  },
+  slate: {
+    50: '#F8FAFC',
+    100: '#F1F5F9',
+    200: '#E2E8F0',
+    600: '#475569',
+    900: '#0F172A',
+  }
+};
+```
+
+### Shadows
+```typescript
+const shadows = {
+  sm: 'shadow-sm',
+  DEFAULT: 'shadow',
+  md: 'shadow-md',
+  lg: 'shadow-lg',
+  xl: 'shadow-xl',
+};
+```
+
+### Animation
+```typescript
+const animation = {
+  DEFAULT: 'transition-all duration-200',
+  slow: 'transition-all duration-300',
+  fast: 'transition-all duration-150',
+};
+```
+
+## Implementation Guide
+
+1. Create base layout components:
+   ```
+   src/components/layout/
+   ├── PageLayout.tsx
+   ├── PageHeader.tsx
+   ├── SectionHeader.tsx
+   └── ContentSection.tsx
+   ```
+
+2. Use consistent class patterns:
+   ```typescript
+   const COMMON_CLASSES = {
+     card: 'rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-200',
+     header: 'text-2xl font-semibold text-slate-900',
+     description: 'text-sm text-slate-600',
+     section: 'space-y-6',
+   };
+   ```
+
+3. Implement shared hover effects:
+   ```typescript
+   const HOVER_EFFECTS = {
+     card: 'hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1',
+     button: 'hover:shadow-md hover:scale-[1.02]',
+     link: 'hover:text-purple-700 hover:underline',
+   };
+   ```
+
+4. Use consistent spacing:
+   ```typescript
+   const SPACING = {
+     page: 'p-6',
+     section: 'space-y-6',
+     card: 'p-4',
+     header: 'mb-8',
+   };
+   ```
+
+This system ensures:
+- Consistent visual hierarchy
+- Predictable spacing
+- Unified interactive states
+- Maintainable theme updates
+- Responsive behavior
+- Accessible components
+
+## Common Component Patterns
+
+### Card Base Styles
+```typescript
+const CARD_STYLES = {
+  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
+  small: 'hover:scale-[1.02]',
+  large: 'hover:scale-[1.01]',
+};
+```
+
+### Layout Patterns
+
+#### Grid Layouts
+- KPI Cards: `grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3`
+- Chart Grid: `grid gap-4 md:grid-cols-2`
+- Full Width: `w-full`
+
+#### Spacing
+- Page Container: `space-y-8`
+- Section Spacing: `space-y-6`
+- Card Padding: `p-6`
+- Card Content Split: `pb-2` for header, `pt-2` for content
+
+### Card Components
+
+#### KPI Cards
+```tsx
+<div className={cn(CARD_STYLES.base, CARD_STYLES.small)}>
+  <div className="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
+    <h3 className="text-sm font-medium">{title}</h3>
+    <Icon className="size-4 text-muted-foreground" />
+  </div>
+  <div className="p-6 pt-2">
+    <div className="text-2xl font-bold">{value}</div>
+    <p className="text-xs text-muted-foreground">{description}</p>
+  </div>
+</div>;
+```
+
+#### Chart Cards
+```tsx
+<div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+  <div className="p-6">
+    <h3 className="text-lg font-semibold">{title}</h3>
+  </div>
+  <div className="p-6 pt-2">
+    <Chart data={chartData} height={300} />
+  </div>
+</div>;
+```
+
+### Typography Patterns
+
+#### Card Headers
+- KPI Cards: `text-sm font-medium`
+- Chart Cards: `text-lg font-semibold`
+- Section Headers: `text-xl font-semibold`
+
+#### Values and Metrics
+- KPI Values: `text-2xl font-bold`
+- Descriptions: `text-xs text-muted-foreground`
+- Chart Labels: `text-sm text-slate-600`
+
+### Icon Usage
+- KPI Cards: `size-4 text-muted-foreground`
+- Navigation: `size-5`
+- Buttons: `size-4`
+- Consistent set from Lucide icons
+
+### Chart Styling
+
+#### Bar Charts
+```typescript
+const chartConfig = {
+  data: Array<DataPoint>,
+  datasets: [
+    {
+      dataKey: string,
+      label: string,
+      backgroundColor: string, // Use theme colors
+    }
+  ]
+};
+```
+
+#### Color Scheme
+- Primary Data: `#7C3AED` (Purple)
+- Secondary Data: `#94A3B8` (Slate)
+- Success Data: `#22C55E` (Green)
+- Accent Colors: `#3B82F6` (Blue)
+
+### Interactive States
+
+#### Hover Effects
+- Small Cards: `hover:scale-[1.02]`
+- Large Cards: `hover:scale-[1.01]`
+- All Cards:
+  - `hover:shadow-xl`
+  - `hover:-translate-y-1`
+  - `hover:border-slate-200`
+
+#### Transitions
+```css
+transition-all duration-300 ease-out transform-gpu
+```
+
+### Responsive Design
+
+#### Breakpoints
+- Mobile: 1 column
+- Tablet: 2 columns (`md:grid-cols-2`)
+- Desktop: 3 columns for KPIs (`lg:grid-cols-3`)
+
+#### Chart Responsiveness
+- Height: 300px (consistent across breakpoints)
+- Width: 100% of container
+- Maintain aspect ratio
+
+### Best Practices
+
+1. Use consistent spacing with Tailwind's spacing scale
+2. Implement hover states for interactive elements
+3. Ensure smooth transitions for all interactive states
+4. Use semantic HTML structure
+5. Maintain consistent padding and margins
+6. Follow the established color scheme
+7. Use responsive design patterns
+8. Implement proper accessibility attributes

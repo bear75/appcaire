@@ -123,7 +123,7 @@ Caire aspires to become the **leading AI-powered scheduling platform** for home 
 
 ### 4.4 Domain Users (Managed via Internal Database — Not using Caire UI)
 
-#### Care Employees
+#### Caire Employees
 - View schedules  
 - Log visits and tasks  
 - Provide feedback on assignments  

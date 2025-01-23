@@ -3,101 +3,82 @@
 import { Card } from '@/components/ui/card';
 import { useTranslations } from '@/utils/translations';
 import { ArrowUp, Clock, Users, Car, Wand2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const CARD_STYLES = {
+  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
+  small: 'hover:scale-[1.02]',
+};
 
 export default function ScheduleMetrics() {
-  const t = useTranslations('Schedule.metrics');
+  const t = useTranslations('Schedule');
+
+  const metrics = [
+    {
+      title: t('metrics.ai_driven'),
+      value: '92%',
+      change: '+5.2%',
+      icon: <Wand2 className="size-4 text-purple-600" />,
+      increase: true,
+    },
+    {
+      title: t('metrics.total_hours'),
+      value: '156.5h',
+      change: '+2.1%',
+      icon: <Clock className="size-4 text-purple-600" />,
+      increase: true,
+    },
+    {
+      title: t('metrics.completion_rate'),
+      value: '98.2%',
+      change: '+1.2%',
+      icon: <Users className="size-4 text-purple-600" />,
+      increase: true,
+    },
+    {
+      title: t('metrics.staff_utilization'),
+      value: '87.5%',
+      change: '+3.4%',
+      icon: <Users className="size-4 text-purple-600" />,
+      increase: true,
+    },
+    {
+      title: t('metrics.travel_time'),
+      value: '22.3 min',
+      change: '-5.2%',
+      icon: <Car className="size-4 text-purple-600" />,
+      increase: false,
+    },
+  ];
 
   return (
-    <div className="grid grid-cols-5 gap-2 max-w-[1200px]">
-      <Card className="p-2.5 bg-white hover:bg-purple-50/50 transition-all hover:shadow-md">
-        <div className="flex items-center justify-between gap-2">
-          <div className="min-w-0">
-            <p className="text-xs font-medium text-gray-500 truncate">AI-Driven</p>
-            <div className="flex items-center gap-1.5">
-              <p className="text-base font-semibold text-purple-900">92%</p>
-              <div className="flex items-center gap-0.5">
-                <ArrowUp className="size-3 text-green-600" />
-                <p className="text-xs text-green-600">+5.2%</p>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      {metrics.map((metric, index) => (
+        <Card key={index} className={cn(CARD_STYLES.base, CARD_STYLES.small)}>
+          <div className="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
+            <h3 className="text-sm font-medium text-slate-600">
+              {metric.title}
+            </h3>
+            <div className="flex items-center justify-center size-8 rounded-full bg-purple-50">
+              {metric.icon}
+            </div>
+          </div>
+          <div className="p-6 pt-2">
+            <div className="flex items-center gap-2">
+              <div className="text-2xl font-bold text-slate-900">{metric.value}</div>
+              <div className="flex items-center gap-1">
+                <ArrowUp 
+                  className={cn(
+                    "size-4",
+                    metric.increase ? "text-green-600" : "text-green-600 rotate-180"
+                  )} 
+                />
+                <p className="text-sm text-green-600">{metric.change}</p>
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 flex-shrink-0">
-            <Wand2 className="size-3.5 text-purple-600" />
-          </div>
-        </div>
-      </Card>
-
-      <Card className="p-2.5 bg-white hover:bg-purple-50/50 transition-all hover:shadow-md">
-        <div className="flex items-center justify-between gap-2">
-          <div className="min-w-0">
-            <p className="text-xs font-medium text-gray-500 truncate">{t('total_hours')}</p>
-            <div className="flex items-center gap-1.5">
-              <p className="text-base font-semibold text-purple-900">156.5h</p>
-              <div className="flex items-center gap-0.5">
-                <ArrowUp className="size-3 text-green-600" />
-                <p className="text-xs text-green-600">+2.1%</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 flex-shrink-0">
-            <Clock className="size-3.5 text-purple-600" />
-          </div>
-        </div>
-      </Card>
-
-      <Card className="p-2.5 bg-white hover:bg-purple-50/50 transition-all hover:shadow-md">
-        <div className="flex items-center justify-between gap-2">
-          <div className="min-w-0">
-            <p className="text-xs font-medium text-gray-500 truncate">{t('completion_rate')}</p>
-            <div className="flex items-center gap-1.5">
-              <p className="text-base font-semibold text-purple-900">98.2%</p>
-              <div className="flex items-center gap-0.5">
-                <ArrowUp className="size-3 text-green-600" />
-                <p className="text-xs text-green-600">+1.2%</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 flex-shrink-0">
-            <Users className="size-3.5 text-purple-600" />
-          </div>
-        </div>
-      </Card>
-
-      <Card className="p-2.5 bg-white hover:bg-purple-50/50 transition-all hover:shadow-md">
-        <div className="flex items-center justify-between gap-2">
-          <div className="min-w-0">
-            <p className="text-xs font-medium text-gray-500 truncate">{t('staff_utilization')}</p>
-            <div className="flex items-center gap-1.5">
-              <p className="text-base font-semibold text-purple-900">87.5%</p>
-              <div className="flex items-center gap-0.5">
-                <ArrowUp className="size-3 text-green-600" />
-                <p className="text-xs text-green-600">+3.4%</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 flex-shrink-0">
-            <Users className="size-3.5 text-purple-600" />
-          </div>
-        </div>
-      </Card>
-
-      <Card className="p-2.5 bg-white hover:bg-purple-50/50 transition-all hover:shadow-md">
-        <div className="flex items-center justify-between gap-2">
-          <div className="min-w-0">
-            <p className="text-xs font-medium text-gray-500 truncate">{t('travel_time')}</p>
-            <div className="flex items-center gap-1.5">
-              <p className="text-base font-semibold text-purple-900">22.3 min</p>
-              <div className="flex items-center gap-0.5">
-                <ArrowUp className="size-3 text-green-600 rotate-180" />
-                <p className="text-xs text-green-600">-5.2%</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 flex-shrink-0">
-            <Car className="size-3.5 text-purple-600" />
-          </div>
-        </div>
-      </Card>
+        </Card>
+      ))}
     </div>
   );
 }

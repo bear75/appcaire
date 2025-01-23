@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { PageContainer } from '@/components/shared';
 import { SettingsHeader } from '@/features/settings/SettingsHeader';
 import { SettingsTabs } from '@/features/settings/SettingsTabs';
 import { getTranslations } from '@/utils/translations';
@@ -15,9 +16,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function SettingsPage() {
   return (
-    <main className="container mx-auto space-y-6 p-6">
+    <PageContainer>
       <SettingsHeader />
       <SettingsTabs />
-    </main>
+    </PageContainer>
   );
 }

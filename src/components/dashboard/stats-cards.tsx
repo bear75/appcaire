@@ -11,9 +11,13 @@ import {
   Users,
 } from 'lucide-react';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/libs/utils';
-import { useTranslations } from '@/utils/translations';
+import { cn } from '@/lib/utils';
+import { t } from '@/utils/translations';
+
+const CARD_STYLES = {
+  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
+  small: 'hover:scale-[1.03]',
+};
 
 type StatsCardProps = {
   title: string;
@@ -40,13 +44,14 @@ function StatsCard({ title, value, description, icon: Icon, change, efficiency }
   };
 
   return (
-    <Card className={cn(
-      'h-[100px]', // Make cards smaller
+    <div className={cn(
+      CARD_STYLES.base,
+      CARD_STYLES.small,
+      'h-[100px]',
       efficiency && getEfficiencyColor(efficiency),
-    )}
-    >
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 pt-2">
-        <CardTitle className="text-xs font-medium text-slate-600">{title}</CardTitle>
+    )}>
+      <div className="flex flex-row items-center justify-between space-y-0 pb-1 pt-2 px-4">
+        <h3 className="text-xs font-medium text-slate-600">{title}</h3>
         <Icon className={cn(
           'h-3 w-3',
           efficiency
@@ -60,8 +65,8 @@ function StatsCard({ title, value, description, icon: Icon, change, efficiency }
             : 'text-slate-400',
         )}
         />
-      </CardHeader>
-      <CardContent className="pb-2">
+      </div>
+      <div className="px-4 pb-2">
         <div className="text-lg font-bold text-slate-900">{value}</div>
         <div className="flex items-center text-[10px] text-slate-500">
           {change
@@ -90,65 +95,63 @@ function StatsCard({ title, value, description, icon: Icon, change, efficiency }
                 <span>{description}</span>
               )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
 export function StatsCards() {
-  const t = useTranslations('Dashboard');
-
   const stats = [
     {
-      title: t('stats.total_clients.title'),
+      title: t('Dashboard.stats.total_clients.title'),
       value: '342',
-      description: t('stats.total_clients.description'),
+      description: t('Dashboard.stats.total_clients.description'),
       icon: Users,
       change: { value: 2.5, trend: 'up' as const },
       efficiency: 72,
     },
     {
-      title: t('stats.total_employees.title'),
+      title: t('Dashboard.stats.total_employees.title'),
       value: '45',
-      description: t('stats.total_employees.description'),
+      description: t('Dashboard.stats.total_employees.description'),
       icon: Users,
       change: { value: 1.2, trend: 'up' as const },
       efficiency: 68,
     },
     {
-      title: t('stats.vehicles.title'),
+      title: t('Dashboard.stats.vehicles.title'),
       value: '12',
-      description: t('stats.vehicles.description'),
+      description: t('Dashboard.stats.vehicles.description'),
       icon: Car,
       efficiency: 75,
     },
     {
-      title: t('stats.scheduled_visits.title'),
+      title: t('Dashboard.stats.scheduled_visits.title'),
       value: '128',
-      description: t('stats.scheduled_visits.description'),
+      description: t('Dashboard.stats.scheduled_visits.description'),
       icon: Calendar,
       change: { value: 1.8, trend: 'up' as const },
       efficiency: 71,
     },
     {
-      title: t('stats.travel_time.title'),
+      title: t('Dashboard.stats.travel_time.title'),
       value: '45 min',
-      description: t('stats.travel_time.description'),
+      description: t('Dashboard.stats.travel_time.description'),
       icon: Clock,
       change: { value: 3.2, trend: 'down' as const },
       efficiency: 64,
     },
     {
-      title: t('stats.critical_alerts.title'),
+      title: t('Dashboard.stats.critical_alerts.title'),
       value: '3',
-      description: t('stats.critical_alerts.description'),
+      description: t('Dashboard.stats.critical_alerts.description'),
       icon: AlertTriangle,
       efficiency: 62,
     },
     {
-      title: t('stats.optimization.title'),
+      title: t('Dashboard.stats.optimization.title'),
       value: '68%',
-      description: t('stats.optimization.description'),
+      description: t('Dashboard.stats.optimization.description'),
       icon: Percent,
       change: { value: 4.5, trend: 'up' as const },
       efficiency: 68,

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { getTranslations } from '@/utils/translations';
 
+import { PageContainer } from '@/components/shared';
 import { AnalyticsContent } from '@/features/analytics/AnalyticsContent';
+import { getTranslations } from '@/utils/translations';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('Analytics');
@@ -13,5 +14,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function AnalyticsPage() {
-  return <AnalyticsContent />;
+  return (
+    <PageContainer>
+      <AnalyticsContent />
+    </PageContainer>
+  );
 }

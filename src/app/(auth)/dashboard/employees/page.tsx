@@ -1,18 +1,24 @@
 import { Metadata } from 'next';
 
+import { PageContainer } from '@/components/shared';
 import { EmployeeDirectory } from '@/features/employees/EmployeeDirectory';
 import { EmployeeHeader } from '@/features/employees/EmployeeHeader';
+import { getTranslations } from '@/utils/translations';
 
-export const metadata: Metadata = {
-  title: 'Personal | Caire',
-  description: 'Hantera personal och kompetenser',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('Employees');
+
+  return {
+    title: t('page_title'),
+    description: t('page_description'),
+  };
+}
 
 export default function EmployeesPage() {
   return (
-    <main className="flex min-h-screen flex-col gap-8 bg-slate-50 p-8">
+    <PageContainer>
       <EmployeeHeader />
       <EmployeeDirectory />
-    </main>
+    </PageContainer>
   );
 }

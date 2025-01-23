@@ -4,7 +4,14 @@ import { Alert, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart } from '@/components/ui/charts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { cn } from '@/lib/utils';
 import { t } from '@/utils/translations';
+import { LineChart as LineChartIcon, AlertTriangle, Trophy } from 'lucide-react';
+
+const CARD_STYLES = {
+  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
+  large: 'hover:scale-[1.01]',
+};
 
 export function ContinuityKPI() {
   const trendData = {
@@ -57,39 +64,50 @@ export function ContinuityKPI() {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('Analytics.continuity.trendTitle')}</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+        <div className="p-6">
+          <div className="flex items-center gap-2">
+            <LineChartIcon className="size-5 text-purple-500" />
+            <h3 className="text-lg font-semibold">{t('Analytics.continuity.trendTitle')}</h3>
+          </div>
+        </div>
+        <div className="p-6 pt-2">
           <LineChart data={trendData} height={300} />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('Analytics.continuity.warningTitle')}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {warnings.map((warning, index) => (
-            <Alert key={index} variant="warning" className="bg-yellow-50 text-yellow-900">
-              <AlertTitle>
-                {t('Analytics.continuity.warningDesc', {
-                  client: warning.client,
-                  caregivers: warning.caregivers,
-                  period: warning.period,
-                })}
-              </AlertTitle>
-            </Alert>
-          ))}
-        </CardContent>
-      </Card>
+      <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+        <div className="p-6">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="size-5 text-yellow-500" />
+            <h3 className="text-lg font-semibold">{t('Analytics.continuity.warningTitle')}</h3>
+          </div>
+        </div>
+        <div className="p-6 pt-2">
+          <div className="space-y-4">
+            {warnings.map((warning, index) => (
+              <Alert key={index} variant="warning" className="bg-yellow-50 text-yellow-900">
+                <AlertTitle>
+                  {t('Analytics.continuity.warningDesc', {
+                    client: warning.client,
+                    caregivers: warning.caregivers,
+                    period: warning.period,
+                  })}
+                </AlertTitle>
+              </Alert>
+            ))}
+          </div>
+        </div>
+      </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('Analytics.continuity.topPerformanceTitle')}</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+        <div className="p-6">
+          <div className="flex items-center gap-2">
+            <Trophy className="size-5 text-green-500" />
+            <h3 className="text-lg font-semibold">{t('Analytics.continuity.topPerformanceTitle')}</h3>
+          </div>
+        </div>
+        <div className="p-6 pt-2">
           <Table>
             <TableHeader>
               <TableRow>
@@ -108,8 +126,8 @@ export function ContinuityKPI() {
               ))}
             </TableBody>
           </Table>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

@@ -318,6 +318,7 @@
     "optimize": "Optimera schema",
     "optimize_schedule": "Optimera schema",
     "timeline": {
+      "title": "Tidslinje",
       "staff": "Personal",
       "time": "Tid",
       "no_visits": "Inga besök schemalagda"
@@ -360,6 +361,7 @@
       }
     },
     "grid": {
+      "title": "Schema",
       "employee": "Personal",
       "client": "Klient",
       "time": "Tid",
@@ -369,11 +371,13 @@
       "constraints": "Begränsningar"
     },
     "map": {
+      "title": "Karta",
       "routes": "Rutter",
       "total_time": "Total tid",
       "integration_placeholder": "Kartintegration kommer snart"
     },
     "metrics": {
+      "ai_driven": "AI-Optimering",
       "total_hours": "Totala Timmar",
       "active_employees": "Aktiv Personal",
       "travel_time": "Restid",
@@ -573,21 +577,15 @@
     "organization": {
       "title": "Organisationsinställningar",
       "description": "Hantera din organisations information och inställningar",
-      "fields": {
+      "details": {
+        "title": "Organisationsuppgifter",
+        "description": "Hantera din organisations information och inställningar",
         "name": "Organisationsnamn",
-        "org_number": "Organisationsnummer",
+        "number": "Organisationsnummer",
         "email": "E-post",
         "phone": "Telefon",
         "address": "Adress"
-      },
-      "placeholders": {
-        "name": "Ange organisationsnamn",
-        "org_number": "Ange organisationsnummer",
-        "email": "Ange e-postadress",
-        "phone": "Ange telefonnummer",
-        "address": "Ange adress"
-      },
-      "save": "Spara ändringar"
+      }
     },
     "users": {
       "title": "Användarhantering",
@@ -610,6 +608,7 @@
       "description": "Hantera hur och när du får notifieringar",
       "email": {
         "title": "E-postnotifieringar",
+        "description": "Få notifieringar när scheman ändras",
         "schedule_changes": "Schemaändringar",
         "schedule_changes_description": "Få notifieringar när scheman ändras",
         "new_assignments": "Nya uppdrag",
@@ -619,16 +618,19 @@
       },
       "sms": {
         "title": "SMS-notifieringar",
+        "description": "Få SMS vid akuta schemaändringar",
         "urgent_changes": "Akuta ändringar",
         "urgent_changes_description": "Få SMS vid akuta schemaändringar"
       },
       "frequency": {
         "title": "Notifieringsfrekvens",
+        "description": "Välj hur ofta du vill få notifieringar",
         "label": "Frekvens",
-        "placeholder": "Välj frekvens",
-        "realtime": "Realtid",
-        "daily": "Dagligen",
-        "weekly": "Veckovis"
+        "options": {
+          "daily": "Dagligen",
+          "weekly": "Veckovis",
+          "monthly": "Månadsvis"
+        }
       },
       "save": "Spara ändringar"
     },

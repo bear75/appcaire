@@ -1,21 +1,25 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { BarChart2, LineChart as LineChartIcon, ListChecks } from 'lucide-react';
 import { BarChart, LineChart } from '@/components/ui/charts';
 import { Progress } from '@/components/ui/progress';
-import { useTranslations } from '@/utils/translations';
+import { cn } from '@/lib/utils';
+import { t } from '@/utils/translations';
+
+const CARD_STYLES = {
+  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
+  large: 'hover:scale-[1.01]',
+};
 
 export function ScheduleOptimization() {
-  const t = useTranslations('Analytics');
-
   // Mock data - replace with real data from your API
   const comparisonData = {
     data: [
-      { name: t('time.weekdays.monday'), aiSchedule: 480, manualSchedule: 520 },
-      { name: t('time.weekdays.tuesday'), aiSchedule: 450, manualSchedule: 510 },
-      { name: t('time.weekdays.wednesday'), aiSchedule: 470, manualSchedule: 530 },
-      { name: t('time.weekdays.thursday'), aiSchedule: 460, manualSchedule: 515 },
-      { name: t('time.weekdays.friday'), aiSchedule: 475, manualSchedule: 525 },
+      { name: t('Analytics.time.weekdays.monday'), aiSchedule: 480, manualSchedule: 520 },
+      { name: t('Analytics.time.weekdays.tuesday'), aiSchedule: 450, manualSchedule: 510 },
+      { name: t('Analytics.time.weekdays.wednesday'), aiSchedule: 470, manualSchedule: 530 },
+      { name: t('Analytics.time.weekdays.thursday'), aiSchedule: 460, manualSchedule: 515 },
+      { name: t('Analytics.time.weekdays.friday'), aiSchedule: 475, manualSchedule: 525 },
     ],
     datasets: [
       {
@@ -33,65 +37,71 @@ export function ScheduleOptimization() {
 
   const travelTimeData = {
     data: [
-      { name: t('time.weeks.week1'), value: 120 },
-      { name: t('time.weeks.week2'), value: 100 },
-      { name: t('time.weeks.week3'), value: 85 },
-      { name: t('time.weeks.week4'), value: 75 },
+      { name: t('Analytics.time.weeks.week1'), value: 120 },
+      { name: t('Analytics.time.weeks.week2'), value: 100 },
+      { name: t('Analytics.time.weeks.week3'), value: 85 },
+      { name: t('Analytics.time.weeks.week4'), value: 75 },
     ],
     datasets: [{
       dataKey: 'value',
-      label: t('schedule.travelTime'),
+      label: t('Analytics.schedule.travelTime'),
       borderColor: '#22C55E',
     }],
   };
 
   const constraints = [
     {
-      type: t('constraints.hard'),
+      type: t('Analytics.constraints.hard'),
       satisfaction: 98,
-      description: t('constraints.hardDesc'),
+      description: t('Analytics.constraints.hardDesc'),
     },
     {
-      type: t('constraints.medium'),
+      type: t('Analytics.constraints.medium'),
       satisfaction: 85,
-      description: t('constraints.mediumDesc'),
+      description: t('Analytics.constraints.mediumDesc'),
     },
     {
-      type: t('constraints.soft'),
+      type: t('Analytics.constraints.soft'),
       satisfaction: 75,
-      description: t('constraints.softDesc'),
+      description: t('Analytics.constraints.softDesc'),
     },
   ];
 
   return (
     <div className="space-y-6">
-      {/* AI vs Manual Comparison */}
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('schedule.comparisonTitle')}</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+        <div className="p-6">
+          <div className="flex items-center gap-2">
+            <BarChart2 className="size-5 text-purple-500" />
+            <h3 className="text-lg font-semibold">{t('Analytics.schedule.comparisonTitle')}</h3>
+          </div>
+        </div>
+        <div className="p-6 pt-2">
           <BarChart data={comparisonData} height={300} />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Travel Time Reduction */}
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('schedule.travelTimeTitle')}</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+          <div className="p-6">
+            <div className="flex items-center gap-2">
+              <LineChartIcon className="size-5 text-green-500" />
+              <h3 className="text-lg font-semibold">{t('Analytics.schedule.travelTimeTitle')}</h3>
+            </div>
+          </div>
+          <div className="p-6 pt-2">
             <LineChart data={travelTimeData} height={300} />
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        {/* Constraint Satisfaction */}
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('schedule.constraintsTitle')}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
+        <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+          <div className="p-6">
+            <div className="flex items-center gap-2">
+              <ListChecks className="size-5 text-blue-500" />
+              <h3 className="text-lg font-semibold">{t('Analytics.schedule.constraintsTitle')}</h3>
+            </div>
+          </div>
+          <div className="p-6 pt-2 space-y-6">
             {constraints.map(constraint => (
               <div key={`constraint-${constraint.type}`} className="space-y-2">
                 <div className="flex justify-between">
@@ -106,8 +116,8 @@ export function ScheduleOptimization() {
                 </p>
               </div>
             ))}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
