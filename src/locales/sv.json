@@ -382,10 +382,19 @@
       "active_employees": "Aktiv Personal",
       "travel_time": "Restid",
       "completion_rate": "Slutföringsgrad",
-      "staff_utilization": "Personalutnyttjande"
+      "staff_utilization": "Personalutnyttjande",
+      "visits": "Antal besök",
+      "total_time": "Total tid",
+      "completed": "Slutförda",
+      "staff": "Personal"
     },
     "page_title": "Schema | Caire",
-    "page_description": "Hantera och optimera ditt hemtjänstschema"
+    "page_description": "Hantera och optimera ditt hemtjänstschema",
+    "tabs": {
+      "timeline": "Tidslinje",
+      "grid": "Schema",
+      "map": "Karta"
+    }
   },
   "Auth": {
     "sign_in": {

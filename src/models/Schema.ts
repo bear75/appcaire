@@ -106,11 +106,30 @@ export const scheduleSchema = pgTable(
   {
     id: uuid('id').primaryKey(),
     organizationId: uuid('organization_id').references(() => organizationSchema.id),
-    employeeId: uuid('employee_id').references(() => employeeSchema.id),
     clientId: uuid('client_id').references(() => clientSchema.id),
     startTime: timestamp('start_time', { mode: 'date' }).notNull(),
     endTime: timestamp('end_time', { mode: 'date' }).notNull(),
     status: text('status').$type<'scheduled' | 'completed' | 'canceled'>().default('scheduled'),
+    scheduleType: text('schedule_type').$type<'MANUAL' | 'IMPORTED' | 'OPTIMIZED' | 'PUBLISHED'>().default('MANUAL'),
+    eCareTaskId: text('ecare_task_id'), // Reference to original eCare task
+    timefoldScore: json('timefold_score'), // Store optimization score
+    optimizationMetrics: json('optimization_metrics'), // Store detailed metrics
+    createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { mode: 'date' })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+);
+
+// Schedule Assignments table
+export const scheduleAssignmentSchema = pgTable(
+  'schedule_assignments',
+  {
+    id: uuid('id').primaryKey(),
+    scheduleId: uuid('schedule_id').references(() => scheduleSchema.id),
+    employeeId: uuid('employee_id').references(() => employeeSchema.id),
+    assignmentType: text('assignment_type').$type<'primary' | 'assistant'>().default('primary'),
     createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
     updatedAt: timestamp('updated_at', { mode: 'date' })
       .defaultNow()
@@ -244,6 +263,9 @@ export const visitRequirementSchema = pgTable(
     frequency: json('frequency'),
     priority: integer('priority').default(1),
     timeWindows: json('time_windows'),
+    eCareVisitType: text('ecare_visit_type'), // Original eCare visit type
+    eCareRequirements: json('ecare_requirements'), // Additional eCare specific requirements
+    requiredEmployeeCount: integer('required_employee_count').default(1), // For multi-employee visits
     createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
     updatedAt: timestamp('updated_at', { mode: 'date' })
       .defaultNow()
@@ -281,6 +303,42 @@ export const scheduleMetricSchema = pgTable(
     metricType: text('metric_type').notNull(),
     value: numeric('value', { precision: 10, scale: 2 }).notNull(),
     constraintImpacts: json('constraint_impacts'),
+    createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { mode: 'date' })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+);
+
+// eCare Integration table
+export const eCareIntegrationSchema = pgTable(
+  'ecare_integration',
+  {
+    id: uuid('id').primaryKey(),
+    organizationId: uuid('organization_id').references(() => organizationSchema.id),
+    importSource: text('import_source').$type<'JSON_UPLOAD' | 'DIRECT_API'>().notNull(),
+    importedAt: timestamp('imported_at', { mode: 'date' }).defaultNow().notNull(),
+    rawData: json('raw_data').notNull(),
+    status: text('status').$type<'PENDING' | 'PROCESSED' | 'FAILED'>().default('PENDING'),
+    createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { mode: 'date' })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+);
+
+// Schedule Comparison table
+export const scheduleComparisonSchema = pgTable(
+  'schedule_comparisons',
+  {
+    id: uuid('id').primaryKey(),
+    organizationId: uuid('organization_id').references(() => organizationSchema.id),
+    manualScheduleId: uuid('manual_schedule_id').references(() => scheduleSchema.id),
+    optimizedScheduleId: uuid('optimized_schedule_id').references(() => scheduleSchema.id),
+    comparisonMetrics: json('comparison_metrics').notNull(),
+    status: text('status').$type<'PENDING' | 'COMPLETED' | 'FAILED'>().default('PENDING'),
     createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
     updatedAt: timestamp('updated_at', { mode: 'date' })
       .defaultNow()

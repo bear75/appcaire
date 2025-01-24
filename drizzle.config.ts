@@ -1,39 +1,20 @@
+import type { Config } from 'drizzle-kit';
 import * as dotenv from 'dotenv';
-import { defineConfig } from 'drizzle-kit';
 
 // Load environment variables based on NODE_ENV
-dotenv.config({
-  path:
-    process.env.NODE_ENV === 'production'
-      ? '.env.production'
-      : '.env.development',
-});
+dotenv.config({ path: '.env.local' });
 
-// Parse database URL for drizzle-kit
-const dbUrl = process.env.DATABASE_URL
-  ? new URL(process.env.DATABASE_URL)
-  : null;
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL environment variable is not set');
+}
 
-export default defineConfig({
+export default {
   schema: './src/models/Schema.ts',
   out: './migrations',
-  dialect: 'postgresql',
-  dbCredentials: dbUrl
-    ? {
-        host: dbUrl.hostname,
-        port: Number.parseInt(dbUrl.port),
-        user: dbUrl.username,
-        password: dbUrl.password,
-        database: dbUrl.pathname.slice(1),
-        ssl: true,
-      }
-    : {
-        host: 'localhost',
-        port: 5432,
-        user: 'postgres',
-        password: 'postgres',
-        database: 'postgres',
-      },
+  driver: 'pg',
+  dbCredentials: {
+    connectionString: process.env.DATABASE_URL,
+  },
   verbose: true,
   strict: true,
-});
+} satisfies Config;

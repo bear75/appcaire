@@ -1,312 +1,134 @@
-# Database Design Document for **Caire Platform MVP**
+# Database Design
 
-## 1. Introduction
+## Overview
+This document outlines the database schema for the Caire platform, focusing on scheduling and organization management.
 
-The Caire platform requires a scalable, secure, and modular database schema to support its MVP and future phases. The database will handle data for multi-tenancy (multiple organizations), user roles, scheduling, analytics, and integrations with external systems like **Timefold.ai** and **Alfa eCare**.
+## Tables
 
-### Key Design Goals
-
-- **Multi-Tenancy**: Support multiple home care organizations with isolated data scopes.
-- **Flexibility**: Easily accommodate trial users, integrations, and real-time updates.
-- **Security**: Ensure compliance with GDPR by pseudonymizing sensitive data and encrypting patient addresses.
-- **Efficiency**: Enable fast schedule generation, analytics, and role-based data access.
-- **Constraint Management**: Support flexible definition and management of scheduling constraints.
-
----
-
-## 2. Database Entities
-
-### 2.1 **Core Tables**
-
-#### **Organizations**
-
-Stores details of home care companies.
+### Organization
+The core table for multi-tenant functionality.
 
 ```sql
-CREATE TABLE Organizations (
-    id UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    trial_expiration_date DATE,
-    status ENUM('trial', 'active', 'suspended') DEFAULT 'trial',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE organization (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    name text NOT NULL,
+    trial_expiration_date timestamp with time zone,
+    status text DEFAULT 'ACTIVE'::text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
-#### **Users**
+Key features:
+- UUID-based primary key
+- Trial period tracking
+- Status tracking (ACTIVE, SUSPENDED)
+- Automatic timestamps
+- Row Level Security enabled for multi-tenant isolation
 
-Stores platform users with role-based access control (RBAC).
+### Schedules
+Stores schedule entries for both manual and optimized schedules.
 
 ```sql
-CREATE TABLE Users (
-    id UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    role ENUM('super_admin', 'admin', 'scheduler', 'employee', 'client') NOT NULL,
-    organization_id UUID REFERENCES Organizations(id),
-    status ENUM('active', 'trial', 'suspended', 'deactivated') DEFAULT 'trial',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE schedules (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    organization_id uuid NOT NULL REFERENCES organization(id),
+    client_id uuid NOT NULL,
+    start_time timestamp with time zone NOT NULL,
+    end_time timestamp with time zone NOT NULL,
+    status text DEFAULT 'DRAFT'::text,
+    schedule_type text NOT NULL,
+    ecare_task_id text,
+    timefold_score text,
+    optimization_metrics jsonb,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
-### 2.2 **Constraint Management**
+Key features:
+- Supports both manual and AI-optimized schedules
+- Tracks optimization metrics and scores
+- Links to eCare tasks when imported
+- Status tracking (DRAFT, PUBLISHED, ARCHIVED)
 
-#### **Constraint Definitions**
-
-Defines the types and weights of constraints for scheduling.
+### Schedule Assignments
+Links schedules to employees, supporting multiple employees per visit.
 
 ```sql
-CREATE TABLE ConstraintDefinitions (
-    id UUID PRIMARY KEY,
-    organization_id UUID REFERENCES Organizations(id),
-    name VARCHAR(255) NOT NULL,
-    type ENUM('HARD', 'MEDIUM', 'SOFT') NOT NULL,
-    priority VARCHAR(255) NOT NULL,
-    weight INTEGER NOT NULL,
-    category ENUM('SKILL', 'PREFERENCE', 'RESOURCE', 'TIME', 'LOCATION') NOT NULL,
-    is_system BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE schedule_assignments (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    schedule_id uuid NOT NULL REFERENCES schedules(id),
+    employee_id uuid NOT NULL,
+    assignment_type text NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
-#### **Constraint Values**
+Key features:
+- Enables multiple employees per schedule entry
+- Tracks assignment types
+- Maintains relationship history
 
-Stores the actual constraint values for different entities.
+### Visit Requirements
+Stores requirements for client visits.
 
 ```sql
-CREATE TABLE ConstraintValues (
-    id UUID PRIMARY KEY,
-    constraint_definition_id UUID REFERENCES ConstraintDefinitions(id),
-    entity_type ENUM('ORGANIZATION', 'EMPLOYEE', 'CLIENT') NOT NULL,
-    entity_id UUID NOT NULL,
-    value JSONB NOT NULL,
-    override_weight INTEGER,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE visit_requirements (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    client_id uuid NOT NULL,
+    required_employee_count integer DEFAULT 1,
+    ecare_visit_type text,
+    ecare_requirements jsonb,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
-### 2.3 **Resource Management**
+Key features:
+- Specifies number of employees needed
+- Stores eCare-specific requirements
+- Flexible requirements storage using JSONB
 
-#### **Vehicles**
+## Security
 
-Manages organization's vehicle fleet.
-
-```sql
-CREATE TABLE Vehicles (
-    id UUID PRIMARY KEY,
-    organization_id UUID REFERENCES Organizations(id),
-    name VARCHAR(255) NOT NULL,
-    type VARCHAR(255) NOT NULL,
-    capacity INTEGER,
-    status ENUM('ACTIVE', 'MAINTENANCE', 'INACTIVE') DEFAULT 'ACTIVE',
-    location POINT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-```
-
-#### **Shift Templates**
-
-Defines standard shift patterns.
+### Row Level Security
+All tables implement Row Level Security (RLS) policies to ensure data isolation between organizations:
 
 ```sql
-CREATE TABLE ShiftTemplates (
-    id UUID PRIMARY KEY,
-    organization_id UUID REFERENCES Organizations(id),
-    name VARCHAR(255) NOT NULL,
-    start_time TIMESTAMP NOT NULL,
-    end_time TIMESTAMP NOT NULL,
-    break_windows JSONB,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+ALTER TABLE [table_name] ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY tenant_isolation_policy ON [table_name]
+    USING (organization_id = current_setting('app.current_tenant')::uuid)
+    WITH CHECK (organization_id = current_setting('app.current_tenant')::uuid);
 ```
 
-#### **Employee Shifts**
-
-Tracks actual employee shift assignments.
+### Automatic Updates
+All tables include `created_at` and `updated_at` timestamps, with triggers to maintain `updated_at`:
 
 ```sql
-CREATE TABLE EmployeeShifts (
-    id UUID PRIMARY KEY,
-    employee_id UUID REFERENCES Employees(id),
-    shift_template_id UUID REFERENCES ShiftTemplates(id),
-    date DATE NOT NULL,
-    vehicle_id UUID REFERENCES Vehicles(id),
-    actual_start TIMESTAMP,
-    actual_end TIMESTAMP,
-    status ENUM('PLANNED', 'ACTIVE', 'COMPLETED') DEFAULT 'PLANNED',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+CREATE TRIGGER update_updated_at_column
+    BEFORE UPDATE ON [table_name]
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
 ```
 
-### 2.4 **Service Management**
+## Migrations
+Migrations are managed using Drizzle ORM with the following structure:
+- Sequential migration files in `/migrations`
+- Metadata tracking in `/migrations/meta`
+- Migration state in `drizzle_migrations` table
 
-#### **Visit Requirements**
+## Indexes
+Key indexes for performance optimization:
+- Primary keys (UUID-based)
+- Foreign keys for relationships
+- Composite indexes for common queries
+- Temporal indexes on schedule dates
 
-Defines client service requirements and preferences.
-
-```sql
-CREATE TABLE VisitRequirements (
-    id UUID PRIMARY KEY,
-    client_id UUID REFERENCES Clients(id),
-    service_type VARCHAR(255) NOT NULL,
-    duration INTERVAL NOT NULL,
-    frequency JSONB,
-    priority INTEGER DEFAULT 1,
-    time_windows JSONB,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-```
-
-### 2.5 **Scheduling and Analytics**
-
-#### **Schedule Solutions**
-
-Stores scheduling optimization results.
-
-```sql
-CREATE TABLE ScheduleSolutions (
-    id UUID PRIMARY KEY,
-    organization_id UUID REFERENCES Organizations(id),
-    run_date TIMESTAMP NOT NULL,
-    input_data JSONB NOT NULL,
-    output_solution JSONB NOT NULL,
-    score JSONB NOT NULL,
-    status ENUM('RUNNING', 'COMPLETED', 'FAILED') DEFAULT 'RUNNING',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-```
-
-#### **Schedule Metrics**
-
-Tracks KPIs and performance metrics.
-
-```sql
-CREATE TABLE ScheduleMetrics (
-    id UUID PRIMARY KEY,
-    organization_id UUID REFERENCES Organizations(id),
-    schedule_date DATE NOT NULL,
-    metric_type VARCHAR(255) NOT NULL,
-    value DECIMAL(10,2) NOT NULL,
-    constraint_impacts JSONB,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-```
-
----
-
-## 3. Key Relationships
-
-### 3.1 Constraint Management
-
-- Organizations define their constraints
-- Constraints can be overridden at employee/client level
-- System constraints cannot be modified
-
-### 3.2 Resource Planning
-
-- Employees are assigned to shifts
-- Shifts can have vehicle assignments
-- Vehicle assignments consider employee qualifications
-
-### 3.3 Service Delivery
-
-- Client visits are planned based on requirements
-- Visit requirements consider constraints
-- Actual service delivery is tracked for analytics
-
----
-
-## 4. Data Types and Formats
-
-### 4.1 JSON Structures
-
-- **Constraints**: `{ type, value, priority }`
-- **Break Windows**: `[{ start, end, required }]`
-- **Time Windows**: `[{ day, start, end, preference }]`
-- **Schedule Solutions**: Complete solution including routes and assignments
-
-### 4.2 Enums and Constants
-
-- Constraint Types: HARD, MEDIUM, SOFT
-- Entity Types: ORGANIZATION, EMPLOYEE, CLIENT
-- Status Types: Various per entity
-
----
-
-## 5. Security & Compliance
-
-### 5.1 Data Protection
-
-- Encrypt sensitive client data
-- Use row-level security for multi-tenancy
-- Audit logging for critical operations
-
-### 5.2 Access Control
-
-- Role-based access control
-- Organization-level data isolation
-- API key management for integrations
-
----
-
-## 6. Performance Considerations
-
-### 6.1 Indexing Strategy
-
-- Index foreign keys
-- Index frequently queried fields
-- Consider partial indexes for large tables
-
-### 6.2 Partitioning
-
-- Consider partitioning by organization
-- Time-based partitioning for historical data
-- Archive old schedule solutions
-
-### 6.3 Migration Management
-
-- Migrations stored in `/migrations` directory
-- Each migration follows format: `XXXX_description.sql`
-- Development migrations run via `npm run db:migrate`
-- Production migrations require confirmation:
-  ```bash
-  npm run db:migrate:prod        # Dry run
-  npm run db:migrate:prod:execute # Execute with confirmation
-  ```
-
-### 6.4 Environment Configuration
-
-#### Development Database
-
-- Supabase Project: ryimasacidqeuufdbcrv.supabase.co
-- Connection pooling enabled (port 6543)
-- Transaction pool mode
-- SSL required for all connections
-
-#### Production Database
-
-- Supabase Project: qcailgzrkecklsmtkodp.supabase.co
-- Connection pooling enabled (port 6543)
-- Transaction pool mode
-- SSL required for all connections
-- Enhanced security measures
-- Regular backups and monitoring
-
-### 6.5 Connection Pooling
-
-- Using Supabase connection pooler (port 6543)
-- Transaction pool mode enabled
-- SSL required for all connections
-- Prefetch disabled for pooler compatibility
-- Connection timeout configuration
-- Pool size optimization per environment
+## Data Types
+- UUIDs for primary keys
+- Timestamps with time zone for all temporal data
+- JSONB for flexible data storage
+- Text for enumerated values with constraints

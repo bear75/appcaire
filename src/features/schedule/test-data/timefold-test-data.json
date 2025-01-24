@@ -1,0 +1,379 @@
+{
+  "config": {
+    "run": {
+      "name": "Full Test Run",
+      "termination": {
+        "spentLimit": "PT10M",
+        "unimprovedSpentLimit": "PT3M"
+      }
+    },
+    "model": {
+      "overrides": {
+        "minimizeTravelTimeWeight": 1,
+        "balanceTimeUtilizationWeight": 1
+      }
+    }
+  },
+  "modelInput": {
+    "vehicles": [
+      {
+        "id": "EMP001",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP001-SHIFT1",
+            "startLocation": [33.84475, -84.47405],
+            "endLocation": [33.84475, -84.47405],
+            "minStartTime": "2024-01-01T07:00:00Z",
+            "maxEndTime": "2024-01-01T16:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "cleaning",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "mobility",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP002",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP002-SHIFT1",
+            "startLocation": [33.87673, -84.26024],
+            "endLocation": [33.87673, -84.26024],
+            "minStartTime": "2024-01-01T07:00:00Z",
+            "maxEndTime": "2024-01-01T16:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "heavy_lifting",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP003",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP003-SHIFT1",
+            "startLocation": [59.3251, 18.0710],
+            "endLocation": [59.3251, 18.0710],
+            "minStartTime": "2024-01-01T07:00:00Z",
+            "maxEndTime": "2024-01-01T16:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "cleaning",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP004",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP004-SHIFT1",
+            "startLocation": [59.3325, 18.0649],
+            "endLocation": [59.3325, 18.0649],
+            "minStartTime": "2024-01-01T07:00:00Z",
+            "maxEndTime": "2024-01-01T16:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "mobility",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP005",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP005-SHIFT1",
+            "startLocation": [59.3325, 18.0649],
+            "endLocation": [59.3325, 18.0649],
+            "minStartTime": "2024-01-01T07:00:00Z",
+            "maxEndTime": "2024-01-01T16:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "cleaning",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "heavy_lifting",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP006",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP006-SHIFT1",
+            "startLocation": [59.3293, 18.0686],
+            "endLocation": [59.3293, 18.0686],
+            "minStartTime": "2024-01-01T16:00:00Z",
+            "maxEndTime": "2024-01-01T22:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "mobility",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP007",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP007-SHIFT1",
+            "startLocation": [59.3251, 18.0710],
+            "endLocation": [59.3251, 18.0710],
+            "minStartTime": "2024-01-01T16:00:00Z",
+            "maxEndTime": "2024-01-01T22:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "cleaning",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP008",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP008-SHIFT1",
+            "startLocation": [59.3251, 18.0710],
+            "endLocation": [59.3251, 18.0710],
+            "minStartTime": "2024-01-01T16:00:00Z",
+            "maxEndTime": "2024-01-01T22:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "heavy_lifting",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP009",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP009-SHIFT1",
+            "startLocation": [59.3325, 18.0649],
+            "endLocation": [59.3325, 18.0649],
+            "minStartTime": "2024-01-01T16:00:00Z",
+            "maxEndTime": "2024-01-01T22:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "cleaning",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "mobility",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP010",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP010-SHIFT1",
+            "startLocation": [59.3325, 18.0649],
+            "endLocation": [59.3325, 18.0649],
+            "minStartTime": "2024-01-01T16:00:00Z",
+            "maxEndTime": "2024-01-01T22:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "cleaning",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "heavy_lifting",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "visits": [
+      {
+        "id": "VISIT001",
+        "location": [33.84475, -84.47405],
+        "timeWindows": [
+          {
+            "minStartTime": "2024-01-01T07:00:00Z",
+            "maxEndTime": "2024-01-01T09:00:00Z"
+          }
+        ],
+        "serviceDuration": "PT30M",
+        "requiredSkills": [
+          {
+            "name": "medical",
+            "minLevel": 1
+          },
+          {
+            "name": "mobility",
+            "minLevel": 1
+          }
+        ],
+        "priority": "6"
+      },
+      {
+        "id": "VISIT002",
+        "location": [33.87673, -84.26024],
+        "timeWindows": [
+          {
+            "minStartTime": "2024-01-01T16:00:00Z",
+            "maxEndTime": "2024-01-01T18:00:00Z"
+          }
+        ],
+        "serviceDuration": "PT45M",
+        "requiredSkills": [
+          {
+            "name": "medical",
+            "minLevel": 1
+          },
+          {
+            "name": "mobility",
+            "minLevel": 1
+          }
+        ],
+        "priority": "4"
+      },
+      {
+        "id": "VISIT003",
+        "location": [33.88664, -84.28118],
+        "timeWindows": [
+          {
+            "minStartTime": "2024-01-01T20:00:00Z",
+            "maxEndTime": "2024-01-01T22:00:00Z"
+          }
+        ],
+        "serviceDuration": "PT45M",
+        "requiredSkills": [
+          {
+            "name": "medical",
+            "minLevel": 1
+          },
+          {
+            "name": "mobility",
+            "minLevel": 1
+          }
+        ],
+        "priority": "6"
+      }
+    ],
+    "skills": [
+      "medical",
+      "cleaning",
+      "mobility",
+      "heavy_lifting"
+    ],
+    "planningWindow": {
+      "startDate": "2024-01-01T07:00:00Z",
+      "endDate": "2024-01-01T22:00:00Z"
+    }
+  }
+}

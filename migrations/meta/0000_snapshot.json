@@ -10,72 +10,46 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
+          "notNull": true,
+          "default": "uuid_generate_v4()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
           "notNull": true
         },
-        "stripe_customer_id": {
-          "name": "stripe_customer_id",
-          "type": "text",
+        "trial_expiration_date": {
+          "name": "trial_expiration_date",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
         },
-        "stripe_subscription_id": {
-          "name": "stripe_subscription_id",
-          "type": "text",
+        "status": {
+          "name": "status",
+          "type": "organization_status",
           "primaryKey": false,
-          "notNull": false
-        },
-        "stripe_subscription_price_id": {
-          "name": "stripe_subscription_price_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "stripe_subscription_status": {
-          "name": "stripe_subscription_status",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "stripe_subscription_current_period_end": {
-          "name": "stripe_subscription_current_period_end",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "'trial'"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
-          "default": "now()"
+          "default": "CURRENT_TIMESTAMP"
         },
         "created_at": {
           "name": "created_at",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
-          "default": "now()"
+          "default": "CURRENT_TIMESTAMP"
         }
       },
-      "indexes": {
-        "stripe_customer_id_idx": {
-          "name": "stripe_customer_id_idx",
-          "columns": [
-            {
-              "expression": "stripe_customer_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
+      "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
@@ -129,7 +103,12 @@
       "uniqueConstraints": {}
     }
   },
-  "enums": {},
+  "enums": {
+    "organization_status": {
+      "name": "organization_status",
+      "values": ["trial", "active", "suspended"]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "_meta": {

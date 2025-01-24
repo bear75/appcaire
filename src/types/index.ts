@@ -26,9 +26,30 @@ export type Task = {
 
 export type Schedule = {
   id: string;
-  status: SchedulingStatus;
-  organizationId: string;
-  createdAt: Date;
-  updatedAt: Date;
-  tasks: Task[];
+  organization_id: string;
+  type: 'MANUAL' | 'OPTIMIZED';
+  status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+  start_date: Date;
+  end_date: Date;
+  metadata: {
+    source: 'ECARE_JSON' | 'ECARE_API' | 'CAREFOX' | 'CSV' | 'DEMO';
+    importMethod: 'JSON_UPLOAD' | 'DIRECT_API';
+  };
+  data: {
+    entries: Array<{
+      id: string;
+      employeeId: string;
+      clientId: string;
+      startDateTime: Date;
+      endDateTime: Date;
+      category: string;
+      location: {
+        lat: number;
+        lng: number;
+        address: string;
+      };
+    }>;
+  };
+  created_at: Date;
+  updated_at: Date;
 };

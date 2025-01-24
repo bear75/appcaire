@@ -1,0 +1,146 @@
+{
+  "config": {
+    "run": {
+      "name": "Simple Test Run",
+      "termination": {
+        "spentLimit": "PT10M",
+        "unimprovedSpentLimit": "PT3M"
+      }
+    },
+    "model": {
+      "overrides": {
+        "minimizeTravelTimeWeight": 1,
+        "balanceTimeUtilizationWeight": 1
+      }
+    }
+  },
+  "modelInput": {
+    "vehicles": [
+      {
+        "id": "EMP001",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP001-SHIFT1",
+            "startLocation": [33.84475, -84.47405],
+            "endLocation": [33.84475, -84.47405],
+            "minStartTime": "2024-01-01T07:00:00Z",
+            "maxEndTime": "2024-01-01T16:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "mobility",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "EMP002",
+        "vehicleType": "VAN",
+        "shifts": [
+          {
+            "id": "EMP002-SHIFT1",
+            "startLocation": [33.87673, -84.26024],
+            "endLocation": [33.87673, -84.26024],
+            "minStartTime": "2024-01-01T16:00:00Z",
+            "maxEndTime": "2024-01-01T22:00:00Z",
+            "maxTravelTimePerVisit": "PT30M",
+            "skills": [
+              {
+                "name": "medical",
+                "level": 1,
+                "multiplier": 1
+              },
+              {
+                "name": "cleaning",
+                "level": 1,
+                "multiplier": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "visits": [
+      {
+        "id": "VISIT001",
+        "location": [33.84475, -84.47405],
+        "timeWindows": [
+          {
+            "minStartTime": "2024-01-01T08:00:00Z",
+            "maxEndTime": "2024-01-01T10:00:00Z"
+          }
+        ],
+        "serviceDuration": "PT30M",
+        "requiredSkills": [
+          {
+            "name": "medical",
+            "minLevel": 1
+          },
+          {
+            "name": "mobility",
+            "minLevel": 1
+          }
+        ],
+        "priority": "6"
+      },
+      {
+        "id": "VISIT002",
+        "location": [33.87673, -84.26024],
+        "timeWindows": [
+          {
+            "minStartTime": "2024-01-01T14:00:00Z",
+            "maxEndTime": "2024-01-01T16:00:00Z"
+          }
+        ],
+        "serviceDuration": "PT45M",
+        "requiredSkills": [
+          {
+            "name": "medical",
+            "minLevel": 1
+          }
+        ],
+        "priority": "4"
+      },
+      {
+        "id": "VISIT003",
+        "location": [33.88664, -84.28118],
+        "timeWindows": [
+          {
+            "minStartTime": "2024-01-01T17:00:00Z",
+            "maxEndTime": "2024-01-01T19:00:00Z"
+          }
+        ],
+        "serviceDuration": "PT30M",
+        "requiredSkills": [
+          {
+            "name": "medical",
+            "minLevel": 1
+          },
+          {
+            "name": "cleaning",
+            "minLevel": 1
+          }
+        ],
+        "priority": "6"
+      }
+    ],
+    "skills": [
+      "medical",
+      "mobility",
+      "cleaning"
+    ],
+    "planningWindow": {
+      "startDate": "2024-01-01T07:00:00Z",
+      "endDate": "2024-01-01T22:00:00Z"
+    }
+  }
+}

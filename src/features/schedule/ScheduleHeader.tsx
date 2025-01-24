@@ -3,17 +3,9 @@
 import { Wand2 } from 'lucide-react';
 import { useState } from 'react';
 
-import { PageHeader } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useTranslations } from '@/utils/translations';
-
-const BUTTON_STYLES = {
-  base: 'transition-all duration-300 ease-out transform-gpu',
-  primary: 'bg-purple-600 hover:bg-purple-700 text-white shadow-sm hover:shadow-md',
-  icon: 'size-4 transition-transform',
-  loading: 'animate-spin',
-};
 
 export default function ScheduleHeader() {
   const t = useTranslations('Schedule');
@@ -28,27 +20,19 @@ export default function ScheduleHeader() {
   };
 
   return (
-    <PageHeader
-      title={t('title')}
-      description={t('description')}
-    >
-      <Button
-        onClick={handleOptimize}
-        disabled={isOptimizing}
-        className={cn(
-          BUTTON_STYLES.base,
-          BUTTON_STYLES.primary,
-          'flex items-center gap-2',
-        )}
-      >
-        <Wand2
-          className={cn(
-            BUTTON_STYLES.icon,
-            isOptimizing && BUTTON_STYLES.loading,
-          )}
-        />
-        {t('optimize')}
-      </Button>
-    </PageHeader>
+    <div className="flex flex-col gap-2">
+      <h1 className="text-2xl font-semibold tracking-tight">{t('title')}</h1>
+      <p className="text-sm text-muted-foreground">{t('description')}</p>
+      <div className="mt-4 flex justify-end">
+        <Button
+          onClick={handleOptimize}
+          disabled={isOptimizing}
+          className="gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700"
+        >
+          <Wand2 className={cn('size-4', isOptimizing && 'animate-spin')} />
+          {t('optimize')}
+        </Button>
+      </div>
+    </div>
   );
 }

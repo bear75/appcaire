@@ -1,3 +1,7 @@
+Below is the **complete PRD** with the **new** additions in **Section 5.1.4** (regarding **monthly leftover hours** and **auto-optimization** of constraints) and **Section 5.1.5** (regarding **trial org flow** for comparing **manual** vs. **AI-optimized** schedules). All other PRD content remains unchanged.
+
+---
+
 # Product Requirements Document (PRD)
 
 ## 1. Introduction & Context
@@ -69,7 +73,7 @@ Caire aspires to become the **leading AI-powered scheduling platform** for home 
 - <500ms API response time  
 - 99.9% uptime  
 
-**(Additional / Longer-Term)**  
+_(Additional / Longer-Term)_  
 - 5% improvement in overall staff efficiency  
 - 98% schedule completion rate (minimal last-minute changes)  
 - 95% constraint satisfaction (hard vs. medium vs. soft)  
@@ -123,7 +127,7 @@ Caire aspires to become the **leading AI-powered scheduling platform** for home 
 
 ### 4.4 Domain Users (Managed via Internal Database — Not using Caire UI)
 
-#### Caire Employees
+#### Care Employees
 - View schedules  
 - Log visits and tasks  
 - Provide feedback on assignments  
@@ -150,7 +154,7 @@ Caire aspires to become the **leading AI-powered scheduling platform** for home 
   - **Medium**: Preferred staff, staff availability  
   - **Soft**: Workload balancing, cost optimization, employee preferences  
 
-- **Constraints can be set on multiple levels**:
+- Constraints can be set on multiple levels:
   - **Caire-wide** (managed by Super Admins)  
   - **Organization**  
   - **Employees**  
@@ -179,11 +183,95 @@ Caire aspires to become the **leading AI-powered scheduling platform** for home 
 4. **Push** schedule back to Ecare/Carefox for a consistent record  
 5. **Real-Time Updates** on any changes  
 
+#### 5.1.4 Additional Advanced Scheduling Requirements
+
+##### **A. Unused Hours Recapture**
+**User Story**  
+> “As a home care org admin, I want the scheduling logic to track and recapture unused monthly hours for each client, ensuring we schedule them before the new month resets. Unused hours result in lost billable time if not utilized.”
+
+**Details**  
+1. **Leftover Hours**  
+   - Each client’s monthly hours (e.g., 100 hrs/month, 25 hrs/month) are monitored.  
+   - If visits are canceled, leaving “unused hours,” the system shows these hours as “remaining.”  
+
+2. **Scheduling Priority**  
+   - Add an **Unused Hours Recapture** constraint that attempts to schedule leftover time before month’s end.  
+
+3. **Analytics & KPI**  
+   - A KPI for leftover hour usage appears in:
+     - **Analytics** page (detailed leftover hour usage)  
+     - **Dashboard** overview (alert if leftover hours are at risk)  
+
+4. **UI Indication**  
+   - In the **Schedule** section (and/or client profile), display leftover monthly hours  
+   - Highlight newly inserted “extra” tasks or time slots meant to recapture them  
+
+**Technical Notes**  
+- This leftover-hour constraint can be **Medium** or **High** priority (admin-configurable).  
+- If leftover hours cannot be rescheduled, log it in analytics as a shortfall or missed opportunity.
+
+##### **B. Over-Time Optimization of Constraints**
+**User Story**  
+> “As a home care org admin, I want the scheduling logic to learn from past data—employee usage, continuity, travel time—and automatically adjust constraint weights to better match goals (staff efficiency, client continuity, or margin).”
+
+**Details**  
+1. **Historical Data Evaluation**  
+   - The system observes past scheduling outcomes and proposes new weight/priority values for constraints.  
+
+2. **Default vs. Manual vs. Optimized Constraint Values**  
+   - Each constraint can hold three potential values:  
+     - **Default** (system-supplied)  
+     - **Manual** (admin sets custom)  
+     - **Optimized** (auto-generated from historical data)  
+
+3. **Admin Selection**  
+   - An admin can choose which version to **use**.  
+   - Once chosen, the schedule re-runs with those constraint weights, and KPI changes are reflected in analytics.  
+
+4. **Database Storage**  
+   - Store each constraint’s three values plus a note on how the “optimized” value was derived (e.g., Q2 usage data).  
+
+**Technical Notes**  
+- The system might run a “learning” job periodically to refine constraints.  
+- Admin sees improvements in staff utilization, continuity, or travel time from new auto-optimized weights.
+
+#### 5.1.5 Trial Org Flow: Manual vs. Optimized Schedules
+> **Note**: This flow can also be used by **active** organizations to compare manual vs. optimized schedules, as well as compare how different constraint weights affect the KPIs.
+
+**Overall Recommendation**  
+- **Reuse the existing Schedule page** but add a **“Compare View”** or **toggle** for manual vs. AI schedules.  
+
+**UI/UX Flow**  
+1. **Single Schedule Page**  
+   - Both trial and paying orgs can see “Manual” vs. “Optimized” if data is present.  
+2. **Comparison Toggle/Tab**  
+   - A **“Compare Manual vs. AI”** button or tab displays a split-screen or toggle between “Manual” and “Optimized.”  
+3. **Differences Highlight**  
+   - Highlight reassignments, different time windows, reduced travel times, etc.  
+4. **Trial-Specific UI Elements**  
+   - If the org is in trial, show a banner or “trial mode” label.  
+   - Encourage adopting the AI schedule if results are beneficial.  
+5. **Read-Only or Merge**  
+   - Decide if the user can “publish” the AI schedule as final, overwriting or replacing the manual version.  
+
+**Data Architecture**  
+- **Import Existing Schedule**: From Ecare/Carefox or CSV, stored in something like `schedule_imported`.  
+- **Generate AI Schedule**: Store in a separate table (e.g., `schedule_optimized`) or the same `Schedules` table but flagged.  
+- **Comparison Logic**: Query both for the same date range, align them side by side.  
+- **Publishing/Overwriting**: If the AI schedule is adopted, update or create a final schedule, then push to Ecare/Carefox.
+
+**Why This Approach Works**  
+- Minimizes code duplication (no separate “trial compare” page).  
+- Intuitive flow for both **trial** and **active** organizations wanting to see the difference in cost/time savings.  
+- Flexible for future expansions (scenario testing, advanced analytics).
+
+---
+
 ### 5.2 Analytics & Reporting
 
 1. **Dashboards**  
    - Key metrics (staff utilization, schedule efficiency, travel time)  
-   - Drill-down for performance insights  
+   - Drill-down for deeper performance insights  
 
 2. **Reporting**  
    - Daily/weekly/monthly schedules  
@@ -239,102 +327,91 @@ Caire aspires to become the **leading AI-powered scheduling platform** for home 
 
 **Clerk.dev (Organization Users)**  
 - Login, sign-up, org switching, RBAC  
-- Integrates with Next.js
+- Roles: Super Admin (all orgs), Admin (one org), Member (restricted)  
+- Trial user flows
 
 **Supabase (Domain Users)**  
 - Employees, clients, family members  
 - Custom RBAC logic in DB  
-- Row-level security for privacy  
+- Row-level security  
 
 ### 6.3 Database
-- **Supabase** (Postgres) + **Drizzle ORM** for schema management  
+- **Supabase** (Postgres) + **Drizzle ORM**  
 - **Key Entities**:
   - **Users**: Org-level (Clerk) or domain-level (Supabase)  
-  - **Organizations**: Tracks trial expiration, statuses  
-  - **Employees**: Linked to user, skills, availability  
-  - **Clients**: Preferences, encrypted lat/long, special needs  
-  - **Schedules**: Employee → client assignments, time ranges, statuses  
+  - **Organizations**: trial expiration, statuses  
+  - **Employees**: linked to user, skills, availability  
+  - **Clients**: preferences, encrypted lat/long, special needs  
+  - **Schedules**: employee-client assignments, statuses  
   - **Constraints & Preferences**: Hard/medium/soft definitions  
-  - **Analytics**: Metric tables for scheduling and general usage  
-  - **Vehicles** (optional for route optimization)  
-  - **Shift Templates & Employee Shifts** (manage coverage)  
-- **GDPR Compliance**: Pseudonymized trial data, encryption at rest  
+  - **Analytics**: metric tables for scheduling & usage  
+  - **Vehicles** (if used), **Shift Templates**, **Employee Shifts**  
+- **GDPR Compliance**: pseudonymized data, encryption at rest  
 
 #### 6.3.1 Schema Considerations
-
-**Multi-Employee Visits**  
-- Possibly store multiple employees per schedule row or use a junction table.
-
-**Authentication**  
-- `passwordHash` optional if fully external auth.
-
-**Constraints**  
-- `constraintDefinitionSchema` + `constraintValueSchema` for flexible rule sets.
-
-**Scheduling Solutions**  
-- `scheduleSolutionSchema` logs each optimization run (inputData, outputSolution, score).
-
-**Analytics**  
-- `analyticsSchema` + `scheduleMetricSchema` to power dashboards.
+- **Multi-Employee Visits**: single or multiple employees per row  
+- **Constraints**: `constraintDefinitionSchema` + `constraintValueSchema`  
+- **Scheduling Solutions**: `scheduleSolutionSchema` logs each run  
+- **Analytics**: `analyticsSchema` + `scheduleMetricSchema`
 
 ### 6.4 Integrations
 
 1. **Timefold.ai**  
-   - Field service routing model for constraint-based scheduling  
-   - REST API integration  
+   - Field service routing model  
+   - REST API for constraint-based optimization  
 
 2. **Alfa eCare**  
    - Employee/client data sync  
-   - Real-time updates for changes  
+   - Real-time updates  
 
-3. **Potential Future**: Carefox, other e-health systems  
+3. **Future**: Carefox, other e-health  
 
 ### 6.5 Security & Compliance
-- **Row-Level Security** (org-based data isolation)  
-- **Data Encryption** at rest and in transit  
-- **Audit Logging** for user actions  
-- Full **GDPR** compliance  
+- Row-level security (org-based isolation)  
+- Data encryption (rest & transit)  
+- Audit logging  
+- GDPR compliance  
 
 ---
 
 ## 7. Implementation Timeline
 
-### **Phase 1: Foundation (Weeks 1–4)**
-- Project setup (Next.js + TypeScript + Tailwind)  
-- Clerk + Supabase authentication flows  
+### Phase 1: Foundation (Weeks 1–4)
+- Next.js + TypeScript + Tailwind setup  
+- Clerk + Supabase auth flows  
 - Basic DB schema (Drizzle ORM)  
-- Core RBAC (super admin, admin)  
+- RBAC roles (super admin, admin)
 
-### **Phase 2: Scheduling (Weeks 5–8)**
-- Integrate Timefold.ai for schedule creation  
-- Implement constraints (hard, medium, soft)  
-- Deploy scheduling UI (Samordnare focus)  
-- Manual overrides, conflict resolution  
+### Phase 2: Scheduling (Weeks 5–8)
+- Timefold.ai integration for schedule creation  
+- Constraints (hard, medium, soft)  
+- Basic scheduling UI (Samordnare focus)  
+- Manual overrides, conflict resolution
 
-### **Phase 3: Analytics (Weeks 9–12)**
+### Phase 3: Analytics (Weeks 9–12)
 - Dashboards (staff utilization, travel time)  
-- Real-time updates/route optimization metrics  
+- Real-time updates, route optimization metrics  
 - Trial usage metrics  
-- Fine-tuning performance (<500ms API)  
+- Fine-tuning performance (<500ms API)
 
-### **Phase 4: Polish & Beta Launch (Weeks 13–16)**
+### Phase 4: Polish & Beta Launch (Weeks 13–16)
 - Enhanced reporting (exports, additional charts)  
 - Possible multi-language foundation  
 - User testing & iterative improvements  
-- Prepare MVP for Nova Omsorg pilot + additional beta clients  
+- MVP pilot with Nova Omsorg + additional beta clients  
 
 ---
 
 ## 8. Narrative
-Imagine a **Samordnare** logging into Caire on Monday morning. Instead of juggling spreadsheets, they simply input constraints (working hours, staff skills, client preferences), and the system **generates an optimized schedule**—reducing travel time and improving employee assignments. Meanwhile, a **Trial User** can experiment in a sandbox environment to see potential savings (time/cost) vs. manual scheduling. A **Super Admin** can oversee multiple organizations, manage trials, and eventually expand into advanced analytics for top-tier clients.
+Imagine a **Samordnare** logging into Caire on Monday morning. Instead of juggling spreadsheets, they simply input constraints—working hours, staff skills, client preferences—and the system **generates an optimized schedule**. This includes recapturing leftover monthly hours for clients at risk of losing them. Over time, constraints can **auto-optimize** for better efficiency. A **Trial User** can see side-by-side comparisons (manual vs. AI) in a sandbox environment. Meanwhile, a **Super Admin** manages organization-level settings, extends trials, and can eventually delve into advanced analytics.
 
 ---
 
 ## 9. Success Metrics (Extended)
 
 ### 9.1 Business Metrics
-- 1–2% immediate improvement in billed hours (MVP pilot)  
-- 5%+ improvement in staff efficiency (longer term)  
+- 1–2% improvement in billed hours (pilot)  
+- 5%+ improvement in staff efficiency (long-term)  
 - 15% reduction in travel time overall  
 - 30%+ trial-to-paid conversion  
 
@@ -345,7 +422,7 @@ Imagine a **Samordnare** logging into Caire on Monday morning. Instead of juggli
 - <1s schedule optimization (Timefold.ai)  
 
 ### 9.3 User Metrics
-- 90% user satisfaction for scheduling/admin  
+- 90% user satisfaction (scheduling/admin)  
 - <5 minutes for onboarding  
 - <2 support tickets per user per month  
 
@@ -354,25 +431,27 @@ Imagine a **Samordnare** logging into Caire on Monday morning. Instead of juggli
 ## 10. Future Considerations
 
 ### 10.1 Additional Feature Ideas
-- **Mobile Application** for on-the-go scheduling  
-- **Advanced AI/ML**: predictive staff shortages, high-need times  
+- **Mobile Application** for real-time scheduling updates  
+- **Advanced AI/ML**: predictive staff shortages, complex scheduling  
 - **Additional Integrations**: Carefox, municipal e-health  
-- **International Expansion**: multi-lingual support  
-- **Custom Optimization Rules**: advanced continuity constraints, specialized skill sets  
+- **International Expansion**: multi-lingual  
+- **Custom Optimization Rules**: continuity constraints, specialized skill sets  
 
 ### 10.2 Advanced Analytics as Premium Upsell
-As Caire matures, **Advanced Analytics** could be introduced as a premium or enterprise tier:
-
-1. **Predictive Scheduling & Cost Forecasts**  
-2. **Scenario Testing** (“What if we add more employees/vehicles?”)  
-3. **Custom Dashboards** and **Real-time Alerts**  
-4. **Extended Data Retention & Trends** (6–12+ months)
+- **Predictive Scheduling & Cost Forecasts**  
+- **Scenario Testing** (“What if we add more employees or vehicles?”)  
+- **Custom Dashboards** for large org data insights  
+- **Extended Data Retention & Trends** (6–12+ months)
 
 **Value Proposition**  
-- High revenue potential by offering deeper data insights  
-- Differentiates from simpler competitor solutions  
+- Potential for higher revenue with deeper data insights  
+- Differentiates from simple competitor solutions  
 
 **Implementation Outline**  
-- Keep core analytics in base plan  
-- Offer advanced analytics with predictive features, cost breakdowns, scenario tools in premium tier  
-- Role/plan-based gating in multi-tenant environment  
+- Keep **core analytics** in base plan  
+- Offer advanced analytics (predictive, scenario testing) as premium tier  
+- Possibly restrict via role-based or plan-based gating  
+
+---
+
+**End of Updated PRD**

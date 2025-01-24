@@ -10,6 +10,14 @@ const nextConfig = {
     // Ignore errors in development and preview, but not in production
     ignoreDuringBuilds: process.env.VERCEL_ENV !== 'production',
   },
+  webpack: (config, { isServer }) => {
+    // Ignore OpenTelemetry warnings
+    config.ignoreWarnings = [
+      { module: /node_modules\/@opentelemetry/ },
+      { module: /node_modules\/@prisma/ },
+    ];
+    return config;
+  },
   // ... rest of your config
 };
 

@@ -1,6 +1,8 @@
 'use client';
 
+import { Settings } from 'lucide-react';
 import { useState } from 'react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -21,9 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
 import { useTranslations } from '@/utils/translations';
-import { Settings } from 'lucide-react';
 
 // Mock data - replace with actual data from your backend
 const mockConstraints = {
@@ -84,10 +84,10 @@ export default function ConstraintManager() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           size="icon"
-          className="bg-white hover:bg-purple-50 hover:text-purple-600 border-purple-100"
+          className="border-purple-100 bg-white hover:bg-purple-50 hover:text-purple-600"
         >
           <Settings className="size-4" />
         </Button>
@@ -129,10 +129,10 @@ export default function ConstraintManager() {
 
         {/* Constraints list */}
         <div className="grid gap-4">
-          {mockConstraints[selectedCategory].map((constraint) => (
+          {mockConstraints[selectedCategory].map(constraint => (
             <Card
               key={constraint.id}
-              className="p-4 bg-white border-border shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:bg-purple-50/50"
+              className="border-border bg-white p-4 shadow-sm transition-all hover:-translate-y-1 hover:bg-purple-50/50 hover:shadow-lg"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -143,15 +143,15 @@ export default function ConstraintManager() {
                           constraint.type === 'HARD'
                             ? 'destructive'
                             : constraint.type === 'MEDIUM'
-                            ? 'default'
-                            : 'secondary'
+                              ? 'default'
+                              : 'secondary'
                         }
                         className={
                           constraint.type === 'HARD'
                             ? 'bg-red-100 text-red-600 hover:bg-red-200'
                             : constraint.type === 'MEDIUM'
-                            ? 'bg-purple-100 text-purple-600 hover:bg-purple-200'
-                            : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                              ? 'bg-purple-100 text-purple-600 hover:bg-purple-200'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                         }
                       >
                         {constraint.type}
@@ -166,7 +166,8 @@ export default function ConstraintManager() {
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-medium text-purple-600">
-                      {constraint.satisfaction}%
+                      {constraint.satisfaction}
+                      %
                     </div>
                     <Progress
                       value={constraint.satisfaction}
@@ -175,18 +176,18 @@ export default function ConstraintManager() {
                         constraint.satisfaction >= 90
                           ? 'bg-green-500'
                           : constraint.satisfaction >= 70
-                          ? 'bg-purple-500'
-                          : 'bg-red-500'
+                            ? 'bg-purple-500'
+                            : 'bg-red-500'
                       }
                     />
                   </div>
                 </div>
 
                 {/* Edit form */}
-                <div className="grid gap-4 pt-4 border-t border-border">
+                <div className="grid gap-4 border-t border-border pt-4">
                   <div className="grid gap-2">
                     <Select defaultValue={constraint.type}>
-                      <SelectTrigger className="bg-white text-gray-900 border-purple-100">
+                      <SelectTrigger className="border-purple-100 bg-white text-gray-900">
                         <SelectValue placeholder={t('select_type')} />
                       </SelectTrigger>
                       <SelectContent className="bg-white">
@@ -205,7 +206,7 @@ export default function ConstraintManager() {
                   <Input
                     defaultValue={constraint.description}
                     placeholder={t('description_placeholder')}
-                    className="bg-white text-gray-900 border-purple-100"
+                    className="border-purple-100 bg-white text-gray-900"
                   />
                 </div>
               </div>
@@ -214,10 +215,10 @@ export default function ConstraintManager() {
         </div>
 
         {/* Add new constraint button */}
-        <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+        <Button className="w-full bg-purple-600 text-white hover:bg-purple-700">
           {t('add_constraint')}
         </Button>
       </DialogContent>
     </Dialog>
   );
-} 
+}
