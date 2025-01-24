@@ -2,8 +2,8 @@
 
 import { Car, GraduationCap, Heart, Users } from 'lucide-react';
 
-import { cn } from '@/libs/utils';
-import { useTranslations } from '@/utils/translations';
+import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 type Recommendation = {
   type: 'staffing' | 'training' | 'vehicles' | 'clients';

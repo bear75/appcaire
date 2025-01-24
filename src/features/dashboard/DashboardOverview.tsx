@@ -2,7 +2,7 @@
 
 import { KPICard } from '@/components/KPICard';
 import { PageHeader } from '@/components/shared';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 export const DashboardOverview = () => {
   const t = useTranslations('DashboardOverview');

@@ -6,7 +6,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import {
   Table,

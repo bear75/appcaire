@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import {
   Card,

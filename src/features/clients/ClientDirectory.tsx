@@ -2,7 +2,7 @@
 
 import { Grid2X2, List, Search } from 'lucide-react';
 import { useState } from 'react';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';

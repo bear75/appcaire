@@ -1,73 +1,72 @@
-import { Card } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
+'use client';
 
-interface MetricProps {
+import { Card } from '@/components/ui/card';
+import { useTranslations } from '@/lib/utils/i18n/translations';
+import type { ProcessedSchedule } from '../types';
+
+type MetricProps = {
+  label: string;
   value: string | number;
   unit?: string;
-  label: string;
-  trend?: {
-    value: number;
-    isPositive: boolean;
-  };
-}
+  trend?: number;
+};
 
-function Metric({ value, unit, label, trend }: MetricProps) {
+type ScheduleMetricsProps = {
+  schedule: ProcessedSchedule;
+};
+
+function Metric({ label, value, unit, trend }: MetricProps) {
   return (
-    <Card className="flex min-h-[120px] flex-col justify-between p-6">
-      <div className="flex items-baseline gap-2">
-        <span className="text-4xl font-semibold tracking-tight text-slate-900">{value}</span>
-        {unit && <span className="text-xl text-slate-600">{unit}</span>}
-      </div>
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-slate-600">{label}</span>
-        {trend && (
-          <span
-            className={cn(
-              'text-sm font-medium',
-              trend.isPositive ? 'text-emerald-600' : 'text-red-600'
-            )}
-          >
-            {trend.isPositive ? '+' : '-'}
-            {Math.abs(trend.value)}%
-          </span>
+    <Card className="p-6 transition-all duration-200 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lg">
+      <div className="flex flex-col gap-2">
+        <div className="text-3xl font-bold">
+          {value}
+          {unit && <span className="ml-1 text-xl">{unit}</span>}
+        </div>
+        <div className="text-sm text-slate-600">{label}</div>
+        {trend !== undefined && (
+          <div className={`text-sm ${trend >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            {trend > 0 ? '+' : ''}
+            {trend}
+            %
+          </div>
         )}
       </div>
     </Card>
   );
 }
 
-export default function ScheduleMetrics() {
+export default function ScheduleMetrics({ schedule }: ScheduleMetricsProps) {
+  const t = useTranslations('Schedule');
+
   return (
-    <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5">
+    <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
       <Metric
-        value={92}
         label="Antal besök"
-        trend={{ value: 5.2, isPositive: true }}
+        value={92}
+        trend={5.2}
       />
       <Metric
+        label="Total tid"
         value={156}
         unit="h"
-        label="Total tid"
-        trend={{ value: 1.1, isPositive: false }}
+        trend={-1.1}
       />
       <Metric
-        value={98}
-        unit="%"
         label="Slutförda"
-        trend={{ value: 0.3, isPositive: true }}
-      />
-      <Metric
-        value={87}
+        value={78}
         unit="%"
-        label="Personal"
-        trend={{ value: 0.2, isPositive: false }}
       />
       <Metric
-        value={22}
-        unit="min"
-        label="Restid"
-        trend={{ value: 5.2, isPositive: true }}
+        label="Personal"
+        value={12}
+      />
+      <Metric
+        label="Personalutnyttjande"
+        value={85}
+        unit="%"
+        trend={2.3}
       />
     </div>
   );
-} 
+}

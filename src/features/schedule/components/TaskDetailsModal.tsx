@@ -10,43 +10,37 @@ import {
 } from '@/components/ui/dialog';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 import { Clock, MapPin, User, AlertTriangle } from 'lucide-react';
 
 interface TaskDetailsModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  task: {
-    id: string;
-    employeeName: string;
-    clientName: string;
-    startTime: string;
-    endTime: string;
-    location: string;
-    type: string;
-    constraints: Array<{
-      id: string;
-      type: 'HARD' | 'MEDIUM' | 'SOFT';
-      description: string;
-      satisfaction: number;
-    }>;
-    conflicts: Array<{
-      id: string;
-      severity: 'HIGH' | 'MEDIUM' | 'LOW';
-      description: string;
-    }>;
-  };
+  open: boolean;
+  onOpenChange: () => void;
+  taskId: string | null;
 }
 
 export default function TaskDetailsModal({
-  isOpen,
-  onClose,
-  task,
+  open,
+  onOpenChange,
+  taskId,
 }: TaskDetailsModalProps) {
-  const t = useTranslations('Schedule.task_details');
+  const t = useTranslations('Schedule.taskDetails');
+
+  // Mock task data for now
+  const task = {
+    id: taskId || '',
+    employeeName: 'Anna Andersson',
+    clientName: 'Erik Eriksson',
+    startTime: '09:00',
+    endTime: '10:00',
+    location: 'Storgatan 1',
+    type: 'PERSONAL_CARE',
+    constraints: [],
+    conflicts: [],
+  };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="bg-white sm:max-w-[600px]">
         <DialogHeader className="space-y-3">
           <DialogTitle className="text-xl font-semibold text-gray-900">
@@ -76,7 +70,7 @@ export default function TaskDetailsModal({
             </div>
             <div>
               <p className="text-sm font-medium text-gray-500">{t('type')}</p>
-              <p className="text-base text-gray-900">{task.type}</p>
+              <p className="text-base text-gray-900">{t(`visit_types.${task.type}`)}</p>
             </div>
           </div>
 

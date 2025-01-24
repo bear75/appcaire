@@ -1,42 +1,41 @@
-import { SplitSquareVertical, Wand2 } from 'lucide-react';
+'use client';
+
+import { Wand2 } from 'lucide-react';
+import { useState } from 'react';
+
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
-interface ScheduleHeaderProps {
-  hasManualSchedule: boolean;
-  hasOptimizedSchedule: boolean;
-  isCompareMode: boolean;
-  onCompareToggle: () => void;
-  enableCompareToggle: boolean;
-}
+export default function ScheduleHeader() {
+  const t = useTranslations('Schedule');
+  const [isOptimizing, setIsOptimizing] = useState(false);
 
-export function ScheduleHeader({
-  hasManualSchedule,
-  hasOptimizedSchedule,
-  isCompareMode,
-  onCompareToggle,
-  enableCompareToggle,
-}: ScheduleHeaderProps) {
+  const handleOptimize = () => {
+    setIsOptimizing(true);
+    // Simulate optimization process
+    setTimeout(() => {
+      setIsOptimizing(false);
+    }, 2000);
+  };
+
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-4">
-        <h2 className="text-lg font-semibold">Schema</h2>
-        {hasOptimizedSchedule && !enableCompareToggle && (
-          <Badge variant="secondary" className="bg-purple-50 text-purple-600">
-            AI-optimerat
-          </Badge>
-        )}
+    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="text-muted-foreground">{t('description')}</p>
       </div>
-      {enableCompareToggle && hasManualSchedule && hasOptimizedSchedule && (
+
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
         <Button
-          variant={isCompareMode ? "secondary" : "outline"}
-          onClick={onCompareToggle}
-          className="gap-2"
+          onClick={handleOptimize}
+          disabled={isOptimizing}
+          className="gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700"
         >
-          <SplitSquareVertical className="size-4" />
-          {isCompareMode ? "Dölj jämförelse" : "Visa jämförelse"}
+          <Wand2 className={cn('size-4', isOptimizing && 'animate-spin')} />
+          {t('optimize')}
         </Button>
-      )}
+      </div>
     </div>
   );
-} 
+}

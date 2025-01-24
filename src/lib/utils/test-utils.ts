@@ -1,3 +1,9 @@
+/**
+ * @deprecated This file has been moved to src/lib/utils/testing/test-utils.ts
+ * Please update your imports to use the new location.
+ * This file will be removed once all dependencies are updated.
+ */
+
 import { vi } from 'vitest';
 
 export const mockSupabase = () => ({

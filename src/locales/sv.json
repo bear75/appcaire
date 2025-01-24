@@ -286,7 +286,10 @@
       "soft": "Mjuka begränsningar",
       "hardDesc": "Måste uppfyllas",
       "mediumDesc": "Bör uppfyllas",
-      "softDesc": "Kan uppfyllas"
+      "softDesc": "Kan uppfyllas",
+      "description_placeholder": "Beskriv begränsningen",
+      "constraints_travel_time": "Restid",
+      "constraints_workload": "Arbetsbelastning"
     }
   },
   "QuickActions": {
@@ -332,32 +335,16 @@
       "constraints": "Begränsningar",
       "conflicts": "Konflikter",
       "client": "Klient",
-      "status": "Status"
-    },
-    "constraints": {
-      "title": "Hantera begränsningar",
-      "description": "Konfigurera och övervaka schemaläggningsbegränsningar",
-      "categories": {
-        "organization": "Organisation",
-        "employee": "Personal",
-        "client": "Klienter"
-      },
-      "types": {
-        "hard": "Hård",
-        "medium": "Medium",
-        "soft": "Mjuk"
-      },
-      "select_type": "Välj typ",
-      "description_placeholder": "Beskriv begränsningen",
-      "add_constraint": "Lägg till ny begränsning",
-      "satisfaction": "Uppfyllnad",
-      "category_labels": {
-        "WORKING_HOURS": "Arbetstid",
-        "STAFF_RATIO": "Personaltäthet",
-        "AVAILABILITY": "Tillgänglighet",
-        "PREFERENCES": "Preferenser",
-        "TIME_WINDOW": "Tidsintervall",
-        "CONTINUITY": "Kontinuitet"
+      "status": "Status",
+      "visit_types": {
+        "PERSONAL_CARE": "Personlig omvårdnad",
+        "MEDICATION": "Medicinering",
+        "CLEANING": "Städning",
+        "MEAL": "Måltid",
+        "SOCIAL": "Social aktivitet",
+        "SHOPPING": "Inköp",
+        "LAUNDRY": "Tvätt",
+        "OTHER": "Övrigt"
       }
     },
     "grid": {
@@ -368,7 +355,8 @@
       "type": "Typ",
       "status": "Status",
       "location": "Plats",
-      "constraints": "Begränsningar"
+      "constraints": "Begränsningar",
+      "staff": "Personal"
     },
     "map": {
       "title": "Karta",
@@ -392,8 +380,124 @@
     "page_description": "Hantera och optimera ditt hemtjänstschema",
     "tabs": {
       "timeline": "Tidslinje",
-      "grid": "Schema",
+      "grid": "Lista",
       "map": "Karta"
+    },
+    "trial": {
+      "title": "Testorganisation",
+      "description": "Prova med exempeldata",
+      "banner": "Testläge: Jämför manuellt schema med AI-optimerat schema",
+      "manual_schedule": "Manuellt schema",
+      "optimized_schedule": "AI-optimerat schema",
+      "manual_description": "Detta är ett exempel på ett manuellt skapat schema",
+      "optimized_description": "Detta är ett exempel på hur AI kan optimera schemat för bättre effektivitet",
+      "import": {
+        "title": "Importera schema",
+        "description": "Importera ditt befintliga schema för att jämföra med AI-optimerad version",
+        "json_upload": "JSON-uppladdning",
+        "direct_api": "Direkt API (Kommer snart)",
+        "success": {
+          "title": "Schema importerat",
+          "description": "Ditt schema är redo för AI-optimering"
+        },
+        "cancel": "Avbryt",
+        "json_example": {
+          "title": "JSON-exempel",
+          "content": {
+            "scheduleEntries": [
+              {
+                "date": "2024-01-25",
+                "groupId": "sträng",
+                "clientId": "sträng",
+                "employeeId": "sträng",
+                "startTime": "08:00",
+                "endTime": "09:00",
+                "category": "sträng"
+              }
+            ]
+          }
+        },
+        "import_button": "Importera schema",
+        "how_to": {
+          "title": "Hur du exporterar ditt schema",
+          "steps": [
+            "Exportera ditt schema från eCare via Business Intelligence API",
+            "Använd GetScheduledMinutesExtended-slutpunkten",
+            "Spara svaret som JSON",
+            "Klistra in JSON-innehållet i textfältet ovan"
+          ]
+        }
+      }
+    },
+    "new": {
+      "title": "Ny organisation",
+      "description": "Skapa ett nytt schema för din organisation",
+      "staff": {
+        "add": "Lägg till personal",
+        "description": "Hantera vårdgivare och deras tillgänglighet"
+      },
+      "clients": {
+        "add": "Lägg till klienter",
+        "description": "Hantera klienter och deras vårdscheman"
+      },
+      "create": {
+        "button": "Skapa schema",
+        "disabled_message": "Lägg till personal och klienter först för att skapa schema"
+      }
+    },
+    "Personal": "Personal",
+    "Klient": "Klient",
+    "visit_types": {
+      "PERSONAL_CARE": "Personlig omvårdnad",
+      "MEDICATION": "Medicinering",
+      "CLEANING": "Städning",
+      "MEAL": "Måltid",
+      "SOCIAL": "Social aktivitet",
+      "SHOPPING": "Inköp",
+      "LAUNDRY": "Tvätt",
+      "OTHER": "Övrigt"
+    },
+    "constraints": {
+      "title": "Begränsningar",
+      "description": "Hantera och övervaka schemaläggningsbegränsningar",
+      "constraints_travel_time": "Restid (85%)",
+      "constraints_workload": "Arbetsbelastning (92%)",
+      "constraints_skills": "Kompetenser (78%)",
+      "constraints_preferences": "Preferenser (95%)",
+      "constraints_mode_balanced": "Balanserad optimering",
+      "constraints_mode_time": "Tidsoptimering",
+      "constraints_mode_quality": "Kvalitetsoptimering",
+      "select_mode": "Välj optimeringsläge",
+      "select_type": "Välj typ",
+      "description_placeholder": "Beskriv begränsningen",
+      "add_constraint": "Lägg till begränsning",
+      "types": {
+        "hard": "Hård",
+        "medium": "Medium",
+        "soft": "Mjuk"
+      },
+      "category_labels": {
+        "organization": "Organisation",
+        "employee": "Personal",
+        "client": "Klient",
+        "WORKING_HOURS": "Arbetstid",
+        "STAFF_RATIO": "Personaltäthet",
+        "AVAILABILITY": "Tillgänglighet",
+        "PREFERENCES": "Preferenser",
+        "TIME_WINDOW": "Tidsintervall",
+        "CONTINUITY": "Kontinuitet"
+      }
+    },
+    "constraint_types": {
+      "WORKING_HOURS": "Arbetstid",
+      "STAFF_RATIO": "Personaltäthet",
+      "AVAILABILITY": "Tillgänglighet",
+      "PREFERENCES": "Preferenser",
+      "TIME_WINDOW": "Tidsintervall",
+      "CONTINUITY": "Kontinuitet",
+      "TRAVEL_TIME": "Restid",
+      "WORKLOAD": "Arbetsbelastning",
+      "SKILLS": "Kompetenser"
     }
   },
   "Auth": {

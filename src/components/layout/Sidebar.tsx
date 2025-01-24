@@ -1,5 +1,6 @@
 'use client';
 
+import { cn, getI18nPath } from '@/lib/utils/helpers/utils';
 import {
   BarChartIcon,
   CalendarIcon,
@@ -11,7 +12,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { Logo } from '@/templates/Logo';
-import { cn } from '@/utils/Helpers';
 
 const navigation = [
   {

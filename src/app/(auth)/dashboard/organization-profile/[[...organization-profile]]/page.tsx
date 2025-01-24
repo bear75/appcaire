@@ -1,7 +1,7 @@
 import { OrganizationProfile } from '@clerk/nextjs';
-import { useTranslations } from '@/utils/translations';
 
 import { TitleBar } from '@/features/dashboard/TitleBar';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 const OrganizationProfilePage = () => {
   const t = useTranslations('OrganizationProfile');

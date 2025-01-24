@@ -1,7 +1,7 @@
 import type { VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
-import { cn } from '@/utils/Helpers';
+import { cn } from '@/lib/utils/helpers/utils';
 
 import { badgeVariants } from './badgeVariants';
 

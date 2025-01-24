@@ -1,4 +1,4 @@
-import type { PLAN_ID } from '@/utils/AppConfig';
+import type { PLAN_ID } from '@/lib/utils/config/app-config';
 
 import type { EnumValues } from './Enum';
 

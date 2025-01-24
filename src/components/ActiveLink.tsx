@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { cn } from '@/utils/Helpers';
+import { cn } from '@/lib/utils/helpers/utils';
 
 export const ActiveLink = (props: { href: string; children: React.ReactNode }) => {
   const pathname = usePathname();

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { getTranslations } from '@/utils/translations';
+import { getTranslations } from '@/lib/utils/i18n/translations';
 
 import { PageContainer } from '@/components/shared';
 import { ClientHeader } from '@/features/clients/ClientHeader';

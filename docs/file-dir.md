@@ -1,6 +1,63 @@
 # File Directory Structure
 
+## Root Structure
 ```
+/
+├── docs/                    # Documentation files
+├── public/                  # Static assets
+└── src/                     # Source code
+    ├── app/                 # Next.js 13+ App Router pages
+    ├── components/          # Shared components
+    ├── features/           # Feature-specific code
+    ├── lib/                # Core utilities and configurations
+    ├── models/             # Database models and schemas
+    ├── styles/             # Global styles
+    └── utils/              # Utility functions
+```
+
+## Features Directory
+```
+src/features/
+├── analytics/              # Analytics feature
+├── clients/               # Client management
+├── employees/             # Employee management
+└── schedule/              # Scheduling feature
+    ├── components/        # Schedule-specific components
+    │   ├── ImportWizard/  # Schedule import functionality
+    │   └── ScheduleView/  # Schedule view components
+    ├── hooks/             # Custom hooks for scheduling
+    ├── test-data/         # Test data for development
+    ├── types/             # TypeScript type definitions
+    ├── utils/             # Schedule-specific utilities
+    ├── ConstraintManager.tsx    # Constraint management UI
+    ├── OrganizationTypeSelector.tsx  # Organization selection
+    ├── ScheduleContent.tsx     # Main schedule content
+    ├── ScheduleGrid.tsx        # Grid view implementation
+    ├── ScheduleHeader.tsx      # Schedule header component
+    ├── ScheduleMap.tsx         # Map view implementation
+    ├── ScheduleMetrics.tsx     # Metrics display
+    ├── ScheduleTimeline.tsx    # Timeline view
+    ├── ScheduleView.tsx        # Main schedule view
+    └── TaskDetailsModal.tsx    # Task details modal
+```
+
+## Components Directory
+```
+src/components/
+├── shared/                # Shared components across features
+└── ui/                   # UI components from shadcn
+    ├── button.tsx
+    ├── card.tsx
+    ├── dialog.tsx
+    ├── form.tsx
+    ├── input.tsx
+    ├── radio-group.tsx
+    ├── select.tsx
+    ├── sheet.tsx
+    ├── tabs.tsx
+    └── toast.tsx
+```
+
 appcaire/
 ├── docs/                      # Documentation files
 │   ├── file-dir.md           # This file - directory structure

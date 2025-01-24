@@ -1,7 +1,7 @@
 'use client';
 
 import { Globe, Clock, Calendar } from 'lucide-react';
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { Button } from '@/components/ui/button';
 import {

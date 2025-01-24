@@ -1,5 +1,3 @@
-import { useTranslations } from '@/utils/translations';
-
 import { Avatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -10,27 +8,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
-// Mock data - replace with actual data from your backend
-const mockAssignments = [
-  {
-    id: 1,
-    employee: {
-      name: 'Anna Andersson',
-      avatar: '/avatars/aa.png',
-      role: 'Nurse',
-    },
-    client: 'Erik Svensson',
-    time: '09:00 - 10:00',
-    type: 'Medication',
-    status: 'Scheduled',
-    location: 'Kungsgatan 1',
-    constraints: ['Qualification', 'Time Window'],
-  },
-  // Add more assignments here
-];
+import type { ProcessedSchedule } from '../types';
 
-export default function ScheduleGrid() {
+type ScheduleGridProps = {
+  schedule: ProcessedSchedule;
+  onTaskSelect: (taskId: string | null) => void;
+};
+
+export default function ScheduleGrid({ schedule, onTaskSelect }: ScheduleGridProps) {
   const t = useTranslations('Schedule.grid');
 
   return (
@@ -48,50 +35,51 @@ export default function ScheduleGrid() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {mockAssignments.map(assignment => (
-            <TableRow key={assignment.id}>
+          {schedule.data.entries.map(entry => (
+            <TableRow key={entry.id} onClick={() => onTaskSelect(entry.id)} className="cursor-pointer hover:bg-slate-50">
               <TableCell>
                 <div className="flex items-center gap-2">
                   <Avatar className="size-8">
                     <img
-                      src={assignment.employee.avatar}
-                      alt={assignment.employee.name}
+                      src={entry.employeeAvatar || '/placeholder-avatar.png'}
+                      alt={entry.employeeName}
                     />
                   </Avatar>
                   <div>
                     <div className="font-medium">
-                      {assignment.employee.name}
+                      {entry.employeeName}
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      {assignment.employee.role}
+                      {entry.employeeRole || t('staff')}
                     </div>
                   </div>
                 </div>
               </TableCell>
-              <TableCell>{assignment.client}</TableCell>
-              <TableCell>{assignment.time}</TableCell>
+              <TableCell>{entry.clientName}</TableCell>
               <TableCell>
-                <Badge variant="outline">{assignment.type}</Badge>
+                {entry.startDateTime.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}
+                {' '}
+                -
+                {entry.endDateTime.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}
               </TableCell>
               <TableCell>
-                <Badge
-                  variant={
-                    assignment.status === 'Scheduled' ? 'secondary' : 'default'
-                  }
-                >
-                  {assignment.status}
+                <Badge variant="outline">{entry.type}</Badge>
+              </TableCell>
+              <TableCell>
+                <Badge variant="secondary">
+                  {schedule.status}
                 </Badge>
               </TableCell>
-              <TableCell>{assignment.location}</TableCell>
+              <TableCell>{entry.location}</TableCell>
               <TableCell>
                 <div className="flex flex-wrap gap-1">
-                  {assignment.constraints.map(constraint => (
+                  {entry.constraints?.map(constraint => (
                     <Badge
-                      key={constraint}
+                      key={constraint.type}
                       variant="outline"
                       className="bg-primary/5"
                     >
-                      {constraint}
+                      {constraint.type}
                     </Badge>
                   ))}
                 </div>

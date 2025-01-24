@@ -1,3 +1,9 @@
+/**
+ * @deprecated This file is being moved to src/lib/db/migrations.ts
+ * Please update your imports to use the new location.
+ * This file will be removed once all dependencies are updated.
+ */
+
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import postgres from 'postgres';
@@ -19,7 +25,7 @@ async function runMigrations() {
   console.log(`Using migrations folder: ${migrationsFolder}`);
 
   // Create a connection for migrations
-  const sql = postgres(connectionString, { 
+  const sql = postgres(connectionString as string, { 
     max: 1,
     ssl: "require",
     connection: {

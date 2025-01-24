@@ -5,7 +5,7 @@ import type { ControllerProps, FieldPath, FieldValues } from 'react-hook-form';
 import { Controller, FormProvider } from 'react-hook-form';
 
 import { Label } from '@/components/ui/label';
-import { cn } from '@/utils/Helpers';
+import { cn } from '@/lib/utils/helpers/utils';
 
 import { FormFieldContext, FormItemContext, useFormField } from './useFormField';
 

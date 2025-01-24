@@ -1,8 +1,8 @@
-import { useTranslations } from '@/utils/translations';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { PricingCard } from '@/features/billing/PricingCard';
 import { PricingFeature } from '@/features/billing/PricingFeature';
-import { PricingPlanList } from '@/utils/AppConfig';
+import { PricingPlanList } from '@/lib/utils/config/app-config';
 
 export const PricingInformation = (props: {
   buttonList: Record<string, React.ReactNode>;
