@@ -1,22 +1,71 @@
 # Database Design
 
 ## Overview
-This document outlines the database schema for the Caire platform, focusing on scheduling and organization management.
+This document outlines the database schema and setup for the Caire platform, focusing on scheduling and organization management.
+
+## Project Structure
+```
+📦 src/lib/db
+ ├ 📂 schema
+ │  ├ 📜 tables.ts        # Core table definitions
+ │  ├ 📜 types.ts         # Shared types and enums
+ │  └ 📜 index.ts         # Schema exports
+ ├ 📂 migrations
+ │  └ 📜 index.ts         # Migration utilities
+ ├ 📜 client.ts           # Database client setup
+ └ 📜 index.ts            # Main database exports
+
+📦 drizzle
+ ├ 📂 meta               # Migration metadata
+ │  └ 📜 _journal.json
+ └ 📂 migrations         # Generated migrations
+    └ 📜 *.sql
+```
+
+## Configuration
+The database is configured using Drizzle ORM with PostgreSQL. Configuration is managed in `drizzle.config.ts`:
+
+```typescript
+import 'dotenv/config';
+
+import { defineConfig } from 'drizzle-kit';
+
+export default defineConfig({
+  schema: './src/lib/db/schema/*.ts',
+  out: './drizzle',
+  dialect: 'postgresql',
+  dbCredentials: {
+    url: process.env.DATABASE_URL!,
+  },
+});
+```
+
+## Database Commands
+```bash
+# Generate migrations
+pnpm db:generate
+
+# Apply migrations
+pnpm db:migrate
+
+# Test database setup
+pnpm db:test
+```
 
 ## Tables
 
 ### Organization
 The core table for multi-tenant functionality.
 
-```sql
-CREATE TABLE organization (
-    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    name text NOT NULL,
-    trial_expiration_date timestamp with time zone,
-    status text DEFAULT 'ACTIVE'::text,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
-);
+```typescript
+export const organizations = pgTable('organizations', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  trialExpirationDate: timestamp('trial_expiration_date', { withTimezone: true }),
+  status: text('status').default('ACTIVE'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow()
+});
 ```
 
 Key features:
@@ -94,31 +143,48 @@ Key features:
 ## Security
 
 ### Row Level Security
-All tables implement Row Level Security (RLS) policies to ensure data isolation between organizations:
+All tables implement Row Level Security (RLS) policies using Drizzle's policy builder:
 
-```sql
-ALTER TABLE [table_name] ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY tenant_isolation_policy ON [table_name]
-    USING (organization_id = current_setting('app.current_tenant')::uuid)
-    WITH CHECK (organization_id = current_setting('app.current_tenant')::uuid);
+```typescript
+export const organizationPolicy = policy(auth => ({
+  organization_id: equals(auth.organization_id)
+}));
 ```
 
 ### Automatic Updates
-All tables include `created_at` and `updated_at` timestamps, with triggers to maintain `updated_at`:
+Timestamps are handled automatically by Drizzle:
 
-```sql
-CREATE TRIGGER update_updated_at_column
-    BEFORE UPDATE ON [table_name]
-    FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();
+```typescript
+export const baseColumns = {
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow()
+};
 ```
 
 ## Migrations
-Migrations are managed using Drizzle ORM with the following structure:
-- Sequential migration files in `/migrations`
-- Metadata tracking in `/migrations/meta`
-- Migration state in `drizzle_migrations` table
+Migrations are managed using Drizzle Kit:
+1. Schema changes are made in TypeScript files
+2. Run `pnpm db:generate` to create migration files
+3. Review generated SQL in `./drizzle/migrations`
+4. Apply migrations using `pnpm db:migrate`
+
+## Best Practices
+1. Always use TypeScript for schema definitions
+2. Generate migrations for all schema changes
+3. Test migrations locally before deployment
+4. Use prepared statements for queries
+5. Implement proper error handling
+6. Follow naming conventions:
+   - Table names: plural, snake_case
+   - Column names: camelCase in TypeScript, snake_case in DB
+   - Foreign keys: entityName_id format
+
+## Development Workflow
+1. Make schema changes in TypeScript files
+2. Generate and review migrations
+3. Test locally with `pnpm db:test`
+4. Commit both schema and migration files
+5. Deploy with zero-downtime migration strategy
 
 ## Indexes
 Key indexes for performance optimization:

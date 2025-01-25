@@ -6,11 +6,12 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { ImportWizard } from './components/ImportWizard';
 import OrganizationTypeSelector from './components/OrganizationTypeSelector';
-import ScheduleView from './components/ScheduleView/index';
+import { ScheduleView } from './components/ScheduleView';
 import { demoSchedule, existingSchedule, trialSchedule } from './test-data/demo-data';
 import type { ProcessedSchedule, ScheduleEntry } from './types';
 
@@ -38,6 +39,8 @@ function ScheduleContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [hasImportedSchedule, setHasImportedSchedule] = useState(false);
+  const [isOptimizing, setIsOptimizing] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   // Get mode from URL parameters with null checks
   const rawMode = searchParams?.get('mode');
@@ -76,6 +79,23 @@ function ScheduleContent() {
       default:
         return processSchedule(demoSchedule);
     }
+  };
+
+  // Simulate optimization process
+  const simulateOptimization = () => {
+    setIsOptimizing(true);
+    setProgress(0);
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setIsOptimizing(false);
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 500);
   };
 
   const renderContent = () => {
@@ -141,12 +161,33 @@ function ScheduleContent() {
 
     // For all other cases, show schedule view with appropriate data
     return (
-      <ScheduleView
-        schedule={getScheduleForMode()}
-        mode={mode}
-        view={view}
-        compare={compare}
-      />
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-semibold text-gray-900">{t('title')}</h1>
+          {mode === 'existing' && (
+            <div className="space-y-2">
+              <Button
+                className="w-full bg-purple-600 text-white hover:bg-purple-700 disabled:bg-purple-300"
+                onClick={simulateOptimization}
+                disabled={isOptimizing}
+              >
+                {isOptimizing ? `${t('constraints.optimizing')} ${progress}%` : t('optimize_schedule')}
+              </Button>
+              {isOptimizing && (
+                <div className="w-full">
+                  <Progress value={progress} className="h-2" />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <ScheduleView
+          schedule={getScheduleForMode()}
+          mode={mode}
+          view={view}
+          compare={compare}
+        />
+      </div>
     );
   };
 

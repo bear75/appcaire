@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useOrganization } from '@clerk/nextjs';
-import { supabase } from '@/lib/supabase';
+import { db } from '@/lib/db';
 import { validateECareSchedule, validateDateRange, validateScheduleConsistency } from '../utils/validation';
 import type { ImportSource } from '../types';
 
@@ -38,7 +38,7 @@ export function useScheduleImport() {
       };
 
       // Store in Supabase
-      const { data: schedule, error } = await supabase
+      const { data: schedule, error } = await db
         .from('schedules')
         .insert({
           organization_id: organization.id,

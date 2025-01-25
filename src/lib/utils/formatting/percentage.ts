@@ -60,3 +60,29 @@ export function parsePercentage(value: string): number {
   const normalized = value.replace(/[^0-9,.-]/g, '').replace(',', '.');
   return Number.parseFloat(normalized) / 100;
 }
+
+/**
+ * Format a number as a percentage
+ */
+export const formatPercentage = (value: number, decimals: number = 1): string => {
+  return new Intl.NumberFormat('sv-SE', {
+    style: 'percent',
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(value);
+};
+
+/**
+ * Format a decimal as a percentage with custom locale
+ */
+export const formatCustomPercentage = (
+  value: number,
+  decimals: number = 1,
+  locale: string = 'sv-SE'
+): string => {
+  return new Intl.NumberFormat(locale, {
+    style: 'percent',
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(value);
+};

@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { i18nConfig } from '../config';
-import type { Locale, TranslationFunction, TranslationValues } from '../types';
+import { useTranslationContext } from '../context/TranslationProvider';
+import type { TranslationFunction, TranslationValues } from '../types';
 import { loadTranslations } from '../utils/loadTranslations';
 
 export function useTranslation(namespace: string) {
   const [translations, setTranslations] = useState<Record<string, any>>({});
-  const [locale, setLocale] = useState<Locale>(i18nConfig.defaultLocale);
+  const { locale, setLocale } = useTranslationContext();
 
   useEffect(() => {
     loadTranslations(locale, namespace).then(setTranslations);

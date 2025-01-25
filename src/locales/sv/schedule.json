@@ -1,0 +1,120 @@
+{
+  "title": "Schema",
+  "description": "Hantera och optimera ditt schema",
+  "trial": {
+    "title": "Prova schemaläggning",
+    "description": "Importera ditt schema för att se hur Caire kan optimera det",
+    "comparison": {
+      "title": "Jämförelse med nuvarande schema",
+      "description": "Se hur Caire kan förbättra ditt schema"
+    },
+    "import": {
+      "title": "Importera schema",
+      "description": "Välj hur du vill importera ditt schema",
+      "json_upload": "Ladda upp JSON-fil",
+      "direct_api": "Direktkoppling via API",
+      "manual": "Manuell inmatning",
+      "how_to": {
+        "title": "Hur gör jag?",
+        "steps": "Följ dessa steg för att importera ditt schema"
+      },
+      "cancel": "Avbryt"
+    }
+  },
+  "new": {
+    "title": "Kom igång med schemaläggning",
+    "description": "Lägg till personal och klienter för att börja schemalägga",
+    "staff": {
+      "add": "Lägg till personal",
+      "description": "Lägg till personal och deras kompetenser"
+    },
+    "clients": {
+      "add": "Lägg till klienter",
+      "description": "Lägg till klienter och deras behov"
+    }
+  },
+  "active": {
+    "constraints": {
+      "title": "Schemaläggningsregler",
+      "description": "Se hur reglerna påverkar schemat",
+      "optimize": "Optimera schema",
+      "optimizing": "Optimerar..."
+    }
+  },
+  "tabs": {
+    "timeline": "Tidslinje",
+    "grid": "Rutnät",
+    "map": "Karta"
+  },
+  "metrics": {
+    "title": "Schemastatistik",
+    "visits": "Antal besök",
+    "total_time": "Total tid",
+    "completed": "Slutförda",
+    "staff": "Personal",
+    "staff_utilization": "Personalutnyttjande"
+  },
+  "grid": {
+    "employee": "Personal",
+    "client": "Klient",
+    "time": "Tid",
+    "type": "Typ",
+    "status": "Status",
+    "location": "Plats",
+    "constraints": "Regler",
+    "staff": "Personal"
+  },
+  "taskDetails": {
+    "subtitle": "Besöksdetaljer",
+    "employee": "Personal",
+    "time": "Tid",
+    "location": "Plats",
+    "type": "Typ",
+    "constraints": "Regler",
+    "conflicts": "Konflikter"
+  },
+  "visit_types": {
+    "PERSONAL_CARE": "Personlig omvårdnad",
+    "MEDICATION": "Medicinering",
+    "CLEANING": "Städning",
+    "SOCIAL": "Social samvaro",
+    "SHOPPING": "Inköp",
+    "OTHER": "Övrigt"
+  },
+  "constraints": {
+    "title": "Schemaläggningsregler",
+    "description": "Hantera regler för schemaläggning",
+    "types": {
+      "hard": "Hårda regler",
+      "medium": "Medelhårda regler",
+      "soft": "Mjuka regler"
+    },
+    "category_labels": {
+      "WORKING_HOURS": "Arbetstid",
+      "STAFF_RATIO": "Personaltäthet",
+      "AVAILABILITY": "Tillgänglighet",
+      "PREFERENCES": "Preferenser",
+      "TIME_WINDOW": "Tidsintervall",
+      "CONTINUITY": "Kontinuitet",
+      "WORKLOAD": "Arbetsbelastning",
+      "STAFF": "Personal",
+      "SKILLS": "Kompetenser",
+      "TIME": "Tid"
+    },
+    "constraints": {
+      "travel_time": "Restid mellan besök",
+      "workload": "Arbetsbelastning per personal",
+      "skills": "Kompetensmatchning",
+      "preferences": "Personliga preferenser"
+    },
+    "add_constraint": "Lägg till regel",
+    "mode_balanced": "Balanserad schemaläggning",
+    "optimize": "Optimera schema",
+    "optimizing": "Optimerar..."
+  },
+  "actions": {
+    "export": "Exportera schema",
+    "exportJson": "Exportera som JSON",
+    "exportCsv": "Exportera som CSV"
+  }
+}

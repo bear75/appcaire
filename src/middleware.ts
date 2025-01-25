@@ -1,6 +1,9 @@
-import { authMiddleware } from '@clerk/nextjs/server';
+import { authMiddleware, redirectToSignIn } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 
+// This example protects all routes including api/trpc routes
+// Please edit this to allow other routes to be public as needed.
+// See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your middleware
 export default authMiddleware({
   publicRoutes: [
     '/',
@@ -9,22 +12,21 @@ export default authMiddleware({
     '/api/webhooks/clerk',
     '/api/webhooks/stripe',
   ],
+  
   afterAuth(auth, req) {
-    // Handle authenticated users trying to access public routes
-    if (auth.userId) {
-      // If user is signed in and trying to access auth pages, redirect to dashboard
-      if (req.nextUrl.pathname === '/sign-in' || req.nextUrl.pathname === '/sign-up' || req.nextUrl.pathname === '/') {
-        const dashboard = new URL('/dashboard', req.url);
-        return NextResponse.redirect(dashboard);
-      }
-    } else {
-      // If user is not signed in and trying to access protected pages, redirect to sign in
-      const isAuthRoute = req.nextUrl.pathname.startsWith('/dashboard');
-      if (isAuthRoute) {
-        const signIn = new URL('/sign-in', req.url);
-        return NextResponse.redirect(signIn);
-      }
+    // If the user is logged in and trying to access a public route
+    if (auth.userId && auth.isPublicRoute) {
+      const dashboard = new URL('/dashboard', req.url);
+      return NextResponse.redirect(dashboard);
     }
+
+    // If the user is not logged in and trying to access a private route
+    if (!auth.userId && !auth.isPublicRoute) {
+      return redirectToSignIn({ returnBackUrl: req.url });
+    }
+
+    // Allow the request to proceed
+    return NextResponse.next();
   },
 });
 

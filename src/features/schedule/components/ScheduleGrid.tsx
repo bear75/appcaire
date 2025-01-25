@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslation } from '@/lib/i18n';
 
 import type { ProcessedSchedule } from '../types';
 
@@ -17,21 +17,21 @@ type ScheduleGridProps = {
   onTaskSelect: (taskId: string | null) => void;
 };
 
-export default function ScheduleGrid({ schedule, onTaskSelect }: ScheduleGridProps) {
-  const t = useTranslations('Schedule.grid');
+export function ScheduleGrid({ schedule, onTaskSelect }: ScheduleGridProps) {
+  const { t } = useTranslation('schedule');
 
   return (
     <div>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>{t('employee')}</TableHead>
-            <TableHead>{t('client')}</TableHead>
-            <TableHead>{t('time')}</TableHead>
-            <TableHead>{t('type')}</TableHead>
-            <TableHead>{t('status')}</TableHead>
-            <TableHead>{t('location')}</TableHead>
-            <TableHead>{t('constraints')}</TableHead>
+            <TableHead>{t('grid.employee')}</TableHead>
+            <TableHead>{t('grid.client')}</TableHead>
+            <TableHead>{t('grid.time')}</TableHead>
+            <TableHead>{t('grid.type')}</TableHead>
+            <TableHead>{t('grid.status')}</TableHead>
+            <TableHead>{t('grid.location')}</TableHead>
+            <TableHead>{t('grid.constraints')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -50,20 +50,20 @@ export default function ScheduleGrid({ schedule, onTaskSelect }: ScheduleGridPro
                       {entry.employeeName}
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      {entry.employeeRole || t('staff')}
+                      {entry.employeeRole || t('grid.staff')}
                     </div>
                   </div>
                 </div>
               </TableCell>
               <TableCell>{entry.clientName}</TableCell>
               <TableCell>
-                {entry.startDateTime.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}
+                {new Date(entry.startDateTime).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}
                 {' '}
                 -
-                {entry.endDateTime.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}
+                {new Date(entry.endDateTime).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}
               </TableCell>
               <TableCell>
-                <Badge variant="outline">{entry.type}</Badge>
+                <Badge variant="outline">{t(`visit_types.${entry.type}`)}</Badge>
               </TableCell>
               <TableCell>
                 <Badge variant="secondary">

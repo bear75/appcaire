@@ -22,6 +22,14 @@ const config = {
   experimental: {
     serverComponentsExternalPackages: ['@electric-sql/pglite'],
   },
+  webpack: (config, { dev, isServer }) => {
+    // Add mini-css-extract-plugin in production
+    if (!dev && !isServer) {
+      const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+      config.plugins.push(new MiniCssExtractPlugin());
+    }
+    return config;
+  },
 };
 
 export default withSentryConfig(

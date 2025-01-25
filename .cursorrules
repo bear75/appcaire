@@ -79,10 +79,18 @@ tech_stack:
         ssl: "require"
         mode: "transaction"
     migrations:
-      - "SQL-based migrations in /migrations"
-      - "Separate dev/prod migration workflows"
-      - "Migration confirmation for production"
-      - "Schema validation before deployment"
+      - "Drizzle Kit for migration generation"
+      - "TypeScript-first schema definitions"
+      - "SQL migration files in /drizzle directory"
+      - "Migration metadata tracking"
+    drizzle_setup:
+      config: "drizzle.config.ts in project root"
+      schema_location: "./src/lib/db/schema/*.ts"
+      migrations_output: "./drizzle"
+      commands:
+        - "pnpm db:generate - Generate migrations"
+        - "pnpm db:migrate - Apply migrations"
+        - "pnpm db:test - Test database setup"
     auth:
       approach: "Clerk for user and organization-level authentication"
   testing:

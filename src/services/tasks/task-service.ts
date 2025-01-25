@@ -1,11 +1,11 @@
-import { supabase } from '@/lib/supabase';
+import { db } from '@/lib/db';
 import { ServiceError } from '@/lib/utils/service-error';
 import type { TaskStatus } from '@/types';
 
 export class TaskService {
   async getTask(id: string) {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await db
         .from('tasks')
         .select('*')
         .eq('id', id)
@@ -25,7 +25,7 @@ export class TaskService {
 
   async updateStatus(id: string, status: TaskStatus) {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await db
         .from('tasks')
         .update({ status })
         .eq('id', id)

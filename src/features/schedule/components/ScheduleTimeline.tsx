@@ -5,8 +5,8 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import TaskDetailsModal from './TaskDetailsModal';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { TaskDetailsModal } from './TaskDetailsModal';
+import { useTranslation } from '@/lib/i18n';
 import Image from 'next/image';
 import type { ProcessedSchedule } from '../types';
 
@@ -21,8 +21,8 @@ interface ScheduleTimelineProps {
   onTaskSelect: (taskId: string | null) => void;
 }
 
-export default function ScheduleTimeline({ schedule, onTaskSelect }: ScheduleTimelineProps) {
-  const t = useTranslations('Schedule');
+export function ScheduleTimeline({ schedule, onTaskSelect }: ScheduleTimelineProps) {
+  const { t } = useTranslation('schedule');
 
   // Group entries by employee
   const employeeSchedules = schedule.data.entries.reduce((acc, entry) => {

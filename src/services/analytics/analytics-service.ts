@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { db } from '@/lib/db';
 import { ServiceError } from '@/lib/utils/service-error';
 
 export class AnalyticsService {
@@ -8,7 +8,7 @@ export class AnalyticsService {
     endDate: string,
   ) {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await db
         .from('analytics')
         .select('*')
         .eq('organization_id', organizationId)

@@ -1,25 +1,22 @@
 import { SignUp } from '@clerk/nextjs';
+import { type Metadata } from 'next';
 
-export const metadata = {
-  title: 'Registrera dig - Caire',
-  description: 'Skapa ett nytt Caire-konto',
+export const metadata: Metadata = {
+  title: 'Skapa konto | Caire',
+  description: 'Skapa ett nytt Caire-konto.',
 };
 
 export default function SignUpPage() {
   return (
-    <div className="w-full max-w-[400px] px-4">
+    <div className="flex min-h-screen items-center justify-center">
       <SignUp
-        path="/sign-up"
-        routing="path"
-        signInUrl="/sign-in"
-        redirectUrl="/dashboard"
         appearance={{
           elements: {
-            rootBox: 'w-full',
-            card: 'w-full shadow-none border border-border',
-            formButtonPrimary: 'bg-primary hover:bg-primary/90',
+            formButtonPrimary: 'bg-purple-600 hover:bg-purple-700',
+            footerActionLink: 'text-purple-600 hover:text-purple-700',
           },
         }}
+        redirectUrl="/onboarding/organization-selection"
       />
     </div>
   );

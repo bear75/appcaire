@@ -1,13 +1,25 @@
 /**
- * Main utilities export file
- * @module utils
+ * Central export point for all utility functions
  */
 
-export * from './formatting';
+// Date utilities
+export * from './date';
+
+// Formatting utilities
+export * from './format';
+
+// Validation utilities
+export * from './validation';
+
+// Helper utilities
 export * from './helpers';
 
-// Re-export commonly used utilities directly
-export { formatCurrency } from './formatting/currency';
-export { formatDate, formatTime } from './formatting/date';
-export { formatPercentage } from './formatting/percentage';
-export { cn } from './helpers/classnames';
+// Re-export commonly used types
+export type { ClassValue } from 'clsx';
+
+// Constants
+export const DEFAULT_LOCALE = 'sv-SE';
+export const DEFAULT_CURRENCY = 'SEK';
+
+// Version information
+export const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION || '0.0.0';

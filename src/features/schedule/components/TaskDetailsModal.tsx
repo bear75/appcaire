@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslation } from '@/lib/i18n';
 import { Clock, MapPin, User, AlertTriangle } from 'lucide-react';
 
 interface TaskDetailsModalProps {
@@ -19,12 +19,12 @@ interface TaskDetailsModalProps {
   taskId: string | null;
 }
 
-export default function TaskDetailsModal({
+export function TaskDetailsModal({
   open,
   onOpenChange,
   taskId,
 }: TaskDetailsModalProps) {
-  const t = useTranslations('Schedule.taskDetails');
+  const { t } = useTranslation('schedule');
 
   // Mock task data for now
   const task = {

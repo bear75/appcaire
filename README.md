@@ -551,3 +551,32 @@ This project is configured for automatic deployment to Vercel. Here's how it wor
    # Deploy to production
    vercel --prod
    ```
+
+## Caire Platform
+
+## Database Setup
+
+This project uses:
+- Supabase (PostgreSQL) for the database
+- Drizzle ORM for type-safe database operations
+- Row Level Security (RLS) for data protection
+
+### Quick Start
+
+1. Set up environment variables:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_key
+```
+
+2. Run migrations:
+```bash
+# Drizzle migrations
+pnpm drizzle-kit push:pg
+
+# Supabase migrations
+supabase db push
+```
+
+See `src/lib/db/README.md` for detailed documentation.

@@ -1,8 +1,11 @@
 import { clerkClient, type WebhookEvent } from '@clerk/nextjs/server';
 import { headers } from 'next/headers';
 import { Webhook } from 'svix';
-
 import { db } from '@/lib/db';
+import { organizations } from '@/lib/db/schema/organizations';
+import { eq } from 'drizzle-orm';
+import { NextResponse } from 'next/server';
+
 import { ORG_ROLE } from '@/types/Auth';
 
 // Define the type for super admin users from database
@@ -49,120 +52,195 @@ const SUPER_ADMIN_PERMISSIONS = [
   'org:sys_profile:manage',
 ] as const;
 
-export async function POST(req: Request) {
-  // 1. Validate webhook secret
-  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
-  if (!WEBHOOK_SECRET || typeof WEBHOOK_SECRET !== 'string') {
-    throw new Error('Missing or invalid CLERK_WEBHOOK_SECRET');
-  }
+// Organization status types
+const OrgStatus = {
+  TRIAL: 'trial',
+  ACTIVE: 'active',
+  SUSPENDED: 'suspended',
+  EXPIRED: 'expired',
+  DELETED: 'deleted'
+} as const;
 
-  // 2. Get and validate headers
+type OrgStatusType = typeof OrgStatus[keyof typeof OrgStatus];
+
+// Helper function to update organization status
+async function updateOrgStatus(orgId: string, status: OrgStatusType, metadata: Record<string, any> = {}) {
+  try {
+    // Update Clerk metadata
+    await fetch(`https://api.clerk.com/v1/organizations/${orgId}/metadata`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${process.env.CLERK_SECRET_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        publicMetadata: {
+          status,
+          ...metadata
+        }
+      })
+    });
+
+    // Update our database
+    await db.update(organizations)
+      .set({ 
+        status,
+        ...metadata,
+        updatedAt: new Date()
+      })
+      .where(eq(organizations.id, orgId));
+
+  } catch (error) {
+    console.error('Error updating organization status:', error);
+    throw error;
+  }
+}
+
+// Helper function to send notifications
+async function notifyTeam(message: string, metadata: Record<string, any> = {}) {
+  // TODO: Implement your notification system (e.g., email, Slack, etc.)
+  console.log('Team notification:', message, metadata);
+}
+
+export async function POST(req: Request) {
+  // Get the headers
   const headerPayload = headers();
   const svix_id = headerPayload.get('svix-id');
   const svix_timestamp = headerPayload.get('svix-timestamp');
   const svix_signature = headerPayload.get('svix-signature');
 
+  // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return new Response('Missing svix headers', {
-      status: 400,
+    return new Response('Error occured -- no svix headers', {
+      status: 400
     });
   }
 
-  // 3. Get the body
-  let payload: WebhookEvent;
-  try {
-    payload = await req.json();
-  } catch {
-    return new Response('Error parsing webhook body', {
-      status: 400,
-    });
-  }
+  // Get the body
+  const payload = await req.json();
+  const body = JSON.stringify(payload);
 
-  // 4. Verify webhook signature
+  // Create a new Svix instance with your webhook secret
+  const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET || '');
+
+  let evt: WebhookEvent;
+
+  // Verify the webhook
   try {
-    const wh = new Webhook(WEBHOOK_SECRET);
-    payload = wh.verify(JSON.stringify(payload), {
+    evt = wh.verify(body, {
       'svix-id': svix_id,
       'svix-timestamp': svix_timestamp,
       'svix-signature': svix_signature,
     }) as WebhookEvent;
   } catch (err) {
-    // Log error for debugging but don't expose details in response
-    const error = err as Error;
-    console.error('[Webhook] Verification failed:', error.message);
-    return new Response('Error verifying webhook signature', {
-      status: 400,
+    console.error('Error verifying webhook:', err);
+    return new Response('Error occured', {
+      status: 400
     });
   }
 
-  // 5. Handle webhook events
-  try {
-    switch (payload.type) {
-      case 'organization.created': {
-        const { id: organizationId, name: _name } = payload.data;
+  // Handle the webhook
+  const eventType = evt.type;
+  
+  if (eventType === 'organization.created') {
+    try {
+      const { id: clerkId, name, created_at } = evt.data;
+      
+      // Create organization in our database
+      await db.insert(organizations).values({
+        clerkId,
+        name,
+        status: OrgStatus.TRIAL,
+        trialExpirationDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+        createdAt: new Date(created_at),
+        updatedAt: new Date()
+      });
 
-        // 1. Set up permissions for the creator (regular admin)
-        try {
-          await clerkClient.organizations.updateOrganizationMetadata(organizationId, {
-            privateMetadata: {
-              permissions: ADMIN_PERMISSIONS, // Regular admin permissions only
-              isHomeCareCo: true,
-              createdAt: new Date().toISOString(),
-            },
-          });
-        } catch (error) {
-          console.error('[Webhook] Failed to set organization metadata:', error);
-        }
+      // Set Clerk metadata
+      await updateOrgStatus(clerkId, OrgStatus.TRIAL, {
+        trialStartedAt: new Date().toISOString(),
+        trialEndsAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+      });
 
-        // 2. Get super admins from database and add them with elevated permissions
-        const superAdmins = await db.query.users.findMany({
-          where: {
-            role: ORG_ROLE.SUPER_ADMIN,
-            active: true,
-          },
-        }) as SuperAdmin[];
+      // Notify team
+      await notifyTeam('New trial organization created', {
+        orgId: clerkId,
+        name,
+      });
 
-        // Add each super admin to the organization with full permissions
-        const addMembershipPromises = superAdmins.map((admin: SuperAdmin) =>
-          clerkClient.organizations.createOrganizationMembership({
-            organizationId,
-            userId: admin.clerkId,
-            role: ORG_ROLE.SUPER_ADMIN,
-            metadata: {
-              permissions: SUPER_ADMIN_PERMISSIONS, // Super admin gets all permissions
-            },
-          }).catch((error) => {
-            const err = error as Error;
-            console.error(
-              `[Webhook] Failed to add super admin ${admin.clerkId} to organization ${organizationId}:`,
-              err.message,
-            );
-          }),
-        );
-
-        await Promise.allSettled(addMembershipPromises);
-        break;
-      }
-
-      case 'organization.updated': {
-        const { id: _organizationId } = payload.data;
-        // Handle organization updates if needed
-        break;
-      }
-
-      case 'organization.deleted': {
-        const { id: _organizationId } = payload.data;
-        // Handle organization deletion if needed
-        break;
-      }
-
-      // Add more event handlers as needed
+      return NextResponse.json({ success: true });
+    } catch (error) {
+      console.error('Error creating organization:', error);
+      return NextResponse.json({ error: 'Failed to create organization' }, { status: 500 });
     }
-
-    return new Response('Webhook processed successfully', { status: 200 });
-  } catch (error) {
-    const err = error as Error;
-    console.error('[Webhook] Processing failed:', err.message);
-    return new Response('Error processing webhook', { status: 500 });
   }
+
+  if (eventType === 'organization.updated') {
+    const { id, name, slug } = evt.data;
+    
+    // Update basic info
+    await db.update(organizations)
+      .set({ name, slug, updatedAt: new Date() })
+      .where(eq(organizations.id, id));
+  }
+
+  if (eventType === 'organization.deleted') {
+    const { id, name } = evt.data;
+    
+    // Update status to deleted
+    await updateOrgStatus(id, OrgStatus.DELETED);
+
+    // Notify team
+    await notifyTeam('Organization deleted', {
+      orgId: id,
+      name,
+    });
+  }
+
+  // Handle status transitions (you'll need to create custom events for these)
+  if (eventType === 'organization.trial_ending') {
+    const { id, name } = evt.data;
+    // Notify team and organization admin
+    await notifyTeam('Organization trial ending', {
+      orgId: id,
+      name,
+    });
+  }
+
+  if (eventType === 'organization.trial_expired') {
+    const { id, name } = evt.data;
+    // Update status to expired
+    await updateOrgStatus(id, OrgStatus.EXPIRED);
+    // Notify team and organization admin
+    await notifyTeam('Organization trial expired', {
+      orgId: id,
+      name,
+    });
+  }
+
+  if (eventType === 'organization.activated') {
+    const { id, name, subscriptionId } = evt.data;
+    // Update status to active
+    await updateOrgStatus(id, OrgStatus.ACTIVE, { subscriptionId });
+    // Notify team
+    await notifyTeam('Organization activated', {
+      orgId: id,
+      name,
+      subscriptionId,
+    });
+  }
+
+  if (eventType === 'organization.suspended') {
+    const { id, name, reason } = evt.data;
+    // Update status to suspended
+    await updateOrgStatus(id, OrgStatus.SUSPENDED);
+    // Notify team
+    await notifyTeam('Organization suspended', {
+      orgId: id,
+      name,
+      reason,
+    });
+  }
+
+  return NextResponse.json({ success: true });
 }

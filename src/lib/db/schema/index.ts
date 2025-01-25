@@ -1,0 +1,41 @@
+// Export all schema tables
+export {
+  analyticsSchema,
+  clientSchema,
+  constraintDefinitionSchema,
+  constraintValueSchema,
+  eCareIntegrationSchema,
+  employeeSchema,
+  employeeShiftSchema,
+  organizationSchema,
+  scheduleAssignmentSchema,
+  scheduleComparisonSchema,
+  scheduleMetricSchema,
+  scheduleSchema,
+  scheduleSolutionSchema,
+  shiftTemplateSchema,
+  userSchema,
+  vehicleSchema,
+  visitRequirementSchema,
+} from './tables';
+
+// Export types
+export type {
+  Analytics,
+  Client,
+  ConstraintDefinition,
+  ConstraintValue,
+  ECareIntegration,
+  Employee,
+  EmployeeShift,
+  Organization,
+  Schedule,
+  ScheduleAssignment,
+  ScheduleComparison,
+  ScheduleMetric,
+  ScheduleSolution,
+  ShiftTemplate,
+  User,
+  Vehicle,
+  VisitRequirement,
+} from './types';

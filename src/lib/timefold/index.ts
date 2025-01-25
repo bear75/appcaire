@@ -9,6 +9,9 @@ export {
   SOLVER_CONFIG,
 } from './config';
 
+// Utilities
+export * from './utils';
+
 // Types
 export type {
   Assignment,

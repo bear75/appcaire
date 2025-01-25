@@ -44,27 +44,27 @@ export function ScheduleMetrics({ schedule }: ScheduleMetricsProps) {
       <h3 className="text-lg font-semibold mb-4">{t('metrics.title')}</h3>
       <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
         <Metric
-          label="Antal besök"
+          label={t('metrics.visits')}
           value={92}
           trend={5.2}
         />
         <Metric
-          label="Total tid"
+          label={t('metrics.total_time')}
           value={156}
           unit="h"
           trend={-1.1}
         />
         <Metric
-          label="Slutförda"
+          label={t('metrics.completed')}
           value={78}
           unit="%"
         />
         <Metric
-          label="Personal"
+          label={t('metrics.staff')}
           value={12}
         />
         <Metric
-          label="Personalutnyttjande"
+          label={t('metrics.staff_utilization')}
           value={85}
           unit="%"
           trend={2.3}

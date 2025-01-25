@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from '@/lib/i18n';
+import type { ImportMethod } from '../../types';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/lib/hooks';
 import { CARD_STYLES } from '@/lib/styles';
 import { useTranslations } from '@/lib/utils/i18n/translations';
 
@@ -16,10 +18,10 @@ type ImportWizardProps = {
 };
 
 export function ImportWizard({ onImportComplete, onClose }: ImportWizardProps) {
-  const [importMethod, setImportMethod] = useState<'JSON_UPLOAD' | 'DIRECT_API'>('JSON_UPLOAD');
+  const { t } = useTranslation('schedule');
+  const [_importMethod, setImportMethod] = useState<ImportMethod>('manual');
   const { isImporting } = useScheduleImport();
   const { toast } = useToast();
-  const t = useTranslations('Schedule');
 
   const handleImportComplete = (scheduleId: string) => {
     toast({

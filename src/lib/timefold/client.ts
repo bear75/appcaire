@@ -1,6 +1,7 @@
 import { SOLVER_CONFIG } from './config';
 import type { SchedulingProblem, SchedulingSolution } from './types';
 
+// Validate environment variables
 if (!process.env.NEXT_PUBLIC_TIMEFOLD_API_URL) {
   throw new Error('Missing env.NEXT_PUBLIC_TIMEFOLD_API_URL');
 }
@@ -12,12 +13,18 @@ if (!process.env.NEXT_PUBLIC_TIMEFOLD_API_KEY) {
 const API_URL = process.env.NEXT_PUBLIC_TIMEFOLD_API_URL;
 const API_KEY = process.env.NEXT_PUBLIC_TIMEFOLD_API_KEY;
 
+/**
+ * Timefold API client for scheduling optimization
+ */
 export class TimefoldClient {
   private headers: HeadersInit = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${API_KEY}`,
   };
 
+  /**
+   * Solve a scheduling problem
+   */
   async solve(problem: SchedulingProblem): Promise<SchedulingSolution> {
     const response = await fetch(`${API_URL}/solve`, {
       method: 'POST',
@@ -35,6 +42,9 @@ export class TimefoldClient {
     return response.json();
   }
 
+  /**
+   * Validate a scheduling solution
+   */
   async validateSolution(solution: SchedulingSolution): Promise<boolean> {
     const response = await fetch(`${API_URL}/validate`, {
       method: 'POST',
@@ -50,6 +60,9 @@ export class TimefoldClient {
     return result.isValid;
   }
 
+  /**
+   * Get explanations for a scheduling solution
+   */
   async explainSolution(solution: SchedulingSolution): Promise<string[]> {
     const response = await fetch(`${API_URL}/explain`, {
       method: 'POST',
@@ -66,5 +79,5 @@ export class TimefoldClient {
   }
 }
 
-// Export a singleton instance
+// Export singleton instance
 export const timefold = new TimefoldClient();

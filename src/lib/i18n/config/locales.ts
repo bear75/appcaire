@@ -1,4 +1,7 @@
-import type { Locale, SUPPORTED_LOCALES, SupportedLocale } from '../types';
+import type { Locale } from '../types';
+
+export const SUPPORTED_LOCALES = ['sv', 'en', 'no', 'da'] as const;
+export type SupportedLocale = typeof SUPPORTED_LOCALES[number];
 
 export const LOCALE_NAMES: Record<SupportedLocale, string> = {
   sv: 'Svenska',

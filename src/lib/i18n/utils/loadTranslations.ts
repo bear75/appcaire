@@ -1,6 +1,6 @@
 import type { Locale } from '../types';
 
-const NAMESPACES = ['common', 'settings', 'dashboard', 'errors'] as const;
+const NAMESPACES = ['common', 'settings', 'dashboard', 'errors', 'schedule'] as const;
 type Namespace = typeof NAMESPACES[number];
 
 type TranslationCache = {

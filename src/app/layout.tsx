@@ -2,7 +2,7 @@ import '@/styles/global.css';
 
 import { svSE } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
-import type { Metadata } from 'next';
+import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import { cn } from '@/lib/utils';
@@ -28,18 +28,15 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <ClerkProvider
-      localization={{
-        locale: 'sv-SE',
-        ...svSE,
+      localization={svSE}
+      appearance={{
+        variables: {
+          colorPrimary: '#7c3aed',
+        },
       }}
     >
       <html lang="sv" suppressHydrationWarning>
-        <body
-          className={cn(
-            'min-h-screen bg-background antialiased',
-            inter.className,
-          )}
-        >
+        <body className={cn(inter.className, 'min-h-screen antialiased')}>
           <Providers>{children}</Providers>
         </body>
       </html>

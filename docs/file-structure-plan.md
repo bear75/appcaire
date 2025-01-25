@@ -1,66 +1,80 @@
 # File Structure Migration Plan
 
-## Current Focus: Core Cleanup 🧹
+## Current Status ✅
+- Next.js 13+ App Router setup complete
+- Authentication with Clerk integrated
+- Database with Drizzle ORM configured
+- Basic file structure established
 
-### 1. Utility Consolidation (Next 2-3 hours)
-- [ ] Review and merge duplicate utilities
+## Cleanup Steps (In Order) 🔄
+
+### 1. Utility Functions (2-3 hours)
+- [ ] Review all utility files
+- [ ] Remove duplicates
+- [ ] Organize into categories:
+  ```typescript
+  src/lib/utils/
+  ├── date.ts          # Date manipulation
+  ├── format.ts        # Text/data formatting
+  ├── validation.ts    # Input validation
+  └── helpers.ts       # General utilities
   ```
-  src/utils/ → src/lib/utils/
-  src/libs/utils/ → src/lib/utils/
+
+### 2. Custom Hooks (2 hours)
+- [ ] Review all hooks
+- [ ] Remove duplicates
+- [ ] Organize into categories:
+  ```typescript
+  src/lib/hooks/
+  ├── useAuth.ts       # Authentication hooks
+  ├── useData.ts       # Data fetching hooks
+  ├── useUI.ts         # UI-related hooks
+  └── useCommon.ts     # Shared hooks
   ```
-- [ ] Organize by functionality:
-  - date.ts
-  - string.ts
-  - validation.ts
-  - formatting.ts
 
-### 2. Library Organization (2-3 hours)
-- [ ] Consolidate core integrations
+### 3. Components (2-3 hours)
+- [ ] Remove unused components
+- [ ] Merge similar components
+- [ ] Standardize props
+- [ ] Update documentation
+- [ ] Organize styles
+
+### 4. Types (2 hours)
+- [ ] Remove duplicate types
+- [ ] Organize shared types
+- [ ] Update documentation
+- [ ] Ensure consistency
+
+### 5. Prepare Timefold Integration (2-3 hours)
+- [ ] Create integration structure:
+  ```typescript
+  src/lib/timefold/
+  ├── client.ts        # API client
+  ├── types.ts         # Type definitions
+  ├── utils.ts         # Helper functions
+  └── config.ts        # Configuration
   ```
-  src/lib/
-  ├── clerk/      # Auth
-  ├── timefold/   # Scheduling
-  ├── supabase/   # Database
-  └── utils/      # Shared utilities
-  ```
-- [ ] Remove duplicate implementations
-- [ ] Clean up unused code
+- [ ] Define interfaces
+- [ ] Document integration points
 
-### 3. Hook Consolidation (1-2 hours)
-- [ ] Review all custom hooks
-- [ ] Remove duplicate functionality
-- [ ] Merge shared logic
-- [ ] Document core hooks
+## File Structure 📁
+```typescript
+src/
+├── app/              # Pages
+├── components/       # UI components
+├── lib/             # Core libraries
+│   ├── clerk/       # Authentication
+│   ├── db/          # Database
+│   ├── timefold/    # Scheduling
+│   ├── hooks/       # Custom hooks
+│   └── utils/       # Utilities
+└── types/           # TypeScript types
+```
 
-### 4. Database Layer (2-3 hours)
-- [ ] Clean up database models
-- [ ] Consolidate database utilities
-- [ ] Remove unused tables/columns
-- [ ] Document core schemas
-
-## Progress Tracking ✅
-
-### Completed
-- [x] Initial project setup
-- [x] Core library organization
-- [x] Translation system
-- [x] Basic UI prototypes
-
-### In Progress
-- [ ] Utility consolidation
-- [ ] Library cleanup
-- [ ] Hook organization
-- [ ] Database cleanup
-
-## Next Steps
-
-1. Start with utility consolidation
-2. Move to library organization
-3. Clean up hooks
-4. Finalize database layer
-
-## Notes
-- Focus on cleanup, not new features
-- Remove duplicates and unused code
-- Maintain only what's needed for prototype
-- Document core functionality
+## Guidelines 📋
+- Remove all duplicate code
+- Keep related code together
+- Use TypeScript strict mode
+- Document as you go
+- Follow consistent naming
+- Consider maintainability

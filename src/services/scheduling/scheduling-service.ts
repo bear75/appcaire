@@ -1,11 +1,11 @@
-import { supabase } from '@/lib/supabase';
+import { db } from '@/lib/db';
 import { ServiceError } from '@/lib/utils/service-error';
 import type { SchedulingStatus } from '@/types';
 
 export class SchedulingService {
   async getSchedule(id: string) {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await db
         .from('schedules')
         .select('*')
         .eq('id', id)
@@ -25,7 +25,7 @@ export class SchedulingService {
 
   async updateStatus(id: string, status: SchedulingStatus) {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await db
         .from('schedules')
         .update({ status })
         .eq('id', id)

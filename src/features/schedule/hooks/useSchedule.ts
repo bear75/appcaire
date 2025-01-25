@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useOrganization } from '@clerk/nextjs';
-import { supabase } from '@/lib/supabase';
+import { db } from '@/lib/db';
 import type { Schedule } from '../types';
 
 export function useSchedule() {
@@ -13,7 +13,7 @@ export function useSchedule() {
 
     try {
       setIsLoading(true);
-      const { data, error } = await supabase
+      const { data, error } = await db
         .from('schedules')
         .select('*')
         .eq('organization_id', organization.id)
@@ -48,7 +48,7 @@ export function useScheduleById(scheduleId: string) {
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await db
           .from('schedules')
           .select('*')
           .eq('id', scheduleId)

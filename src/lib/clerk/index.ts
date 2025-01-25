@@ -1,5 +1,8 @@
+// Export core functionality
 export * from './client';
 export * from './types';
+export * from './utils';
+export * from './webhooks';
 
 // Re-export commonly used Clerk components and hooks
 export {
@@ -10,6 +13,7 @@ export {
   SignUp,
   UserButton,
 } from '@clerk/nextjs';
+
 export {
   useOrganization,
   useSession,

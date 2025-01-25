@@ -59,9 +59,9 @@
 // Translation utility
 type TranslationKey = NestedKeyOf<typeof translations>;
 
-interface InterpolationValues {
+type InterpolationValues = {
   [key: string]: string | number;
-}
+};
 
 // Translation function with interpolation support
 function t(key: TranslationKey, values?: InterpolationValues): string;
@@ -86,19 +86,46 @@ const warning = t('Analytics.warning', { client: 'Anna', count: 5 });
 
 ## Backend
 
-### Database
+### Database & ORM
 
+#### Database
 - PostgreSQL via Supabase
 - Connection pooling enabled
 - Row-level security
 - Real-time subscriptions
 
-### ORM
+#### Drizzle ORM Setup
+- Type-safe schema definitions
+- Migration management with Drizzle Kit
+- Command structure:
+  ```bash
+  pnpm db:generate  # Generate migrations
+  pnpm db:migrate   # Apply migrations
+  pnpm db:test      # Test database setup
+  ```
+- File structure:
+  ```
+  📦 src/lib/db
+   ├ 📂 schema      # Table definitions
+   ├ 📂 migrations  # Migration utilities
+   ├ 📜 client.ts   # Database client
+   └ 📜 index.ts    # Exports
+  ```
+- Configuration in `drizzle.config.ts`:
+  ```typescript
+  import 'dotenv/config';
 
-- Drizzle ORM
-- Type-safe queries
-- Migration management
-- Schema validation
+  import { defineConfig } from 'drizzle-kit';
+
+  export default defineConfig({
+    schema: './src/lib/db/schema/*.ts',
+    out: './drizzle',
+    dialect: 'postgresql',
+    dbCredentials: {
+      url: process.env.DATABASE_URL!,
+    },
+  });
+  ```
 
 ### API Layer
 
