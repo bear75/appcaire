@@ -1,6 +1,6 @@
+import { Footer } from '@/components/layout/footer/Footer';
 import { Navbar } from '@/components/layout/navbar/Navbar';
 import { Features } from '@/templates/Features';
-import { Footer } from '@/templates/Footer';
 import { Hero } from '@/templates/Hero';
 
 export const metadata = {
