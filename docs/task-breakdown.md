@@ -449,6 +449,43 @@
 - [ ] Implement trial-specific analytics
 - [ ] Create conversion prompts
 
+### 7. Mobile Layout Improvements (4-5 hours)
+
+1. **Collapsible Sidebar**
+
+   - [ ] Add collapse/expand functionality
+   - [ ] Implement smooth transitions
+   - [ ] Handle mobile breakpoints
+   - [ ] Add toggle button in header
+   - [ ] Save user preference
+
+2. **Mobile Navigation**
+
+   - [ ] Create mobile-friendly menu
+   - [ ] Add dropdown for navigation items
+   - [ ] Improve touch targets
+   - [ ] Handle gestures for sidebar
+
+3. **Responsive Content**
+
+   - [ ] Adjust content padding based on sidebar state
+   - [ ] Optimize tables for mobile
+   - [ ] Improve form layouts
+   - [ ] Handle long content overflow
+
+4. **Testing**
+
+   - [ ] Test on various devices
+   - [ ] Verify navigation usability
+   - [ ] Check content readability
+   - [ ] Validate touch interactions
+
+5. **Performance**
+   - [ ] Optimize animations
+   - [ ] Reduce layout shifts
+   - [ ] Handle network conditions
+   - [ ] Test loading states
+
 ## Future Tasks
 
 ### 1. Mobile Responsiveness (2-3 hours)
