@@ -9,7 +9,7 @@ export const CenteredFooter = (props: {
 }) => {
   return (
     <div className="flex flex-col items-center text-center">
-      {props.logo}
+      <div className="flex items-center justify-center">{props.logo}</div>
 
       <ul className="mt-4 flex gap-x-8 text-lg max-sm:flex-col [&_a:hover]:opacity-100 [&_a]:opacity-60">
         {props.children}
@@ -20,10 +20,7 @@ export const CenteredFooter = (props: {
       </ul>
 
       <div className="mt-6 flex w-full items-center justify-between gap-y-2 border-t pt-3 text-sm text-muted-foreground max-md:flex-col">
-        <div>
-          {`© Copyright ${new Date().getFullYear()} ${props.name}. `}
-
-        </div>
+        <div>{`© Copyright ${new Date().getFullYear()} ${props.name}. `}</div>
 
         <ul className="flex gap-x-4 font-medium [&_a:hover]:opacity-100 [&_a]:opacity-60">
           {props.legalLinks}

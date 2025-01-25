@@ -11,19 +11,15 @@ export const Footer = () => {
   return (
     <Section>
       <CenteredFooter
-        logo={<Logo />}
+        logo={<Logo className="size-6" />}
         name="Caire"
         iconList={(
           <>
             <li>
-              <Link href="/privacy-policy">
-                Integritetspolicy
-              </Link>
+              <Link href="/privacy-policy">Integritetspolicy</Link>
             </li>
             <li>
-              <Link href="/terms-of-service">
-                Användarvillkor
-              </Link>
+              <Link href="/terms-of-service">Användarvillkor</Link>
             </li>
           </>
         )}

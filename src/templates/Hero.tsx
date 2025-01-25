@@ -4,7 +4,7 @@ import { Section } from '@/features/landing/Section';
 
 export const Hero = () => {
   return (
-    <Section className="py-24">
+    <Section className="bg-background py-24">
       <CenteredHero
         title="Optimera din hemtjänst med AI"
         description="Effektiv schemaläggning och ruttplanering för hemtjänsten. Spara tid och resurser med vår AI-drivna lösning."

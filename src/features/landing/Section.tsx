@@ -7,7 +7,7 @@ export const Section = (props: {
   description?: string;
   className?: string;
 }) => (
-  <div className={cn('px-3 py-16', props.className)}>
+  <section className={cn('relative px-3 py-16', props.className)}>
     {(props.title || props.subtitle || props.description) && (
       <div className="mx-auto mb-12 max-w-screen-md text-center">
         {props.subtitle && (
@@ -29,5 +29,5 @@ export const Section = (props: {
     )}
 
     <div className="mx-auto max-w-screen-lg">{props.children}</div>
-  </div>
+  </section>
 );
