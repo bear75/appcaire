@@ -1,9 +1,10 @@
 'use client';
 
+import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 
 import { ActiveLink } from '@/components/ActiveLink';
-import { ToggleMenuButton } from '@/components/ToggleMenuButton';
+import { ToggleMenuButton } from '@/components/layout/shared/ToggleMenuButton';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +12,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
-import { UserButton } from '@clerk/nextjs';
 
 export const DashboardHeader = (props: {
   menu: {
@@ -22,7 +22,6 @@ export const DashboardHeader = (props: {
   return (
     <>
       <div className="flex items-center">
-
         <nav className="ml-3 max-lg:hidden">
           <ul className="flex flex-row items-center gap-x-3 text-lg font-medium [&_a:hover]:opacity-100 [&_a]:opacity-75">
             {props.menu.map(item => (
