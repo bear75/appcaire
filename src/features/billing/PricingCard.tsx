@@ -1,4 +1,4 @@
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslations } from '@/lib/i18n';
 import React from 'react';
 
 import type { BillingInterval } from '@/types/Subscription';

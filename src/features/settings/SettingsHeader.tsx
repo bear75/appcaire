@@ -1,5 +1,5 @@
 import { PageHeader } from '@/components/shared';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslations } from '@/lib/i18n';
 
 export function SettingsHeader() {
   const t = useTranslations('Settings');

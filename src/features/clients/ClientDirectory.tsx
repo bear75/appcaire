@@ -1,8 +1,9 @@
 'use client';
 
 import { Grid2X2, List, Search } from 'lucide-react';
-import { useState } from 'react';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { useTranslations } from '@/lib/i18n';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -25,10 +26,27 @@ const CARD_STYLES = {
 
 export function ClientDirectory() {
   const t = useTranslations('Clients');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [visitTypeFilter, setVisitTypeFilter] = useState('all');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Get values from URL parameters with defaults
+  const viewMode = (searchParams?.get('view') as 'grid' | 'list') || 'grid';
+  const searchQuery = searchParams?.get('search') || '';
+  const statusFilter = searchParams?.get('status') || 'all';
+  const visitTypeFilter = searchParams?.get('visitType') || 'all';
+
+  // Function to update URL parameters
+  const updateParams = (updates: Record<string, string>) => {
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+    });
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <div className="space-y-4">
@@ -41,10 +59,13 @@ export function ClientDirectory() {
               placeholder={t('search_placeholder')}
               className="pl-8"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => updateParams({ search: e.target.value })}
             />
           </div>
-          <Select value={visitTypeFilter} onValueChange={setVisitTypeFilter}>
+          <Select 
+            value={visitTypeFilter} 
+            onValueChange={(value) => updateParams({ visitType: value })}
+          >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder={t('select_visit_type')} />
             </SelectTrigger>
@@ -55,7 +76,10 @@ export function ClientDirectory() {
               <SelectItem value="social">{t('social')}</SelectItem>
             </SelectContent>
           </Select>
-          <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <Select 
+            value={statusFilter} 
+            onValueChange={(value) => updateParams({ status: value })}
+          >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder={t('select_status')} />
             </SelectTrigger>
@@ -71,7 +95,7 @@ export function ClientDirectory() {
               variant="ghost"
               size="icon"
               className={viewMode === 'grid' ? 'bg-purple-50 text-purple-600' : ''}
-              onClick={() => setViewMode('grid')}
+              onClick={() => updateParams({ view: 'grid' })}
             >
               <Grid2X2 className="size-4" />
             </Button>
@@ -79,7 +103,7 @@ export function ClientDirectory() {
               variant="ghost"
               size="icon"
               className={viewMode === 'list' ? 'bg-purple-50 text-purple-600' : ''}
-              onClick={() => setViewMode('list')}
+              onClick={() => updateParams({ view: 'list' })}
             >
               <List className="size-4" />
             </Button>

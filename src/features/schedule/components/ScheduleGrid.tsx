@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslations } from '@/lib/i18n';
 
 import type { ProcessedSchedule } from '../types';
 

@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { CARD_STYLES } from '@/lib/styles';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslations } from '@/lib/i18n';
 
 import { useScheduleImport } from '../../hooks/useScheduleImport';
 import { JsonImportForm } from './JsonImportForm';

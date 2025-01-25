@@ -1,5 +1,5 @@
 import { Plus, Search } from 'lucide-react';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslations } from '@/lib/i18n';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';

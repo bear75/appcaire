@@ -1,7 +1,9 @@
 'use client';
 
 import { Grid2X2, List, Search } from 'lucide-react';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { useTranslations } from '@/lib/i18n';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,34 +15,45 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useTranslations } from '@/lib/utils/i18n/translations';
 import { cn } from '@/lib/utils';
 
 import { EmployeeGrid } from './EmployeeGrid';
 import { EmployeeList } from './EmployeeList';
-
-const CARD_STYLES = {
-  base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
-  large: 'hover:scale-[1.01]',
-};
+import { CARD_STYLES } from './styles';
 
 // Available skills for filtering
 const availableSkills = [
   'Medicin',
   'Sårvård',
   'Demens',
-  'Personlig hygien',
-  'Förflyttning',
-  'Matning',
+  'Rehabilitering',
+  'Palliativ vård',
 ];
 
 export function EmployeeDirectory() {
   const t = useTranslations('Employees');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [roleFilter, setRoleFilter] = useState('all');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [skillFilter, setSkillFilter] = useState('all');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Get all parameters from URL
+  const viewMode = (searchParams?.get('view') as 'grid' | 'list') || 'grid';
+  const searchQuery = searchParams?.get('search') || '';
+  const roleFilter = searchParams?.get('role') || 'all';
+  const statusFilter = searchParams?.get('status') || 'all';
+  const skillFilter = searchParams?.get('skill') || 'all';
+
+  // Update URL parameters
+  const updateParams = (updates: Record<string, string>) => {
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+    });
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <div className="space-y-6">
@@ -53,11 +66,11 @@ export function EmployeeDirectory() {
               <Input
                 placeholder={t('search_placeholder')}
                 value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
+                onChange={e => updateParams({ search: e.target.value })}
                 className="pl-10"
               />
             </div>
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
+            <Select value={roleFilter} onValueChange={value => updateParams({ role: value })}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t('select_role')} />
               </SelectTrigger>
@@ -67,7 +80,7 @@ export function EmployeeDirectory() {
                 <SelectItem value="care_assistant">{t('care_assistant')}</SelectItem>
               </SelectContent>
             </Select>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <Select value={statusFilter} onValueChange={value => updateParams({ status: value })}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t('select_status')} />
               </SelectTrigger>
@@ -77,7 +90,7 @@ export function EmployeeDirectory() {
                 <SelectItem value="on_leave">{t('on_leave')}</SelectItem>
               </SelectContent>
             </Select>
-            <Select value={skillFilter} onValueChange={setSkillFilter}>
+            <Select value={skillFilter} onValueChange={value => updateParams({ skill: value })}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t('select_skill')} />
               </SelectTrigger>
@@ -96,7 +109,7 @@ export function EmployeeDirectory() {
               <Button
                 variant={viewMode === 'grid' ? 'default' : 'ghost'}
                 size="icon"
-                onClick={() => setViewMode('grid')}
+                onClick={() => updateParams({ view: 'grid' })}
                 className="size-8"
               >
                 <Grid2X2 className="size-4" />
@@ -104,7 +117,7 @@ export function EmployeeDirectory() {
               <Button
                 variant={viewMode === 'list' ? 'default' : 'ghost'}
                 size="icon"
-                onClick={() => setViewMode('list')}
+                onClick={() => updateParams({ view: 'list' })}
                 className="size-8"
               >
                 <List className="size-4" />

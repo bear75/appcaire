@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { t } from '@/lib/utils/i18n/translations';
+import { t } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import { BarChart2, AlertTriangle, XCircle } from 'lucide-react';
 

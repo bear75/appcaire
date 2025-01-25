@@ -1,5 +1,5 @@
 import { OrganizationList } from '@clerk/nextjs';
-import { getTranslations } from '@/lib/utils/i18n/translations';
+import { getTranslations } from '@/lib/i18n';
 
 export async function generateMetadata(props: { params: { locale: string } }) {
   const t = await getTranslations({

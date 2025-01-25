@@ -10,13 +10,14 @@ import {
   Shield,
   User,
 } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslations } from '@/lib/i18n';
 
 // Mock data - replace with actual data fetching
 const mockClient = {
@@ -68,6 +69,17 @@ const mockClient = {
 
 export function ClientProfile() {
   const t = useTranslations('Clients');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Get tab from URL parameters with default to 'overview'
+  const tab = searchParams?.get('tab') || 'overview';
+
+  const handleTabChange = (newTab: string) => {
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    params.set('tab', newTab);
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <div className="space-y-6">
@@ -129,7 +141,7 @@ export function ClientProfile() {
       </Card>
 
       {/* Tabs Navigation */}
-      <Tabs defaultValue="overview" className="space-y-4">
+      <Tabs value={tab} onValueChange={handleTabChange} className="space-y-4">
         <TabsList className="grid w-full grid-cols-4 gap-4 rounded-lg bg-background p-1">
           <TabsTrigger
             value="overview"

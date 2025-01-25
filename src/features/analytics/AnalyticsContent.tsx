@@ -1,6 +1,7 @@
 'use client';
 
 import { useOrganization } from '@clerk/nextjs';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
 import { Card } from '@/components/ui/card';
@@ -8,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PageHeader } from '@/components/shared';
 import { ContentSection } from '@/components/layout/ContentSection';
 import { ORG_ROLE } from '@/types/Auth';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslations } from '@/lib/i18n';
 
 import { AnalyticsDashboard } from './AnalyticsDashboard';
 import { AnalyticsHeader } from './AnalyticsHeader';
@@ -23,7 +24,18 @@ const TAB_STYLES = "rounded-md px-3 py-2.5 text-sm font-medium ring-offset-backg
 export function AnalyticsContent() {
   const t = useTranslations('Analytics');
   const { membership } = useOrganization();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const isSuperAdmin = membership?.role === ORG_ROLE.SUPER_ADMIN;
+
+  // Get tab from URL parameters
+  const tab = searchParams?.get('tab') || 'overview';
+
+  const handleTabChange = (newTab: string) => {
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    params.set('tab', newTab);
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <div className="space-y-6">
@@ -41,7 +53,7 @@ export function AnalyticsContent() {
       )}
 
       <ContentSection contentClassName="p-0" elevated>
-        <Tabs defaultValue="overview" className="w-full">
+        <Tabs value={tab} onValueChange={handleTabChange} className="w-full">
           <TabsList className="grid w-full grid-cols-5 gap-4 bg-slate-50/50 p-1.5 rounded-lg shadow-inner">
             <TabsTrigger value="overview" className={TAB_STYLES}>
               {t('tabs.overview')}

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { PageContainer } from '@/components/shared';
 import { SettingsHeader } from '@/features/settings/SettingsHeader';
 import { SettingsTabs } from '@/features/settings/SettingsTabs';
-import { getTranslations } from '@/lib/utils/i18n/translations';
+import { getTranslations } from '@/lib/i18n';
 
 export async function generateMetadata(): Promise<Metadata> {
   const translate = await getTranslations('Settings');

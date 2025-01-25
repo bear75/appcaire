@@ -3,7 +3,7 @@
 import { ArrowRight, Car, Clock, User } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslations } from '@/lib/i18n';
 
 type HourlyMetrics = {
   hour: string;

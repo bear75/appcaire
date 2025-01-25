@@ -61,3 +61,15 @@ export const demoSchedule: Schedule = {
   created_at: '2024-01-21T12:00:00',
   updated_at: '2024-01-21T12:00:00',
 };
+
+export const trialSchedule = {
+  ...demoSchedule,
+  id: 'trial-schedule',
+  name: 'Trial Schedule',
+};
+
+export const existingSchedule = {
+  ...demoSchedule,
+  id: 'existing-schedule',
+  name: 'Imported Schedule',
+};

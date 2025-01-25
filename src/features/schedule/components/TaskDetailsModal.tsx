@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useTranslations } from '@/lib/i18n';
 import { Clock, MapPin, User, AlertTriangle } from 'lucide-react';
 
 interface TaskDetailsModalProps {

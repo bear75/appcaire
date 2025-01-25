@@ -4,7 +4,7 @@ import { BarChart2, LineChart as LineChartIcon, ListChecks } from 'lucide-react'
 import { BarChart, LineChart } from '@/components/ui/charts';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
-import { t } from '@/lib/utils/i18n/translations';
+import { t } from '@/lib/i18n';
 
 const CARD_STYLES = {
   base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',

@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { PageContainer } from '@/components/shared';
 import { EmployeeDirectory } from '@/features/employees/EmployeeDirectory';
 import { EmployeeHeader } from '@/features/employees/EmployeeHeader';
-import { getTranslations } from '@/lib/utils/i18n/translations';
+import { getTranslations } from '@/lib/i18n';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('Employees');

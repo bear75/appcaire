@@ -1,5 +1,6 @@
 import { Calendar, Mail, MapPin, Phone, Star, User } from 'lucide-react';
-import { useTranslations } from '@/lib/utils/i18n/translations';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from '@/lib/i18n';
 
 import { Avatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -43,6 +44,17 @@ const mockEmployee = {
 
 export function EmployeeProfile() {
   const t = useTranslations('Employees');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  // Get tab from URL parameters
+  const tab = searchParams?.get('tab') || 'overview';
+
+  const handleTabChange = (newTab: string) => {
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    params.set('tab', newTab);
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <div className="space-y-6">
@@ -102,7 +114,7 @@ export function EmployeeProfile() {
       </Card>
 
       {/* Tabs Section */}
-      <Tabs defaultValue="overview" className="space-y-4">
+      <Tabs value={tab} onValueChange={handleTabChange} className="space-y-4">
         <TabsList className="grid w-full grid-cols-1 md:grid-cols-4 gap-4 rounded-lg bg-background p-1">
           <TabsTrigger 
             value="overview"

@@ -19,7 +19,8 @@
     "db:studio": "drizzle-kit studio",
     "db:check": "drizzle-kit check:pg",
     "db:drop": "drizzle-kit drop",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "screenshots": "NODE_OPTIONS='--loader ts-node/esm' ts-node --project scripts/tsconfig.json scripts/capture-screenshots.ts"
   },
   "dependencies": {
     "@clerk/localizations": "^3.9.13",
@@ -67,6 +68,7 @@
     "pino-pretty": "^11.3.0",
     "postcss": "8.5.1",
     "postgres": "^3.4.5",
+    "puppeteer": "^24.1.1",
     "react": "^18.3.1",
     "react-day-picker": "8.10.1",
     "react-dom": "^18.3.1",
@@ -111,6 +113,7 @@
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/pg": "^8.11.10",
+    "@types/puppeteer": "^5.4.7",
     "@vitejs/plugin-react": "^4.3.2",
     "@vitest/coverage-v8": "^2.1.8",
     "@vitest/expect": "^2.1.3",
@@ -144,6 +147,7 @@
     "start-server-and-test": "^2.0.8",
     "storybook": "^8.3.5",
     "supabase": "^2.6.8",
+    "ts-node": "^10.9.2",
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.1.8",
     "vitest-fail-on-console": "^0.7.1"
