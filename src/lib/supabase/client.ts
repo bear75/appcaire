@@ -18,7 +18,6 @@ export const supabase = createClient<Database>(
   {
     auth: {
       persistSession: true,
-      autoRefreshToken: true,
     },
     db: {
       schema: 'public',
@@ -37,7 +36,6 @@ export const supabaseAdmin = process.env.SUPABASE_SERVICE_ROLE_KEY
       {
         auth: {
           persistSession: false,
-          autoRefreshToken: false,
         },
         db: {
           schema: 'public',
