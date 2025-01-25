@@ -3,7 +3,7 @@
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 
-import { ActiveLink } from '@/components/ActiveLink';
+import { ActiveLink } from '@/components/layout/shared/ActiveLink';
 import { ToggleMenuButton } from '@/components/layout/shared/ToggleMenuButton';
 import {
   DropdownMenu,
