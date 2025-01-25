@@ -1,6 +1,50 @@
 # File Structure Migration Plan
 
+## Refactoring Process 🔄
+
+### Safe Migration Strategy
+
+When refactoring the codebase structure, follow these steps to ensure stability:
+
+1. **Keep Original Files**
+
+   - Never delete original files immediately
+   - Create new directory structure first
+   - Copy (don't move) files to their new locations
+   - Keep both old and new files during transition
+
+2. **Update Incrementally**
+
+   - Work on one component/feature at a time
+   - Update imports to point to new locations
+   - Test that everything still works
+   - Commit after each successful change
+
+3. **Verify Dependencies**
+
+   - Before removing any original file:
+     - Search for all imports of that file
+     - Update all references to use new location
+     - Test thoroughly
+     - Only remove original after verification
+
+4. **Commit Strategy**
+
+   - Commit after each successful component move
+   - Keep commit messages clear and concise
+   - Follow conventional commit format
+   - Makes it easy to revert if issues arise
+
+5. **Testing**
+   - Test after each component move
+   - Verify all features still work
+   - Check for broken imports
+   - Ensure no runtime errors
+
+This process ensures we can safely refactor without breaking functionality and easily revert if needed.
+
 ## Current Status ✅
+
 - Next.js 15.1.6 with App Router setup complete
 - TypeScript 5.x configured
 - Tailwind CSS and shadcn/ui v2 integrated
@@ -9,6 +53,7 @@
 - Component organization started
 
 ## Tech Stack 🛠
+
 - **Framework**: Next.js 15.1.6 with App Router and Server Actions
 - **Language**: TypeScript 5.x
 - **UI**: React 18+, Tailwind CSS, shadcn/ui v2
@@ -20,18 +65,21 @@
 ## Next Steps 🔄
 
 ### 1. Code Organization (2-3 hours)
+
 - [ ] Audit existing files and their locations
 - [ ] Identify duplicate code and components
 - [ ] Create plan for merging similar functionality
 - [ ] Document components to be kept/removed
 
 ### 2. Component Consolidation (3-4 hours)
+
 - [ ] Merge duplicate components
 - [ ] Standardize component props
 - [ ] Create shared component library
 - [ ] Update component documentation
 
 ### 3. Utility Functions (2 hours)
+
 - [ ] Review all utility files
 - [ ] Remove duplicates
 - [ ] Organize into categories:
@@ -44,6 +92,7 @@
   ```
 
 ### 4. Custom Hooks (2 hours)
+
 - [ ] Review all hooks
 - [ ] Remove duplicates
 - [ ] Organize into categories:
@@ -56,12 +105,14 @@
   ```
 
 ### 5. Types and Interfaces (2 hours)
+
 - [ ] Review all type definitions
 - [ ] Remove duplicate types
 - [ ] Create shared type library
 - [ ] Update type documentation
 
 ## File Structure 📁
+
 ```
 src/
 ├── app/                    # Next.js 15 App Router pages
@@ -84,6 +135,7 @@ src/
 ```
 
 ## Guidelines 📋
+
 - Use React Server Components by default
 - Implement Partial Prerendering where beneficial
 - Client Components only when needed ('use client')
@@ -97,7 +149,9 @@ src/
 - Follow security best practices
 
 ## Best Practices
+
 1. Component Organization:
+
    - Use Server Components by default
    - Implement Partial Prerendering for dynamic content
    - Mark Client Components explicitly
@@ -105,9 +159,10 @@ src/
    - Clear, descriptive names
    - Consistent prop interfaces
    - Proper TypeScript types
-   - Use _components directory for route groups
+   - Use \_components directory for route groups
 
 2. Code Style:
+
    - Use TypeScript strict mode
    - Follow ESLint rules
    - Consistent formatting
@@ -120,12 +175,13 @@ src/
      - Route Groups
 
 3. File Naming:
+
    - Use kebab-case for files
    - Use PascalCase for components
    - Use camelCase for utilities
    - Descriptive, purpose-based names
    - Add .server or .client suffix when helpful
-   - Use _components for route-specific components
+   - Use \_components for route-specific components
 
 4. Testing:
    - Keep test files alongside components
@@ -136,6 +192,7 @@ src/
    - Test Partial Prerendering boundaries
 
 ## Performance Optimization
+
 - Implement Partial Prerendering for dynamic content
 - Use route groups for code organization
 - Leverage parallel routes for complex layouts
@@ -145,4 +202,5 @@ src/
 - Implement proper caching strategies
 
 ## After Cleanup
+
 Once the codebase is organized and duplicates are removed, we'll follow the task breakdown document for implementing new features and integrations.
