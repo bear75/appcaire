@@ -295,7 +295,7 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
    - [✅] Background → layout/shared/Background (2024-01-25)
    - [✅] KPICard → shared/KPICard (2024-01-25)
    - [✅] ToggleMenuButton → layout/shared/ToggleMenuButton (2024-01-25)
-   - [ ] ActiveLink → layout/shared/ActiveLink
+   - [✅] ActiveLink → layout/shared/ActiveLink (2024-01-25)
 
 3. **Consolidate Utilities**
 
