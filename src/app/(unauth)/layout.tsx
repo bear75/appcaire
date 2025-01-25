@@ -1,4 +1,4 @@
-import { Navbar } from '@/templates/Navbar';
+import { Navbar } from '@/components/layout/navbar/Navbar';
 
 export default function UnauthLayout({
   children,
