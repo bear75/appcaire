@@ -82,48 +82,7 @@ export function LocalizationSettings() {
           </CardContent>
         </Card>
 
-        {/* Timezone Settings */}
-        <Card className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-              <Clock className={ICON_STYLES} />
-              {t('localization.timezone.title')}
-            </CardTitle>
-            <CardDescription className="text-sm text-slate-600">
-              {t('localization.timezone.description')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="timezone" className="text-sm font-medium text-slate-900">
-                {t('localization.timezone.select_label')}
-              </Label>
-              <Select defaultValue="Europe/Stockholm">
-                <SelectTrigger id="timezone" className="bg-white border-slate-200">
-                  <SelectValue
-                    placeholder={t('localization.timezone.placeholder')}
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Europe/Stockholm">
-                    {t('localization.timezone.options.stockholm')}
-                  </SelectItem>
-                  <SelectItem value="Europe/Oslo">
-                    {t('localization.timezone.options.oslo')}
-                  </SelectItem>
-                  <SelectItem value="Europe/Copenhagen">
-                    {t('localization.timezone.options.copenhagen')}
-                  </SelectItem>
-                  <SelectItem value="Europe/Helsinki">
-                    {t('localization.timezone.options.helsinki')}
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Date & Time Format */}
+        {/* Date Format */}
         <Card className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-lg font-semibold text-slate-900">
@@ -135,45 +94,63 @@ export function LocalizationSettings() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="grid gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="date_format" className="text-sm font-medium text-slate-900">
-                  {t('localization.date_format.select_label')}
-                </Label>
-                <Select defaultValue="sv-SE">
-                  <SelectTrigger id="date_format" className="bg-white border-slate-200">
-                    <SelectValue
-                      placeholder={t('localization.date_format.placeholder')}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="sv-SE">YYYY-MM-DD</SelectItem>
-                    <SelectItem value="en-GB">DD/MM/YYYY</SelectItem>
-                    <SelectItem value="en-US">MM/DD/YYYY</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="date_format" className="text-sm font-medium text-slate-900">
+                {t('localization.date_format.select_label')}
+              </Label>
+              <Select defaultValue="swedish">
+                <SelectTrigger id="date_format" className="bg-white border-slate-200">
+                  <SelectValue
+                    placeholder={t('localization.date_format.placeholder')}
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="swedish">
+                    {t('localization.date_format.options.swedish')}
+                  </SelectItem>
+                  <SelectItem value="european">
+                    {t('localization.date_format.options.european')}
+                  </SelectItem>
+                  <SelectItem value="american">
+                    {t('localization.date_format.options.american')}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
+        </Card>
 
-              <div className="space-y-2">
-                <Label htmlFor="time_format" className="text-sm font-medium text-slate-900">
-                  {t('localization.time_format.select_label')}
-                </Label>
-                <Select defaultValue="24h">
-                  <SelectTrigger id="time_format" className="bg-white border-slate-200">
-                    <SelectValue
-                      placeholder={t('localization.time_format.placeholder')}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="24h">
-                      {t('localization.time_format.options.24h')}
-                    </SelectItem>
-                    <SelectItem value="12h">
-                      {t('localization.time_format.options.12h')}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+        {/* Time Format */}
+        <Card className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-lg font-semibold text-slate-900">
+              <Clock className={ICON_STYLES} />
+              {t('localization.time_format.title')}
+            </CardTitle>
+            <CardDescription className="text-sm text-slate-600">
+              {t('localization.time_format.description')}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="time_format" className="text-sm font-medium text-slate-900">
+                {t('localization.time_format.select_label')}
+              </Label>
+              <Select defaultValue="24h">
+                <SelectTrigger id="time_format" className="bg-white border-slate-200">
+                  <SelectValue
+                    placeholder={t('localization.time_format.placeholder')}
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="24h">
+                    {t('localization.time_format.options.24h')}
+                  </SelectItem>
+                  <SelectItem value="12h">
+                    {t('localization.time_format.options.12h')}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </CardContent>
         </Card>
@@ -184,7 +161,7 @@ export function LocalizationSettings() {
           type="submit"
           className="bg-purple-600 hover:bg-purple-700 text-white shadow-sm hover:shadow-md"
         >
-          {t('localization.save')}
+          {t('save')}
         </Button>
       </div>
     </div>

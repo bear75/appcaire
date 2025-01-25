@@ -681,106 +681,23 @@
     "description": "Hantera dina inställningar och preferenser",
     "tabs": {
       "organization": "Organisation",
-      "users": "Personal",
+      "users": "Användare",
       "scheduling": "Schemaläggning",
+      "localization": "Lokalisering",
       "notifications": "Notifieringar",
-      "security": "Säkerhet",
-      "localization": "Lokalisering"
+      "security": "Säkerhet"
     },
     "organization": {
-      "title": "Organisationsinställningar",
-      "description": "Hantera din organisations information och inställningar",
       "details": {
-        "title": "Organisationsuppgifter",
-        "description": "Hantera din organisations information och inställningar",
-        "name": "Organisationsnamn",
-        "number": "Organisationsnummer",
-        "email": "E-post",
-        "phone": "Telefon",
-        "address": "Adress"
+        "title": "Organisationsinställningar",
+        "description": "Hantera din organisations inställningar"
       }
-    },
-    "users": {
-      "title": "Användarhantering",
-      "description": "Hantera användare och behörigheter",
-      "search_placeholder": "Sök användare...",
-      "invite": "Bjud in användare",
-      "fields": {
-        "name": "Namn",
-        "email": "E-post",
-        "role": "Roll",
-        "status": "Status",
-        "actions": "Åtgärder"
-      },
-      "actions": {
-        "edit": "Redigera"
-      }
-    },
-    "notifications": {
-      "title": "Notifieringsinställningar",
-      "description": "Hantera hur och när du får notifieringar",
-      "email": {
-        "title": "E-postnotifieringar",
-        "description": "Få notifieringar när scheman ändras",
-        "schedule_changes": "Schemaändringar",
-        "schedule_changes_description": "Få notifieringar när scheman ändras",
-        "new_assignments": "Nya uppdrag",
-        "new_assignments_description": "Få notifieringar om nya uppdrag",
-        "reports": "Rapporter",
-        "reports_description": "Få vecko- och månadsrapporter via e-post"
-      },
-      "sms": {
-        "title": "SMS-notifieringar",
-        "description": "Få SMS vid akuta schemaändringar",
-        "urgent_changes": "Akuta ändringar",
-        "urgent_changes_description": "Få SMS vid akuta schemaändringar"
-      },
-      "frequency": {
-        "title": "Notifieringsfrekvens",
-        "description": "Välj hur ofta du vill få notifieringar",
-        "label": "Frekvens",
-        "options": {
-          "daily": "Dagligen",
-          "weekly": "Veckovis",
-          "monthly": "Månadsvis"
-        }
-      },
-      "save": "Spara ändringar"
-    },
-    "security": {
-      "title": "Säkerhetsinställningar",
-      "description": "Hantera säkerhet och autentisering",
-      "authentication": {
-        "title": "Autentisering",
-        "description": "Hantera inloggning och säkerhet",
-        "two_factor": "Tvåfaktorsautentisering",
-        "two_factor_description": "Lägg till ett extra säkerhetslager vid inloggning",
-        "session_timeout": "Sessionstimeout",
-        "session_timeout_description": "Logga ut användare efter inaktivitet"
-      },
-      "data_protection": {
-        "title": "Dataskydd",
-        "description": "Hantera dataskydd och integritet",
-        "encryption": "Datakryptering",
-        "encryption_description": "All känslig data krypteras automatiskt",
-        "audit_log": "Granskningslogg",
-        "audit_log_description": "Spåra viktiga systemhändelser"
-      },
-      "password_policy": {
-        "title": "Lösenordspolicy",
-        "description": "Hantera lösenordskrav",
-        "strong_password": "Starka lösenord",
-        "strong_password_description": "Kräv komplexa lösenord",
-        "password_expiry": "Lösenordsutgång",
-        "password_expiry_description": "Lösenord måste bytas var 90:e dag"
-      },
-      "save": "Spara ändringar"
     },
     "localization": {
-      "title": "Lokaliseringsinställningar",
-      "description": "Hantera språk, tidszon och format",
+      "title": "Språk och format",
+      "description": "Anpassa språk och formatinställningar",
       "language": {
-        "title": "Språk",
+        "title": "Språkinställningar",
         "description": "Välj ditt föredragna språk",
         "select_label": "Välj språk",
         "placeholder": "Välj språk",
@@ -791,87 +708,28 @@
           "danish": "Danska"
         }
       },
-      "timezone": {
-        "title": "Tidszon",
-        "description": "Välj din tidszon",
-        "select_label": "Välj tidszon",
-        "placeholder": "Välj tidszon",
+      "date_format": {
+        "title": "Datumformat",
+        "description": "Välj hur datum ska visas",
+        "select_label": "Välj datumformat",
+        "placeholder": "Välj format",
         "options": {
-          "stockholm": "Stockholm (UTC+1)",
-          "oslo": "Oslo (UTC+1)",
-          "copenhagen": "Köpenhamn (UTC+1)",
-          "helsinki": "Helsingfors (UTC+2)"
+          "swedish": "Svenskt (YYYY-MM-DD)",
+          "european": "Europeiskt (DD.MM.YYYY)",
+          "american": "Amerikanskt (MM/DD/YYYY)"
         }
       },
-      "date_format": {
-        "title": "Datum & tid",
-        "description": "Välj hur datum och tid ska visas",
-        "select_label": "Datumformat",
-        "placeholder": "Välj datumformat"
-      },
       "time_format": {
-        "select_label": "Tidsformat",
-        "placeholder": "Välj tidsformat",
+        "title": "Tidsformat",
+        "description": "Välj hur tid ska visas",
+        "select_label": "Välj tidsformat",
+        "placeholder": "Välj format",
         "options": {
           "24h": "24-timmars (13:00)",
           "12h": "12-timmars (1:00 PM)"
         }
-      },
-      "save": "Spara ändringar"
-    },
-    "roles": {
-      "title": "Rollhantering",
-      "description": "Hantera användarroller och behörigheter",
-      "system_roles": {
-        "title": "Systemroller",
-        "super_admin": "Superadministratör",
-        "super_admin_description": "Full systemåtkomst och organisationshantering",
-        "support": "Supportpersonal",
-        "support_description": "Begränsad systemåtkomst för supportändamål"
-      },
-      "organization_roles": {
-        "title": "Organisationsroller",
-        "admin": "Organisationsadministratör",
-        "admin_description": "Full åtkomst till organisationshantering",
-        "scheduler": "Schemaläggare",
-        "scheduler_description": "Schema- och resurshantering",
-        "unit_manager": "Enhetschef",
-        "unit_manager_description": "Enhetshantering och översikt",
-        "ops_manager": "Verksamhetschef",
-        "ops_manager_description": "Verksamhetsstyrning och planering"
       }
     },
-    "scheduling": {
-      "title": "Schemaläggning",
-      "description": "Hantera inställningar för schemaläggning och resursplanering",
-      "working_hours": {
-        "title": "Arbetstider",
-        "description": "Ställ in standardarbetstider och tillgänglighet",
-        "default_start": "Standard starttid",
-        "default_end": "Standard sluttid",
-        "allow_weekends": "Tillåt schemaläggning på helger"
-      },
-      "service_delivery": {
-        "title": "Tjänsteleverans",
-        "description": "Konfigurera tidsramar för besök och resor",
-        "min_duration": "Minsta besökstid (minuter)",
-        "max_duration": "Längsta besökstid (minuter)",
-        "travel_buffer": "Restidsbuffert (minuter)"
-      },
-      "qualifications": {
-        "title": "Kvalifikationer",
-        "description": "Hantera matchning av personal och kompetenskrav",
-        "strict_matching": "Strikt matchning av kompetenser",
-        "certification_warnings": "Visa varningar för utgående certifieringar"
-      },
-      "resources": {
-        "title": "Resurshantering",
-        "description": "Hantera fordon och transportbegränsningar",
-        "max_daily_distance": "Max daglig körsträcka (km)",
-        "max_continuous_driving": "Max kontinuerlig körtid (minuter)",
-        "optimize_routes": "Optimera rutter automatiskt"
-      },
-      "save": "Spara ändringar"
-    }
+    "save": "Spara ändringar"
   }
 }
