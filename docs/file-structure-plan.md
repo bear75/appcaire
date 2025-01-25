@@ -201,6 +201,45 @@ src/
 - Optimize images with next/image
 - Implement proper caching strategies
 
+## Commit Message Structure 📝
+
+We follow the conventional commit format as defined in our commitlint configuration:
+
+### Format
+
+```
+type(scope?): subject
+```
+
+### Types
+
+- `feat`: New features
+- `fix`: Bug fixes
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting, semicolons, etc)
+- `refactor`: Code changes that neither fix bugs nor add features
+- `perf`: Performance improvements
+- `test`: Adding or updating tests
+- `chore`: Updates to build process, tools, etc
+- `ci`: Changes to CI configuration files and scripts
+
+### Rules
+
+- Subject line must not be longer than 100 characters
+- Subject line should be in present tense ("add feature" not "added feature")
+- Subject line should not end with a period
+- Scope is optional and should be in parentheses
+
+### Examples
+
+```
+feat(auth): add organization role management
+fix(dashboard): resolve data loading issue
+refactor(components): move navbar to new structure
+docs(readme): update installation instructions
+style(lint): apply prettier formatting
+```
+
 ## After Cleanup
 
 Once the codebase is organized and duplicates are removed, we'll follow the task breakdown document for implementing new features and integrations.
