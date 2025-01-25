@@ -29,19 +29,40 @@ Confirm these steps before starting the process
      - Test thoroughly
      - Only remove original after verification
 
-4. **Commit Strategy**
+4. **Testing Steps**
+
+   - After moving layout components:
+
+     - Test both logged-in and logged-out states
+     - Verify navigation works in both states
+     - Check responsive menu on mobile
+     - Test organization switching if applicable
+
+   - After moving shared components:
+
+     - Test all pages where component appears
+     - Verify functionality in different contexts
+     - Check both light and dark modes if applicable
+
+   - After moving feature components:
+
+     - Test the specific feature flow end-to-end
+     - Verify data loading and error states
+     - Test interactions with other features
+
+   - Common test flows:
+     - Landing page: Hero, Features, Footer
+     - Auth flow: Login, Register, Organization creation
+     - Dashboard: Navigation, KPIs, Menu toggle
+     - Settings: Organization settings, User profile
+     - Support: Help center, Contact forms
+
+5. **Commit Strategy**
 
    - Commit after each successful component move
    - Keep commit messages clear and concise
    - Follow conventional commit format
    - Makes it easy to revert if issues arise
-
-5. **Testing**
-
-   - Test after each component move
-   - Verify all features still work
-   - Check for broken imports
-   - Ensure no runtime errors
 
 6. **Task Tracking**
    - Mark tasks as completed in this document after each successful change
