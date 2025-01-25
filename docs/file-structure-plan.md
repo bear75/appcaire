@@ -272,7 +272,7 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
 2. **Move Components**
 
    - [✅] Background → layout/shared/Background (2024-01-25)
-   - [ ] KPICard → shared/KPICard
+   - [✅] KPICard → shared/KPICard (2024-01-25)
    - [ ] ToggleMenuButton → layout/shared/ToggleMenuButton
    - [ ] ActiveLink → layout/shared/ActiveLink
 
