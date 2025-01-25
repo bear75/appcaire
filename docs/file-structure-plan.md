@@ -260,3 +260,43 @@ style(lint): apply prettier formatting
 ## After Cleanup
 
 Once the codebase is organized and duplicates are removed, we'll follow the task breakdown document for implementing new features and integrations.
+
+### File Cleanup Tasks
+
+1. **Remove Unnecessary Files**
+
+   - [ ] Remove src/templates directory (moved to new locations)
+   - [ ] Remove .DS_Store files
+   - [ ] Remove .old and .bak files
+
+2. **Move Components**
+
+   - [ ] Background → layout/shared/Background
+   - [ ] KPICard → shared/KPICard
+   - [ ] ToggleMenuButton → layout/shared/ToggleMenuButton
+   - [ ] ActiveLink → layout/shared/ActiveLink
+
+3. **Consolidate Utilities**
+
+   - [ ] Review and merge duplicate utility functions
+   - [ ] Organize utils by category (date, string, formatting)
+   - [ ] Create proper index files for utilities
+   - [ ] Add proper type definitions
+
+4. **Reorganize Features**
+
+   - [ ] Move dashboard components to features/dashboard
+   - [ ] Move analytics components to features/analytics
+   - [ ] Ensure proper component organization in features
+
+5. **Clean Up Tests**
+
+   - [ ] Move tests next to their components
+   - [ ] Ensure consistent test naming
+   - [ ] Update test imports after reorganization
+
+6. **Documentation**
+   - [ ] Update component documentation
+   - [ ] Document utility functions
+   - [ ] Create README files for major directories
+   - [ ] Document file structure decisions
