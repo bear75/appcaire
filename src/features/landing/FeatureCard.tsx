@@ -1,3 +1,5 @@
+'use client';
+
 export const FeatureCard = (props: {
   icon: React.ReactNode;
   title: string;
