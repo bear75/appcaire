@@ -36,10 +36,18 @@ When refactoring the codebase structure, follow these steps to ensure stability:
    - Makes it easy to revert if issues arise
 
 5. **Testing**
+
    - Test after each component move
    - Verify all features still work
    - Check for broken imports
    - Ensure no runtime errors
+
+6. **Task Tracking**
+   - Mark tasks as completed in this document after each successful change
+   - Use ✅ for completed tasks
+   - Use 🚧 for in-progress tasks
+   - Use ⏳ for pending tasks
+   - Add completion dates for tracking
 
 This process ensures we can safely refactor without breaking functionality and easily revert if needed.
 
@@ -66,17 +74,22 @@ This process ensures we can safely refactor without breaking functionality and e
 
 ### 1. Code Organization (2-3 hours)
 
-- [ ] Audit existing files and their locations
-- [ ] Identify duplicate code and components
-- [ ] Create plan for merging similar functionality
-- [ ] Document components to be kept/removed
+- [✅] Create new directory structure (2024-01-25)
+- [✅] Move Navbar to components/layout/navbar (2024-01-25)
+- [✅] Move Logo to components/layout/shared (2024-01-25)
+- [⏳] Move Footer to components/layout/footer
+- [⏳] Move Hero to components/features/landing
+- [⏳] Move Features to components/features/landing
+- [⏳] Move FAQ to components/features/landing
+- [⏳] Audit remaining files and their locations
+- [⏳] Document components to be kept/removed
 
 ### 2. Component Consolidation (3-4 hours)
 
-- [ ] Merge duplicate components
-- [ ] Standardize component props
-- [ ] Create shared component library
-- [ ] Update component documentation
+- [⏳] Merge duplicate components
+- [⏳] Standardize component props
+- [⏳] Create shared component library
+- [⏳] Update component documentation
 
 ### 3. Utility Functions (2 hours)
 
