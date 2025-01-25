@@ -83,7 +83,7 @@ This process ensures we can safely refactor without breaking functionality and e
 - [✅] Fix footer logo sizing (2024-01-25)
 - [✅] Move Footer to components/layout/footer (2024-01-25)
 - [✅] Move Hero to components/features/landing
-- [⏳] Move Features to components/features/landing
+- [✅] Move Features to components/features/landing (2024-01-25)
 - [⏳] Move FAQ to components/features/landing
 - [⏳] Audit remaining files and their locations
 - [⏳] Document components to be kept/removed
