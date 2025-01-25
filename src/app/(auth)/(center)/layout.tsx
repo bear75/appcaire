@@ -1,4 +1,4 @@
-import { Logo } from '@/templates/Logo';
+import { Logo } from '@/components/layout/shared/Logo';
 
 export default function AuthCenterLayout({
   children,
@@ -10,9 +10,7 @@ export default function AuthCenterLayout({
       <div className="mb-8">
         <Logo className="size-8" />
       </div>
-      <div className="w-full max-w-[400px] px-4">
-        {children}
-      </div>
+      <div className="w-full max-w-[400px] px-4">{children}</div>
     </div>
   );
 }
