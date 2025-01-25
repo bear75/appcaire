@@ -2,7 +2,7 @@
 
 import { CalendarIcon, ClockIcon, PersonIcon } from '@radix-ui/react-icons';
 
-import { Background } from '@/components/Background';
+import { Background } from '@/components/layout/shared/Background';
 import { FeatureCard } from '@/features/landing/FeatureCard';
 import { Section } from '@/features/landing/Section';
 
