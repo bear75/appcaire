@@ -1,16 +1,47 @@
-import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js';
 
-export function createClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+import type { Database } from './types';
 
-  if (!supabaseUrl || !supabaseKey) {
-    throw new Error('Missing Supabase environment variables');
-  }
-
-  return createSupabaseClient(supabaseUrl, supabaseKey, {
-    auth: {
-      persistSession: true
-    }
-  });
+if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+  throw new Error('Missing env.NEXT_PUBLIC_SUPABASE_URL');
 }
+if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  throw new Error('Missing env.NEXT_PUBLIC_SUPABASE_ANON_KEY');
+}
+
+/**
+ * Create a Supabase client for use in the browser
+ */
+export const supabase = createClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+    },
+    db: {
+      schema: 'public',
+    },
+  },
+);
+
+/**
+ * Create a Supabase admin client for use in server-side operations
+ * This client has RLS bypassed and should only be used in secure contexts
+ */
+export const supabaseAdmin = process.env.SUPABASE_SERVICE_ROLE_KEY
+  ? createClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_ROLE_KEY,
+      {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+        },
+        db: {
+          schema: 'public',
+        },
+      },
+    )
+  : null;
