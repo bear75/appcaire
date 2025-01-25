@@ -1,12 +1,34 @@
 /**
- * Central export point for all utility functions
+ * Utility functions for the application
+ * Re-exports all utility functions for easy importing
  */
+
+// Array utilities
+export * from './array/operations';
+
+// Object utilities
+export * from './object/operations';
+
+// Type checking utilities
+export * from './types/guards';
+
+// Error handling utilities
+export * from './error/handlers';
+
+// General utilities
+export * from './general/misc';
+
+// URL and path utilities
+export * from './url/paths';
+
+// Formatting utilities
+export * from './formatting';
+
+// CSS utilities
+export * from './css/tailwind';
 
 // Date utilities
 export * from './date';
-
-// Formatting utilities
-export * from './format';
 
 // Validation utilities
 export * from './validation';
