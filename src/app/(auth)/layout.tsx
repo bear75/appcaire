@@ -1,4 +1,6 @@
-import '@/styles/global.css';
+'use client';
+
+import { useAuth } from '@clerk/nextjs';
 import { Sidebar } from '@/components/layout/Sidebar';
 
 type AuthLayoutProps = {
@@ -6,12 +8,12 @@ type AuthLayoutProps = {
 };
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-      <main className="flex-1 pl-64">
-        <div className="container py-8">{children}</div>
-      </main>
-    </div>
-  );
+  const { isLoaded, userId } = useAuth();
+
+  // Don't show sidebar for unauthenticated users
+  if (!isLoaded || !userId) {
+    return children;
+  }
+
+  return children;
 }

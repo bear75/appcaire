@@ -1,4 +1,4 @@
-import { authMiddleware, redirectToSignIn } from '@clerk/nextjs';
+import { authMiddleware } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 // This example protects all routes including api/trpc routes
@@ -12,7 +12,7 @@ export default authMiddleware({
     '/api/webhooks/clerk',
     '/api/webhooks/stripe',
   ],
-  
+
   afterAuth(auth, req) {
     // If the user is logged in and trying to access a public route
     if (auth.userId && auth.isPublicRoute) {
@@ -22,7 +22,8 @@ export default authMiddleware({
 
     // If the user is not logged in and trying to access a private route
     if (!auth.userId && !auth.isPublicRoute) {
-      return redirectToSignIn({ returnBackUrl: req.url });
+      const signIn = new URL('/sign-in', req.url);
+      return NextResponse.redirect(signIn);
     }
 
     // Allow the request to proceed

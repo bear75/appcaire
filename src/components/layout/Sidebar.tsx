@@ -29,7 +29,7 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="fixed left-0 top-0 z-30 h-screen w-64 border-r bg-background">
+    <aside className="fixed left-0 top-0 z-30 h-screen w-64 border-r bg-white">
       <div className="flex h-full flex-col">
         {/* Logo and Name */}
         <div className="flex h-16 items-center border-b px-6">
@@ -52,7 +52,7 @@ export function Sidebar() {
                   'group flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium',
                   isActive
                     ? 'bg-purple-50 text-purple-600'
-                    : 'text-gray-700 hover:bg-gray-50',
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900',
                 )}
               >
                 <Icon className="size-5" />

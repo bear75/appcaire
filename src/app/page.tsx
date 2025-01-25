@@ -1,30 +1,22 @@
-import { CTA } from '@/templates/CTA';
-import { DemoBanner } from '@/templates/DemoBanner';
-import { FAQ } from '@/templates/FAQ';
 import { Features } from '@/templates/Features';
 import { Footer } from '@/templates/Footer';
 import { Hero } from '@/templates/Hero';
 import { Navbar } from '@/templates/Navbar';
-import { Pricing } from '@/templates/Pricing';
-import { Sponsors } from '@/templates/Sponsors';
 
 export const metadata = {
   title: 'Caire - Framtidens Hemtjänstplanering',
   description: 'Optimera din hemtjänstverksamhet med AI-driven schemaläggning och ruttplanering',
 };
 
-export default function IndexPage() {
+export default function HomePage() {
   return (
-    <>
-      <DemoBanner />
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <Hero />
-      <Sponsors />
-      <Features />
-      <Pricing />
-      <FAQ />
-      <CTA />
-      <Footer />
-    </>
+      <main className="flex flex-col">
+        <Hero />
+        <Features />
+        <Footer />
+      </main>
+    </div>
   );
-} 
+}

@@ -9,12 +9,12 @@ export const metadata = {
 
 export default function IndexPage() {
   return (
-    <>
-      <main>
+    <div className="min-h-screen bg-background">
+      <main className="flex flex-col">
         <Hero />
         <Features />
         <Footer />
       </main>
-    </>
+    </div>
   );
 }

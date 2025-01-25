@@ -1,36 +1,30 @@
-import { auth } from '@clerk/nextjs/server';
-import { createClerkClient } from '@clerk/nextjs/server';
+import { clerkClient } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const { organizationId } = await request.json();
-
+    const { organizationId } = await req.json();
+    
     if (!organizationId) {
       return NextResponse.json({ error: 'Organization ID is required' }, { status: 400 });
     }
 
-    console.log('Setting metadata for organization:', organizationId);
-
-    // Initialize Clerk client
-    const clerk = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
-
-    // Set the metadata
-    const updatedOrg = await clerk.organizations.updateOrganization(organizationId, {
+    const organization = await clerkClient.organizations.updateOrganization(organizationId, {
       publicMetadata: {
-        status: 'trial',
-        trialStartedAt: new Date().toISOString(),
-        trialExpiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days from now
-      }
+        status: 'TRIAL',
+        trialStartDate: new Date().toISOString(),
+        trialExpirationDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(), // 14 days
+      },
     });
 
-    return NextResponse.json({ 
-      success: true, 
-      organization: updatedOrg 
-    });
-  } catch (error) {
+    return NextResponse.json({ organization });
+  } catch (error: any) {
     return NextResponse.json(
-      { error: `Failed to update organization: ${error instanceof Error ? error.message : 'Unknown error'}` },
+      { 
+        error: 'Failed to set organization metadata',
+        details: error.message,
+        organizationId: req.body?.organizationId 
+      }, 
       { status: 500 }
     );
   }

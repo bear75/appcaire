@@ -1,5 +1,4 @@
 export const CenteredHero = (props: {
-  banner: React.ReactNode;
   title: React.ReactNode;
   description: string;
   buttons: React.ReactNode;

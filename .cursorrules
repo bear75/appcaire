@@ -17,10 +17,10 @@ general:
   domain_knowledge:
     - Home care scheduling workflows
     - AI-driven scheduling (Timefold.ai)
-    - for app-caire we use Next.js (preferably 13+ with the new App Router))
-    - React 18+ features
+    - Next.js 14+ with App Router and Server Actions
+    - React 18+ features and Server Components
     - TypeScript 5.x or latest stable
-    - Tailwind CSS and shadcn/ for UI
+    - Tailwind CSS and shadcn/ui v2
     - Clerk for authentication and multi-tenant management
     - Supabase integration for database with drizzle ORM
     - Basic understanding of GDPR/SoL compliance
@@ -38,20 +38,42 @@ general:
 
 tech_stack:
   frontend:
-    framework: next.js
+    framework: "next.js@14"
     language: "TypeScript"
     ui:
       - "React 18+"
       - "Tailwind CSS"
-      - "Shadcn"
-      navigation:
-        - "Use src/templates/Navbar.tsx as the single source for navigation"
-        - "Do not create separate TopNav components"
-        - "Keep navigation consistent across all pages"
-      setup_steps:
-        - "Run 'npx shadcn@latest init' to initialize shadcn"
-        - "Add required components using 'npx shadcn@latest add [component-name]'"
-        - "Required components: button, card, form, input, select, tabs, dialog, sheet"
+      - "Shadcn v2"
+    auth:
+      provider: "Clerk"
+      features:
+        - Multi-tenant organizations
+        - Role-based access control
+        - Webhooks for lifecycle events
+      roles:
+        - super_admin:
+            description: "System-wide access"
+            permissions: ["all"]
+        - admin:
+            description: "Organization admin"
+            permissions: ["org:*"]
+        - scheduler:
+            description: "Schedule management"
+            permissions: ["schedule:*", "employees:view", "clients:view"]
+        - team_manager:
+            description: "Employee management"
+            permissions: ["employees:*", "schedule:view"]
+        - ops_manager:
+            description: "Client management"
+            permissions: ["clients:*", "schedule:view"]
+        - support:
+            description: "Read-only access"
+            permissions: ["view:*"]
+      organization_status:
+        - trial: "30-day trial period"
+        - active: "Paid subscription"
+        - suspended: "Payment/compliance issues"
+        - expired: "Trial ended"
     state_management:
       library: "React hooks"
     styling:
@@ -91,8 +113,13 @@ tech_stack:
         - "pnpm db:generate - Generate migrations"
         - "pnpm db:migrate - Apply migrations"
         - "pnpm db:test - Test database setup"
-    auth:
-      approach: "Clerk for user and organization-level authentication"
+    orm: "Drizzle"
+    provider: "Supabase"
+    features:
+      - "Row Level Security"
+      - "Organization isolation"
+      - "Role-based access"
+      - "Audit logging"
   testing:
     frameworks:
       - "Vitest for unit testing"
@@ -216,11 +243,13 @@ feature_implementation:
   - "If a sample snippet is requested, provide a fully working snippet."
 
 security:
-  - "Use HTTPS (SSL/TLS)."
-  - "Securely handle API tokens and keys in environment variables."
-  - "Follow Supabase best practices (RLS, policies) to protect data at row level."
-  - "Sanitize user input when relevant."
-  - "Comply with GDPR and SoL data handling guidelines."
+  - "HTTPS (SSL/TLS)"
+  - "Environment variables for secrets"
+  - "Row Level Security in database"
+  - "Role-based access control"
+  - "Organization data isolation"
+  - "GDPR compliance"
+  - "Audit logging"
 
 seo:
   - "Use semantic HTML tags (<header>, <main>, <footer>)."
@@ -262,4 +291,19 @@ fixing errors:
   4. Check import paths are correct
   5. Run the development server to verify fixes
 think step by step when fixing it."
+
+webhooks:
+  clerk:
+    events:
+      - organization.created
+      - organization.updated
+      - organization.deleted
+      - organizationMembership.created
+      - organizationMembership.updated
+      - organizationMembership.deleted
+    custom_events:
+      - organization.trial_ending
+      - organization.trial_expired
+      - organization.activated
+      - organization.suspended
 

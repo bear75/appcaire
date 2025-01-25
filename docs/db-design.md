@@ -1,7 +1,7 @@
 # Database Design
 
 ## Overview
-This document outlines the database schema and setup for the Caire platform, focusing on scheduling and organization management.
+This document outlines the database schema and setup for the Caire platform, focusing on scheduling and organization management with Clerk integration.
 
 ## Project Structure
 ```
@@ -60,9 +60,12 @@ The core table for multi-tenant functionality.
 ```typescript
 export const organizations = pgTable('organizations', {
   id: uuid('id').primaryKey().defaultRandom(),
+  clerkId: text('clerk_id').notNull().unique(),
   name: text('name').notNull(),
+  status: text('status', { enum: ['TRIAL', 'ACTIVE', 'SUSPENDED', 'EXPIRED'] }).default('TRIAL'),
+  trialStartDate: timestamp('trial_start_date', { withTimezone: true }).defaultNow(),
   trialExpirationDate: timestamp('trial_expiration_date', { withTimezone: true }),
-  status: text('status').default('ACTIVE'),
+  subscriptionId: text('subscription_id'),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow()
 });
@@ -71,9 +74,101 @@ export const organizations = pgTable('organizations', {
 Key features:
 - UUID-based primary key
 - Trial period tracking
-- Status tracking (ACTIVE, SUSPENDED)
+- Status tracking (TRIAL, ACTIVE, SUSPENDED, EXPIRED)
 - Automatic timestamps
 - Row Level Security enabled for multi-tenant isolation
+
+### Organization Members
+```typescript
+export const organizationMembers = pgTable('organization_members', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  organizationId: uuid('organization_id').references(() => organizations.id),
+  clerkId: text('clerk_id').notNull(),
+  role: text('role', { 
+    enum: ['SUPER_ADMIN', 'ADMIN', 'SCHEDULER', 'TEAM_MANAGER', 'OPS_MANAGER', 'SUPPORT'] 
+  }).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow()
+});
+```
+
+### Required Webhooks
+
+1. Organization Lifecycle
+```typescript
+// Organization Created
+{
+  type: 'organization.created',
+  data: {
+    id: string;
+    name: string;
+    created_at: string;
+  }
+}
+
+// Organization Updated
+{
+  type: 'organization.updated',
+  data: {
+    id: string;
+    name: string;
+    slug: string;
+  }
+}
+
+// Organization Deleted
+{
+  type: 'organization.deleted',
+  data: {
+    id: string;
+    name: string;
+  }
+}
+```
+
+2. Member Management
+```typescript
+// Member Invited
+{
+  type: 'organizationMembership.created',
+  data: {
+    organization: { id: string; name: string; };
+    public_user_data: { user_id: string; };
+    role: string;
+  }
+}
+
+// Member Role Updated
+{
+  type: 'organizationMembership.updated',
+  data: {
+    organization: { id: string; };
+    public_user_data: { user_id: string; };
+    role: string;
+  }
+}
+```
+
+3. Trial Management
+```typescript
+// Custom events to implement
+{
+  type: 'organization.trial_ending',
+  data: {
+    id: string;
+    name: string;
+    trial_ends_at: string;
+  }
+}
+
+{
+  type: 'organization.trial_expired',
+  data: {
+    id: string;
+    name: string;
+  }
+}
+```
 
 ### Schedules
 Stores schedule entries for both manual and optimized schedules.
@@ -161,6 +256,30 @@ export const baseColumns = {
 };
 ```
 
+### Role-Based Access
+```typescript
+export const RolePermissions = {
+  SUPER_ADMIN: [
+    'org:sys_domains:manage',
+    'org:sys_memberships:manage',
+    'org:sys_profile:manage',
+    // ... all permissions
+  ],
+  ADMIN: [
+    'org:profile:manage',
+    'org:members:manage',
+    'org:schedule:manage',
+    // ... organization level permissions
+  ],
+  SCHEDULER: [
+    'org:schedule:manage',
+    'org:schedule:view',
+    // ... scheduling permissions
+  ],
+  // ... other roles
+} as const;
+```
+
 ## Migrations
 Migrations are managed using Drizzle Kit:
 1. Schema changes are made in TypeScript files
@@ -198,3 +317,82 @@ Key indexes for performance optimization:
 - Timestamps with time zone for all temporal data
 - JSONB for flexible data storage
 - Text for enumerated values with constraints
+
+## Clerk Integration
+
+### Security Implementation
+
+#### Row Level Security
+```sql
+-- Enable RLS
+ALTER TABLE organizations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE organization_members ENABLE ROW LEVEL SECURITY;
+
+-- Organization access policy
+CREATE POLICY org_access_policy ON organizations
+  USING (clerk_id = current_user_id());
+
+-- Member access policy
+CREATE POLICY member_access_policy ON organization_members
+  USING (organization_id IN (
+    SELECT organization_id 
+    FROM organization_members 
+    WHERE clerk_id = current_user_id()
+  ));
+```
+
+#### Role-Based Access
+```typescript
+export const RolePermissions = {
+  SUPER_ADMIN: [
+    'org:sys_domains:manage',
+    'org:sys_memberships:manage',
+    'org:sys_profile:manage',
+    // ... all permissions
+  ],
+  ADMIN: [
+    'org:profile:manage',
+    'org:members:manage',
+    'org:schedule:manage',
+    // ... organization level permissions
+  ],
+  SCHEDULER: [
+    'org:schedule:manage',
+    'org:schedule:view',
+    // ... scheduling permissions
+  ],
+  // ... other roles
+} as const;
+```
+
+### Webhook Implementation
+
+1. Create webhook endpoint:
+```typescript
+// src/app/api/webhooks/clerk/route.ts
+import { verifyWebhook } from '@/lib/clerk/webhooks';
+
+export async function POST(req: Request) {
+  const evt = await verifyWebhook(req);
+  
+  switch (evt.type) {
+    case 'organization.created':
+      // Handle organization creation
+      break;
+    case 'organization.updated':
+      // Handle organization update
+      break;
+    // ... handle other events
+  }
+}
+```
+
+2. Set up webhook in Clerk Dashboard:
+- Endpoint: `/api/webhooks/clerk`
+- Events to subscribe:
+  - organization.created
+  - organization.updated
+  - organization.deleted
+  - organizationMembership.created
+  - organizationMembership.updated
+  - organizationMembership.deleted

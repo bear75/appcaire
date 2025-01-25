@@ -256,3 +256,125 @@
   - Plan advanced analytics rollout
 
 ---
+
+## Authentication & Organization Management (Clerk Integration)
+
+### 1. Database Schema Updates (2-3 hours)
+- [ ] Add organization status tracking
+- [ ] Implement trial period management
+- [ ] Add role-based access tables
+- [ ] Update employee and client schemas
+
+### 2. Webhook Implementation (2-3 hours)
+- [ ] Organization lifecycle events
+  - Organization creation
+  - Organization updates
+  - Organization deletion
+- [ ] Member management events
+  - Member invitations
+  - Role changes
+  - Member removals
+- [ ] Trial management events
+  - Trial start
+  - Trial ending notification
+  - Trial expiration
+- [ ] Status change notifications
+
+### 3. Role-Based Access Control (3-4 hours)
+- [ ] Implement role checks in middleware
+- [ ] Add permission guards to routes
+- [ ] Create role-specific layouts
+- [ ] Add role management UI
+- [ ] Implement organization roles:
+  ```typescript
+  roles:
+    - super_admin: ["all"]
+    - admin: ["org:*"]
+    - scheduler: ["schedule:*", "employees:view", "clients:view"]
+    - team_manager: ["employees:*", "schedule:view"]
+    - ops_manager: ["clients:*", "schedule:view"]
+    - support: ["view:*"]
+  ```
+
+### 4. Trial Management (2-3 hours)
+- [ ] Add trial status tracking
+- [ ] Implement trial expiration notifications
+- [ ] Create trial-specific UI elements
+- [ ] Add upgrade flow
+- [ ] Handle organization statuses:
+  - trial (30 days)
+  - active (paid)
+  - suspended
+  - expired
+
+## AI Scheduling Integration (Timefold)
+
+### 1. Integration Setup (3-4 hours)
+- [ ] Create Timefold client structure:
+  ```typescript
+  src/lib/timefold/
+  ├── client.ts        # API client
+  ├── types.ts         # Type definitions
+  ├── utils.ts         # Helper functions
+  └── config.ts        # Configuration
+  ```
+- [ ] Set up API authentication
+- [ ] Define core interfaces
+- [ ] Add error handling
+
+### 2. Constraint Management (4-5 hours)
+- [ ] Implement constraint levels:
+  - Caire-wide constraints
+  - Organization constraints
+  - Employee constraints
+  - Vehicle constraints
+  - Client constraints
+- [ ] Add constraint configuration UI
+- [ ] Create constraint validation
+- [ ] Set up priority system
+
+### 3. Schedule Optimization (4-5 hours)
+- [ ] Implement schedule submission
+- [ ] Handle optimization responses
+- [ ] Add real-time updates
+- [ ] Create schedule comparison views
+- [ ] Implement manual override options
+
+### 4. Analytics Integration (3-4 hours)
+- [ ] Add optimization metrics tracking
+- [ ] Create performance dashboards
+- [ ] Implement schedule quality scoring
+- [ ] Add travel time optimization metrics
+
+### 5. Trial Comparison Features (2-3 hours)
+- [ ] Create manual vs. AI schedule comparison
+- [ ] Add metric comparison views
+- [ ] Implement trial-specific analytics
+- [ ] Create conversion prompts
+
+## Future Tasks
+
+### 1. Mobile Responsiveness (2-3 hours)
+- [ ] Optimize layouts for mobile
+- [ ] Add touch interactions
+- [ ] Test on various devices
+
+### 2. Performance Optimization (2-3 hours)
+- [ ] Implement caching strategies
+- [ ] Optimize API calls
+- [ ] Add loading states
+- [ ] Improve error handling
+
+### 3. Analytics Expansion (3-4 hours)
+- [ ] Add advanced metrics
+- [ ] Create custom reports
+- [ ] Implement data exports
+- [ ] Add visualization options
+
+### 4. Integration Extensions (4-5 hours)
+- [ ] Prepare for Carefox integration
+- [ ] Add more e-health system connections
+- [ ] Implement data synchronization
+- [ ] Add audit logging
+
+---

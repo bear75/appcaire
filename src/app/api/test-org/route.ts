@@ -1,5 +1,5 @@
+import { clerkClient } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
-import { createClerkClient } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db/client';
 import { organization } from '@/lib/db/schema/tables';
@@ -38,49 +38,48 @@ async function syncOrganizationToDb(clerkOrg: any) {
 
 export async function GET() {
   try {
-    // Get the current user's auth context
+    // Get current session
     const session = await auth();
     const userId = session?.userId;
     const orgId = session?.orgId;
 
-    if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    console.log('Current user:', userId, 'Current org:', orgId);
 
-    // Initialize Clerk client
-    const clerk = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
-
-    // Get organizations from Clerk
-    const clerkOrgs = await clerk.organizations.getOrganizationList();
-    
+    // Initialize arrays for organizations
+    let clerkOrgs = [];
     let dbOrgs = [];
     let dbError = null;
-    
+
+    // Get organizations from Clerk
     try {
-      // Sync each Clerk organization to our database
-      for (const org of clerkOrgs.data) {
-        await syncOrganizationToDb(org);
-      }
-      
-      // Get updated organizations from our database
+      clerkOrgs = await clerkClient.organizations.getOrganizationList();
+    } catch (error: any) {
+      console.error('Error fetching Clerk organizations:', error);
+    }
+
+    // Get organizations from database
+    try {
       dbOrgs = await db.select().from(organization);
-    } catch (err) {
-      console.error('Database error:', err);
-      dbError = err instanceof Error ? err.message : 'Unknown database error';
+    } catch (error: any) {
+      console.error('Error fetching database organizations:', error);
+      dbError = error.message;
     }
 
     return NextResponse.json({
+      currentUser: userId,
+      currentOrg: orgId,
       clerkOrganizations: clerkOrgs,
       databaseOrganizations: dbOrgs,
-      databaseError: dbError,
-      currentUserId: userId,
-      currentOrgId: orgId
+      databaseError: dbError
     });
   } catch (error: any) {
-    console.error('Error fetching organizations:', error);
-    return NextResponse.json({ 
-      error: 'Failed to fetch organizations',
-      details: error.message || 'Unknown error'
-    }, { status: 500 });
+    console.error('Error in test-org route:', error);
+    return NextResponse.json(
+      { 
+        error: 'Failed to fetch organizations',
+        details: error.message 
+      }, 
+      { status: 500 }
+    );
   }
 } 

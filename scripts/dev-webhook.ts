@@ -6,34 +6,42 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
 async function startDevServer() {
-  // Start Next.js dev server
-  const nextProcess = exec('pnpm dev');
-  
-  nextProcess.stdout?.on('data', (data) => {
-    console.log(data);
-  });
-
-  nextProcess.stderr?.on('data', (data) => {
-    console.error(data);
-  });
-
-  // Wait for Next.js to start
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-
   try {
-    // Start ngrok tunnel
-    const url = await ngrok.connect({
-      addr: 3000,
-      subdomain: process.env.NGROK_SUBDOMAIN, // Optional: Set a custom subdomain if you have a paid account
+    // Start Next.js development server
+    exec('pnpm dev', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error starting Next.js server: ${error}`);
+        return;
+      }
+      console.log(stdout);
+      console.error(stderr);
     });
 
-    console.log('\n=== Webhook Testing Setup ===');
-    console.log(`🚀 Local Next.js: http://localhost:3000`);
-    console.log(`🌍 Ngrok URL: ${url}`);
-    console.log(`\n📝 Add this webhook URL in Clerk Dashboard:`);
-    console.log(`${url}/api/webhooks/clerk\n`);
+    // Wait for server to start
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    // Only start ngrok if ENABLE_NGROK is true
+    if (process.env.ENABLE_NGROK === 'true') {
+      try {
+        // Configure ngrok
+        const url = await ngrok.connect({
+          addr: 3000,
+          authtoken: process.env.NGROK_AUTHTOKEN,
+          subdomain: process.env.NGROK_SUBDOMAIN
+        });
+
+        console.log('Local server:', 'http://localhost:3000');
+        console.log('Webhook URL:', url);
+        console.log('Add this URL to your Clerk Dashboard webhook endpoints');
+      } catch (ngrokError) {
+        console.log('Ngrok setup skipped or failed. Local server available at http://localhost:3000');
+        console.error('Ngrok error:', ngrokError);
+      }
+    } else {
+      console.log('Ngrok disabled. Local server available at http://localhost:3000');
+    }
   } catch (error) {
-    console.error('Error starting ngrok:', error);
+    console.error('Error starting development server:', error);
     process.exit(1);
   }
 }
