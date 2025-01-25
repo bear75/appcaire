@@ -1,13 +1,16 @@
 # File Structure Migration Plan
 
 ## Current Status ⚠️
+
 - UI Prototype stage - some warnings/errors acceptable
 - Import paths need fixing (e.g., @/libs/utils → @/lib/utils)
 - Multiple utility files need consolidation
 - Translation files need organization
 
 ## Immediate Actions (Current Sprint)
+
 1. Fix Critical Import Paths
+
    - [x] Update traffic-light.tsx imports
    - [ ] Document all @/libs/utils imports that need updating
    - [ ] Fix ImportWizard split error
@@ -15,6 +18,7 @@
 
 2. Utils Consolidation Analysis
    Current Locations:
+
    ```
    src/
    ├── utils/
@@ -30,6 +34,7 @@
    ```
 
    Plan:
+
    1. Document each util's purpose
    2. Identify overlapping functionality
    3. Plan merged structure
@@ -43,11 +48,13 @@
 ## Refactoring Process ⚠️
 
 ### Step 1: Analysis Phase
+
 1. Identify Duplicates
+
    - [ ] List all duplicate directories and files
    - [ ] Document locations and purposes of each duplicate
    - [ ] Compare contents and identify unique code in each location
-   Example duplicates found:
+         Example duplicates found:
    - `lib/` vs `libs/`
    - `messages/` vs `locales/`
    - Multiple utility files across directories
@@ -59,7 +66,9 @@
    - [ ] Note any conflicts or inconsistencies
 
 ### Step 2: Merge Planning
+
 1. Create Merge Strategy
+
    - [ ] Determine target location for each merged file
    - [ ] List all code that needs to be combined
    - [ ] Document import path updates needed
@@ -71,7 +80,9 @@
    - [ ] Document expected behavior
 
 ### Step 3: Implementation
+
 1. Code Merging
+
    - [ ] Copy unique code to target files
    - [ ] Update imports in target files
    - [ ] Run tests to verify functionality
@@ -85,6 +96,7 @@
    - [ ] Validate build process
 
 ### Step 4: Cleanup (Only after successful verification)
+
 1. File Removal
    - [ ] Document files to be removed
    - [ ] Get approval for removal
@@ -94,11 +106,14 @@
 ## Current Focus: Utils Consolidation
 
 ### Analysis of Utils Duplicates
+
 1. Current Locations:
+
    - `src/utils/`
    - `src/libs/utils/`
 
 2. Files to Review:
+
    - `src/utils/date.ts`
    - `src/utils/AppConfig.ts`
    - `src/utils/translations.ts`
@@ -115,6 +130,7 @@
 ## Completed Steps ✅
 
 ### 1. Initial Setup
+
 - ✅ Basic Next.js 13+ App Router structure
 - ✅ Basic feature module structure
 - ✅ shadcn/ui components setup
@@ -122,6 +138,7 @@
 - ✅ Basic API structure with webhooks
 
 ### 2. Schedule Feature Progress
+
 - ✅ Basic component structure
 - ✅ Translation system setup
 - ✅ Schedule view components
@@ -129,38 +146,52 @@
 - ✅ Import wizard structure
 
 ### 3. Component Organization
+
 - ✅ Basic UI components with shadcn
 - ✅ Schedule feature components
 - ✅ Basic layout templates
 
+### 4. i18n System Refactor
+
+- ✅ Core i18n structure in lib/i18n/
+- ✅ Translation hooks and utilities
+- ✅ Type definitions and configuration
+- ✅ Basic Swedish translations setup
+
 ## In Progress 🔄
 
-### Current Focus: Schedule Feature Cleanup
-1. Import Path Fixes
-   - [ ] Fix ScheduleView import in ScheduleContent
-   - [ ] Update component import paths
-   - [ ] Verify all imports resolve correctly
+### Current Focus: Translation File Organization
 
-2. Component Organization
-   - [ ] Move ScheduleContent.tsx to proper location
-   - [ ] Organize ScheduleView hierarchy
-   - [ ] Clean up ImportWizard structure
+1. Split Translation Files
+
+   - [ ] Move translations to language-specific directories
+   - [ ] Split by domain (common, settings, etc.)
+   - [ ] Update import paths in components
+
+2. Component Updates
+   - [ ] Update useTranslation hook usage
+   - [ ] Verify all translations are working
+   - [ ] Add missing translations
 
 ## Next Steps (Prioritized)
 
 ### 1. Immediate Actions (Next 24-48 hours)
-1. Fix Schedule Feature
-   - [ ] Restore ScheduleContent.tsx
-   - [ ] Fix ScheduleView import
-   - [ ] Test schedule page functionality
 
-2. Clean Up Translations
-   - [ ] Move `src/messages/` → `src/locales/`
-   - [ ] Move `src/app/messages/` → `src/locales/`
-   - [ ] Update translation imports
+1. Translation System
+
+   - [ ] Complete translation file splitting
+   - [ ] Add English translations
+   - [ ] Test multi-language support
+
+2. Component Updates
+   - [ ] Update all components to use new i18n system
+   - [ ] Test all pages with translations
+   - [ ] Fix any missing translations
 
 ### 2. Short Term (Next Week)
+
 1. Core Library Organization
+
    - [ ] Create `lib/clerk/`
      ```
      lib/clerk/
@@ -199,7 +230,9 @@
    - [ ] Move feature-specific utils to features
 
 ### 3. Medium Term (Next 2 Weeks)
+
 1. Feature Module Organization
+
    - [ ] Complete Schedule feature
    - [ ] Set up Client feature
    - [ ] Set up Employee feature
@@ -211,7 +244,9 @@
    - [ ] Create proper type exports
 
 ### 4. Long Term (Next Month)
+
 1. Testing Infrastructure
+
    - [ ] Set up Vitest for unit tests
    - [ ] Configure Playwright for E2E
    - [ ] Add test coverage reporting
@@ -224,12 +259,15 @@
 ## Testing Requirements
 
 ### For Schedule Feature (Current Focus)
+
 1. **Component Tests**
+
    - [ ] ScheduleView renders correctly
    - [ ] ConstraintManager functions properly
    - [ ] ImportWizard works as expected
 
 2. **Integration Tests**
+
    - [ ] Schedule page loads
    - [ ] Navigation works
    - [ ] Data flow is correct
@@ -242,12 +280,15 @@
 ## Rollback Plan
 
 ### For Current Changes
+
 1. Keep copies of:
+
    - Original ScheduleContent.tsx
    - Original import paths
    - Current translation structure
 
 2. Backup Steps:
+
    ```bash
    # Before making changes
    cp -r src/features/schedule src/features/schedule.bak
@@ -262,6 +303,7 @@
    ```
 
 ## Progress Tracking
+
 - [x] Initial Setup (3/3)
 - [x] Basic Feature Structure (2/2)
 - [x] Component Setup (2/2)
@@ -271,6 +313,7 @@
 - [ ] Testing Setup (0/3)
 
 ## Next Action Items
+
 1. ✨ Fix ScheduleContent.tsx and its imports
 2. 🔄 Clean up translation structure
 3. 📦 Begin core library organization
