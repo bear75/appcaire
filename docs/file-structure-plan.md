@@ -119,6 +119,7 @@ This process ensures we can safely refactor without breaking functionality and e
 ### 3. Utility Functions (2 hours)
 
 - [✅] Consolidate date utilities (2024-01-25)
+- [✅] Consolidate formatting utilities (2024-01-25)
 - [ ] Review and merge duplicate utility functions
 - [ ] Organize utils by category (date, string, formatting)
 - [ ] Create proper index files for utilities
@@ -295,8 +296,8 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
 3. **Consolidate Utilities**
 
    - [✅] Consolidate date utilities (2024-01-25)
+   - [✅] Consolidate formatting utilities (2024-01-25)
    - [ ] Review and merge duplicate utility functions
-   - [ ] Organize utils by category (date, string, formatting)
    - [ ] Create proper index files for utilities
    - [ ] Add proper type definitions
 
