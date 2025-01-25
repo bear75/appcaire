@@ -1,6 +1,6 @@
+import { Hero } from '@/components/features/landing/Hero';
 import { Footer } from '@/components/layout/footer/Footer';
 import { Features } from '@/templates/Features';
-import { Hero } from '@/templates/Hero';
 
 export const metadata = {
   title: 'Caire - Framtidens Hemtjänstplanering',
