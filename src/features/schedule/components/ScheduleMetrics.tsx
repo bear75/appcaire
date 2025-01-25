@@ -1,8 +1,8 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { useTranslations } from '@/lib/i18n';
-import type { ProcessedSchedule } from '../types';
+import { useTranslation } from '@/lib/i18n';
+import type { Schedule } from '../types';
 
 type MetricProps = {
   label: string;
@@ -11,9 +11,9 @@ type MetricProps = {
   trend?: number;
 };
 
-type ScheduleMetricsProps = {
-  schedule: ProcessedSchedule;
-};
+interface ScheduleMetricsProps {
+  schedule: Schedule;
+}
 
 function Metric({ label, value, unit, trend }: MetricProps) {
   return (
@@ -36,37 +36,40 @@ function Metric({ label, value, unit, trend }: MetricProps) {
   );
 }
 
-export default function ScheduleMetrics({ schedule }: ScheduleMetricsProps) {
-  const t = useTranslations('Schedule');
+export function ScheduleMetrics({ schedule }: ScheduleMetricsProps) {
+  const { t } = useTranslation('schedule');
 
   return (
-    <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-      <Metric
-        label="Antal besök"
-        value={92}
-        trend={5.2}
-      />
-      <Metric
-        label="Total tid"
-        value={156}
-        unit="h"
-        trend={-1.1}
-      />
-      <Metric
-        label="Slutförda"
-        value={78}
-        unit="%"
-      />
-      <Metric
-        label="Personal"
-        value={12}
-      />
-      <Metric
-        label="Personalutnyttjande"
-        value={85}
-        unit="%"
-        trend={2.3}
-      />
+    <div className="p-4">
+      <h3 className="text-lg font-semibold mb-4">{t('metrics.title')}</h3>
+      <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+        <Metric
+          label="Antal besök"
+          value={92}
+          trend={5.2}
+        />
+        <Metric
+          label="Total tid"
+          value={156}
+          unit="h"
+          trend={-1.1}
+        />
+        <Metric
+          label="Slutförda"
+          value={78}
+          unit="%"
+        />
+        <Metric
+          label="Personal"
+          value={12}
+        />
+        <Metric
+          label="Personalutnyttjande"
+          value={85}
+          unit="%"
+          trend={2.3}
+        />
+      </div>
     </div>
   );
 }

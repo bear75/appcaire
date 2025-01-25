@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useOrganization } from '@clerk/nextjs';
-import { createClient } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabase';
 import type { Schedule } from '../types';
 
 export function useSchedule() {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { organization } = useOrganization();
-  const supabase = createClient();
 
   const fetchSchedules = async () => {
     if (!organization) return;
@@ -39,4 +38,33 @@ export function useSchedule() {
     isLoading,
     refetchSchedules: fetchSchedules
   };
+}
+
+export function useScheduleById(scheduleId: string) {
+  const [schedule, setSchedule] = useState<Schedule | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    async function fetchSchedule() {
+      try {
+        const { data, error } = await supabase
+          .from('schedules')
+          .select('*')
+          .eq('id', scheduleId)
+          .single();
+
+        if (error) throw error;
+        setSchedule(data);
+      } catch (err) {
+        setError(err as Error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchSchedule();
+  }, [scheduleId]);
+
+  return { schedule, loading, error };
 } 

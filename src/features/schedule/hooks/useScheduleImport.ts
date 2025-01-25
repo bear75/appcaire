@@ -1,18 +1,12 @@
 import { useState } from 'react';
 import { useOrganization } from '@clerk/nextjs';
-import { createClient } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabase';
 import { validateECareSchedule, validateDateRange, validateScheduleConsistency } from '../utils/validation';
 import type { ImportSource } from '../types';
-
-interface ImportScheduleParams {
-  source: ImportSource;
-  data: any;
-}
 
 export function useScheduleImport() {
   const [isImporting, setIsImporting] = useState(false);
   const { organization } = useOrganization();
-  const supabase = createClient();
 
   const importJsonSchedule = async (jsonContent: string): Promise<string> => {
     if (!organization) throw new Error('No organization found');

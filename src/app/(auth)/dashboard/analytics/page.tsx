@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import { PageContainer } from '@/components/shared';
 import { AnalyticsContent } from '@/features/analytics/AnalyticsContent';
-import { getTranslations } from '@/lib/i18n';
+import { getTranslations } from '@/lib/utils/i18n/translations';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('Analytics');

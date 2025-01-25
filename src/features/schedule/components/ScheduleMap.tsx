@@ -1,16 +1,23 @@
-import { useTranslations } from '@/lib/i18n';
+import { useEffect, useState } from 'react';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import type { ProcessedSchedule } from '../types';
+import type { Schedule, Task } from '../types';
 
 interface ScheduleMapProps {
-  schedule: ProcessedSchedule;
-  onTaskSelect: (taskId: string | null) => void;
+  schedule: Schedule;
+  selectedTask?: Task;
+  _onTaskSelect?: (task: Task) => void; // Prefix with _ to indicate intentionally unused
 }
 
-export default function ScheduleMap({ schedule, onTaskSelect }: ScheduleMapProps) {
+export function ScheduleMap({ schedule, selectedTask }: ScheduleMapProps) {
+  const [_employeeRoutes, setEmployeeRoutes] = useState([]); // Prefix with _ to indicate intentionally unused
   const t = useTranslations('Schedule');
+
+  useEffect(() => {
+    // TODO: Implement route visualization
+  }, [schedule]);
 
   // Group entries by employee
   const employeeRoutes = schedule.data.entries.reduce((acc, entry) => {

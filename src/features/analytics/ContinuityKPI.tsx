@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart } from '@/components/ui/charts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
-import { t } from '@/lib/i18n';
+import { t } from '@/lib/utils/i18n/translations';
 import { LineChart as LineChartIcon, AlertTriangle, Trophy } from 'lucide-react';
 
 const CARD_STYLES = {

@@ -679,18 +679,19 @@
     "page_description": "Hantera dina inställningar och preferenser",
     "title": "Inställningar",
     "description": "Hantera dina inställningar och preferenser",
+    "save": "Spara ändringar",
     "tabs": {
       "organization": "Organisation",
       "users": "Användare",
       "scheduling": "Schemaläggning",
-      "localization": "Lokalisering",
       "notifications": "Notifieringar",
-      "security": "Säkerhet"
+      "security": "Säkerhet",
+      "localization": "Lokalisering"
     },
     "organization": {
       "details": {
-        "title": "Organisationsinställningar",
-        "description": "Hantera din organisations inställningar",
+        "title": "Organisationsuppgifter",
+        "description": "Hantera din organisations grundläggande information",
         "name": "Organisationsnamn",
         "name_placeholder": "Ange organisationsnamn",
         "org_number": "Organisationsnummer",
@@ -700,12 +701,28 @@
         "phone": "Telefonnummer",
         "phone_placeholder": "Ange telefonnummer",
         "address": "Adress",
-        "address_placeholder": "Ange adress"
+        "address_placeholder": "Ange fullständig adress"
+      }
+    },
+    "users": {
+      "title": "Användarhantering",
+      "description": "Hantera användare och behörigheter",
+      "search_placeholder": "Sök användare...",
+      "invite": "Bjud in användare",
+      "fields": {
+        "name": "Namn",
+        "email": "E-post",
+        "role": "Roll",
+        "status": "Status",
+        "actions": "Åtgärder"
+      },
+      "actions": {
+        "edit": "Redigera"
       }
     },
     "localization": {
-      "title": "Språk och format",
-      "description": "Anpassa språk och formatinställningar",
+      "title": "Lokalisering",
+      "description": "Anpassa språk och regionala inställningar",
       "language": {
         "title": "Språkinställningar",
         "description": "Välj ditt föredragna språk",
@@ -724,9 +741,9 @@
         "select_label": "Välj datumformat",
         "placeholder": "Välj format",
         "options": {
-          "swedish": "Svenskt (YYYY-MM-DD)",
-          "european": "Europeiskt (DD.MM.YYYY)",
-          "american": "Amerikanskt (MM/DD/YYYY)"
+          "swedish": "Svenskt (ÅÅÅÅ-MM-DD)",
+          "european": "Europeiskt (DD.MM.ÅÅÅÅ)",
+          "american": "Amerikanskt (MM/DD/ÅÅÅÅ)"
         }
       },
       "time_format": {
@@ -740,26 +757,9 @@
         }
       }
     },
-    "save": "Spara ändringar",
-    "users": {
-      "title": "Användarhantering",
-      "description": "Hantera användare och behörigheter",
-      "search_placeholder": "Sök användare...",
-      "invite": "Bjud in användare",
-      "fields": {
-        "name": "Namn",
-        "email": "E-post",
-        "role": "Roll",
-        "status": "Status",
-        "actions": "Åtgärder"
-      },
-      "actions": {
-        "edit": "Redigera"
-      }
-    },
     "security": {
-      "title": "Säkerhetsinställningar",
-      "description": "Hantera säkerhet och autentisering",
+      "title": "Säkerhet",
+      "description": "Hantera säkerhetsinställningar",
       "authentication": {
         "title": "Autentisering",
         "description": "Hantera inloggning och säkerhet",
@@ -772,9 +772,9 @@
         "title": "Dataskydd",
         "description": "Hantera dataskydd och kryptering",
         "encryption": "Datakryptering",
-        "encryption_description": "Kryptera all känslig information",
+        "encryption_description": "Kryptera känslig information",
         "audit_log": "Granskningslogg",
-        "audit_log_description": "Spåra alla ändringar i systemet"
+        "audit_log_description": "Logga viktiga systemhändelser"
       },
       "password_policy": {
         "title": "Lösenordspolicy",
@@ -782,20 +782,19 @@
         "strong_password": "Starka lösenord",
         "strong_password_description": "Kräv komplexa lösenord",
         "password_expiry": "Lösenordsutgång",
-        "password_expiry_description": "Kräv lösenordsbyte periodiskt"
-      },
-      "save": "Spara ändringar"
+        "password_expiry_description": "Kräv regelbundet lösenordsbyte"
+      }
     },
     "notifications": {
-      "title": "Notifieringsinställningar",
-      "description": "Hantera hur du vill bli notifierad",
+      "title": "Notifieringar",
+      "description": "Hantera hur och när du får notifieringar",
       "email": {
         "title": "E-postnotifieringar",
         "description": "Hantera e-postnotifieringar",
         "schedule_changes": "Schemaändringar",
-        "schedule_changes_description": "Få notifieringar när schemat ändras",
+        "schedule_changes_description": "Få meddelanden om schemaändringar",
         "new_assignments": "Nya uppdrag",
-        "new_assignments_description": "Få notifieringar om nya uppdrag",
+        "new_assignments_description": "Få meddelanden om nya uppdrag",
         "reports": "Rapporter",
         "reports_description": "Få vecko- och månadsrapporter"
       },
@@ -807,30 +806,27 @@
       },
       "frequency": {
         "title": "Notifieringsfrekvens",
-        "description": "Ställ in hur ofta du vill få notifieringar",
-        "select_label": "Välj frekvens",
-        "options": {
-          "immediate": "Omedelbart",
-          "hourly": "Varje timme",
-          "daily": "Dagligen",
-          "weekly": "Veckovis"
-        }
-      },
-      "save": "Spara ändringar"
+        "description": "Hur ofta vill du få notifieringar?",
+        "label": "Välj frekvens",
+        "placeholder": "Välj frekvens",
+        "realtime": "Realtid",
+        "daily": "Dagligen",
+        "weekly": "Veckovis"
+      }
     },
     "scheduling": {
-      "title": "Schemainställningar",
-      "description": "Hantera schemaläggning och optimering",
+      "title": "Schemaläggning",
+      "description": "Hantera schemaläggningsinställningar",
       "working_hours": {
         "title": "Arbetstider",
         "description": "Ställ in standardarbetstider",
-        "start_time": "Starttid",
-        "end_time": "Sluttid",
+        "default_start": "Standardstarttid",
+        "default_end": "Standardsluttid",
         "allow_weekends": "Tillåt helgschemaläggning"
       },
       "service_delivery": {
         "title": "Tjänsteleverans",
-        "description": "Ställ in tidsparametrar för besök",
+        "description": "Hantera besökstider och buffertar",
         "min_duration": "Minsta besökstid (minuter)",
         "max_duration": "Längsta besökstid (minuter)",
         "travel_buffer": "Restidsbuffert (minuter)"
@@ -839,9 +835,15 @@
         "title": "Kvalifikationer",
         "description": "Hantera kompetenskrav",
         "strict_matching": "Strikt kompetensmatchning",
-        "certification_warnings": "Visa varningar för utgående certifieringar"
+        "certification_warnings": "Visa certifieringsvarningar"
       },
-      "save": "Spara ändringar"
+      "resources": {
+        "title": "Resurshantering",
+        "description": "Hantera personal och fordon",
+        "max_daily_distance": "Max daglig körsträcka (km)",
+        "max_continuous_driving": "Max kontinuerlig körtid (minuter)",
+        "optimize_routes": "Optimera rutter automatiskt"
+      }
     }
   }
 }

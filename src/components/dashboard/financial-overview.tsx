@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from '@/lib/i18n';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

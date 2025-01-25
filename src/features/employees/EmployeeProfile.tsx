@@ -1,6 +1,6 @@
 import { Calendar, Mail, MapPin, Phone, Star, User } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useTranslations } from '@/lib/i18n';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { Avatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';

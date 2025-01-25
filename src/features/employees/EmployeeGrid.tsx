@@ -1,7 +1,7 @@
 'use client';
 
 import { Mail, MoreHorizontal, Phone } from 'lucide-react';
-import { useTranslations } from '@/lib/i18n';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 import Link from 'next/link';
 
 import { Avatar } from '@/components/ui/avatar';

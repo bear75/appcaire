@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PageHeader } from '@/components/shared';
 import { ContentSection } from '@/components/layout/ContentSection';
 import { ORG_ROLE } from '@/types/Auth';
-import { useTranslations } from '@/lib/i18n';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { AnalyticsDashboard } from './AnalyticsDashboard';
 import { AnalyticsHeader } from './AnalyticsHeader';

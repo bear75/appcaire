@@ -2,20 +2,21 @@
  * i18n configuration
  */
 
-import type { Locale } from '../types';
+import type { I18nConfig } from '../types';
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from './locales';
 
 /**
  * i18n configuration object
  */
-export const i18nConfig = {
+export const i18nConfig: I18nConfig = {
   /** Default locale for the application */
-  defaultLocale: 'sv' as const,
+  defaultLocale: DEFAULT_LOCALE,
 
   /** All supported locales */
-  locales: ['sv', 'en', 'no', 'da'] as const,
+  locales: SUPPORTED_LOCALES,
 
   /** Default namespace for translations */
-  defaultNamespace: 'common' as const,
+  defaultNamespace: 'common',
 
   /** Whether to show missing translation warnings in development */
   debug: process.env.NODE_ENV === 'development',
@@ -26,14 +27,14 @@ export const i18nConfig = {
  * @param locale - The locale code
  * @returns The display name in Swedish
  */
-export function getLocaleDisplayName(locale: Locale): string {
-  const names: Record<Locale, string> = {
+export function getLocaleDisplayName(locale: string): string {
+  const names: Record<string, string> = {
     sv: 'Svenska',
     en: 'Engelska',
     no: 'Norska',
     da: 'Danska',
   };
-  return names[locale];
+  return names[locale] || locale;
 }
 
 /**
@@ -41,6 +42,8 @@ export function getLocaleDisplayName(locale: Locale): string {
  * @param locale - The locale to check
  * @returns Whether the locale is supported
  */
-export function isValidLocale(locale: string): locale is Locale {
-  return i18nConfig.locales.includes(locale as Locale);
-} 
+export function isValidLocale(locale: string): boolean {
+  return i18nConfig.locales.includes(locale as string);
+}
+
+export * from './locales';

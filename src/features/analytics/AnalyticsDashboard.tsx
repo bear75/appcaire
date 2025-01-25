@@ -4,7 +4,7 @@ import { CheckCircle, Clock, Users } from 'lucide-react';
 
 import { BarChart, DoughnutChart } from '@/components/ui/charts';
 import { cn } from '@/lib/utils';
-import { t } from '@/lib/i18n';
+import { t } from '@/lib/utils/i18n/translations';
 
 const CARD_STYLES = {
   base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',

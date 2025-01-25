@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useTranslations } from "@/lib/i18n";
+import { useTranslations } from "@/lib/utils/i18n/translations";
 import { Upload } from "lucide-react";
 import { useState } from "react";
 
