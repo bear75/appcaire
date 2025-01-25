@@ -1,4 +1,5 @@
-import { isValid, parseISO } from 'date-fns';
+import { format, isValid, parseISO } from 'date-fns';
+import { sv } from 'date-fns/locale';
 
 /**
  * Check if a date string is valid
@@ -25,4 +26,20 @@ export const isFutureDate = (date: Date | string): boolean => {
 export const isPastDate = (date: Date | string): boolean => {
   const dateObj = typeof date === 'string' ? parseISO(date) : date;
   return dateObj < new Date();
-}; 
+};
+
+/**
+ * Validate if a date string is in the correct format
+ */
+export const isValidDateFormat = (
+  dateString: string,
+  formatStr: string = 'yyyy-MM-dd',
+): boolean => {
+  try {
+    const date = parseISO(dateString);
+    const formatted = format(date, formatStr, { locale: sv });
+    return formatted === dateString;
+  } catch {
+    return false;
+  }
+};

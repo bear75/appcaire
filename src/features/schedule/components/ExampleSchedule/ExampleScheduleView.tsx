@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { convertToDate } from '@/lib/utils/date/formatters';
 import type { Schedule as UISchedule } from '@/types';
 
-import { convertToDate } from '../../../../utils/date';
 import ConstraintManager from '../../ConstraintManager';
 import { demoSchedule } from '../../demo-data';
 import ScheduleGrid from '../../ScheduleGrid';
@@ -49,7 +49,9 @@ function convertSchedule(schedule: Schedule): UISchedule {
   };
 }
 
-export default function ExampleScheduleView({ schedule = demoSchedule }: ExampleScheduleViewProps) {
+export default function ExampleScheduleView({
+  schedule = demoSchedule,
+}: ExampleScheduleViewProps) {
   const [selectedView, setSelectedView] = useState('timeline');
   const [selectedTask, setSelectedTask] = useState<string | null>(null);
 
@@ -68,7 +70,9 @@ export default function ExampleScheduleView({ schedule = demoSchedule }: Example
         <Card className="col-span-1 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-slate-600">AI-Optimering</span>
+              <span className="text-sm font-medium text-slate-600">
+                AI-Optimering
+              </span>
               <span className="text-xs text-green-600">↑ +2.5%</span>
             </div>
             <div className="text-2xl font-semibold text-slate-900">92%</div>
@@ -78,7 +82,9 @@ export default function ExampleScheduleView({ schedule = demoSchedule }: Example
         <Card className="col-span-1 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-slate-600">Totala Timmar</span>
+              <span className="text-sm font-medium text-slate-600">
+                Totala Timmar
+              </span>
               <span className="text-xs text-purple-600">i</span>
             </div>
             <div className="text-2xl font-semibold text-slate-900">156.5h</div>
@@ -88,7 +94,9 @@ export default function ExampleScheduleView({ schedule = demoSchedule }: Example
         <Card className="col-span-1 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-slate-600">Slutföringsgrad</span>
+              <span className="text-sm font-medium text-slate-600">
+                Slutföringsgrad
+              </span>
             </div>
             <div className="text-2xl font-semibold text-slate-900">98.2%</div>
           </div>
@@ -97,7 +105,9 @@ export default function ExampleScheduleView({ schedule = demoSchedule }: Example
         <Card className="col-span-1 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-slate-600">Personalutnyttjande</span>
+              <span className="text-sm font-medium text-slate-600">
+                Personalutnyttjande
+              </span>
             </div>
             <div className="text-2xl font-semibold text-slate-900">87.5%</div>
           </div>
@@ -109,13 +119,20 @@ export default function ExampleScheduleView({ schedule = demoSchedule }: Example
               <span className="text-sm font-medium text-slate-600">Restid</span>
               <span className="text-xs text-green-600">↓ -5.2%</span>
             </div>
-            <div className="text-2xl font-semibold text-slate-900">22.3 min</div>
+            <div className="text-2xl font-semibold text-slate-900">
+              22.3 min
+            </div>
           </div>
         </Card>
       </div>
 
       {/* Tabs */}
-      <Tabs defaultValue="timeline" value={selectedView} onValueChange={setSelectedView} className="space-y-4">
+      <Tabs
+        defaultValue="timeline"
+        value={selectedView}
+        onValueChange={setSelectedView}
+        className="space-y-4"
+      >
         <TabsList className="bg-background p-1">
           <TabsTrigger
             value="timeline"
@@ -138,7 +155,10 @@ export default function ExampleScheduleView({ schedule = demoSchedule }: Example
         </TabsList>
 
         <TabsContent value="timeline">
-          <ScheduleTimeline schedule={uiSchedule} onTaskClick={setSelectedTask} />
+          <ScheduleTimeline
+            schedule={uiSchedule}
+            onTaskClick={setSelectedTask}
+          />
         </TabsContent>
         <TabsContent value="grid">
           <ScheduleGrid schedule={uiSchedule} onTaskClick={setSelectedTask} />
@@ -148,7 +168,11 @@ export default function ExampleScheduleView({ schedule = demoSchedule }: Example
         </TabsContent>
       </Tabs>
 
-      <TaskDetailsModal isOpen={!!selectedTask} taskId={selectedTask} onClose={() => setSelectedTask(null)} />
+      <TaskDetailsModal
+        isOpen={!!selectedTask}
+        taskId={selectedTask}
+        onClose={() => setSelectedTask(null)}
+      />
     </div>
   );
 }
