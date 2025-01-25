@@ -60,6 +60,7 @@ This process ensures we can safely refactor without breaking functionality and e
 - Basic file structure established
 - Layout structure finalized
 - Component organization started
+- [✅] Large logo removed from landing page (2024-01-25)
 
 ## Tech Stack 🛠
 
@@ -78,6 +79,7 @@ This process ensures we can safely refactor without breaking functionality and e
 - [✅] Create new directory structure (2024-01-25)
 - [✅] Move Navbar to components/layout/navbar (2024-01-25)
 - [✅] Move Logo to components/layout/shared (2024-01-25)
+- [✅] Fix footer logo sizing (2024-01-25)
 - [⏳] Move Footer to components/layout/footer
 - [⏳] Move Hero to components/features/landing
 - [⏳] Move Features to components/features/landing
