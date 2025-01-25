@@ -5,6 +5,7 @@
 ### Safe Migration Strategy
 
 When refactoring the codebase structure, follow these steps to ensure stability:
+Confirm these steps before starting the process
 
 1. **Keep Original Files**
 

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils/helpers/utils';
+import { cn } from '@/lib/utils';
 
 export const Section = (props: {
   children: React.ReactNode;

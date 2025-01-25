@@ -1,12 +1,12 @@
-import React from 'react';
 import '@/styles/global.css';
 
 import { svSE } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
-import { type Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import React from 'react';
 
-import { cn } from '@/lib/utils/index';
+import { cn } from '@/lib/utils';
 
 import { Providers } from './providers';
 
@@ -37,7 +37,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
       }}
     >
       <html lang="sv" suppressHydrationWarning>
-        <body className={cn(inter.className, 'min-h-screen bg-slate-50 antialiased')}>
+        <body
+          className={cn(
+            inter.className,
+            'min-h-screen bg-background antialiased',
+          )}
+        >
           <Providers>{children}</Providers>
         </body>
       </html>
