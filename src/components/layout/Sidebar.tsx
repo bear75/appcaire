@@ -12,9 +12,8 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { Logo } from '@/components/layout/shared/Logo';
 import { cn } from '@/lib/utils';
-
-import { Logo } from '@/templates/Logo';
 
 export function Sidebar() {
   const pathname = usePathname();
