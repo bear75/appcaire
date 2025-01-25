@@ -118,16 +118,11 @@ This process ensures we can safely refactor without breaking functionality and e
 
 ### 3. Utility Functions (2 hours)
 
-- [ ] Review all utility files
-- [ ] Remove duplicates
-- [ ] Organize into categories:
-  ```
-  src/lib/utils/
-  ├── date.ts          # Date manipulation
-  ├── format.ts        # Text/data formatting
-  ├── validation.ts    # Input validation
-  └── helpers.ts       # General utilities
-  ```
+- [✅] Consolidate date utilities (2024-01-25)
+- [ ] Review and merge duplicate utility functions
+- [ ] Organize utils by category (date, string, formatting)
+- [ ] Create proper index files for utilities
+- [ ] Add proper type definitions
 
 ### 4. Custom Hooks (2 hours)
 
@@ -299,6 +294,7 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
 
 3. **Consolidate Utilities**
 
+   - [✅] Consolidate date utilities (2024-01-25)
    - [ ] Review and merge duplicate utility functions
    - [ ] Organize utils by category (date, string, formatting)
    - [ ] Create proper index files for utilities
