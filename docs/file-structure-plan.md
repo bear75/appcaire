@@ -265,9 +265,9 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
 
 1. **Remove Unnecessary Files**
 
-   - [ ] Remove src/templates directory (moved to new locations)
-   - [ ] Remove .DS_Store files
-   - [ ] Remove .old and .bak files
+   - [✅] Remove src/templates directory (moved to new locations) (2024-01-25)
+   - [✅] Remove .DS_Store files (2024-01-25)
+   - [✅] Remove .old and .bak files (2024-01-25)
 
 2. **Move Components**
 
