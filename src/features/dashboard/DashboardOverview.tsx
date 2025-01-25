@@ -1,7 +1,7 @@
 'use client';
 
-import { KPICard } from '@/components/KPICard';
 import { PageHeader } from '@/components/shared';
+import { KPICard } from '@/components/shared/KPICard';
 import { useTranslations } from '@/lib/utils/i18n/translations';
 
 export const DashboardOverview = () => {
