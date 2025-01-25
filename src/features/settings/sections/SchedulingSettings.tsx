@@ -20,8 +20,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { useTranslations } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 const CARD_STYLES = {
   base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
@@ -36,10 +36,10 @@ export function SchedulingSettings() {
   return (
     <div className="flex-1 space-y-8 p-8 pt-6">
       <div className="space-y-1">
-        <h3 className="text-2xl font-semibold text-slate-900">{t('scheduling.title')}</h3>
-        <p className="text-sm text-slate-600">
-          {t('scheduling.description')}
-        </p>
+        <h3 className="text-2xl font-semibold text-slate-900">
+          {t('scheduling.title')}
+        </h3>
+        <p className="text-sm text-slate-600">{t('scheduling.description')}</p>
       </div>
 
       <div className="grid gap-6">
@@ -57,30 +57,36 @@ export function SchedulingSettings() {
           <CardContent className="space-y-6">
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-slate-900">{t('scheduling.working_hours.default_start')}</Label>
+                <Label className="text-sm font-medium text-slate-900">
+                  {t('scheduling.working_hours.default_start')}
+                </Label>
                 <Select defaultValue="08">
-                  <SelectTrigger className="bg-white border-slate-200">
+                  <SelectTrigger className="border-slate-200 bg-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {Array.from({ length: 24 }, (_, i) => (
                       <SelectItem key={i} value={i.toString().padStart(2, '0')}>
-                        {i.toString().padStart(2, '0')}:00
+                        {i.toString().padStart(2, '0')}
+                        :00
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-slate-900">{t('scheduling.working_hours.default_end')}</Label>
+                <Label className="text-sm font-medium text-slate-900">
+                  {t('scheduling.working_hours.default_end')}
+                </Label>
                 <Select defaultValue="17">
-                  <SelectTrigger className="bg-white border-slate-200">
+                  <SelectTrigger className="border-slate-200 bg-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {Array.from({ length: 24 }, (_, i) => (
                       <SelectItem key={i} value={i.toString().padStart(2, '0')}>
-                        {i.toString().padStart(2, '0')}:00
+                        {i.toString().padStart(2, '0')}
+                        :00
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -88,8 +94,14 @@ export function SchedulingSettings() {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <Switch id="weekend_scheduling" className="data-[state=checked]:bg-purple-600" />
-              <Label htmlFor="weekend_scheduling" className="text-sm font-medium text-slate-900">
+              <Switch
+                id="weekend_scheduling"
+                className="data-[state=checked]:bg-purple-600"
+              />
+              <Label
+                htmlFor="weekend_scheduling"
+                className="text-sm font-medium text-slate-900"
+              >
                 {t('scheduling.working_hours.allow_weekends')}
               </Label>
             </div>
@@ -110,34 +122,40 @@ export function SchedulingSettings() {
           <CardContent className="space-y-6">
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-slate-900">{t('scheduling.service_delivery.min_duration')}</Label>
-                <Input 
-                  type="number" 
-                  min="15" 
-                  step="15" 
+                <Label className="text-sm font-medium text-slate-900">
+                  {t('scheduling.service_delivery.min_duration')}
+                </Label>
+                <Input
+                  type="number"
+                  min="15"
+                  step="15"
                   defaultValue="30"
-                  className="bg-white border-slate-200" 
+                  className="border-slate-200 bg-white"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-slate-900">{t('scheduling.service_delivery.max_duration')}</Label>
-                <Input 
-                  type="number" 
-                  min="30" 
-                  step="15" 
+                <Label className="text-sm font-medium text-slate-900">
+                  {t('scheduling.service_delivery.max_duration')}
+                </Label>
+                <Input
+                  type="number"
+                  min="30"
+                  step="15"
                   defaultValue="120"
-                  className="bg-white border-slate-200" 
+                  className="border-slate-200 bg-white"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label className="text-sm font-medium text-slate-900">{t('scheduling.service_delivery.travel_buffer')}</Label>
-              <Input 
-                type="number" 
-                min="5" 
-                step="5" 
+              <Label className="text-sm font-medium text-slate-900">
+                {t('scheduling.service_delivery.travel_buffer')}
+              </Label>
+              <Input
+                type="number"
+                min="5"
+                step="5"
                 defaultValue="15"
-                className="bg-white border-slate-200" 
+                className="border-slate-200 bg-white"
               />
             </div>
           </CardContent>
@@ -156,14 +174,26 @@ export function SchedulingSettings() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center space-x-3">
-              <Switch id="strict_matching" className="data-[state=checked]:bg-purple-600" />
-              <Label htmlFor="strict_matching" className="text-sm font-medium text-slate-900">
+              <Switch
+                id="strict_matching"
+                className="data-[state=checked]:bg-purple-600"
+              />
+              <Label
+                htmlFor="strict_matching"
+                className="text-sm font-medium text-slate-900"
+              >
                 {t('scheduling.qualifications.strict_matching')}
               </Label>
             </div>
             <div className="flex items-center space-x-3">
-              <Switch id="certification_warnings" className="data-[state=checked]:bg-purple-600" />
-              <Label htmlFor="certification_warnings" className="text-sm font-medium text-slate-900">
+              <Switch
+                id="certification_warnings"
+                className="data-[state=checked]:bg-purple-600"
+              />
+              <Label
+                htmlFor="certification_warnings"
+                className="text-sm font-medium text-slate-900"
+              >
                 {t('scheduling.qualifications.certification_warnings')}
               </Label>
             </div>
@@ -184,29 +214,40 @@ export function SchedulingSettings() {
           <CardContent className="space-y-6">
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-slate-900">{t('scheduling.resources.max_daily_distance')}</Label>
-                <Input 
-                  type="number" 
-                  min="0" 
-                  step="10" 
+                <Label className="text-sm font-medium text-slate-900">
+                  {t('scheduling.resources.max_daily_distance')}
+                </Label>
+                <Input
+                  type="number"
+                  min="0"
+                  step="10"
                   defaultValue="200"
-                  className="bg-white border-slate-200" 
+                  className="border-slate-200 bg-white"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-slate-900">{t('scheduling.resources.max_continuous_driving')}</Label>
-                <Input 
-                  type="number" 
-                  min="30" 
-                  step="30" 
+                <Label className="text-sm font-medium text-slate-900">
+                  {t('scheduling.resources.max_continuous_driving')}
+                </Label>
+                <Input
+                  type="number"
+                  min="30"
+                  step="30"
                   defaultValue="240"
-                  className="bg-white border-slate-200" 
+                  className="border-slate-200 bg-white"
                 />
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <Switch id="optimize_routes" defaultChecked className="data-[state=checked]:bg-purple-600" />
-              <Label htmlFor="optimize_routes" className="text-sm font-medium text-slate-900">
+              <Switch
+                id="optimize_routes"
+                defaultChecked
+                className="data-[state=checked]:bg-purple-600"
+              />
+              <Label
+                htmlFor="optimize_routes"
+                className="text-sm font-medium text-slate-900"
+              >
                 {t('scheduling.resources.optimize_routes')}
               </Label>
             </div>
@@ -215,13 +256,13 @@ export function SchedulingSettings() {
       </div>
 
       <div className="flex justify-end">
-        <Button 
+        <Button
           type="submit"
-          className="bg-purple-600 hover:bg-purple-700 text-white shadow-sm hover:shadow-md"
+          className="bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:shadow-md"
         >
           {t('scheduling.save')}
         </Button>
       </div>
     </div>
   );
-} 
+}

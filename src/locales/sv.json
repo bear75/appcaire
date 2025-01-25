@@ -690,7 +690,17 @@
     "organization": {
       "details": {
         "title": "Organisationsinställningar",
-        "description": "Hantera din organisations inställningar"
+        "description": "Hantera din organisations inställningar",
+        "name": "Organisationsnamn",
+        "name_placeholder": "Ange organisationsnamn",
+        "org_number": "Organisationsnummer",
+        "org_number_placeholder": "Ange organisationsnummer",
+        "email": "E-postadress",
+        "email_placeholder": "Ange e-postadress",
+        "phone": "Telefonnummer",
+        "phone_placeholder": "Ange telefonnummer",
+        "address": "Adress",
+        "address_placeholder": "Ange adress"
       }
     },
     "localization": {
@@ -730,6 +740,108 @@
         }
       }
     },
-    "save": "Spara ändringar"
+    "save": "Spara ändringar",
+    "users": {
+      "title": "Användarhantering",
+      "description": "Hantera användare och behörigheter",
+      "search_placeholder": "Sök användare...",
+      "invite": "Bjud in användare",
+      "fields": {
+        "name": "Namn",
+        "email": "E-post",
+        "role": "Roll",
+        "status": "Status",
+        "actions": "Åtgärder"
+      },
+      "actions": {
+        "edit": "Redigera"
+      }
+    },
+    "security": {
+      "title": "Säkerhetsinställningar",
+      "description": "Hantera säkerhet och autentisering",
+      "authentication": {
+        "title": "Autentisering",
+        "description": "Hantera inloggning och säkerhet",
+        "two_factor": "Tvåfaktorsautentisering",
+        "two_factor_description": "Kräv en extra verifieringskod vid inloggning",
+        "session_timeout": "Sessionstimeout",
+        "session_timeout_description": "Logga ut användare efter inaktivitet"
+      },
+      "data_protection": {
+        "title": "Dataskydd",
+        "description": "Hantera dataskydd och kryptering",
+        "encryption": "Datakryptering",
+        "encryption_description": "Kryptera all känslig information",
+        "audit_log": "Granskningslogg",
+        "audit_log_description": "Spåra alla ändringar i systemet"
+      },
+      "password_policy": {
+        "title": "Lösenordspolicy",
+        "description": "Hantera lösenordskrav",
+        "strong_password": "Starka lösenord",
+        "strong_password_description": "Kräv komplexa lösenord",
+        "password_expiry": "Lösenordsutgång",
+        "password_expiry_description": "Kräv lösenordsbyte periodiskt"
+      },
+      "save": "Spara ändringar"
+    },
+    "notifications": {
+      "title": "Notifieringsinställningar",
+      "description": "Hantera hur du vill bli notifierad",
+      "email": {
+        "title": "E-postnotifieringar",
+        "description": "Hantera e-postnotifieringar",
+        "schedule_changes": "Schemaändringar",
+        "schedule_changes_description": "Få notifieringar när schemat ändras",
+        "new_assignments": "Nya uppdrag",
+        "new_assignments_description": "Få notifieringar om nya uppdrag",
+        "reports": "Rapporter",
+        "reports_description": "Få vecko- och månadsrapporter"
+      },
+      "sms": {
+        "title": "SMS-notifieringar",
+        "description": "Hantera SMS-notifieringar",
+        "urgent_changes": "Akuta ändringar",
+        "urgent_changes_description": "Få SMS vid akuta schemaändringar"
+      },
+      "frequency": {
+        "title": "Notifieringsfrekvens",
+        "description": "Ställ in hur ofta du vill få notifieringar",
+        "select_label": "Välj frekvens",
+        "options": {
+          "immediate": "Omedelbart",
+          "hourly": "Varje timme",
+          "daily": "Dagligen",
+          "weekly": "Veckovis"
+        }
+      },
+      "save": "Spara ändringar"
+    },
+    "scheduling": {
+      "title": "Schemainställningar",
+      "description": "Hantera schemaläggning och optimering",
+      "working_hours": {
+        "title": "Arbetstider",
+        "description": "Ställ in standardarbetstider",
+        "start_time": "Starttid",
+        "end_time": "Sluttid",
+        "allow_weekends": "Tillåt helgschemaläggning"
+      },
+      "service_delivery": {
+        "title": "Tjänsteleverans",
+        "description": "Ställ in tidsparametrar för besök",
+        "min_duration": "Minsta besökstid (minuter)",
+        "max_duration": "Längsta besökstid (minuter)",
+        "travel_buffer": "Restidsbuffert (minuter)"
+      },
+      "qualifications": {
+        "title": "Kvalifikationer",
+        "description": "Hantera kompetenskrav",
+        "strict_matching": "Strikt kompetensmatchning",
+        "certification_warnings": "Visa varningar för utgående certifieringar"
+      },
+      "save": "Spara ändringar"
+    }
   }
 }

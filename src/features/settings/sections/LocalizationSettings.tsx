@@ -1,7 +1,6 @@
 'use client';
 
-import { Globe, Clock, Calendar } from 'lucide-react';
-import { useTranslations } from '@/lib/i18n';
+import { Calendar, Clock, Globe } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -20,6 +19,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 const CARD_STYLES = {
   base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
@@ -34,7 +34,9 @@ export function LocalizationSettings() {
   return (
     <div className="flex-1 space-y-8 p-8 pt-6">
       <div className="space-y-1">
-        <h3 className="text-2xl font-semibold text-slate-900">{t('localization.title')}</h3>
+        <h3 className="text-2xl font-semibold text-slate-900">
+          {t('localization.title')}
+        </h3>
         <p className="text-sm text-slate-600">
           {t('localization.description')}
         </p>
@@ -54,11 +56,17 @@ export function LocalizationSettings() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="language" className="text-sm font-medium text-slate-900">
+              <Label
+                htmlFor="language"
+                className="text-sm font-medium text-slate-900"
+              >
                 {t('localization.language.select_label')}
               </Label>
               <Select defaultValue="sv">
-                <SelectTrigger id="language" className="bg-white border-slate-200">
+                <SelectTrigger
+                  id="language"
+                  className="border-slate-200 bg-white"
+                >
                   <SelectValue
                     placeholder={t('localization.language.placeholder')}
                   />
@@ -95,11 +103,17 @@ export function LocalizationSettings() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="date_format" className="text-sm font-medium text-slate-900">
+              <Label
+                htmlFor="date_format"
+                className="text-sm font-medium text-slate-900"
+              >
                 {t('localization.date_format.select_label')}
               </Label>
               <Select defaultValue="swedish">
-                <SelectTrigger id="date_format" className="bg-white border-slate-200">
+                <SelectTrigger
+                  id="date_format"
+                  className="border-slate-200 bg-white"
+                >
                   <SelectValue
                     placeholder={t('localization.date_format.placeholder')}
                   />
@@ -133,11 +147,17 @@ export function LocalizationSettings() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="time_format" className="text-sm font-medium text-slate-900">
+              <Label
+                htmlFor="time_format"
+                className="text-sm font-medium text-slate-900"
+              >
                 {t('localization.time_format.select_label')}
               </Label>
               <Select defaultValue="24h">
-                <SelectTrigger id="time_format" className="bg-white border-slate-200">
+                <SelectTrigger
+                  id="time_format"
+                  className="border-slate-200 bg-white"
+                >
                   <SelectValue
                     placeholder={t('localization.time_format.placeholder')}
                   />
@@ -157,9 +177,9 @@ export function LocalizationSettings() {
       </div>
 
       <div className="flex justify-end">
-        <Button 
+        <Button
           type="submit"
-          className="bg-purple-600 hover:bg-purple-700 text-white shadow-sm hover:shadow-md"
+          className="bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:shadow-md"
         >
           {t('save')}
         </Button>

@@ -2,17 +2,14 @@
 
 import { KPICard } from '@/components/KPICard';
 import { PageHeader } from '@/components/shared';
-import { useTranslations } from '@/lib/i18n';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 export const DashboardOverview = () => {
   const t = useTranslations('DashboardOverview');
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title={t('welcome')}
-        description={t('description')}
-      />
+      <PageHeader title={t('welcome')} description={t('description')} />
       <div className="grid gap-4 md:grid-cols-4">
         <KPICard
           title={t('active_employees')}

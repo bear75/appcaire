@@ -1,11 +1,16 @@
 'use client';
 
-import { CalendarIcon, GearIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
+import {
+  CalendarIcon,
+  GearIcon,
+  HomeIcon,
+  PersonIcon,
+} from '@radix-ui/react-icons';
 import Link from 'next/link';
-import { useTranslations } from '@/lib/i18n';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 export function QuickActions() {
   const t = useTranslations('QuickActions');

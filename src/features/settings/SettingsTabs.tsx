@@ -1,10 +1,17 @@
 'use client';
 
-import { Bell, Building2, Calendar, Globe2, Shield, Users2 } from 'lucide-react';
+import {
+  Bell,
+  Building2,
+  Calendar,
+  Globe2,
+  Shield,
+  Users2,
+} from 'lucide-react';
 
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useTranslations } from '@/lib/i18n';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { LocalizationSettings } from './sections/LocalizationSettings';
 import { NotificationSettings } from './sections/NotificationSettings';

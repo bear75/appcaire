@@ -1,8 +1,8 @@
 'use client';
 
 import { Key, LockKeyhole, Shield } from 'lucide-react';
-import { useTranslations } from '@/lib/i18n';
 
+import { PageContainer, PageHeader } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -13,8 +13,8 @@ import {
 } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { PageContainer, PageHeader } from '@/components/shared';
 import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 const CARD_STYLES = {
   base: 'rounded-xl border border-slate-200/50 bg-white shadow-md transition-all duration-300 ease-out transform-gpu hover:shadow-xl hover:-translate-y-1 hover:border-slate-200',
@@ -48,12 +48,17 @@ export function SecuritySettings() {
           <CardContent className="space-y-6">
             <div className="flex items-center justify-between space-x-4">
               <Label htmlFor="two_factor" className="flex flex-col space-y-1">
-                <span className="text-sm font-medium text-slate-900">{t('security.authentication.two_factor')}</span>
+                <span className="text-sm font-medium text-slate-900">
+                  {t('security.authentication.two_factor')}
+                </span>
                 <span className="text-sm text-slate-600">
                   {t('security.authentication.two_factor_description')}
                 </span>
               </Label>
-              <Switch id="two_factor" className="data-[state=checked]:bg-purple-600" />
+              <Switch
+                id="two_factor"
+                className="data-[state=checked]:bg-purple-600"
+              />
             </div>
 
             <div className="flex items-center justify-between space-x-4">
@@ -61,12 +66,17 @@ export function SecuritySettings() {
                 htmlFor="session_timeout"
                 className="flex flex-col space-y-1"
               >
-                <span className="text-sm font-medium text-slate-900">{t('security.authentication.session_timeout')}</span>
+                <span className="text-sm font-medium text-slate-900">
+                  {t('security.authentication.session_timeout')}
+                </span>
                 <span className="text-sm text-slate-600">
                   {t('security.authentication.session_timeout_description')}
                 </span>
               </Label>
-              <Switch id="session_timeout" className="data-[state=checked]:bg-purple-600" />
+              <Switch
+                id="session_timeout"
+                className="data-[state=checked]:bg-purple-600"
+              />
             </div>
           </CardContent>
         </Card>
@@ -85,27 +95,34 @@ export function SecuritySettings() {
           <CardContent className="space-y-6">
             <div className="flex items-center justify-between space-x-4">
               <Label htmlFor="encryption" className="flex flex-col space-y-1">
-                <span className="text-sm font-medium text-slate-900">{t('security.data_protection.encryption')}</span>
+                <span className="text-sm font-medium text-slate-900">
+                  {t('security.data_protection.encryption')}
+                </span>
                 <span className="text-sm text-slate-600">
                   {t('security.data_protection.encryption_description')}
                 </span>
               </Label>
-              <Switch 
-                id="encryption" 
-                defaultChecked 
-                disabled 
+              <Switch
+                id="encryption"
+                defaultChecked
+                disabled
                 className="data-[state=checked]:bg-purple-600 data-[disabled]:opacity-50"
               />
             </div>
 
             <div className="flex items-center justify-between space-x-4">
               <Label htmlFor="audit_log" className="flex flex-col space-y-1">
-                <span className="text-sm font-medium text-slate-900">{t('security.data_protection.audit_log')}</span>
+                <span className="text-sm font-medium text-slate-900">
+                  {t('security.data_protection.audit_log')}
+                </span>
                 <span className="text-sm text-slate-600">
                   {t('security.data_protection.audit_log_description')}
                 </span>
               </Label>
-              <Switch id="audit_log" className="data-[state=checked]:bg-purple-600" />
+              <Switch
+                id="audit_log"
+                className="data-[state=checked]:bg-purple-600"
+              />
             </div>
           </CardContent>
         </Card>
@@ -127,12 +144,18 @@ export function SecuritySettings() {
                 htmlFor="strong_password"
                 className="flex flex-col space-y-1"
               >
-                <span className="text-sm font-medium text-slate-900">{t('security.password_policy.strong_password')}</span>
+                <span className="text-sm font-medium text-slate-900">
+                  {t('security.password_policy.strong_password')}
+                </span>
                 <span className="text-sm text-slate-600">
                   {t('security.password_policy.strong_password_description')}
                 </span>
               </Label>
-              <Switch id="strong_password" defaultChecked className="data-[state=checked]:bg-purple-600" />
+              <Switch
+                id="strong_password"
+                defaultChecked
+                className="data-[state=checked]:bg-purple-600"
+              />
             </div>
 
             <div className="flex items-center justify-between space-x-4">
@@ -140,21 +163,26 @@ export function SecuritySettings() {
                 htmlFor="password_expiry"
                 className="flex flex-col space-y-1"
               >
-                <span className="text-sm font-medium text-slate-900">{t('security.password_policy.password_expiry')}</span>
+                <span className="text-sm font-medium text-slate-900">
+                  {t('security.password_policy.password_expiry')}
+                </span>
                 <span className="text-sm text-slate-600">
                   {t('security.password_policy.password_expiry_description')}
                 </span>
               </Label>
-              <Switch id="password_expiry" className="data-[state=checked]:bg-purple-600" />
+              <Switch
+                id="password_expiry"
+                className="data-[state=checked]:bg-purple-600"
+              />
             </div>
           </CardContent>
         </Card>
       </div>
 
       <div className="flex justify-end">
-        <Button 
+        <Button
           type="submit"
-          className="bg-purple-600 hover:bg-purple-700 text-white shadow-sm hover:shadow-md"
+          className="bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:shadow-md"
         >
           {t('security.save')}
         </Button>

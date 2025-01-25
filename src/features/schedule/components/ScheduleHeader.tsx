@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { useTranslations } from '@/lib/i18n';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 export default function ScheduleHeader() {
   const t = useTranslations('Schedule');
