@@ -5,6 +5,7 @@
 ### 1. Project Setup & Core Infrastructure
 
 1. **Initialize Project & UI Framework** ✅
+
    - **Ref. PRD Sections**: 6.1 Architecture, 5.6 UI Structure
    - **Tasks**:
      - Create Next.js 13+ project (App Router) ✅
@@ -15,6 +16,7 @@
      - Set up Swedish language support with sv.json ✅
 
 2. **Translation System & UI Components** ✅
+
    - **Tasks**:
      - Implement type-safe translation utility ✅
      - Create interpolation support for dynamic values ✅
@@ -24,6 +26,7 @@
      - Document translation usage patterns ✅
 
 3. **RBAC & Authentication (Clerk + Supabase)** ✅
+
    - **Ref. PRD Sections**: 6.2 Authentication & Authorization
    - **Tasks**:
      - Integrate Clerk.dev for Super Admin, Admin, Member, Trial User ✅
@@ -31,6 +34,7 @@
      - Implement row-level security for org data ✅
 
 4. **Database Schema (Drizzle ORM + Supabase)** ✅
+
    - **Ref. PRD Sections**: 6.3 Database, 6.3.1 Schema Considerations
    - **Tasks**:
      - Define migrations for Organizations, Users, Employees, Clients, Schedules, etc. ✅
@@ -47,6 +51,7 @@
 ### 2. Basic UI & Sidebar Navigation ✅
 
 1. **Sidebar Layout & Structure** ✅
+
    - **Ref. PRD Sections**: 5.5 Navigation Structure
    - **Tasks**:
      - Logo/name at top ✅
@@ -57,6 +62,7 @@
      - Add proper aria-labels for accessibility ✅
 
 2. **Initial Pages & UI Components** ✅
+
    - **Ref. PRD**: 5.5
    - **Tasks**:
      - Create base components with translation support ✅
@@ -80,6 +86,7 @@
 ## Phase 2: Scheduling (Weeks 5–8) 🔄 [IN PROGRESS]
 
 ### 1. Timefold.ai Integration [NEXT]
+
 - **Ref. PRD & Docs**: 5.1.1 AI-Optimized Scheduling, scheduling-logic.md
 - **Tasks**:
   - Set up Timefold.ai API client
@@ -91,6 +98,7 @@
   - Implement schedule optimization endpoints
 
 ### 2. Schedule Comparison UI Implementation
+
 - **Ref. PRD & Docs**: 5.1.1 AI-Optimized Scheduling, scheduling-logic.md
 - **Tasks**:
   - Implement Schedule page layout with comparison toggle
@@ -106,6 +114,7 @@
 ### 2. Timefold.ai Integration & Scheduling Core
 
 1. **Constraint Definitions & Management**
+
    - **Ref. PRD**: 5.1.1 AI-Optimized Scheduling, 5.1.3 Constraints
    - **Tasks**:
      - Model constraints (org, employee, client) in DB
@@ -113,6 +122,7 @@
      - Stub out eCare/Carefox sync if partial
 
 2. **Timefold.ai Service Layer**
+
    - **Ref. PRD**: 5.1.1, 6.4 Integrations
    - **Tasks**:
      - Call Timefold API with consolidated constraints
@@ -120,6 +130,7 @@
      - Possibly store schedule solution in `scheduleSolutionSchema`
 
 3. **Schedule Page & UI**
+
    - **Ref. PRD**: 4.1 Samordnare, 5.1.2 Real-Time Updates
    - **Tasks**:
      - Day/week view of tasks
@@ -140,6 +151,7 @@
 ### 1. Analytics DB & Dashboards
 
 1. **Analytics Schema**
+
    - **Ref. PRD**: 5.2 Analytics & Reporting, 6.3
    - **Tasks**:
      - Implement `analyticsSchema`, `scheduleMetricSchema`
@@ -148,6 +160,7 @@
      - Implement interpolation for dynamic values
 
 2. **Dashboard UI**
+
    - **Ref. PRD**: 5.2.1 (Dashboards)
    - **Tasks**:
      - Main Overview page w/ KPI cards (utilization, travel time, efficiency)
@@ -158,6 +171,7 @@
      - Support dynamic value interpolation in status messages
 
 3. **Reporting & Exports**
+
    - **Ref. PRD**: 5.2.2
    - **Tasks**:
      - Generate daily/weekly/monthly schedule reports (CSV/PDF)
@@ -173,6 +187,7 @@
 ### 2. Performance & Real-Time Monitoring
 
 1. **Performance Tuning**
+
    - **Ref. PRD**: 3.2 Success Metrics, 9.2 Technical Metrics
    - **Tasks**:
      - DB indexing, check API times (<500ms)
@@ -192,12 +207,14 @@
 ### 1. Enhanced Reporting & Multi-Language (Optional)
 
 1. **Advanced Reports & Visualizations**
+
    - **Ref. PRD**: 5.2.2, 10.1 Additional Feature Ideas
    - **Tasks**:
      - Possibly add continuity KPI (how many caregivers per client)
      - Investigate multi-language if requested
 
 2. **User Testing & Feedback**
+
    - **Ref. PRD**: 8. Narrative, Beta Launch
    - **Tasks**:
      - Conduct pilot w/ Nova Omsorg
@@ -210,6 +227,73 @@
      - Final subscription or billing integration
      - Document admin workflows (vehicle mgmt, invites, etc.)
      - Track user satisfaction metrics
+
+---
+
+## Support System Implementation
+
+### Phase 1 (MVP Priority) - Basic Support Setup
+
+- [ ] Create Support menu item in sidebar navigation
+- [ ] Design and implement basic contact information page
+  - [ ] Add support email and phone numbers
+  - [ ] Display support hours
+  - [ ] Add emergency contact information
+  - [ ] Include office location details
+- [ ] Create essential documentation components
+  - [ ] Getting started guide template
+  - [ ] Basic FAQ structure
+  - [ ] Troubleshooting guide template
+  - [ ] Security & privacy guidelines
+
+### Phase 2 (Post-MVP) - Enhanced Support Features
+
+- [ ] Implement Knowledge Center
+  - [ ] Create FAQ categories structure
+  - [ ] Set up documentation framework
+  - [ ] Add video tutorial support
+  - [ ] Implement search functionality
+- [ ] Develop support ticket system
+  - [ ] Design ticket submission form
+  - [ ] Create ticket management interface
+  - [ ] Set up email notifications
+  - [ ] Implement ticket status tracking
+- [ ] Integrate live chat system
+  - [ ] Research and select chat provider
+  - [ ] Implement chat widget
+  - [ ] Set up chat routing rules
+  - [ ] Create chat operation hours
+
+### Phase 3 (Future) - Community & Advanced Features
+
+- [ ] Build community platform
+  - [ ] Create user forum
+  - [ ] Set up moderation tools
+  - [ ] Implement user reputation system
+- [ ] Develop feedback systems
+  - [ ] Create feature request portal
+  - [ ] Implement satisfaction surveys
+  - [ ] Set up beta program framework
+- [ ] Enhance documentation
+  - [ ] Add API documentation
+  - [ ] Create integration guides
+  - [ ] Develop case studies
+  - [ ] Add best practices guides
+
+### Technical Requirements
+
+- [ ] Set up documentation storage and versioning
+- [ ] Implement search functionality across all support content
+- [ ] Create support analytics dashboard
+- [ ] Set up monitoring for support response times
+- [ ] Implement user feedback collection system
+
+### Design Requirements
+
+- [ ] Create consistent documentation style guide
+- [ ] Design support portal UI components
+- [ ] Develop responsive layouts for all support pages
+- [ ] Create iconography for different support categories
 
 ---
 
@@ -235,18 +319,22 @@
 ### Roles & Responsibilities
 
 - **Lead Developer / Tech Lead**
+
   - Overall architecture, code reviews, data consistency
 
 - **Frontend Developer(s)**
+
   - Implement Next.js pages (Schedule, Analytics)
   - Ensure responsive, minimal CSS conflicts
 
 - **Backend / Integration Engineer**
+
   - Timefold.ai, eCare/Carefox syncing
   - Drizzle migrations, data ingestion
   - Performance & logging
 
 - **QA / Tester**
+
   - Validate scheduling logic
   - Test analytics data & performance
 
@@ -260,12 +348,14 @@
 ## Authentication & Organization Management (Clerk Integration)
 
 ### 1. Database Schema Updates (2-3 hours)
+
 - [ ] Add organization status tracking
 - [ ] Implement trial period management
 - [ ] Add role-based access tables
 - [ ] Update employee and client schemas
 
 ### 2. Webhook Implementation (2-3 hours)
+
 - [ ] Organization lifecycle events
   - Organization creation
   - Organization updates
@@ -281,6 +371,7 @@
 - [ ] Status change notifications
 
 ### 3. Role-Based Access Control (3-4 hours)
+
 - [ ] Implement role checks in middleware
 - [ ] Add permission guards to routes
 - [ ] Create role-specific layouts
@@ -297,6 +388,7 @@
   ```
 
 ### 4. Trial Management (2-3 hours)
+
 - [ ] Add trial status tracking
 - [ ] Implement trial expiration notifications
 - [ ] Create trial-specific UI elements
@@ -310,6 +402,7 @@
 ## AI Scheduling Integration (Timefold)
 
 ### 1. Integration Setup (3-4 hours)
+
 - [ ] Create Timefold client structure:
   ```typescript
   src/lib/timefold/
@@ -323,6 +416,7 @@
 - [ ] Add error handling
 
 ### 2. Constraint Management (4-5 hours)
+
 - [ ] Implement constraint levels:
   - Caire-wide constraints
   - Organization constraints
@@ -334,6 +428,7 @@
 - [ ] Set up priority system
 
 ### 3. Schedule Optimization (4-5 hours)
+
 - [ ] Implement schedule submission
 - [ ] Handle optimization responses
 - [ ] Add real-time updates
@@ -341,12 +436,14 @@
 - [ ] Implement manual override options
 
 ### 4. Analytics Integration (3-4 hours)
+
 - [ ] Add optimization metrics tracking
 - [ ] Create performance dashboards
 - [ ] Implement schedule quality scoring
 - [ ] Add travel time optimization metrics
 
 ### 5. Trial Comparison Features (2-3 hours)
+
 - [ ] Create manual vs. AI schedule comparison
 - [ ] Add metric comparison views
 - [ ] Implement trial-specific analytics
@@ -355,23 +452,27 @@
 ## Future Tasks
 
 ### 1. Mobile Responsiveness (2-3 hours)
+
 - [ ] Optimize layouts for mobile
 - [ ] Add touch interactions
 - [ ] Test on various devices
 
 ### 2. Performance Optimization (2-3 hours)
+
 - [ ] Implement caching strategies
 - [ ] Optimize API calls
 - [ ] Add loading states
 - [ ] Improve error handling
 
 ### 3. Analytics Expansion (3-4 hours)
+
 - [ ] Add advanced metrics
 - [ ] Create custom reports
 - [ ] Implement data exports
 - [ ] Add visualization options
 
 ### 4. Integration Extensions (4-5 hours)
+
 - [ ] Prepare for Carefox integration
 - [ ] Add more e-health system connections
 - [ ] Implement data synchronization
