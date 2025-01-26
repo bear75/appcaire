@@ -154,28 +154,49 @@ Note: Test structure has been established:
    - [⏳] Create test templates (deferred until after prototype)
    - [✅] Add component documentation (2024-01-26)
 
-## File Structure 📁
+## File Structure ��
 
 ```
 src/
-├── app/                    # Next.js 15 App Router pages
-│   ├── (auth)/            # Authenticated routes (RSC)
-│   │   └── _components/   # Route group components
-│   ├── (unauth)/          # Public routes (RSC)
-│   │   └── _components/   # Route group components
-│   └── api/               # Route Handlers
-├── components/            # UI components
+├── app/                      # Next.js 15 App Router pages
+│   ├── (auth)/              # Authenticated routes (RSC)
+│   │   └── _components/     # Route group components
+│   ├── (unauth)/            # Public routes (RSC)
+│   │   └── _components/     # Route group components
+│   └── api/                 # Route Handlers
+├── features/                # Feature modules
+│   ├── auth/               # Authentication feature
+│   │   ├── components/     # Feature-specific components
+│   │   ├── hooks/         # Feature-specific hooks
+│   │   ├── utils/         # Feature-specific utilities
+│   │   ├── types/         # Feature-specific types
+│   │   └── __tests__/     # Feature tests
+│   ├── schedule/          # Scheduling feature
+│   │   ├── components/    # Schedule-specific components
+│   │   ├── hooks/        # Schedule-specific hooks
+│   │   ├── utils/        # Schedule-specific utilities
+│   │   └── __tests__/    # Schedule tests
+│   └── employees/        # Employee management feature
+│       ├── components/   # Employee-specific components
+│       ├── hooks/       # Employee-specific hooks
+│       ├── utils/       # Employee-specific utilities
+│       └── __tests__/   # Employee tests
+├── components/            # Shared UI components
 │   ├── ui/               # shadcn/ui components
 │   ├── layout/           # Layout components (RSC)
-│   ├── features/         # Feature-specific components
 │   └── shared/           # Shared components
-├── lib/                  # Core libraries
-│   ├── hooks/           # Custom React hooks
-│   ├── utils/           # Utility functions
-│   └── services/        # Core services (analytics, scheduling, tasks)
+├── lib/                  # Core libraries and services
+│   ├── services/        # Core business services
+│   │   ├── analytics/   # Analytics service
+│   │   ├── scheduling/  # Scheduling service
+│   │   └── tasks/       # Task management service
+│   ├── db/             # Database and ORM setup
+│   ├── clerk/          # Authentication setup
+│   ├── hooks/          # Shared hooks
+│   └── utils/          # Shared utilities
 ├── styles/              # Global styles
-│   └── globals.css      # Tailwind directives
-└── types/               # TypeScript types
+│   └── globals.css     # Tailwind directives
+└── types/              # Shared TypeScript types
 ```
 
 ## Guidelines 📋
