@@ -85,7 +85,28 @@
 
 ## Phase 2: Scheduling (Weeks 5–8) 🔄 [IN PROGRESS]
 
-### 1. Timefold.ai Integration [NEXT]
+### 1. Vehicle Integration [CURRENT]
+
+- **Ref. PRD & Docs**: 5.1.1 AI-Optimized Scheduling, scheduling-logic.md
+- **Tasks**:
+  - [x] Create vehicle management UI
+    - [x] Vehicle directory with grid/list views
+    - [x] Vehicle profile pages
+    - [x] Vehicle status tracking
+  - [ ] Implement vehicle data model
+    - [ ] Vehicle types and capabilities
+    - [ ] Vehicle assignments to staff
+    - [ ] Vehicle status management
+  - [ ] Add vehicle constraints
+    - [ ] Maximum travel distance
+    - [ ] Vehicle capacity
+    - [ ] Special equipment requirements
+  - [ ] Integrate with Timefold solver
+    - [ ] Vehicle routing optimization
+    - [ ] Staff-vehicle assignments
+    - [ ] Route visualization
+
+### 2. Timefold.ai Integration [NEXT]
 
 - **Ref. PRD & Docs**: 5.1.1 AI-Optimized Scheduling, scheduling-logic.md
 - **Tasks**:
@@ -97,7 +118,7 @@
   - Add error handling and retries
   - Implement schedule optimization endpoints
 
-### 2. Schedule Comparison UI Implementation
+### 3. Schedule Comparison UI Implementation
 
 - **Ref. PRD & Docs**: 5.1.1 AI-Optimized Scheduling, scheduling-logic.md
 - **Tasks**:
@@ -110,6 +131,27 @@
   - Implement basic metrics calculation and display
   - Add schedule publishing workflow
   - Test with sample data before Timefold integration
+
+### 4. eCare Integration & Vehicle Sync
+
+- **Ref. PRD & Docs**: ecare-api-integration.md
+- **Tasks**:
+  - [ ] Implement vehicle data sync with eCare
+  - [ ] Handle real-time vehicle status updates
+  - [ ] Sync vehicle assignments with schedule
+  - [ ] Track vehicle utilization metrics
+  - [ ] Implement error handling and retries
+  - [ ] Add vehicle-specific analytics
+
+### 5. Route Optimization
+
+- **Tasks**:
+  - [ ] Implement route calculation service
+  - [ ] Add route visualization
+  - [ ] Optimize for vehicle constraints
+  - [ ] Handle real-time traffic updates
+  - [ ] Calculate route efficiency metrics
+  - [ ] Add route export functionality
 
 ### 2. Timefold.ai Integration & Scheduling Core
 

@@ -4,6 +4,7 @@ import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
 import {
   BarChart3,
   Calendar,
+  Car,
   Home,
   Settings,
   Users,
@@ -23,6 +24,7 @@ export function Sidebar() {
     { name: 'Schema', href: '/dashboard/schedule', icon: Calendar },
     { name: 'Personal', href: '/dashboard/employees', icon: Users },
     { name: 'Klienter', href: '/dashboard/clients', icon: UserSquare2 },
+    { name: 'Fordon', href: '/dashboard/vehicles', icon: Car },
     { name: 'Analys', href: '/dashboard/analytics', icon: BarChart3 },
     { name: 'Inställningar', href: '/dashboard/settings', icon: Settings },
   ];

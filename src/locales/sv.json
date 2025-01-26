@@ -845,5 +845,50 @@
         "optimize_routes": "Optimera rutter automatiskt"
       }
     }
+  },
+  "Common": {
+    "views": {
+      "grid": "Rutnät",
+      "list": "Lista"
+    }
+  },
+  "Vehicles": {
+    "page_title": "Fordon",
+    "page_description": "Hantera och övervaka fordonsflottan",
+    "actions": {
+      "add_vehicle": "Lägg till fordon"
+    },
+    "status": {
+      "available": "Tillgänglig",
+      "in_use": "I användning",
+      "maintenance": "Underhåll",
+      "out_of_service": "Ur tjänst"
+    },
+    "profile": {
+      "description": "Hantera fordonsinformation och status"
+    },
+    "tabs": {
+      "overview": "Översikt",
+      "schedule": "Schema",
+      "maintenance": "Underhåll"
+    },
+    "stats": {
+      "total_distance": "Total körsträcka",
+      "avg_daily_trips": "Genomsnittliga dagliga resor",
+      "efficiency": "Effektivitet"
+    },
+    "details": {
+      "title": "Fordonsdetaljer",
+      "registration": "Registreringsnummer",
+      "type": "Fordonstyp",
+      "capacity": "Kapacitet",
+      "status": "Status"
+    },
+    "schedule": {
+      "title": "Schemaläggning"
+    },
+    "maintenance": {
+      "title": "Underhållshistorik"
+    }
   }
 }
