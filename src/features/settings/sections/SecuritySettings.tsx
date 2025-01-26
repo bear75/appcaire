@@ -23,8 +23,64 @@ const CARD_STYLES = {
 
 const ICON_STYLES = 'size-4 text-purple-600';
 
-export function SecuritySettings() {
+// Add type definitions for security settings data
+export type SecuritySettingsData = {
+  authentication: {
+    twoFactor: boolean;
+    sessionTimeout: boolean;
+  };
+  dataProtection: {
+    encryption: boolean;
+    auditLog: boolean;
+  };
+  passwordPolicy: {
+    strongPassword: boolean;
+    passwordExpiry: boolean;
+  };
+};
+
+export type SecuritySettingsProps = {
+  initialData?: Partial<SecuritySettingsData>;
+  onSubmit?: (data: SecuritySettingsData) => Promise<void>;
+  className?: string;
+};
+
+const DEFAULT_INITIAL_DATA: Partial<SecuritySettingsData> = {
+  dataProtection: {
+    encryption: true,
+  },
+  passwordPolicy: {
+    strongPassword: true,
+  },
+};
+
+export function SecuritySettings({
+  initialData = DEFAULT_INITIAL_DATA,
+  onSubmit,
+  className,
+}: SecuritySettingsProps) {
   const t = useTranslations('Settings');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (onSubmit) {
+      const formData = new FormData(e.currentTarget);
+      await onSubmit({
+        authentication: {
+          twoFactor: formData.get('two_factor') === 'on',
+          sessionTimeout: formData.get('session_timeout') === 'on',
+        },
+        dataProtection: {
+          encryption: formData.get('encryption') === 'on',
+          auditLog: formData.get('audit_log') === 'on',
+        },
+        passwordPolicy: {
+          strongPassword: formData.get('strong_password') === 'on',
+          passwordExpiry: formData.get('password_expiry') === 'on',
+        },
+      });
+    }
+  };
 
   return (
     <PageContainer>
@@ -33,7 +89,7 @@ export function SecuritySettings() {
         description={t('security.description')}
       />
 
-      <div className="grid gap-6">
+      <form onSubmit={handleSubmit} className={cn('grid gap-6', className)}>
         {/* Authentication */}
         <Card className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
           <CardHeader>
@@ -57,6 +113,8 @@ export function SecuritySettings() {
               </Label>
               <Switch
                 id="two_factor"
+                name="two_factor"
+                defaultChecked={initialData?.authentication?.twoFactor}
                 className="data-[state=checked]:bg-purple-600"
               />
             </div>
@@ -75,6 +133,8 @@ export function SecuritySettings() {
               </Label>
               <Switch
                 id="session_timeout"
+                name="session_timeout"
+                defaultChecked={initialData?.authentication?.sessionTimeout}
                 className="data-[state=checked]:bg-purple-600"
               />
             </div>
@@ -104,7 +164,8 @@ export function SecuritySettings() {
               </Label>
               <Switch
                 id="encryption"
-                defaultChecked
+                name="encryption"
+                defaultChecked={initialData?.dataProtection?.encryption}
                 disabled
                 className="data-[state=checked]:bg-purple-600 data-[disabled]:opacity-50"
               />
@@ -121,6 +182,8 @@ export function SecuritySettings() {
               </Label>
               <Switch
                 id="audit_log"
+                name="audit_log"
+                defaultChecked={initialData?.dataProtection?.auditLog}
                 className="data-[state=checked]:bg-purple-600"
               />
             </div>
@@ -153,7 +216,8 @@ export function SecuritySettings() {
               </Label>
               <Switch
                 id="strong_password"
-                defaultChecked
+                name="strong_password"
+                defaultChecked={initialData?.passwordPolicy?.strongPassword}
                 className="data-[state=checked]:bg-purple-600"
               />
             </div>
@@ -172,21 +236,23 @@ export function SecuritySettings() {
               </Label>
               <Switch
                 id="password_expiry"
+                name="password_expiry"
+                defaultChecked={initialData?.passwordPolicy?.passwordExpiry}
                 className="data-[state=checked]:bg-purple-600"
               />
             </div>
           </CardContent>
         </Card>
-      </div>
 
-      <div className="flex justify-end">
-        <Button
-          type="submit"
-          className="bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:shadow-md"
-        >
-          {t('security.save')}
-        </Button>
-      </div>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:shadow-md"
+          >
+            {t('security.save')}
+          </Button>
+        </div>
+      </form>
     </PageContainer>
   );
 }

@@ -30,8 +30,57 @@ const CARD_STYLES = {
 
 const ICON_STYLES = 'size-4 text-purple-600';
 
-export function NotificationSettings() {
+// Add type definitions for notification frequency
+export type NotificationFrequency = 'realtime' | 'daily' | 'weekly';
+
+// Add type definitions for notification settings data
+export type NotificationSettingsData = {
+  email: {
+    scheduleChanges: boolean;
+    newAssignments: boolean;
+    reports: boolean;
+  };
+  sms: {
+    urgentChanges: boolean;
+  };
+  frequency: NotificationFrequency;
+};
+
+export type NotificationSettingsProps = {
+  initialData?: Partial<NotificationSettingsData>;
+  onSubmit?: (data: NotificationSettingsData) => Promise<void>;
+  className?: string;
+};
+
+const DEFAULT_INITIAL_DATA: Partial<NotificationSettingsData> = {
+  frequency: 'daily',
+};
+
+export function NotificationSettings({
+  initialData = DEFAULT_INITIAL_DATA,
+  onSubmit,
+  className,
+}: NotificationSettingsProps) {
   const t = useTranslations('Settings');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (onSubmit) {
+      const formData = new FormData(e.currentTarget);
+      await onSubmit({
+        email: {
+          scheduleChanges: formData.get('schedule_changes') === 'on',
+          newAssignments: formData.get('new_assignments') === 'on',
+          reports: formData.get('reports') === 'on',
+        },
+        sms: {
+          urgentChanges: formData.get('urgent_changes') === 'on',
+        },
+        frequency:
+          (formData.get('frequency') as NotificationFrequency) || 'daily',
+      });
+    }
+  };
 
   return (
     <PageContainer>
@@ -40,7 +89,7 @@ export function NotificationSettings() {
         description={t('notifications.description')}
       />
 
-      <div className="grid gap-6">
+      <form onSubmit={handleSubmit} className={cn('grid gap-6', className)}>
         {/* Email Notifications */}
         <Card className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
           <CardHeader>
@@ -68,6 +117,8 @@ export function NotificationSettings() {
                 </Label>
                 <Switch
                   id="schedule_changes"
+                  name="schedule_changes"
+                  defaultChecked={initialData?.email?.scheduleChanges}
                   className="data-[state=checked]:bg-purple-600"
                 />
               </div>
@@ -86,6 +137,8 @@ export function NotificationSettings() {
                 </Label>
                 <Switch
                   id="new_assignments"
+                  name="new_assignments"
+                  defaultChecked={initialData?.email?.newAssignments}
                   className="data-[state=checked]:bg-purple-600"
                 />
               </div>
@@ -101,6 +154,8 @@ export function NotificationSettings() {
                 </Label>
                 <Switch
                   id="reports"
+                  name="reports"
+                  defaultChecked={initialData?.email?.reports}
                   className="data-[state=checked]:bg-purple-600"
                 />
               </div>
@@ -134,6 +189,8 @@ export function NotificationSettings() {
               </Label>
               <Switch
                 id="urgent_changes"
+                name="urgent_changes"
+                defaultChecked={initialData?.sms?.urgentChanges}
                 className="data-[state=checked]:bg-purple-600"
               />
             </div>
@@ -160,7 +217,10 @@ export function NotificationSettings() {
                 >
                   {t('notifications.frequency.label')}
                 </Label>
-                <Select defaultValue="daily">
+                <Select
+                  name="frequency"
+                  defaultValue={initialData?.frequency || 'daily'}
+                >
                   <SelectTrigger
                     id="frequency"
                     className="min-w-[180px] border-slate-200 bg-white"
@@ -185,16 +245,16 @@ export function NotificationSettings() {
             </div>
           </CardContent>
         </Card>
-      </div>
 
-      <div className="flex justify-end">
-        <Button
-          type="submit"
-          className="bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:shadow-md"
-        >
-          {t('notifications.save')}
-        </Button>
-      </div>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:shadow-md"
+          >
+            {t('notifications.save')}
+          </Button>
+        </div>
+      </form>
     </PageContainer>
   );
 }

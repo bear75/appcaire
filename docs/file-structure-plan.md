@@ -308,6 +308,11 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
    - [✅] Add type definitions to settings components (2024-01-26)
      - Added SettingsTabValue and SettingsTabsProps
      - Added OrganizationFormData and OrganizationSettingsProps
+     - Added SecuritySettingsData and SecuritySettingsProps
+     - Added NotificationSettingsData and NotificationSettingsProps
+     - Added LocalizationSettingsData and LocalizationSettingsProps with Language, DateFormat, and TimeFormat types
+     - Added SchedulingSettingsData and related interfaces (WorkingHours, ServiceDelivery, Qualification, Resource)
+     - Added UserRole, UserStatus, User interface, and UserSettingsProps
    - [⏳] Review component dependencies
    - [⏳] Clean up unused imports
    - [⏳] Add missing type definitions to remaining components

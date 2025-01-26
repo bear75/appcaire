@@ -28,11 +28,51 @@ const CARD_STYLES = {
 
 const ICON_STYLES = 'size-4 text-purple-600';
 
-export function LocalizationSettings() {
+// Add type definitions for localization options
+export type Language = 'sv' | 'en' | 'no' | 'da';
+export type DateFormat = 'swedish' | 'european' | 'american';
+export type TimeFormat = '24h' | '12h';
+
+// Add type definitions for localization settings data
+export type LocalizationSettingsData = {
+  language: Language;
+  dateFormat: DateFormat;
+  timeFormat: TimeFormat;
+};
+
+export type LocalizationSettingsProps = {
+  initialData?: Partial<LocalizationSettingsData>;
+  onSubmit?: (data: LocalizationSettingsData) => Promise<void>;
+  className?: string;
+};
+
+const DEFAULT_INITIAL_DATA: Partial<LocalizationSettingsData> = {
+  language: 'sv',
+  dateFormat: 'swedish',
+  timeFormat: '24h',
+};
+
+export function LocalizationSettings({
+  initialData = DEFAULT_INITIAL_DATA,
+  onSubmit,
+  className,
+}: LocalizationSettingsProps) {
   const t = useTranslations('Settings');
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (onSubmit) {
+      const formData = new FormData(e.currentTarget);
+      await onSubmit({
+        language: (formData.get('language') as Language) || 'sv',
+        dateFormat: (formData.get('date_format') as DateFormat) || 'swedish',
+        timeFormat: (formData.get('time_format') as TimeFormat) || '24h',
+      });
+    }
+  };
+
   return (
-    <div className="flex-1 space-y-8 p-8 pt-6">
+    <div className={cn('flex-1 space-y-8 p-8 pt-6', className)}>
       <div className="space-y-1">
         <h3 className="text-2xl font-semibold text-slate-900">
           {t('localization.title')}
@@ -42,7 +82,7 @@ export function LocalizationSettings() {
         </p>
       </div>
 
-      <div className="grid gap-6">
+      <form onSubmit={handleSubmit} className="grid gap-6">
         {/* Language Settings */}
         <Card className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
           <CardHeader>
@@ -62,7 +102,10 @@ export function LocalizationSettings() {
               >
                 {t('localization.language.select_label')}
               </Label>
-              <Select defaultValue="sv">
+              <Select
+                name="language"
+                defaultValue={initialData?.language || 'sv'}
+              >
                 <SelectTrigger
                   id="language"
                   className="border-slate-200 bg-white"
@@ -109,7 +152,10 @@ export function LocalizationSettings() {
               >
                 {t('localization.date_format.select_label')}
               </Label>
-              <Select defaultValue="swedish">
+              <Select
+                name="date_format"
+                defaultValue={initialData?.dateFormat || 'swedish'}
+              >
                 <SelectTrigger
                   id="date_format"
                   className="border-slate-200 bg-white"
@@ -153,7 +199,10 @@ export function LocalizationSettings() {
               >
                 {t('localization.time_format.select_label')}
               </Label>
-              <Select defaultValue="24h">
+              <Select
+                name="time_format"
+                defaultValue={initialData?.timeFormat || '24h'}
+              >
                 <SelectTrigger
                   id="time_format"
                   className="border-slate-200 bg-white"
@@ -174,16 +223,16 @@ export function LocalizationSettings() {
             </div>
           </CardContent>
         </Card>
-      </div>
 
-      <div className="flex justify-end">
-        <Button
-          type="submit"
-          className="bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:shadow-md"
-        >
-          {t('save')}
-        </Button>
-      </div>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:shadow-md"
+          >
+            {t('save')}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }
