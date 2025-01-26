@@ -223,6 +223,77 @@ src/
 - Optimize images with next/image
 - Implement proper caching strategies
 
+## Business Logic Organization 🧩
+
+### Core Services (`lib/services/`)
+
+- **Scheduling Service**: AI-driven scheduling logic using Timefold.ai
+
+  - Route optimization
+  - Shift planning
+  - Availability management
+  - Constraint handling
+
+- **Task Management**: Core task-related operations
+
+  - Task creation and updates
+  - Status management
+  - Assignment logic
+  - Priority handling
+
+- **Client Management**: Client-related business logic
+
+  - Client profiles
+  - Care plans
+  - Service agreements
+  - Contact management
+
+- **Employee Management**: Staff-related operations
+  - Employee profiles
+  - Skills and qualifications
+  - Availability patterns
+  - Team assignments
+
+### Data Access Layer (`lib/db/`)
+
+- Use Drizzle ORM for type-safe database operations
+- Implement repository pattern for data access
+- Keep business logic separate from data access
+- Use transactions for complex operations
+- Implement proper error handling and logging
+
+### Utilities (`lib/utils/`)
+
+- Helper functions should be pure and testable
+- Group utilities by domain (date, validation, formatting)
+- Keep utilities simple and focused
+- Document complex algorithms
+- Add proper TypeScript types
+
+### State Management
+
+- Use React Server Components for server-side state
+- Implement Server Actions for mutations
+- Use React hooks for client-side state
+- Keep state as close to usage as possible
+- Implement proper loading and error states
+
+### Error Handling
+
+- Define custom error types for different domains
+- Implement proper error boundaries
+- Log errors with appropriate context
+- Provide user-friendly error messages
+- Handle edge cases gracefully
+
+### Security
+
+- Implement proper authentication checks
+- Use row-level security in database
+- Validate all user input
+- Sanitize data output
+- Follow GDPR compliance guidelines
+
 ## Commit Message Structure 📝
 
 We follow the conventional commit format as defined in our commitlint configuration:
