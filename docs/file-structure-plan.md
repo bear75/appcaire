@@ -98,54 +98,39 @@ This process ensures we can safely refactor without breaking functionality and e
 
 ## Next Steps 🔄
 
-### 1. Code Organization (2-3 hours)
+### 1. Final Cleanup (1-2 hours)
 
 - [✅] Create new directory structure (2024-01-25)
-- [✅] Move Navbar to components/layout/navbar (2024-01-25)
-- [✅] Move Logo to components/layout/shared (2024-01-25)
-- [✅] Fix footer logo sizing (2024-01-25)
-- [✅] Move Footer to components/layout/footer (2024-01-25)
-- [✅] Move Hero to components/features/landing
-- [✅] Move Features to components/features/landing (2024-01-25)
-- [✅] Move FAQ to components/features/landing (2024-01-26)
-- [⏳] Audit remaining files and their locations
-- [⏳] Document components to be kept/removed
+- [✅] Move all components to new locations (2024-01-25)
+- [✅] Consolidate utilities and hooks (2024-01-26)
+- [✅] Move services to lib/services directory (2024-01-26)
+- [⏳] Clean up duplicate error directories (error/ and errors/)
 
-### 2. Component Consolidation (3-4 hours)
+### 2. Import Path Standardization (1 hour)
 
-- [⏳] Merge duplicate components
-- [⏳] Standardize component props
-- [⏳] Create shared component library
-- [⏳] Update component documentation
+- [⏳] Verify all imports use @/ alias
+- [⏳] Update any relative imports to use alias
+- [⏳] Clean up unused imports
 
-### 3. Utility Functions (2 hours)
+### 3. Documentation (2 hours)
 
-- [✅] Consolidate date utilities (2024-01-25)
-- [✅] Consolidate formatting utilities (2024-01-25)
-- [ ] Review and merge duplicate utility functions
-- [ ] Organize utils by category (date, string, formatting)
-- [ ] Create proper index files for utilities
-- [ ] Add proper type definitions
+- [⏳] Create README files for major directories
+- [⏳] Document file structure decisions
+- [⏳] Update component documentation where needed
 
-### 4. Custom Hooks (2 hours)
+### 4. Testing Setup (Optional)
 
-- [ ] Review all hooks
-- [ ] Remove duplicates
-- [ ] Organize into categories:
-  ```
-  src/lib/hooks/
-  ├── useAuth.ts       # Authentication hooks
-  ├── useData.ts       # Data fetching hooks
-  ├── useUI.ts         # UI-related hooks
-  └── useCommon.ts     # Shared hooks
-  ```
+- [ ] Decide on testing strategy
+- [ ] Set up test directory structure
+- [ ] Create initial test templates
 
-### 5. Types and Interfaces (2 hours)
+Note: Many previously listed tasks have been completed during the recent refactoring:
 
-- [ ] Review all type definitions
-- [ ] Remove duplicate types
-- [ ] Create shared type library
-- [ ] Update type documentation
+- ✅ Component organization is complete
+- ✅ Utility functions are properly categorized
+- ✅ Custom hooks are organized
+- ✅ Types and interfaces are in place
+- ✅ Feature components are in correct locations
 
 ## File Structure 📁
 
@@ -164,7 +149,8 @@ src/
 │   └── shared/           # Shared components
 ├── lib/                  # Core libraries
 │   ├── hooks/           # Custom React hooks
-│   └── utils/           # Utility functions
+│   ├── utils/           # Utility functions
+│   └── services/        # Core services (analytics, scheduling, tasks)
 ├── styles/              # Global styles
 │   └── globals.css      # Tailwind directives
 └── types/               # TypeScript types
@@ -282,55 +268,26 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
 
 ### File Cleanup Tasks
 
-1. **Remove Unnecessary Files**
+1. **Completed Tasks**
 
-   - [✅] Remove src/templates directory (moved to new locations) (2024-01-25)
+   - [✅] Remove src/templates directory (2024-01-25)
    - [✅] Remove .DS_Store files (2024-01-25)
    - [✅] Remove .old and .bak files (2024-01-25)
    - [✅] Remove legacy pages directory (2024-01-26)
+   - [✅] Move all layout components to new locations (2024-01-25)
+   - [✅] Consolidate toast implementations (2024-01-26)
 
-2. **Move Components**
+2. **Remaining Tasks**
 
-   - [✅] Background → layout/shared/Background (2024-01-25)
-   - [✅] KPICard → shared/KPICard (2024-01-25)
-   - [✅] ToggleMenuButton → layout/shared/ToggleMenuButton (2024-01-25)
-   - [✅] ActiveLink → layout/shared/ActiveLink (2024-01-25)
+   - [⏳] Review services directory for unused files
+   - [⏳] Clean up duplicate error directories
+   - [⏳] Verify all imports use @/ alias
+   - [⏳] Create README files for major directories
 
-3. **Consolidate Utilities**
-
-   - [✅] Consolidate date utilities (2024-01-25)
-   - [✅] Consolidate formatting utilities (2024-01-25)
-   - [ ] Review and merge duplicate utility functions
-   - [ ] Create proper index files for utilities
-   - [ ] Add proper type definitions
-
-4. **Reorganize Features**
-
-   - [✅] Keep UI prototype pages in src/features (2024-01-26)
-   - [✅] Document current file structure (2024-01-26)
-   - [✅] Add type definitions to settings components (2024-01-26)
-     - Added SettingsTabValue and SettingsTabsProps
-     - Added OrganizationFormData and OrganizationSettingsProps
-     - Added SecuritySettingsData and SecuritySettingsProps
-     - Added NotificationSettingsData and NotificationSettingsProps
-     - Added LocalizationSettingsData and LocalizationSettingsProps with Language, DateFormat, and TimeFormat types
-     - Added SchedulingSettingsData and related interfaces (WorkingHours, ServiceDelivery, Qualification, Resource)
-     - Added UserRole, UserStatus, User interface, and UserSettingsProps
-   - [⏳] Review component dependencies
-   - [⏳] Clean up unused imports
-   - [⏳] Add missing type definitions to remaining components
-
-5. **Clean Up Tests**
-
-   - [ ] Move tests next to their components
-   - [ ] Ensure consistent test naming
-   - [ ] Update test imports after reorganization
-
-6. **Documentation**
-   - [ ] Update component documentation
-   - [ ] Document utility functions
-   - [ ] Create README files for major directories
-   - [ ] Document file structure decisions
+3. **Optional Tasks**
+   - [ ] Set up test directory structure
+   - [ ] Create test templates
+   - [ ] Add component documentation
 
 ### Common Pitfalls to Avoid 🚫
 
