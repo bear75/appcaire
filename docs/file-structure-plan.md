@@ -154,23 +154,33 @@ Note: Test structure has been established:
    - [⏳] Create test templates (deferred until after prototype)
    - [✅] Add component documentation (2024-01-26)
 
-## File Structure 📁
+## File Structure ��
 
 ```
 src/
-├── app/                      # Next.js 15 App Router pages
-│   ├── (auth)/              # Authenticated routes (RSC)
-│   │   ├── dashboard/       # Dashboard pages
-│   │   ├── schedule/        # Schedule management
-│   │   ├── employees/       # Employee management
-│   │   ├── clients/         # Client management
-│   │   ├── settings/        # Settings pages
-│   │   └── _components/     # Auth route components
-│   ├── (unauth)/           # Public routes (RSC)
-│   │   ├── login/         # Login page
-│   │   ├── register/      # Registration
-│   │   ├── landing/       # Landing pages
-│   │   └── _components/   # Public route components
+├── app/                           # Next.js 15 App Router pages
+│   ├── (auth)/                   # Authenticated routes (RSC)
+│   │   ├── layout.tsx           # Auth layout with navigation
+│   │   ├── dashboard/          # Main dashboard
+│   │   │   ├── page.tsx       # Dashboard overview
+│   │   │   ├── layout.tsx     # Dashboard layout
+│   │   │   ├── template.tsx   # Dashboard template
+│   │   │   ├── metadata.ts    # Route metadata
+│   │   │   ├── analytics/     # Analytics pages
+│   │   │   ├── schedule/      # Schedule management
+│   │   │   ├── employees/     # Employee management
+│   │   │   ├── clients/       # Client management
+│   │   │   ├── settings/      # App settings
+│   │   │   ├── user-profile/  # User profile pages
+│   │   │   └── organization-profile/ # Org settings
+│   │   └── (center)/         # Centered layout group
+│   │       ├── layout.tsx    # Centered layout
+│   │       ├── sign-in/      # Sign in pages
+│   │       ├── sign-up/      # Sign up pages
+│   │       └── onboarding/   # Onboarding flow
+│   ├── (unauth)/            # Public routes (RSC)
+│   │   ├── layout.tsx      # Public layout
+│   │   └── page.tsx       # Landing page
 │   └── api/               # Route Handlers
 ├── features/              # Feature modules
 │   ├── schedule/         # Scheduling feature
