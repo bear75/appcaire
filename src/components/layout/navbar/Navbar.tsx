@@ -39,7 +39,7 @@ export function Navbar() {
           </Link>
           <Link
             href="/sign-up"
-            className={buttonVariants({ variant: 'default', size: 'sm' })}
+            className={buttonVariants({ size: 'sm' })}
           >
             Skapa konto
           </Link>
