@@ -121,16 +121,15 @@ This process ensures we can safely refactor without breaking functionality and e
 ### 4. Testing Setup (Optional)
 
 - [✅] Decide on testing strategy (2024-01-26)
-- [🚧] Set up test directory structure
+- [✅] Set up test directory structure (2024-01-26)
 - [⏳] Create initial test templates
 
-Note: Many previously listed tasks have been completed during the recent refactoring:
+Note: Test structure has been established:
 
-- ✅ Component organization is complete
-- ✅ Utility functions are properly categorized
-- ✅ Custom hooks are organized
-- ✅ Types and interfaces are in place
-- ✅ Feature components are in correct locations
+- Created src/test-utils/ for common test utilities
+- Added integration test structure in features/auth/**tests**/
+- Created e2e/ directory with Playwright test structure
+- Tests are currently disabled during prototype phase
 
 ### File Cleanup Tasks
 
@@ -229,12 +228,56 @@ src/
    - Use \_components for route-specific components
 
 4. Testing:
+
    - Keep test files alongside components
    - Use meaningful test descriptions
    - Test component interfaces
    - Test utility functions
    - Test Server Actions
    - Test Partial Prerendering boundaries
+
+   ### Test Directory Structure
+
+   1. **Component Tests**
+
+      - Place test files next to the component they test
+      - Use `.test.tsx` extension for React components
+      - Use `.test.ts` for utility functions
+      - Example: `Button.tsx` and `Button.test.tsx`
+
+   2. **Integration Tests**
+
+      - Place in `__tests__` directory at feature level
+      - Test interactions between components
+      - Focus on user workflows
+      - Example: `features/auth/__tests__/login-flow.test.tsx`
+
+   3. **E2E Tests**
+
+      - Keep in `e2e` directory at project root
+      - Use Playwright for browser testing
+      - Test complete user journeys
+      - Example: `e2e/auth/organization-signup.spec.ts`
+
+   4. **Test Utils**
+
+      - Place shared test utilities in `src/test-utils`
+      - Include common test setup
+      - Provide test data factories
+      - Example: `src/test-utils/setup.ts`
+
+   5. **Naming Conventions**
+
+      - Component tests: `ComponentName.test.tsx`
+      - Integration tests: `feature-name.test.tsx`
+      - E2E tests: `feature-name.spec.ts`
+      - Test utils: `util-name.ts`
+
+   6. **Coverage Reports**
+      - Configure in `vitest.config.ts`
+      - Store reports in `coverage` directory
+      - Add to `.gitignore`
+      - Set minimum coverage thresholds
 
 ## Performance Optimization
 
