@@ -6,12 +6,19 @@ import { SettingsTabs } from '@/features/settings/SettingsTabs';
 import { getTranslations } from '@/lib/utils/i18n/translations';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const translate = await getTranslations('Settings');
-
-  return {
-    title: translate('page_title'),
-    description: translate('page_description'),
-  };
+  try {
+    const t = await getTranslations('Settings');
+    return {
+      title: t('page_title'),
+      description: t('page_description'),
+    };
+  } catch {
+    // Fallback metadata if translation fails
+    return {
+      title: 'Inställningar - Caire',
+      description: 'Hantera dina inställningar i Caire.',
+    };
+  }
 }
 
 export default function SettingsPage() {

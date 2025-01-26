@@ -13,7 +13,24 @@ export default authMiddleware({
     '/api/webhooks/stripe',
   ],
 
-  afterAuth(auth, req) {
+  async afterAuth(auth, req) {
+    // Handle security headers
+    const response = auth.isPublicRoute ? NextResponse.next() : undefined;
+
+    if (response) {
+      // Add security headers
+      response.headers.set(
+        'Content-Security-Policy',
+        'default-src \'self\'; script-src \'self\' \'unsafe-inline\' \'unsafe-eval\'; style-src \'self\' \'unsafe-inline\';',
+      );
+      response.headers.set('X-Frame-Options', 'DENY');
+      response.headers.set('X-Content-Type-Options', 'nosniff');
+      response.headers.set(
+        'Referrer-Policy',
+        'strict-origin-when-cross-origin',
+      );
+    }
+
     // If the user is logged in and trying to access a public route
     if (auth.userId && auth.isPublicRoute) {
       const dashboard = new URL('/dashboard', req.url);
@@ -26,8 +43,20 @@ export default authMiddleware({
       return NextResponse.redirect(signIn);
     }
 
-    // Allow the request to proceed
-    return NextResponse.next();
+    // Allow the request to proceed with security headers
+    const nextResponse = NextResponse.next();
+    nextResponse.headers.set(
+      'Content-Security-Policy',
+      'default-src \'self\'; script-src \'self\' \'unsafe-inline\' \'unsafe-eval\'; style-src \'self\' \'unsafe-inline\';',
+    );
+    nextResponse.headers.set('X-Frame-Options', 'DENY');
+    nextResponse.headers.set('X-Content-Type-Options', 'nosniff');
+    nextResponse.headers.set(
+      'Referrer-Policy',
+      'strict-origin-when-cross-origin',
+    );
+
+    return nextResponse;
   },
 });
 
