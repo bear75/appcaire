@@ -1,5 +1,5 @@
-import { db } from '@/lib/db';
-import { ServiceError } from '@/lib/utils/service-error';
+import { db } from "@/lib/db";
+import { ServiceError } from "@/lib/utils/error";
 
 export class AnalyticsService {
   async getOrganizationMetrics(
@@ -9,17 +9,17 @@ export class AnalyticsService {
   ) {
     try {
       const { data, error } = await db
-        .from('analytics')
-        .select('*')
-        .eq('organization_id', organizationId)
-        .gte('created_at', startDate)
-        .lte('created_at', endDate)
+        .from("analytics")
+        .select("*")
+        .eq("organization_id", organizationId)
+        .gte("created_at", startDate)
+        .lte("created_at", endDate)
         .single();
 
       if (error) {
         throw new ServiceError(
-          'Failed to fetch analytics',
-          'ANALYTICS_FETCH_ERROR',
+          "Failed to fetch analytics",
+          "ANALYTICS_FETCH_ERROR",
           500,
         );
       }
@@ -30,8 +30,8 @@ export class AnalyticsService {
         throw error;
       }
       throw new ServiceError(
-        'Failed to fetch analytics',
-        'ANALYTICS_FETCH_ERROR',
+        "Failed to fetch analytics",
+        "ANALYTICS_FETCH_ERROR",
         500,
       );
     }

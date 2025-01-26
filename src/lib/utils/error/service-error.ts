@@ -6,10 +6,10 @@ export class ServiceError extends Error {
     message: string,
     public code: string,
     public status: number = 500,
-    public details?: Record<string, unknown>
+    public details?: Record<string, unknown>,
   ) {
     super(message);
-    this.name = 'ServiceError';
+    this.name = "ServiceError";
   }
 
   /**
@@ -21,9 +21,9 @@ export class ServiceError extends Error {
     }
 
     if (error instanceof Error) {
-      return new ServiceError(error.message, 'UNKNOWN_ERROR');
+      return new ServiceError(error.message, "UNKNOWN_ERROR");
     }
 
-    return new ServiceError('An unknown error occurred', 'UNKNOWN_ERROR');
+    return new ServiceError("An unknown error occurred", "UNKNOWN_ERROR");
   }
-} 
+}
