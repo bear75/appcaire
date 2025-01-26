@@ -20,7 +20,10 @@ import { EmployeeGrid } from './EmployeeGrid';
 import { EmployeeList } from './EmployeeList';
 import { CARD_STYLES } from './styles';
 
-// Available skills for filtering
+/**
+ * Available skills for filtering employees
+ * @constant {string[]}
+ */
 const availableSkills = [
   'Medicin',
   'Sårvård',
@@ -29,6 +32,24 @@ const availableSkills = [
   'Palliativ vård',
 ];
 
+/**
+ * EmployeeDirectory component provides a filterable and switchable grid/list view of employees.
+ *
+ * Features:
+ * - Search functionality for finding employees
+ * - Role-based filtering (nurse, care assistant)
+ * - Status filtering (active, on leave)
+ * - Skills filtering (medicine, wound care, etc.)
+ * - Switchable grid/list view
+ * - URL-based state management for filters and view mode
+ *
+ * Note: This is currently a UI prototype. Database integration will be added later.
+ *
+ * @example
+ * ```tsx
+ * <EmployeeDirectory />
+ * ```
+ */
 export function EmployeeDirectory() {
   const t = useTranslations('Employees');
   const router = useRouter();
@@ -41,7 +62,10 @@ export function EmployeeDirectory() {
   const statusFilter = searchParams?.get('status') || 'all';
   const skillFilter = searchParams?.get('skill') || 'all';
 
-  // Update URL parameters
+  /**
+   * Updates URL parameters with new filter values
+   * @param {Record<string, string>} updates - Key-value pairs of parameters to update
+   */
   const updateParams = (updates: Record<string, string>) => {
     const params = new URLSearchParams(searchParams?.toString() || '');
     Object.entries(updates).forEach(([key, value]) => {
