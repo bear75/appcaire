@@ -2,8 +2,6 @@
 
 import { Grid2X2, List, Search } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
-import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,6 +14,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { EmployeeGrid } from './EmployeeGrid';
 import { EmployeeList } from './EmployeeList';
@@ -70,17 +69,25 @@ export function EmployeeDirectory() {
                 className="pl-10"
               />
             </div>
-            <Select value={roleFilter} onValueChange={value => updateParams({ role: value })}>
+            <Select
+              value={roleFilter}
+              onValueChange={value => updateParams({ role: value })}
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t('select_role')} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">{t('all_roles')}</SelectItem>
                 <SelectItem value="nurse">{t('nurse')}</SelectItem>
-                <SelectItem value="care_assistant">{t('care_assistant')}</SelectItem>
+                <SelectItem value="care_assistant">
+                  {t('care_assistant')}
+                </SelectItem>
               </SelectContent>
             </Select>
-            <Select value={statusFilter} onValueChange={value => updateParams({ status: value })}>
+            <Select
+              value={statusFilter}
+              onValueChange={value => updateParams({ status: value })}
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t('select_status')} />
               </SelectTrigger>
@@ -90,7 +97,10 @@ export function EmployeeDirectory() {
                 <SelectItem value="on_leave">{t('on_leave')}</SelectItem>
               </SelectContent>
             </Select>
-            <Select value={skillFilter} onValueChange={value => updateParams({ skill: value })}>
+            <Select
+              value={skillFilter}
+              onValueChange={value => updateParams({ skill: value })}
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t('select_skill')} />
               </SelectTrigger>
