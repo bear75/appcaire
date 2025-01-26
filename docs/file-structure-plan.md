@@ -154,7 +154,7 @@ Note: Test structure has been established:
    - [⏳] Create test templates (deferred until after prototype)
    - [✅] Add component documentation (2024-01-26)
 
-## File Structure ��
+## File Structure 📁
 
 ```
 src/
@@ -182,60 +182,107 @@ src/
 │   │   ├── layout.tsx      # Public layout
 │   │   └── page.tsx       # Landing page
 │   └── api/               # Route Handlers
-├── features/              # Feature modules
-│   ├── schedule/         # Scheduling feature
-│   │   ├── components/   # Schedule UI components
-│   │   ├── hooks/       # Schedule-specific hooks
-│   │   └── utils/       # Schedule-specific utilities
-│   ├── employees/       # Employee management
-│   │   ├── components/  # Employee UI components
-│   │   ├── hooks/      # Employee-specific hooks
-│   │   └── utils/      # Employee-specific utilities
-│   └── clients/        # Client management
-│       ├── components/ # Client UI components
-│       ├── hooks/     # Client-specific hooks
-│       └── utils/     # Client-specific utilities
-├── components/         # Shared UI components
-│   ├── ui/            # shadcn/ui components
-│   ├── layout/        # Layout components (RSC)
-│   └── shared/        # Shared components
-├── lib/               # Core libraries and services
-│   ├── services/     # Core business services
-│   │   ├── scheduling/  # Scheduling service
-│   │   ├── employees/   # Employee service
-│   │   └── clients/     # Client service
-│   ├── clerk/       # Clerk.dev auth setup
-│   ├── db/          # Database and ORM setup
-│   ├── hooks/       # Shared hooks
-│   └── utils/       # Shared utilities
-├── styles/          # Global styles
-│   └── globals.css  # Tailwind directives
-└── types/           # Shared TypeScript types
+├── features/             # Feature modules
+│   ├── analytics/       # Analytics feature
+│   │   ├── components/  # Analytics UI components
+│   │   ├── hooks/      # Analytics-specific hooks
+│   │   └── utils/      # Analytics-specific utilities
+│   ├── schedule/       # Scheduling feature
+│   │   ├── components/ # Schedule UI components
+│   │   ├── hooks/     # Schedule-specific hooks
+│   │   └── utils/     # Schedule-specific utilities
+│   ├── employees/     # Employee management
+│   │   ├── components/ # Employee UI components
+│   │   ├── hooks/    # Employee-specific hooks
+│   │   └── utils/    # Employee-specific utilities
+│   ├── clients/      # Client management
+│   │   ├── components/ # Client UI components
+│   │   ├── hooks/    # Client-specific hooks
+│   │   └── utils/    # Client-specific utilities
+│   ├── billing/     # Billing and invoicing
+│   │   ├── components/ # Billing UI components
+│   │   ├── hooks/    # Billing-specific hooks
+│   │   └── utils/    # Billing-specific utilities
+│   ├── settings/    # App settings feature
+│   │   ├── components/ # Settings UI components
+│   │   ├── hooks/    # Settings-specific hooks
+│   │   └── utils/    # Settings-specific utilities
+│   └── landing/     # Landing page features
+│       ├── components/ # Landing UI components
+│       └── utils/    # Landing-specific utilities
+├── components/      # Shared UI components
+│   ├── ui/         # shadcn/ui components
+│   ├── layout/     # Layout components (RSC)
+│   └── shared/     # Shared components
+├── lib/            # Core libraries and services
+│   ├── services/  # Core business services
+│   │   ├── scheduling/ # Timefold.ai integration
+│   │   ├── tasks/     # Task management service
+│   │   └── analytics/ # Analytics service
+│   ├── clerk/    # Clerk.dev auth setup
+│   ├── db/       # Database and ORM setup
+│   ├── hooks/    # Shared hooks
+│   └── utils/    # Shared utilities
+├── styles/       # Global styles
+│   └── globals.css # Tailwind directives
+└── types/        # Shared TypeScript types
 ```
 
-### Route Organization
+## Business Logic Organization 🧩
 
-1. **Authenticated Routes** (`app/(auth)/`)
+### Core Services (`lib/services/`)
 
-   - Protected by Clerk middleware
-   - Requires valid session
-   - Contains main application features
+- **Scheduling Service**: AI-driven scheduling logic using Timefold.ai
 
-2. **Public Routes** (`app/(unauth)/`)
+  - Route optimization
+  - Shift planning
+  - Availability management
+  - Constraint handling
 
-   - Open access
-   - Landing pages
-   - Authentication flows
-   - Marketing content
+- **Task Management**: Core task-related operations
 
-3. **API Routes** (`app/api/`)
-   - Protected endpoints
-   - Webhook handlers
-   - External integrations
+  - Task creation and updates
+  - Status management
+  - Assignment logic
+  - Priority handling
 
-### Feature Organization
+- **Analytics Service**: Business intelligence and reporting
+  - KPI calculations
+  - Report generation
+  - Data aggregation
+  - Trend analysis
 
-Features directory contains UI components and logic specific to each feature area, while the actual pages/routes are handled by the App Router in their respective route groups.
+### Feature Organization (`features/`)
+
+Each feature module contains:
+
+- UI Components specific to the feature
+- Feature-specific hooks for state and logic
+- Feature-specific utilities and helpers
+- Integration with core services
+
+Key features:
+
+1. **Analytics**: Business intelligence dashboards
+2. **Schedule**: Staff scheduling and route optimization
+3. **Employees**: Staff management and assignments
+4. **Clients**: Client management and care plans
+5. **Billing**: Invoice and payment processing
+6. **Settings**: Application configuration
+7. **Landing**: Marketing and public pages
+
+### Implementation Guidelines
+
+When implementing new features:
+
+1. Core business logic goes in `lib/services/`
+2. Feature-specific UI goes in `features/[feature]/components/`
+3. Feature-specific hooks go in `features/[feature]/hooks/`
+4. Feature-specific utilities go in `features/[feature]/utils/`
+5. Routes/pages go in appropriate `app/` directory
+6. Shared components go in `components/`
+7. Global types go in `types/`
+8. Global utilities go in `lib/utils/`
 
 ## Guidelines 📋
 
@@ -347,77 +394,6 @@ Features directory contains UI components and logic specific to each feature are
 - Use suspense boundaries effectively
 - Optimize images with next/image
 - Implement proper caching strategies
-
-## Business Logic Organization 🧩
-
-### Core Services (`lib/services/`)
-
-- **Scheduling Service**: AI-driven scheduling logic using Timefold.ai
-
-  - Route optimization
-  - Shift planning
-  - Availability management
-  - Constraint handling
-
-- **Task Management**: Core task-related operations
-
-  - Task creation and updates
-  - Status management
-  - Assignment logic
-  - Priority handling
-
-- **Client Management**: Client-related business logic
-
-  - Client profiles
-  - Care plans
-  - Service agreements
-  - Contact management
-
-- **Employee Management**: Staff-related operations
-  - Employee profiles
-  - Skills and qualifications
-  - Availability patterns
-  - Team assignments
-
-### Data Access Layer (`lib/db/`)
-
-- Use Drizzle ORM for type-safe database operations
-- Implement repository pattern for data access
-- Keep business logic separate from data access
-- Use transactions for complex operations
-- Implement proper error handling and logging
-
-### Utilities (`lib/utils/`)
-
-- Helper functions should be pure and testable
-- Group utilities by domain (date, validation, formatting)
-- Keep utilities simple and focused
-- Document complex algorithms
-- Add proper TypeScript types
-
-### State Management
-
-- Use React Server Components for server-side state
-- Implement Server Actions for mutations
-- Use React hooks for client-side state
-- Keep state as close to usage as possible
-- Implement proper loading and error states
-
-### Error Handling
-
-- Define custom error types for different domains
-- Implement proper error boundaries
-- Log errors with appropriate context
-- Provide user-friendly error messages
-- Handle edge cases gracefully
-
-### Security
-
-- Implement proper authentication checks
-- Use row-level security in database
-- Validate all user input
-- Sanitize data output
-- Follow GDPR compliance guidelines
 
 ## Commit Message Structure 📝
 
