@@ -105,7 +105,7 @@ This process ensures we can safely refactor without breaking functionality and e
 - [✅] Move Footer to components/layout/footer (2024-01-25)
 - [✅] Move Hero to components/features/landing
 - [✅] Move Features to components/features/landing (2024-01-25)
-- [⏳] Move FAQ to components/features/landing
+- [✅] Move FAQ to components/features/landing (2024-01-26)
 - [⏳] Audit remaining files and their locations
 - [⏳] Document components to be kept/removed
 
@@ -303,10 +303,14 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
 
 4. **Reorganize Features**
 
-   - [✅] Move dashboard components to features/dashboard (2024-01-26)
-   - [✅] Move TitleBar from features/dashboard to components/layout/shared (2024-01-26)
-   - [⏳] Move analytics components to features/analytics
-   - [⏳] Ensure proper component organization in features
+   - [✅] Keep UI prototype pages in src/features (2024-01-26)
+   - [✅] Document current file structure (2024-01-26)
+   - [✅] Add type definitions to settings components (2024-01-26)
+     - Added SettingsTabValue and SettingsTabsProps
+     - Added OrganizationFormData and OrganizationSettingsProps
+   - [⏳] Review component dependencies
+   - [⏳] Clean up unused imports
+   - [⏳] Add missing type definitions to remaining components
 
 5. **Clean Up Tests**
 
@@ -417,3 +421,36 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
    - Check error boundaries
 
 Please complete all tests before marking this migration as stable.
+
+### File Location Audit (2024-01-26)
+
+1. **Current Structure**
+
+   - [✅] UI prototype pages in src/features/
+     - settings/
+     - schedule/
+     - employees/
+     - clients/
+     - billing/
+     - auth/
+   - [✅] Shared components in src/components/layout/shared
+   - [✅] UI components in src/components/ui
+
+2. **Decision**
+
+   - Keep UI prototype pages in src/features/
+   - No need to move to components/features/ as they are mockups
+   - Avoid introducing unnecessary complexity
+   - Maintain working prototype state
+
+3. **Components to Review**
+
+   - [⏳] Audit component dependencies
+   - [⏳] Check for duplicate components
+   - [⏳] Verify all imports use @/ alias
+
+4. **Next Actions**
+   - Document component dependencies
+   - Update import paths to use aliases
+   - Remove unused components
+   - Add proper type definitions

@@ -11,6 +11,7 @@ import {
 
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 import { useTranslations } from '@/lib/utils/i18n/translations';
 
 import { LocalizationSettings } from './sections/LocalizationSettings';
@@ -20,11 +21,29 @@ import { SchedulingSettings } from './sections/SchedulingSettings';
 import { SecuritySettings } from './sections/SecuritySettings';
 import { UserSettings } from './sections/UserSettings';
 
-export function SettingsTabs() {
+// Add type definitions for tab values
+type SettingsTabValue =
+  | 'organization'
+  | 'users'
+  | 'scheduling'
+  | 'notifications'
+  | 'security'
+  | 'localization';
+
+// Add type for the component
+export type SettingsTabsProps = {
+  defaultTab?: SettingsTabValue;
+  className?: string;
+};
+
+export function SettingsTabs({
+  defaultTab = 'organization',
+  className,
+}: SettingsTabsProps) {
   const t = useTranslations('Settings');
 
   return (
-    <Tabs defaultValue="organization" className="space-y-6">
+    <Tabs defaultValue={defaultTab} className={cn('space-y-6', className)}>
       <TabsList className="grid w-full grid-cols-2 gap-4 bg-background p-1 md:grid-cols-6">
         <TabsTrigger
           value="organization"
