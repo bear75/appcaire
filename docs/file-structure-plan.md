@@ -154,50 +154,78 @@ Note: Test structure has been established:
    - [⏳] Create test templates (deferred until after prototype)
    - [✅] Add component documentation (2024-01-26)
 
-## File Structure ��
+## File Structure 📁
 
 ```
 src/
 ├── app/                      # Next.js 15 App Router pages
 │   ├── (auth)/              # Authenticated routes (RSC)
-│   │   └── _components/     # Route group components
-│   ├── (unauth)/            # Public routes (RSC)
-│   │   └── _components/     # Route group components
-│   └── api/                 # Route Handlers
-├── features/                # Feature modules
-│   ├── auth/               # Authentication feature
-│   │   ├── components/     # Feature-specific components
-│   │   ├── hooks/         # Feature-specific hooks
-│   │   ├── utils/         # Feature-specific utilities
-│   │   ├── types/         # Feature-specific types
-│   │   └── __tests__/     # Feature tests
-│   ├── schedule/          # Scheduling feature
-│   │   ├── components/    # Schedule-specific components
-│   │   ├── hooks/        # Schedule-specific hooks
-│   │   ├── utils/        # Schedule-specific utilities
-│   │   └── __tests__/    # Schedule tests
-│   └── employees/        # Employee management feature
-│       ├── components/   # Employee-specific components
-│       ├── hooks/       # Employee-specific hooks
-│       ├── utils/       # Employee-specific utilities
-│       └── __tests__/   # Employee tests
-├── components/            # Shared UI components
-│   ├── ui/               # shadcn/ui components
-│   ├── layout/           # Layout components (RSC)
-│   └── shared/           # Shared components
-├── lib/                  # Core libraries and services
-│   ├── services/        # Core business services
-│   │   ├── analytics/   # Analytics service
+│   │   ├── dashboard/       # Dashboard pages
+│   │   ├── schedule/        # Schedule management
+│   │   ├── employees/       # Employee management
+│   │   ├── clients/         # Client management
+│   │   ├── settings/        # Settings pages
+│   │   └── _components/     # Auth route components
+│   ├── (unauth)/           # Public routes (RSC)
+│   │   ├── login/         # Login page
+│   │   ├── register/      # Registration
+│   │   ├── landing/       # Landing pages
+│   │   └── _components/   # Public route components
+│   └── api/               # Route Handlers
+├── features/              # Feature modules
+│   ├── schedule/         # Scheduling feature
+│   │   ├── components/   # Schedule UI components
+│   │   ├── hooks/       # Schedule-specific hooks
+│   │   └── utils/       # Schedule-specific utilities
+│   ├── employees/       # Employee management
+│   │   ├── components/  # Employee UI components
+│   │   ├── hooks/      # Employee-specific hooks
+│   │   └── utils/      # Employee-specific utilities
+│   └── clients/        # Client management
+│       ├── components/ # Client UI components
+│       ├── hooks/     # Client-specific hooks
+│       └── utils/     # Client-specific utilities
+├── components/         # Shared UI components
+│   ├── ui/            # shadcn/ui components
+│   ├── layout/        # Layout components (RSC)
+│   └── shared/        # Shared components
+├── lib/               # Core libraries and services
+│   ├── services/     # Core business services
 │   │   ├── scheduling/  # Scheduling service
-│   │   └── tasks/       # Task management service
-│   ├── db/             # Database and ORM setup
-│   ├── clerk/          # Authentication setup
-│   ├── hooks/          # Shared hooks
-│   └── utils/          # Shared utilities
-├── styles/              # Global styles
-│   └── globals.css     # Tailwind directives
-└── types/              # Shared TypeScript types
+│   │   ├── employees/   # Employee service
+│   │   └── clients/     # Client service
+│   ├── clerk/       # Clerk.dev auth setup
+│   ├── db/          # Database and ORM setup
+│   ├── hooks/       # Shared hooks
+│   └── utils/       # Shared utilities
+├── styles/          # Global styles
+│   └── globals.css  # Tailwind directives
+└── types/           # Shared TypeScript types
 ```
+
+### Route Organization
+
+1. **Authenticated Routes** (`app/(auth)/`)
+
+   - Protected by Clerk middleware
+   - Requires valid session
+   - Contains main application features
+
+2. **Public Routes** (`app/(unauth)/`)
+
+   - Open access
+   - Landing pages
+   - Authentication flows
+   - Marketing content
+
+3. **API Routes** (`app/api/`)
+   - Protected endpoints
+   - Webhook handlers
+   - External integrations
+
+### Feature Organization
+
+Features directory contains UI components and logic specific to each feature area, while the actual pages/routes are handled by the App Router in their respective route groups.
 
 ## Guidelines 📋
 
