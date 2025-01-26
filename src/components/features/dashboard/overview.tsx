@@ -1,18 +1,25 @@
 'use client';
 
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 import { useTranslations } from '@/lib/utils/i18n/translations';
 
 const data = [
   { month: 'Mar 2023', revenue: 32839.99, target: 30932.12 },
-  { month: 'Jun 2023', revenue: 30500.00, target: 29500.00 },
-  { month: 'Sep 2023', revenue: 28700.00, target: 28000.00 },
-  { month: 'Dec 2023', revenue: 31200.00, target: 29800.00 },
-  { month: 'Mar 2024', revenue: 33500.00, target: 31000.00 },
-  { month: 'Jun 2024', revenue: 32000.00, target: 30500.00 },
-  { month: 'Sep 2024', revenue: 12823.98, target: 10100.00 },
-  { month: 'Dec 2024', revenue: 34500.00, target: 32000.00 },
+  { month: 'Jun 2023', revenue: 30500.0, target: 29500.0 },
+  { month: 'Sep 2023', revenue: 28700.0, target: 28000.0 },
+  { month: 'Dec 2023', revenue: 31200.0, target: 29800.0 },
+  { month: 'Mar 2024', revenue: 33500.0, target: 31000.0 },
+  { month: 'Jun 2024', revenue: 32000.0, target: 30500.0 },
+  { month: 'Sep 2024', revenue: 12823.98, target: 10100.0 },
+  { month: 'Dec 2024', revenue: 34500.0, target: 32000.0 },
 ];
 
 export function Overview() {
@@ -41,7 +48,10 @@ export function Overview() {
               const revenueValue = payload[0]?.value;
               const targetValue = payload[1]?.value;
 
-              if (typeof revenueValue !== 'number' || typeof targetValue !== 'number') {
+              if (
+                typeof revenueValue !== 'number'
+                || typeof targetValue !== 'number'
+              ) {
                 return null;
               }
 

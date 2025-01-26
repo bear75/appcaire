@@ -31,7 +31,14 @@ type StatsCardProps = {
   efficiency?: number;
 };
 
-function StatsCard({ title, value, description, icon: Icon, change, efficiency }: StatsCardProps) {
+function StatsCard({
+  title,
+  value,
+  description,
+  icon: Icon,
+  change,
+  efficiency,
+}: StatsCardProps) {
   // Get color based on efficiency threshold
   const getEfficiencyColor = (value: number) => {
     if (value < 65) {
@@ -44,26 +51,27 @@ function StatsCard({ title, value, description, icon: Icon, change, efficiency }
   };
 
   return (
-    <div className={cn(
-      CARD_STYLES.base,
-      CARD_STYLES.small,
-      'h-[100px]',
-      efficiency && getEfficiencyColor(efficiency),
-    )}>
-      <div className="flex flex-row items-center justify-between space-y-0 pb-1 pt-2 px-4">
+    <div
+      className={cn(
+        CARD_STYLES.base,
+        CARD_STYLES.small,
+        'h-[100px]',
+        efficiency && getEfficiencyColor(efficiency),
+      )}
+    >
+      <div className="flex flex-row items-center justify-between space-y-0 px-4 pb-1 pt-2">
         <h3 className="text-xs font-medium text-slate-600">{title}</h3>
-        <Icon className={cn(
-          'h-3 w-3',
-          efficiency
-            ? (
-                efficiency < 65
-                  ? 'text-red-500'
-                  : efficiency < 70
-                    ? 'text-yellow-500'
-                    : 'text-green-500'
-              )
-            : 'text-slate-400',
-        )}
+        <Icon
+          className={cn(
+            'h-3 w-3',
+            efficiency
+              ? efficiency < 65
+                ? 'text-red-500'
+                : efficiency < 70
+                  ? 'text-yellow-500'
+                  : 'text-green-500'
+              : 'text-slate-400',
+          )}
         />
       </div>
       <div className="px-4 pb-2">

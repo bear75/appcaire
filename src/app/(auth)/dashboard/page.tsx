@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
 
-import { Overview } from '@/components/dashboard/overview';
-import { RecentActivity } from '@/components/dashboard/recent-activity';
-import { StatsCards } from '@/components/dashboard/stats-cards';
-import { TodaySchedule } from '@/components/dashboard/today-schedule';
-import { TrafficLightRecommendations } from '@/components/dashboard/traffic-light';
+// Old imports (keeping for safety until tested)
+// import { Overview } from '@/components/dashboard/overview';
+// import { RecentActivity } from '@/components/dashboard/recent-activity';
+// import { StatsCards } from '@/components/dashboard/stats-cards';
+// import { TodaySchedule } from '@/components/dashboard/today-schedule';
+// import { TrafficLightRecommendations } from '@/components/dashboard/traffic-light';
+// New feature-based imports
+import { Overview } from '@/components/features/dashboard/overview';
+import { RecentActivity } from '@/components/features/dashboard/recent-activity';
+import { StatsCards } from '@/components/features/dashboard/stats-cards';
+import { TodaySchedule } from '@/components/features/dashboard/today-schedule';
+import { TrafficLightRecommendations } from '@/components/features/dashboard/traffic-light';
 import { ContentSection } from '@/components/layout/ContentSection';
 import { PageContainer, PageHeader } from '@/components/shared';
 import { cn } from '@/lib/utils';
@@ -35,7 +42,9 @@ export default function DashboardPage() {
         <div className="grid gap-6 lg:grid-cols-2">
           <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
             <div className="p-6">
-              <h3 className="text-lg font-semibold">{t('Dashboard.today_schedule.title')}</h3>
+              <h3 className="text-lg font-semibold">
+                {t('Dashboard.today_schedule.title')}
+              </h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 {t('Dashboard.today_schedule.description')}
               </p>
@@ -47,7 +56,9 @@ export default function DashboardPage() {
 
           <div className={cn(CARD_STYLES.base, CARD_STYLES.large)}>
             <div className="p-6">
-              <h3 className="text-lg font-semibold">{t('Dashboard.recommendations.title')}</h3>
+              <h3 className="text-lg font-semibold">
+                {t('Dashboard.recommendations.title')}
+              </h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 {t('Dashboard.recommendations.description')}
               </p>
@@ -59,9 +70,13 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-7">
-          <div className={cn(CARD_STYLES.base, CARD_STYLES.large, 'col-span-4')}>
+          <div
+            className={cn(CARD_STYLES.base, CARD_STYLES.large, 'col-span-4')}
+          >
             <div className="p-6">
-              <h3 className="text-lg font-semibold">{t('Dashboard.financial_overview.title')}</h3>
+              <h3 className="text-lg font-semibold">
+                {t('Dashboard.financial_overview.title')}
+              </h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 {t('Dashboard.financial_overview.description')}
               </p>
@@ -71,9 +86,13 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className={cn(CARD_STYLES.base, CARD_STYLES.large, 'col-span-3')}>
+          <div
+            className={cn(CARD_STYLES.base, CARD_STYLES.large, 'col-span-3')}
+          >
             <div className="p-6">
-              <h3 className="text-lg font-semibold">{t('Dashboard.recent_activity.title')}</h3>
+              <h3 className="text-lg font-semibold">
+                {t('Dashboard.recent_activity.title')}
+              </h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 {t('Dashboard.recent_activity.description')}
               </p>

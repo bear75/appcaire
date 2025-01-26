@@ -67,8 +67,8 @@ type InterpolationValues = {
 function t(key: TranslationKey, values?: InterpolationValues): string;
 
 // Example usage
-const title = t('Analytics.title');
-const warning = t('Analytics.warning', { client: 'Anna', count: 5 });
+const title = t("Analytics.title");
+const warning = t("Analytics.warning", { client: "Anna", count: 5 });
 ```
 
 ### Data Visualization
@@ -89,12 +89,14 @@ const warning = t('Analytics.warning', { client: 'Anna', count: 5 });
 ### Database & ORM
 
 #### Database
+
 - PostgreSQL via Supabase
 - Connection pooling enabled
 - Row-level security
 - Real-time subscriptions
 
 #### Drizzle ORM Setup
+
 - Type-safe schema definitions
 - Migration management with Drizzle Kit
 - Command structure:
@@ -112,15 +114,16 @@ const warning = t('Analytics.warning', { client: 'Anna', count: 5 });
    └ 📜 index.ts    # Exports
   ```
 - Configuration in `drizzle.config.ts`:
-  ```typescript
-  import 'dotenv/config';
 
-  import { defineConfig } from 'drizzle-kit';
+  ```typescript
+  import "dotenv/config";
+
+  import { defineConfig } from "drizzle-kit";
 
   export default defineConfig({
-    schema: './src/lib/db/schema/*.ts',
-    out: './drizzle',
-    dialect: 'postgresql',
+    schema: "./src/lib/db/schema/*.ts",
+    out: "./drizzle",
+    dialect: "postgresql",
     dbCredentials: {
       url: process.env.DATABASE_URL!,
     },
@@ -258,7 +261,7 @@ const warning = t('Analytics.warning', { client: 'Anna', count: 5 });
 
 - Development: dev.caire.se
 - Staging: staging.caire.se
-- Production: caire.se
+- Production: app.caire.se
 
 ### Monitoring
 

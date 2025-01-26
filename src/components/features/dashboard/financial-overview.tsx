@@ -1,9 +1,17 @@
 'use client';
 
-import { useTranslations } from '@/lib/utils/i18n/translations';
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useTranslations } from '@/lib/utils/i18n/translations';
 
 type FinancialData = {
   date: string;
@@ -63,7 +71,9 @@ export function FinancialOverview() {
           {/* Revenue Chart */}
           <Card>
             <CardHeader className="py-2">
-              <CardTitle className="text-sm font-medium">{t('metrics.revenue')}</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                {t('metrics.revenue')}
+              </CardTitle>
             </CardHeader>
             <CardContent className="h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -71,8 +81,16 @@ export function FinancialOverview() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
                   <YAxis tickFormatter={formatCurrency} />
-                  <Tooltip formatter={(value: number) => formatCurrency(value)} />
-                  <Line type="monotone" dataKey="revenue" stroke="#7C3AED" strokeWidth={2} name={t('metrics.revenue')} />
+                  <Tooltip
+                    formatter={(value: number) => formatCurrency(value)}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="revenue"
+                    stroke="#7C3AED"
+                    strokeWidth={2}
+                    name={t('metrics.revenue')}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
@@ -81,7 +99,9 @@ export function FinancialOverview() {
           {/* Costs Chart */}
           <Card>
             <CardHeader className="py-2">
-              <CardTitle className="text-sm font-medium">{t('metrics.costs')}</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                {t('metrics.costs')}
+              </CardTitle>
             </CardHeader>
             <CardContent className="h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -89,8 +109,16 @@ export function FinancialOverview() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
                   <YAxis tickFormatter={formatCurrency} />
-                  <Tooltip formatter={(value: number) => formatCurrency(value)} />
-                  <Line type="monotone" dataKey="costs" stroke="#EF4444" strokeWidth={2} name={t('metrics.costs')} />
+                  <Tooltip
+                    formatter={(value: number) => formatCurrency(value)}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="costs"
+                    stroke="#EF4444"
+                    strokeWidth={2}
+                    name={t('metrics.costs')}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
@@ -99,7 +127,9 @@ export function FinancialOverview() {
           {/* Billable Hours Chart */}
           <Card>
             <CardHeader className="py-2">
-              <CardTitle className="text-sm font-medium">{t('metrics.billable_hours')}</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                {t('metrics.billable_hours')}
+              </CardTitle>
             </CardHeader>
             <CardContent className="h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -108,7 +138,13 @@ export function FinancialOverview() {
                   <XAxis dataKey="date" />
                   <YAxis tickFormatter={formatHours} />
                   <Tooltip formatter={(value: number) => formatHours(value)} />
-                  <Line type="monotone" dataKey="billableHours" stroke="#3B82F6" strokeWidth={2} name={t('metrics.billable_hours')} />
+                  <Line
+                    type="monotone"
+                    dataKey="billableHours"
+                    stroke="#3B82F6"
+                    strokeWidth={2}
+                    name={t('metrics.billable_hours')}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
@@ -117,7 +153,9 @@ export function FinancialOverview() {
           {/* Efficiency Chart */}
           <Card>
             <CardHeader className="py-2">
-              <CardTitle className="text-sm font-medium">{t('metrics.efficiency')}</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                {t('metrics.efficiency')}
+              </CardTitle>
             </CardHeader>
             <CardContent className="h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -125,8 +163,16 @@ export function FinancialOverview() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
                   <YAxis tickFormatter={formatEfficiency} />
-                  <Tooltip formatter={(value: number) => formatEfficiency(value)} />
-                  <Line type="monotone" dataKey="efficiency" stroke="#22C55E" strokeWidth={2} name={t('metrics.efficiency')} />
+                  <Tooltip
+                    formatter={(value: number) => formatEfficiency(value)}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="efficiency"
+                    stroke="#22C55E"
+                    strokeWidth={2}
+                    name={t('metrics.efficiency')}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>

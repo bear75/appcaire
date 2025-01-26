@@ -1,7 +1,7 @@
 import { UserProfile } from '@clerk/nextjs';
 import { useTranslations } from 'next-intl';
 
-import { TitleBar } from '@/features/dashboard/TitleBar';
+import { TitleBar } from '@/components/layout/shared/TitleBar';
 import { getI18nPath } from '@/lib/utils/helpers/utils';
 
 const UserProfilePage = (props: { params: { locale: string } }) => {

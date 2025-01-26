@@ -303,9 +303,10 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
 
 4. **Reorganize Features**
 
-   - [ ] Move dashboard components to features/dashboard
-   - [ ] Move analytics components to features/analytics
-   - [ ] Ensure proper component organization in features
+   - [✅] Move dashboard components to features/dashboard (2024-01-26)
+   - [✅] Move TitleBar from features/dashboard to components/layout/shared (2024-01-26)
+   - [⏳] Move analytics components to features/analytics
+   - [⏳] Ensure proper component organization in features
 
 5. **Clean Up Tests**
 
@@ -318,3 +319,101 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
    - [ ] Document utility functions
    - [ ] Create README files for major directories
    - [ ] Document file structure decisions
+
+### Common Pitfalls to Avoid 🚫
+
+1. **Never Skip Import Verification**
+
+   - ALWAYS use grep or codebase search to find ALL references
+   - Check for both direct imports and re-exports
+   - Include variations of the import path
+   - Don't assume you know all the places a component is used
+
+2. **Complete Verification Before Deletion**
+
+   - Never delete original files until ALL imports are updated
+   - Never delete original files until the app is tested
+   - Keep original files as backup until changes are committed
+   - Document which files were moved and their new locations
+
+3. **Thorough Testing Required**
+
+   - Test the specific feature that uses moved components
+   - Test any features that might interact with moved components
+   - Test both authenticated and unauthenticated states
+   - Test all relevant routes and navigation paths
+
+4. **Import Path Consistency**
+   - Use consistent import aliases (@/ prefix)
+   - Follow the established directory structure
+   - Update barrel files (index.ts) if used
+   - Keep import paths as short and clear as possible
+
+### Enhanced Verification Steps 🔍
+
+1. **Before Moving Files**
+
+   - Use `grep_search` or similar to find ALL file references
+   - Document all locations where the file is imported
+   - Create a checklist of files to update
+   - Plan the new location carefully
+
+2. **During Migration**
+
+   - Copy files to new location (don't move yet)
+   - Update imports one file at a time
+   - Test after each file update
+   - Keep original files in place
+
+3. **After Updates**
+
+   - Run the development server
+   - Test all affected features
+   - Check for console errors
+   - Verify all imports are updated
+
+4. **Final Cleanup**
+   - Remove commented-out old imports
+   - Delete original files
+   - Update documentation
+   - Commit changes with clear message
+
+### Recent Changes Test Instructions (2024-01-26)
+
+#### Dashboard Components Migration Test Plan
+
+1. **Dashboard Overview Page**
+
+   - Visit /dashboard
+   - Verify all KPI cards load correctly
+   - Check Today's Schedule section
+   - Verify Traffic Light recommendations
+   - Test Financial Overview charts
+   - Confirm Recent Activity updates
+
+2. **Organization Profile**
+
+   - Visit /dashboard/organization-profile
+   - Verify TitleBar displays correctly
+   - Test organization settings changes
+   - Confirm navigation works
+
+3. **User Profile**
+
+   - Visit /dashboard/user-profile
+   - Verify TitleBar displays correctly
+   - Test profile updates
+   - Check navigation
+
+4. **Mobile Testing**
+
+   - Test all above on mobile viewport
+   - Verify responsive layout
+   - Check touch interactions
+
+5. **Error States**
+   - Test with network disconnected
+   - Verify loading states
+   - Check error boundaries
+
+Please complete all tests before marking this migration as stable.
