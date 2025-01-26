@@ -1,26 +1,34 @@
 'use client';
 
 import * as Sentry from '@sentry/nextjs';
-import NextError from 'next/error';
 import { useEffect } from 'react';
 
-export default function GlobalError(props: {
+export default function GlobalError({
+  error,
+  reset,
+}: {
   error: Error & { digest?: string };
-  params: { locale: string };
+  reset: () => void;
 }) {
   useEffect(() => {
-    Sentry.captureException(props.error);
-  }, [props.error]);
+    Sentry.captureException(error);
+  }, [error]);
 
   return (
-    <html lang={props.params.locale}>
-      <body>
-        {/* `NextError` is the default Next.js error page component. Its type
-        definition requires a `statusCode` prop. However, since the App Router
-        does not expose status codes for errors, we simply pass 0 to render a
-        generic error message. */}
-        <NextError statusCode={0} />
-      </body>
-    </html>
+    <div className="flex min-h-screen flex-col items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold">Ett allvarligt fel har inträffat</h1>
+        <p className="mt-4 text-lg text-muted-foreground">
+          Vi har notifierats om felet och arbetar på en lösning.
+        </p>
+        <button
+          className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-400"
+          onClick={() => reset()}
+          type="button"
+        >
+          Försök igen
+        </button>
+      </div>
+    </div>
   );
 }

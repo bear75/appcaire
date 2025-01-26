@@ -1,21 +1,16 @@
-import type { Locale } from '../types';
+import type { SupportedLocale } from '../types';
+import { LOCALE_NAMES, SUPPORTED_LOCALES } from '../types';
 
-export const SUPPORTED_LOCALES = ['sv', 'en', 'no', 'da'] as const;
-export type SupportedLocale = typeof SUPPORTED_LOCALES[number];
-
-export const LOCALE_NAMES: Record<SupportedLocale, string> = {
-  sv: 'Svenska',
-  en: 'English',
-  no: 'Norsk',
-  da: 'Dansk',
-} as const;
-
-export const DEFAULT_LOCALE: SupportedLocale = 'sv';
-
+/**
+ * Check if a locale is supported (only Swedish)
+ */
 export function isValidLocale(locale: string): locale is SupportedLocale {
   return SUPPORTED_LOCALES.includes(locale as SupportedLocale);
 }
 
+/**
+ * Get the display name for a locale (only Swedish)
+ */
 export function getLocaleDisplayName(locale: SupportedLocale): string {
   return LOCALE_NAMES[locale];
-} 
+}
