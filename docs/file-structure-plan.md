@@ -83,6 +83,8 @@ This process ensures we can safely refactor without breaking functionality and e
 - Component organization started
 - [✅] Large logo removed from landing page (2024-01-25)
 - [✅] Move Hero to components/features/landing (2024-01-25)
+- [✅] Consolidate toast implementations into single source of truth (2024-01-26)
+- [✅] Remove legacy pages directory and \_document.tsx (2024-01-26)
 
 ## Tech Stack 🛠
 
@@ -285,6 +287,7 @@ Once the codebase is organized and duplicates are removed, we'll follow the task
    - [✅] Remove src/templates directory (moved to new locations) (2024-01-25)
    - [✅] Remove .DS_Store files (2024-01-25)
    - [✅] Remove .old and .bak files (2024-01-25)
+   - [✅] Remove legacy pages directory (2024-01-26)
 
 2. **Move Components**
 
@@ -450,7 +453,9 @@ Please complete all tests before marking this migration as stable.
 
 3. **Components to Review**
 
-   - [⏳] Audit component dependencies
+   - [🚧] Audit component dependencies
+     - [✅] Toast implementation consolidated (2024-01-26)
+     - [⏳] Check remaining UI components
    - [⏳] Check for duplicate components
    - [⏳] Verify all imports use @/ alias
 
