@@ -108,21 +108,21 @@ This process ensures we can safely refactor without breaking functionality and e
 
 ### 2. Import Path Standardization (1 hour)
 
-- [🚧] Verify all imports use @/ alias
-- [⏳] Update any relative imports to use alias
-- [⏳] Clean up unused imports
+- [✅] Verify all imports use @/ alias (2024-01-26)
+- [✅] Update any relative imports to use alias (2024-01-26)
+- [🚧] Clean up unused imports
 
 ### 3. Documentation (2 hours)
 
-- [⏳] Create README files for major directories
-- [⏳] Document file structure decisions
-- [⏳] Update component documentation where needed
+- [✅] Create README files for major directories (2024-01-26)
+- [✅] Document file structure decisions (2024-01-26)
+- [🚧] Update component documentation where needed
 
 ### 4. Testing Setup (Optional)
 
-- [ ] Decide on testing strategy
-- [ ] Set up test directory structure
-- [ ] Create initial test templates
+- [✅] Decide on testing strategy (2024-01-26)
+- [🚧] Set up test directory structure
+- [⏳] Create initial test templates
 
 Note: Many previously listed tasks have been completed during the recent refactoring:
 
@@ -131,6 +131,29 @@ Note: Many previously listed tasks have been completed during the recent refacto
 - ✅ Custom hooks are organized
 - ✅ Types and interfaces are in place
 - ✅ Feature components are in correct locations
+
+### File Cleanup Tasks
+
+1. **Completed Tasks**
+
+   - [✅] Remove src/templates directory (2024-01-25)
+   - [✅] Remove .DS_Store files (2024-01-25)
+   - [✅] Remove .old and .bak files (2024-01-25)
+   - [✅] Remove legacy pages directory (2024-01-26)
+   - [✅] Move all layout components to new locations (2024-01-25)
+   - [✅] Consolidate toast implementations (2024-01-26)
+
+2. **Remaining Tasks**
+
+   - [✅] Review services directory for unused files (2024-01-26)
+   - [✅] Clean up duplicate error directories (2024-01-26)
+   - [✅] Verify all imports use @/ alias (2024-01-26)
+   - [✅] Create README files for major directories (2024-01-26)
+
+3. **Optional Tasks**
+   - [🚧] Set up test directory structure
+   - [⏳] Create test templates
+   - [🚧] Add component documentation
 
 ## File Structure 📁
 
@@ -336,29 +359,6 @@ style(lint): apply prettier formatting
 ## After Cleanup
 
 Once the codebase is organized and duplicates are removed, we'll follow the task breakdown document for implementing new features and integrations.
-
-### File Cleanup Tasks
-
-1. **Completed Tasks**
-
-   - [✅] Remove src/templates directory (2024-01-25)
-   - [✅] Remove .DS_Store files (2024-01-25)
-   - [✅] Remove .old and .bak files (2024-01-25)
-   - [✅] Remove legacy pages directory (2024-01-26)
-   - [✅] Move all layout components to new locations (2024-01-25)
-   - [✅] Consolidate toast implementations (2024-01-26)
-
-2. **Remaining Tasks**
-
-   - [⏳] Review services directory for unused files
-   - [⏳] Clean up duplicate error directories
-   - [⏳] Verify all imports use @/ alias
-   - [⏳] Create README files for major directories
-
-3. **Optional Tasks**
-   - [ ] Set up test directory structure
-   - [ ] Create test templates
-   - [ ] Add component documentation
 
 ### Common Pitfalls to Avoid 🚫
 
